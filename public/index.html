@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Overlay Playground</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <header>
+          <h1>Overlay Playground</h1>
+          <p class="subtitle">
+            Katseplatvorm, kus saab testida iframe kihte, filtreid ja märkmete kogumist.
+          </p>
+        </header>
+
+        <section>
+          <h2>Sihtlehed</h2>
+          <div id="siteList" class="site-list" aria-live="polite"></div>
+        </section>
+
+        <section>
+          <h2>Filtrid</h2>
+          <div class="toggle-grid" id="filterToggleContainer">
+            <button data-filter="grayscale" class="toggle">Halltoon</button>
+            <button data-filter="invert" class="toggle">Öörežiim</button>
+            <button data-filter="contrast" class="toggle">Kontrast</button>
+            <button data-filter="sepia" class="toggle">Retro</button>
+            <button data-filter="blur" class="toggle">Hägusta</button>
+          </div>
+          <label class="slider-label">
+            Hägustuse tugevus
+            <input type="range" min="0" max="10" value="0" id="blurSlider" />
+          </label>
+          <label class="slider-label">
+            Hele/tume tasakaal
+            <input type="range" min="50" max="150" value="100" id="brightnessSlider" />
+          </label>
+        </section>
+
+        <section>
+          <h2>Elementide peitmine</h2>
+          <div class="button-row">
+            <button id="hideModeBtn" class="primary">Alusta peitmist</button>
+            <button id="clearBlocksBtn" class="secondary">Tühjenda maskid</button>
+          </div>
+          <p class="hint">
+            Klõpsa "Alusta peitmist" ja lohista raame, et katta tüütuid alasid. See toimib ka
+            lehtedel, mille DOM-i ei saa otse muuta.
+          </p>
+        </section>
+
+        <section>
+          <h2>Kiirmärkmed</h2>
+          <textarea id="noteInput" rows="4" placeholder="Kopeeri tekst lehelt ja kleebi siia..."></textarea>
+          <div class="button-row">
+            <button id="saveNoteBtn" class="primary">Salvesta</button>
+            <button id="clearNotesBtn" class="secondary">Tühjenda kõik</button>
+          </div>
+          <ul id="notesList" class="notes-list"></ul>
+        </section>
+
+        <section>
+          <h2>Ideed järgmiseks</h2>
+          <ul class="ideas-list">
+            <li>Kasutaja- või projektipõhised filtrikomplektid ja profiilid.</li>
+            <li>Automaatne tekstikogumine ja kategooriatesse sorteerimine.</li>
+            <li>Integreeritud tõlketeenus (nt Google Translate API) overlay kihina.</li>
+            <li>Offline vahemälu ja täielik lokaalserver (taustal töötav proxy).</li>
+            <li>Visuaalsed teemandid: mobiilivaade, pimedas režiim, pildivaba režiim.</li>
+            <li>Modulaarsed skriptid (näiteks raha- või analüütikatööriistad) kasutaja valikul.</li>
+          </ul>
+        </section>
+      </aside>
+
+      <main class="workspace">
+        <div class="frame-toolbar">
+          <span id="activeSiteLabel">Vali sihtleht</span>
+          <div class="tool-buttons">
+            <button id="reloadBtn" title="Laadi iframe uuesti">Laadi uuesti</button>
+            <button id="openExternalBtn" title="Ava uues aknas" disabled>Ava eraldi</button>
+          </div>
+        </div>
+        <div class="frame-wrapper" id="frameWrapper">
+          <iframe id="contentFrame" title="Sihtlehe eelvaade"></iframe>
+          <div class="mask-layer" id="maskLayer" aria-hidden="true"></div>
+        </div>
+        <div class="status-bar" id="statusBar">Vali leht vasakult, et alustada.</div>
+      </main>
+    </div>
+
+    <template id="noteItemTemplate">
+      <li>
+        <article>
+          <header>
+            <time></time>
+            <button class="remove-note" type="button">×</button>
+          </header>
+          <pre></pre>
+        </article>
+      </li>
+    </template>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
