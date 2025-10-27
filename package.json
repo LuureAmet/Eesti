@@ -1,0 +1,21 @@
+{
+  "name": "eesti",
+  "version": "1.0.0",
+  "description": "Interactive overlay demo with iframe tooling",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "keywords": [
+    "iframe",
+    "overlay",
+    "demo"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "http-proxy-middleware": "^3.0.5"
+  }
+}
