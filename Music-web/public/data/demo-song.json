@@ -1,0 +1,32 @@
+{
+  "sections": [
+    {
+      "id": "intro",
+      "startTime": 0,
+      "endTime": 12.5,
+      "label": "Intro",
+      "placeholder": "Should we add vocals here?",
+      "color": "#93c5fd",
+      "comments": []
+    },
+    {
+      "id": "verse1",
+      "startTime": 12.5,
+      "endTime": 45.2,
+      "label": "Verse 1",
+      "placeholder": "Who might sing this part?",
+      "color": "#86efac",
+      "comments": []
+    },
+    {
+      "id": "chorus",
+      "startTime": 45.2,
+      "endTime": 75.6,
+      "label": "Chorus",
+      "placeholder": "What energy do we want here?",
+      "color": "#fbcfe8",
+      "comments": []
+    }
+  ],
+  "comments": []
+}
