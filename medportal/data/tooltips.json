@@ -1,0 +1,17 @@
+{
+  "age": "Vanus aastates. Oluline riskihindamiseks ja ravimite annuste jaoks.",
+  "bmi": "Kehamassiindeks (BMI) arvutatakse: kaal(kg) / (pikkus(m))². Norm 18.5-25.",
+  "targetBmi": "Siht-BMI arvutatakse soovkaalu põhjal. Aitab seada realistlikke eesmärke.",
+  "breathlessness": "Õhupuudus: 0=puudub, 1=kerge (kiire kõnd), 2=mõõdukas (tavaline kõnd), 3=raske (rahus).",
+  "anticoagulant": "Verevedeldaja (Warfarin, Eliquis, Xarelto jne). OLULINE: koostoimed taimraviga (ginkgo, Dan Shen)!",
+  "bpMorning": "Vererõhk hommikul. Formaat: 120/80 (süstoolne/diastoolne). Norm <140/90.",
+  "hawthornTea": "Viirpuu (Crataegus) - toetab südant, vähendab staminat. Koostoime südameravimitega!",
+  "danShen": "Dan Shen (Salvia) - ETTEVAATUST! Tugev koostoime antikoagulandiga. Konsulteeri arstiga!",
+  "coherentBreathing": "Koherentne hingamine 5-5: sisse 5 sek, välja 5 sek. Rahustab närvisüsteemi.",
+  "timeDaily": "Kui palju aega saad päevas pühendada rutiinidele (hingamine, liikumine jne).",
+  "budgetMonthly": "Ligikaudne eelarve kuus lisandite, taimravide, seadmete jaoks.",
+  "redFlags": "PUNASED LIPUD - kui ilmneb, helista 112 või mine EMO-sse KOHE!",
+  "ef": "EF% (ejektsioonifraktsioon) - näitab südame võimet verd pumbata. Norm >50%.",
+  "afBurden": "AF-koormus % - kui palju aega südames esineb kodade virvendust. <10% kerge.",
+  "ntProBNP": "NT-proBNP (pg/ml) - südamepuudulikkuse marker. Kõrge väärtus = südameprobleem."
+}
