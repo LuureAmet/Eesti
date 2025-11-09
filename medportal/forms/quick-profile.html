@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiirprofiil - Meditsiiniportaal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/forms.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ Kiirprofiil</h1>
+            <p class="subtitle">5 minutit | 15 küsimust</p>
+        </header>
+
+        <main>
+            <div class="form-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <p class="progress-text">Täidetud: <span id="progressText">0%</span></p>
+            </div>
+
+            <form id="quickProfileForm">
+
+                <!-- 1. PÕHIANDMED -->
+                <section class="form-section">
+                    <h2>📋 Põhiandmed</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age">Vanus *</label>
+                            <input type="number" id="age" name="age" min="0" max="120" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="gender">Sugu *</label>
+                            <select id="gender" name="gender" required>
+                                <option value="">Vali...</option>
+                                <option value="mees">Mees</option>
+                                <option value="naine">Naine</option>
+                                <option value="muu">Muu</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="height">Pikkus (cm) *</label>
+                            <input type="number" id="height" name="height" min="50" max="250" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="weight">Kaal (kg) *</label>
+                            <input type="number" id="weight" name="weight" min="20" max="300" step="0.1" required>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. PÕHIDIAGNOOS -->
+                <section class="form-section">
+                    <h2>🩺 Põhidiagnoos ja kaebused</h2>
+
+                    <div class="form-group">
+                        <label for="mainDiagnosis">Põhidiagnoos *</label>
+                        <input type="text" id="mainDiagnosis" name="mainDiagnosis" placeholder="Nt: Südamepuudulikkus, AF, hüpertensioon..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mainComplaint">Peamine kaebus (1-2 lauset) *</label>
+                        <textarea id="mainComplaint" name="mainComplaint" rows="3" placeholder="Kirjelda põhilisi vaevusi..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sümptomid (0=puudub, 1=kerge, 2=mõõdukas, 3=raske)</label>
+                        <div class="symptom-grid">
+                            <div>
+                                <label>Õhupuudus:</label>
+                                <input type="number" name="breathlessness" min="0" max="3" value="0">
+                            </div>
+                            <div>
+                                <label>Väsimus:</label>
+                                <input type="number" name="fatigue" min="0" max="3" value="0">
+                            </div>
+                            <div>
+                                <label>Turse:</label>
+                                <input type="number" name="swelling" min="0" max="3" value="0">
+                            </div>
+                            <div>
+                                <label>Rindkerevalu:</label>
+                                <input type="number" name="chestPain" min="0" max="3" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. RAVIMID -->
+                <section class="form-section">
+                    <h2>💊 Praegused ravimid</h2>
+
+                    <div class="form-group">
+                        <label>Kas võtad praegu ravimeid?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="takingMeds" value="yes"> Jah</label>
+                            <label><input type="radio" name="takingMeds" value="no" checked> Ei</label>
+                        </div>
+                    </div>
+
+                    <div id="medicationSection" class="hidden">
+                        <div class="form-group">
+                            <label for="medications">Ravimid (kirjuta nimetus ja annus) *</label>
+                            <textarea id="medications" name="medications" rows="5" placeholder="Näide:&#10;Warfarin 5mg õhtul&#10;Metoprolol 50mg hommikul&#10;Furosemiid 40mg hommikul"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Kas võtad antikoagulanti (verevedeldajat)?</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" name="anticoagulant" value="yes"> Jah (Warfarin, Eliquis, Xarelto vms)</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. EELISTUSED -->
+                <section class="form-section">
+                    <h2>🌿 Ravi eelistused</h2>
+
+                    <div class="form-group">
+                        <label>Milline lähenemine on sulle kõige olulisem? *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="approach" value="natural" required> Loomulik/holistiline (taimed, hingamine, toitumine)</label>
+                            <label><input type="radio" name="approach" value="combined" required> Kombineeritud (looduslik + ravimid)</label>
+                            <label><input type="radio" name="approach" value="medical" required> Meditsiiniline (peamiselt ravimid)</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="timeAvailable">Kui palju aega päevas saad rutiinidele pühendada? *</label>
+                        <select id="timeAvailable" name="timeAvailable" required>
+                            <option value="">Vali...</option>
+                            <option value="10-15min">10-15 minutit (miinimum)</option>
+                            <option value="15-30min">15-30 minutit</option>
+                            <option value="30-60min">30-60 minutit</option>
+                            <option value="60+min">Üle 1 tunni</option>
+                        </select>
+                    </div>
+                </section>
+
+                <!-- 5. ELUSTIIL -->
+                <section class="form-section">
+                    <h2>🏃 Elustiil</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Aktiivsustase</label>
+                            <select name="activityLevel">
+                                <option value="sedentary">Istuv</option>
+                                <option value="light">Kerge (jalutuskäigud)</option>
+                                <option value="moderate">Mõõdukas (füüsiline töö)</option>
+                                <option value="active">Aktiivne (regulaarne treening)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Uneaeg ööpäevas (tundi)</label>
+                            <input type="number" name="sleepHours" min="0" max="24" step="0.5" value="7">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Eluviis</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="smoking" value="no" checked> Ei suitseta</label>
+                            <label><input type="checkbox" name="alcohol" value="no" checked> Ei joo alkoholi</label>
+                            <label><input type="checkbox" name="rural" value="yes"> Maaelu</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. EESMÄRGID -->
+                <section class="form-section">
+                    <h2>🎯 Eesmärgid</h2>
+
+                    <div class="form-group">
+                        <label for="goals">Mida tahad 3-6 kuu jooksul saavutada? *</label>
+                        <textarea id="goals" name="goals" rows="3" placeholder="Nt: Vähendada õhupuudust, parandada und, suurendada energiat..." required></textarea>
+                    </div>
+                </section>
+
+                <!-- 7. LISAINFO -->
+                <section class="form-section">
+                    <h2>📝 Lisainfo</h2>
+
+                    <div class="form-group">
+                        <label for="additionalInfo">Muu oluline info (vabatahtlik)</label>
+                        <textarea id="additionalInfo" name="additionalInfo" rows="3" placeholder="Allergiad, erilised piirangud, varasemad ravikatsed..."></textarea>
+                    </div>
+                </section>
+
+                <!-- EXPORT VALIKUD -->
+                <section class="form-section export-options">
+                    <h2>💾 Väljundi valikud</h2>
+
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="exportTxt" checked> TXT fail (tekst)</label>
+                        <label><input type="checkbox" name="exportPdf"> PDF fail</label>
+                        <label><input type="checkbox" name="exportJson"> JSON fail (andmebaasile)</label>
+                        <label><input type="checkbox" name="exportAiPrompt" checked> AI prompt (Claude/ChatGPT)</label>
+                    </div>
+                </section>
+
+                <!-- NUPUD -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='../index.html'">← Tagasi</button>
+                    <button type="button" class="btn btn-secondary" onclick="saveForm()">💾 Salvesta draft</button>
+                    <button type="submit" class="btn btn-primary">Genereeri väljund →</button>
+                </div>
+
+            </form>
+
+            <div id="output" class="output-section hidden">
+                <h2>✅ Väljund genereeritud!</h2>
+                <div class="output-buttons">
+                    <button class="btn btn-primary" onclick="downloadTxt()">📄 Lae alla TXT</button>
+                    <button class="btn btn-primary" onclick="downloadPdf()">📑 Lae alla PDF</button>
+                    <button class="btn btn-primary" onclick="downloadJson()">💾 Lae alla JSON</button>
+                    <button class="btn btn-secondary" onclick="copyAiPrompt()">📋 Kopeeri AI prompt</button>
+                </div>
+                <div id="preview" class="output-preview"></div>
+            </div>
+
+        </main>
+
+        <footer>
+            <p>© 2025 Meditsiiniportaal | Kiirprofiil</p>
+        </footer>
+    </div>
+
+    <script src="../js/form-handler.js"></script>
+    <script src="../js/quick-profile.js"></script>
+</body>
+</html>

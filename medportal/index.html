@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditsiiniportaal - Holistiline Tervisevorm</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏥 Meditsiiniportaal</h1>
+            <p class="subtitle">Holistiline terviseprofiili koostamine</p>
+        </header>
+
+        <main>
+            <div class="intro">
+                <h2>Tere tulemast!</h2>
+                <p>See portaal aitab sul koostada põhjaliku terviseprofiili, mis võtab arvesse nii meditsiinilisi kui ka holistilisi aspekte.</p>
+                <p><strong>Vali sobiv vorm:</strong></p>
+            </div>
+
+            <div class="form-options">
+                <!-- TASE 1: Kiirprofiil -->
+                <div class="form-card">
+                    <div class="form-icon">⚡</div>
+                    <h3>Kiirprofiil</h3>
+                    <p class="time-estimate">⏱️ ~5 minutit</p>
+                    <p class="description">Lihtne ja kiire vorm põhiandmete kogumiseks. Ideaalne AI konsultatsioonide alustamiseks.</p>
+                    <ul class="features">
+                        <li>✓ 15 põhiküsimust</li>
+                        <li>✓ Kiire väljund (TXT/PDF)</li>
+                        <li>✓ AI promoti genereerimine</li>
+                    </ul>
+                    <a href="forms/quick-profile.html" class="btn btn-primary">Alusta kiirprofiili</a>
+                </div>
+
+                <!-- TASE 2: Täisprofiil -->
+                <div class="form-card featured">
+                    <div class="ribbon">Soovitatud</div>
+                    <div class="form-icon">📋</div>
+                    <h3>Täisprofiil</h3>
+                    <p class="time-estimate">⏱️ ~30 minutit</p>
+                    <p class="description">Põhjalik 18-sektsiooniline vorm, mis katab kõik aspektid: ajalugu, ravimid, toitumine, taimravi, hingamine jne.</p>
+                    <ul class="features">
+                        <li>✓ 18 detailset sektsiooni</li>
+                        <li>✓ Dünaamilised väljad</li>
+                        <li>✓ Export JSON/PDF/TXT</li>
+                        <li>✓ Koostoime analüüs</li>
+                    </ul>
+                    <a href="forms/full-profile.html" class="btn btn-primary">Alusta täisprofiili</a>
+                </div>
+
+                <!-- TASE 3: Päevalogi -->
+                <div class="form-card">
+                    <div class="form-icon">📊</div>
+                    <h3>Päevalogi</h3>
+                    <p class="time-estimate">⏱️ ~2 minutit päevas</p>
+                    <p class="description">Jooksev päevik mõõtmiste ja sümptomite jälgimiseks. Ideaalne pikaajaliseks monitoorimiseks.</p>
+                    <ul class="features">
+                        <li>✓ Kaal, BP, pulss</li>
+                        <li>✓ Sümptomite skoor</li>
+                        <li>✓ CSV export arstile</li>
+                    </ul>
+                    <a href="forms/daily-log.html" class="btn btn-secondary">Ava päevalogi</a>
+                </div>
+            </div>
+
+            <div class="info-section">
+                <h3>ℹ️ Info</h3>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <strong>🔒 Privaatsus:</strong>
+                        <p>Andmeid salvestatakse ainult sinu nõusolekul. Võid valida, kas soovid andmeid jagada arstiga, pereliikmega või hoida isiklikuna.</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>💾 Salvestamine:</strong>
+                        <p>Saad vormi salvestada oma arvutisse (TXT, PDF, JSON). Hiljem saad jätkata või muuta.</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>🤖 AI Soovitused:</strong>
+                        <p>Vormist genereeritakse AI prompt, mida saad kasutada konsultatsioonideks (Claude, ChatGPT, jne).</p>
+                    </div>
+                    <div class="info-item">
+                        <strong>🌿 Holistiline:</strong>
+                        <p>Vorm katab nii meditsiinilisi kui looduslikke meetodeid: taimravi, hingamine, toitumine, liikumine.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2025 Meditsiiniportaal | <a href="#privaatsus">Privaatsuspoliitika</a> | <a href="#abi">Abi</a></p>
+        </footer>
+    </div>
+</body>
+</html>
