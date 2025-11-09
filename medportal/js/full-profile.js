@@ -459,55 +459,381 @@ function downloadPdfFull() {
     alert('ℹ PDF genereeritud tekstiformaadis. Täiustatud PDF (jsPDF) tulekul v1.1!');
 }
 
-// AI prompt kopeerimine
+// AI prompt kopeerimine - ava redaktor
 function copyAiPromptFull() {
-    const prompt = generateAiPromptAdvanced();
-    copyToClipboard(prompt);
-    alert('✓ AI prompt kopeeritud lõikelauale!');
+    showPromptEditor();
 }
 
-// Täiustatud AI prompt
-function generateAiPromptAdvanced() {
+// AI PROMPT REDAKTOR - vali sektsioonid checkboxidega
+function showPromptEditor() {
+    // Eemalda vana modal kui on
+    const oldModal = document.getElementById('promptEditorModal');
+    if (oldModal) oldModal.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'promptEditorModal';
+    modal.className = 'preview-modal';
+
+    let checkboxesHtml = '<div class="prompt-sections">';
+
+    if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.promptSections) {
+        SITE_CONFIG.promptSections.forEach(section => {
+            const checked = section.default ? 'checked' : '';
+            checkboxesHtml += `
+                <label class="section-checkbox">
+                    <input type="checkbox" value="${section.id}" ${checked} onchange="updatePromptPreview()">
+                    ${section.label}
+                </label>
+            `;
+        });
+    } else {
+        // Fallback kui config pole laetud
+        checkboxesHtml += '<p style="color:orange;">Config pole laetud. Kasutatakse vaikimisi kõiki sektsioone.</p>';
+    }
+
+    checkboxesHtml += '</div>';
+
+    modal.innerHTML = `
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>AI Prompt - Kohanda väljundit</h3>
+                <button class="close-btn" onclick="this.closest('.preview-modal').remove()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="prompt-controls">
+                    <h4>Vali kaasatavad sektsioonid:</h4>
+                    ${checkboxesHtml}
+                    <div class="prompt-actions">
+                        <button onclick="selectAllSections(true)" class="btn btn-secondary btn-sm">Vali kõik</button>
+                        <button onclick="selectAllSections(false)" class="btn btn-secondary btn-sm">Tühista kõik</button>
+                        <button onclick="resetToDefaults()" class="btn btn-secondary btn-sm">Taasta vaikeväärtused</button>
+                    </div>
+                </div>
+                <div class="prompt-preview">
+                    <h4>Eelvaade:</h4>
+                    <pre id="promptPreviewContent"></pre>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="copyPromptFromEditor()" class="btn btn-primary">Kopeeri lõikelauale</button>
+                <button onclick="downloadPromptTxt()" class="btn btn-primary">Lae alla TXT</button>
+                <button onclick="this.closest('.preview-modal').remove()" class="btn btn-secondary">Sulge</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Lisa CSS kui pole
+    if (!document.getElementById('promptEditorCss')) {
+        const css = document.createElement('style');
+        css.id = 'promptEditorCss';
+        css.textContent = `
+            .modal-content.large {
+                max-width: 900px;
+                max-height: 90vh;
+            }
+            .modal-body {
+                display: grid;
+                grid-template-columns: 300px 1fr;
+                gap: 1.5rem;
+                max-height: 600px;
+            }
+            .prompt-controls {
+                border-right: 1px solid #e5e7eb;
+                padding-right: 1rem;
+                overflow-y: auto;
+            }
+            .prompt-controls h4 {
+                margin-bottom: 0.75rem;
+                font-size: 0.95rem;
+                color: var(--primary-color);
+            }
+            .prompt-sections {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                margin-bottom: 1rem;
+            }
+            .section-checkbox {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.4rem;
+                cursor: pointer;
+                border-radius: 4px;
+                font-size: 0.9rem;
+            }
+            .section-checkbox:hover {
+                background: #f3f4f6;
+            }
+            .section-checkbox input[type="checkbox"] {
+                cursor: pointer;
+            }
+            .prompt-actions {
+                display: flex;
+                flex-direction: column;
+                gap: 0.4rem;
+            }
+            .btn-sm {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+            .prompt-preview {
+                overflow-y: auto;
+            }
+            .prompt-preview h4 {
+                margin-bottom: 0.75rem;
+                font-size: 0.95rem;
+                color: var(--primary-color);
+            }
+            .prompt-preview pre {
+                background: #f9fafb;
+                padding: 1rem;
+                border-radius: 6px;
+                font-size: 0.85rem;
+                line-height: 1.5;
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                max-height: 500px;
+                overflow-y: auto;
+            }
+            @media (max-width: 768px) {
+                .modal-body {
+                    grid-template-columns: 1fr;
+                }
+                .prompt-controls {
+                    border-right: none;
+                    border-bottom: 1px solid #e5e7eb;
+                    padding-bottom: 1rem;
+                }
+            }
+        `;
+        document.head.appendChild(css);
+    }
+
+    // Genereeri algne preview
+    updatePromptPreview();
+}
+
+// Uuenda prompt preview
+function updatePromptPreview() {
+    const selectedSections = getSelectedSections();
+    const prompt = generateAiPromptCustom(selectedSections);
+    const previewEl = document.getElementById('promptPreviewContent');
+    if (previewEl) {
+        previewEl.textContent = prompt;
+    }
+}
+
+// Hangi valitud sektsioonid
+function getSelectedSections() {
+    const checkboxes = document.querySelectorAll('.section-checkbox input[type="checkbox"]:checked');
+    return Array.from(checkboxes).map(cb => cb.value);
+}
+
+// Vali kõik / tühista kõik
+function selectAllSections(select) {
+    const checkboxes = document.querySelectorAll('.section-checkbox input[type="checkbox"]');
+    checkboxes.forEach(cb => cb.checked = select);
+    updatePromptPreview();
+}
+
+// Taasta vaikeväärtused
+function resetToDefaults() {
+    if (typeof SITE_CONFIG !== 'undefined' && SITE_CONFIG.promptSections) {
+        const checkboxes = document.querySelectorAll('.section-checkbox input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+            const section = SITE_CONFIG.promptSections.find(s => s.id === cb.value);
+            cb.checked = section ? section.default : true;
+        });
+        updatePromptPreview();
+    }
+}
+
+// Kopeeri prompt editorist
+function copyPromptFromEditor() {
+    const selectedSections = getSelectedSections();
+    const prompt = generateAiPromptCustom(selectedSections);
+    copyToClipboard(prompt);
+    alert('AI prompt kopeeritud lõikelauale!');
+}
+
+// Lae alla prompt TXT-na
+function downloadPromptTxt() {
+    const selectedSections = getSelectedSections();
+    const prompt = generateAiPromptCustom(selectedSections);
+    const filename = `ai-prompt_${formatDate()}.txt`;
+    downloadFile(prompt, filename, 'text/plain');
+}
+
+// Genereeri kohandatud AI prompt valitud sektsioonidega
+function generateAiPromptCustom(selectedSections = []) {
     const d = formDataGlobal;
 
     let prompt = `═══════════════════════════════════════════════════════════\n`;
     prompt += `HOLISTILINE MEDITSIINILINE KONSULTATSIOON\n`;
-    prompt += `Täisprofiil | ${new Date().toLocaleDateString('et-EE')}\n`;
+    prompt += `Täisprofiil | ${new Date().toLocaleDateString('et-EE', {timeZone: 'Europe/Tallinn'})}\n`;
     prompt += `═══════════════════════════════════════════════════════════\n\n`;
 
-    prompt += `PATSIENT:\n`;
-    prompt += `${d.age || 'X'}a ${d.gender || 'N/A'}, `;
-    prompt += `${d.height || 'X'}cm, ${d.weight || 'X'}kg`;
-    if (d.bmi) prompt += ` (BMI ${d.bmi})`;
-    if (d.targetWeight) prompt += ` → Siht: ${d.targetWeight}kg`;
-    prompt += `\n\n`;
-
-    if (d.diagnoses) {
-        prompt += `DIAGNOOSID:\n${d.diagnoses}\n\n`;
+    // Kui ei ole valitud ühtegi, kasuta kõiki
+    if (selectedSections.length === 0) {
+        return generateAiPromptAdvanced();
     }
 
-    prompt += `SÜMPTOMID (0-3):\n`;
-    prompt += `Õhupuudus: ${d.breathlessness || 0}, `;
-    prompt += `Turse: ${d.swelling || 0}, `;
-    prompt += `Väsimus: ${d.fatigue || 0}\n\n`;
+    // Helper funktsioon - kas sektsioon on valitud
+    const has = (id) => selectedSections.includes(id);
 
-    if (d.medicationSummary && d.medicationSummary.length > 0) {
-        prompt += `RAVIMID:\n`;
-        d.medicationSummary.forEach(med => {
-            prompt += `- ${med.name} ${med.dose} (${med.timing})\n`;
-        });
+    // PROFILE
+    if (has('profile')) {
+        prompt += `PATSIENT:\n`;
+        prompt += `${d.age || 'X'}a ${d.gender || 'N/A'}, `;
+        prompt += `${d.height || 'X'}cm, ${d.weight || 'X'}kg`;
+        if (d.bmi) prompt += ` (BMI ${d.bmi})`;
+        if (d.targetWeight) prompt += ` → Siht: ${d.targetWeight}kg`;
+        prompt += `\n`;
+        if (d.diagnoses) prompt += `Diagnoosid: ${d.diagnoses}\n`;
         prompt += `\n`;
     }
 
-    if (d.anticoagulant === 'yes') {
-        prompt += `⚠ VÕTAB ANTIKOAGULANTI: ${d.anticoagulantName || 'ei täpsustatud'}\n`;
-        prompt += `OLULINE: Väldi koostoimeid (Dan Shen, ginkgo, naistepuna jne)!\n\n`;
+    // SYMPTOMS
+    if (has('symptoms')) {
+        prompt += `SÜMPTOMID (0-3):\n`;
+        prompt += `Õhupuudus: ${d.breathlessness || 0}, `;
+        prompt += `Turse: ${d.swelling || 0}, `;
+        prompt += `Väsimus: ${d.fatigue || 0}, `;
+        prompt += `Rindkerevalu: ${d.chestPain || 0}\n\n`;
     }
 
-    prompt += `EELISTUSED:\n`;
-    prompt += `- Lähenemine: ${d.naturalFirst || 'määramata'}\n`;
-    prompt += `- Aeg päevas: ${d.timeDaily || 'määramata'}\n`;
-    prompt += `- Eelarve: ${d.budgetMonthly || 'määramata'}\n\n`;
+    // MEASUREMENTS
+    if (has('measurements')) {
+        prompt += `MÕÕTMISED:\n`;
+        if (d.bp) prompt += `Vererõhk: ${d.bp}\n`;
+        if (d.pulse) prompt += `Pulss: ${d.pulse}\n`;
+        if (d.weight) prompt += `Kaal: ${d.weight}kg\n`;
+        prompt += `\n`;
+    }
+
+    // HISTORY
+    if (has('history')) {
+        if (d.historyNote) {
+            prompt += `HAIGUSLUGU:\n${d.historyNote}\n\n`;
+        }
+    }
+
+    // MEDICATIONS
+    if (has('medications')) {
+        if (d.medicationSummary && d.medicationSummary.length > 0) {
+            prompt += `RAVIMID:\n`;
+            d.medicationSummary.forEach(med => {
+                prompt += `- ${med.name} ${med.dose} (${med.timing})\n`;
+            });
+            if (d.anticoagulant === 'yes') {
+                prompt += `\n⚠ VÕTAB ANTIKOAGULANTI: ${d.anticoagulantName || 'ei täpsustatud'}\n`;
+                prompt += `OLULINE: Väldi koostoimeid (Dan Shen, ginkgo, naistepuna jne)!\n`;
+            }
+            prompt += `\n`;
+        }
+    }
+
+    // HERBAL
+    if (has('herbal')) {
+        if (d.herbalRemedies) {
+            prompt += `TAIMRAVI:\n${d.herbalRemedies}\n\n`;
+        }
+    }
+
+    // NUTRITION
+    if (has('nutrition')) {
+        if (d.dietType || d.mealCount || d.waterIntake) {
+            prompt += `TOITUMINE:\n`;
+            if (d.dietType) prompt += `Dieedi tüüp: ${d.dietType}\n`;
+            if (d.mealCount) prompt += `Söökkordi päevas: ${d.mealCount}\n`;
+            if (d.waterIntake) prompt += `Vedeliku tarbimine: ${d.waterIntake}\n`;
+            prompt += `\n`;
+        }
+    }
+
+    // PHYSICAL
+    if (has('physical')) {
+        if (d.walkDaily || d.exerciseType) {
+            prompt += `FÜÜSILINE AKTIIVSUS:\n`;
+            if (d.walkDaily) prompt += `Jalutuskäik: ${d.walkDaily}\n`;
+            if (d.exerciseType) prompt += `Harjutused: ${d.exerciseType}\n`;
+            prompt += `\n`;
+        }
+    }
+
+    // BREATHING
+    if (has('breathing')) {
+        if (d.breathingPractice) {
+            prompt += `HINGAMISTEHNIKAD:\n${d.breathingPractice}\n\n`;
+        }
+    }
+
+    // MEDITATION
+    if (has('meditation')) {
+        if (d.meditationPractice) {
+            prompt += `MEDITATSIOON:\n${d.meditationPractice}\n\n`;
+        }
+    }
+
+    // IDEOLOGY
+    if (has('ideology')) {
+        if (d.ideology) {
+            prompt += `MAAILMAVAADE/USK:\n${d.ideology}\n\n`;
+        }
+    }
+
+    // RESOURCES
+    if (has('resources')) {
+        prompt += `RESSURSID:\n`;
+        if (d.budgetMonthly) prompt += `Eelarve: ${d.budgetMonthly} €/kuu\n`;
+        if (d.timeDaily) prompt += `Aeg päevas: ${d.timeDaily}\n`;
+        prompt += `\n`;
+    }
+
+    // RISKS
+    if (has('risks')) {
+        if (d.riskFlags) {
+            prompt += `RISKIFAKTORID:\n${d.riskFlags}\n\n`;
+        }
+    }
+
+    // DIAGNOSTICS
+    if (has('diagnostics')) {
+        if (d.diagnosticsNeeded) {
+            prompt += `DIAGNOSTIKA SOOVITUSED:\n${d.diagnosticsNeeded}\n\n`;
+        }
+    }
+
+    // DECISION TREE
+    if (has('decisionTree')) {
+        if (d.decisionTree) {
+            prompt += `OTSUSTUSPUU:\n${d.decisionTree}\n\n`;
+        }
+    }
+
+    // PLANS
+    if (has('plans')) {
+        if (d.treatmentPlan) {
+            prompt += `RAVIPLAAN:\n${d.treatmentPlan}\n\n`;
+        }
+    }
+
+    // MENU
+    if (has('menu')) {
+        if (d.menuPreferences) {
+            prompt += `MENÜÜ SOOVITUSED:\n${d.menuPreferences}\n\n`;
+        }
+    }
+
+    // PACKAGE
+    if (has('package')) {
+        if (d.packageChoice) {
+            prompt += `PAKETT VALIK:\n${d.packageChoice}\n\n`;
+        }
+    }
 
     prompt += `───────────────────────────────────────────────────────────\n`;
     prompt += `PALUN SOOVITA:\n\n`;
@@ -518,6 +844,11 @@ function generateAiPromptAdvanced() {
     prompt += `5. Prioriteedid ja reaalsed eesmärgid 3-6 kuuks\n`;
 
     return prompt;
+}
+
+// Vana funktsioon jääb alles tagasiühilduvuse jaoks
+function generateAiPromptAdvanced() {
+    return generateAiPromptCustom(['profile', 'symptoms', 'medications', 'herbal', 'nutrition', 'physical', 'resources', 'plans']);
 }
 
 // Abiline funktsioon kuupäeva jaoks
