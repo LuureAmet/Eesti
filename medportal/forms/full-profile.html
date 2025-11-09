@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Täisprofiil - Meditsiiniportaal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/forms.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Holistiline Terviseprofiil</h1>
+            <p class="subtitle">Täisprofiil | ~30 minutit | 18 sektsiooni</p>
+        </header>
+
+        <main>
+            <div class="form-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <p class="progress-text">Täidetud: <span id="progressText">0%</span></p>
+            </div>
+
+            <form id="fullProfileForm">
+
+                <!-- SEKTSIOON 0: PRIVAATSUS -->
+                <section class="form-section">
+                    <h2>0. Privaatsus ja nõusolek</h2>
+
+                    <div class="form-group">
+                        <label>Jagamise tase</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="shareDoctor" value="yes"> Ainult arstile</label>
+                            <label><input type="checkbox" name="shareFamily" value="yes"> Pereliikmega</label>
+                            <label><input type="checkbox" name="shareAnonymous" value="yes"> Anonüümselt uurijale</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="noShare">Millist andmestikku EI jagata</label>
+                        <input type="text" id="noShare" name="noShare" placeholder="Näiteks: psühholoogilised andmed">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nõusolek</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="consentMeasurements" value="yes"> Kodused mõõtmised</label>
+                            <label><input type="checkbox" name="consentHerbs" value="yes"> Teetaust (taimed)</label>
+                            <label><input type="checkbox" name="consentBreathing" value="yes"> Hingamis-/meditatsioonirutiin</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="emergencyContact">Kontakt hädaolukorraks</label>
+                            <input type="text" id="emergencyContact" name="emergencyContact">
+                        </div>
+                        <div class="form-group">
+                            <label for="emergencyPhone">Telefon</label>
+                            <input type="tel" id="emergencyPhone" name="emergencyPhone">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 1: PROFIIL JA ELURÜTM -->
+                <section class="form-section">
+                    <h2>1. Profiil ja elurütm (ankrud + aknad)</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age1">Vanus</label>
+                            <input type="number" id="age1" name="age" min="0" max="120">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender1">Sugu</label>
+                            <select id="gender1" name="gender">
+                                <option value="">Vali...</option>
+                                <option value="mees">Mees</option>
+                                <option value="naine">Naine</option>
+                                <option value="muu">Muu</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="height1">Pikkus (cm)</label>
+                            <input type="number" id="height1" name="height" min="50" max="250">
+                        </div>
+                        <div class="form-group">
+                            <label for="weight1">Kaal (kg)</label>
+                            <input type="number" id="weight1" name="weight" min="20" max="300" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="targetWeight">Soovkaal (kg)</label>
+                            <input type="number" id="targetWeight" name="targetWeight" min="20" max="300" step="0.1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Eluviis</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="rural" value="yes"> Maaelu</label>
+                            <label><input type="checkbox" name="urban" value="yes"> Linn</label>
+                            <label><input type="checkbox" name="nightShift" value="yes"> Öötöö</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="travelDays">Pikkade sõitude päevad nädalas</label>
+                        <input type="number" id="travelDays" name="travelDays" min="0" max="7">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Aknad (optimaalsed ajad tegevusteks)</label>
+                        <div class="form-row">
+                            <div>
+                                <label class="optional">Hommik (1-3h ärkamisest)</label>
+                                <input type="time" name="morningWindow">
+                            </div>
+                            <div>
+                                <label class="optional">Keskpäev (11-15)</label>
+                                <input type="time" name="noonWindow">
+                            </div>
+                            <div>
+                                <label class="optional">Õhtu (17-21)</label>
+                                <input type="time" name="eveningWindow">
+                            </div>
+                            <div>
+                                <label class="optional">Uneaeg</label>
+                                <input type="time" name="sleepTime">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Aktiivsus</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="activity" value="walking"> Kõnd</label>
+                            <label><input type="radio" name="activity" value="physical"> Füüsiline töö</label>
+                            <label><input type="radio" name="activity" value="sedentary"> Istuv</label>
+                            <label><input type="radio" name="activity" value="mixed"> Segarežiim</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sleepHours">Uneaeg ööpäevas (h)</label>
+                            <input type="number" id="sleepHours" name="sleepHours" min="0" max="24" step="0.5">
+                        </div>
+                        <div class="form-group">
+                            <label for="sleepQuality">Kvaliteet (0-3)</label>
+                            <input type="number" id="sleepQuality" name="sleepQuality" min="0" max="3">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Norskamine/pausid</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="snoring" value="yes"> Jah</label>
+                            <label><input type="radio" name="snoring" value="no"> Ei</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="stressLevel">Stressi tase (0-3)</label>
+                            <input type="number" id="stressLevel" name="stressLevel" min="0" max="3">
+                        </div>
+                        <div class="form-group">
+                            <label for="stressors">Peamised stressorid</label>
+                            <input type="text" id="stressors" name="stressors">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 2: KAEBUSED JA SÜMPTOMID -->
+                <section class="form-section">
+                    <h2>2. Kaebused ja sümptomite skaalad</h2>
+                    <p class="help-text">Skoor: 0=puudub, 1=kerge, 2=mõõdukas, 3=raske</p>
+
+                    <div class="symptom-grid">
+                        <div>
+                            <label>Õhupuudus</label>
+                            <input type="number" name="breathlessness" min="0" max="3" value="0">
+                        </div>
+                        <div>
+                            <label>Turse</label>
+                            <input type="number" name="swelling" min="0" max="3" value="0">
+                        </div>
+                        <div>
+                            <label>Väsimus</label>
+                            <input type="number" name="fatigue" min="0" max="3" value="0">
+                        </div>
+                        <div>
+                            <label>Südamepekslemine</label>
+                            <input type="number" name="palpitations" min="0" max="3" value="0">
+                        </div>
+                        <div>
+                            <label>Rindkerevalu</label>
+                            <input type="number" name="chestPain" min="0" max="3" value="0">
+                        </div>
+                        <div>
+                            <label>Pearinglus/minestus</label>
+                            <input type="number" name="dizziness" min="0" max="3" value="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nightWaking">Öine ülesärkamise sagedus (korda/öö)</label>
+                        <input type="number" id="nightWaking" name="nightWaking" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Koormustaluvus</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="exerciseTolerance" value="<100m"> &lt;100 m</label>
+                            <label><input type="radio" name="exerciseTolerance" value="100-500m"> 100-500 m</label>
+                            <label><input type="radio" name="exerciseTolerance" value=">500m"> &gt;500 m</label>
+                            <label><input type="radio" name="exerciseTolerance" value="work-capable"> Töövõimeline</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 3: TÖÖRIISTAD JA MÕÕTMISED -->
+                <section class="form-section">
+                    <h2>3. Tööriistad ja kodused mõõtmised</h2>
+
+                    <div class="form-group">
+                        <label>Vererõhumõõtja</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="bpMonitor" value="yes"> Olemas</label>
+                            <label><input type="radio" name="bpMonitor" value="no"> Puudub</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bpMorning">Keskmine BP hommikul (mmHg)</label>
+                            <input type="text" id="bpMorning" name="bpMorning" placeholder="120/80">
+                        </div>
+                        <div class="form-group">
+                            <label for="bpEvening">Keskmine BP õhtul (mmHg)</label>
+                            <input type="text" id="bpEvening" name="bpEvening" placeholder="120/80">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="restingHR">Pulss rahus (lpm)</label>
+                        <input type="number" id="restingHR" name="restingHR" min="30" max="200">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sammulugeja/telefon</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="stepCounter" value="yes"> Jah</label>
+                            <label><input type="radio" name="stepCounter" value="no"> Ei</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dailySteps">Päevane sammude tase</label>
+                        <input type="number" id="dailySteps" name="dailySteps" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kaal igal hommikul</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="dailyWeight" value="yes"> Jah</label>
+                            <label><input type="radio" name="dailyWeight" value="no"> Ei</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Viimase 7 päeva kaalutrend</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="weightTrend" value="up"> Tõuseb</label>
+                            <label><input type="radio" name="weightTrend" value="stable"> Stabiilne</label>
+                            <label><input type="radio" name="weightTrend" value="down"> Langeb</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 4: AJALUGU -->
+                <section class="form-section">
+                    <h2>4. Ajalugu (viimased 5 aastat)</h2>
+
+                    <div class="form-group">
+                        <label for="diagnoses">Diagnoosid</label>
+                        <textarea id="diagnoses" name="diagnoses" rows="3" placeholder="Näiteks: Südamepuudulikkus, AF, hüpertensioon..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sündmused</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="eventHospital" value="yes"> Haiglaravi</label>
+                            <label><input type="checkbox" name="eventER" value="yes"> EMO külastus</label>
+                            <label><input type="checkbox" name="eventCardioversion" value="yes"> Kardioversioon</label>
+                            <label><input type="checkbox" name="eventAblation" value="yes"> Ablatsioon</label>
+                            <label><input type="checkbox" name="eventNone" value="yes"> Puudub</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Perekondlik risk (süda/insult &lt;65 a)</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="familyRisk" value="yes"> Jah</label>
+                            <label><input type="radio" name="familyRisk" value="no"> Ei</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Allergiad/ülitundlikkus</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="allergies" value="no"> Puudub</label>
+                            <label><input type="radio" name="allergies" value="yes"> On</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="allergiesDetail" class="hidden">
+                        <label for="allergiesText">Kirjelda allergiad</label>
+                        <textarea id="allergiesText" name="allergiesText" rows="2"></textarea>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 5: RAVIMID -->
+                <section class="form-section">
+                    <h2>5. Ravimid ja lisandid (praegu või hiljuti)</h2>
+
+                    <div id="medicationTableContainer">
+                        <table class="medication-table">
+                            <thead>
+                                <tr>
+                                    <th>Nimi</th>
+                                    <th>Annus</th>
+                                    <th>Millal/aknas</th>
+                                    <th>Algus</th>
+                                    <th>Mõju (0-3)</th>
+                                    <th>Kõrvaltoime</th>
+                                    <th>Jätkata?</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="medicationTableBody">
+                                <tr>
+                                    <td><input type="text" name="medName[]" placeholder="Nimi"></td>
+                                    <td><input type="text" name="medDose[]" placeholder="mg"></td>
+                                    <td><input type="text" name="medTiming[]" placeholder="Hommikul"></td>
+                                    <td><input type="text" name="medStart[]" placeholder="2023"></td>
+                                    <td><input type="number" name="medEffect[]" min="0" max="3"></td>
+                                    <td><input type="text" name="medSideEffect[]"></td>
+                                    <td>
+                                        <select name="medContinue[]">
+                                            <option value="yes">Jah</option>
+                                            <option value="no">Ei</option>
+                                        </select>
+                                    </td>
+                                    <td><button type="button" class="remove-row" onclick="removeRow(this)">×</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="add-row-btn" onclick="addMedicationRow()">+ Lisa rida</button>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label>Antikoagulant?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="anticoagulant" value="yes"> Jah</label>
+                            <label><input type="radio" name="anticoagulant" value="no"> Ei</label>
+                        </div>
+                    </div>
+
+                    <div id="anticoagulantDetails" class="hidden">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="anticoagulantName">Mis ravim</label>
+                                <input type="text" id="anticoagulantName" name="anticoagulantName" placeholder="Warfarin, Eliquis...">
+                            </div>
+                            <div class="form-group">
+                                <label for="anticoagulantDose">Annus</label>
+                                <input type="text" id="anticoagulantDose" name="anticoagulantDose">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Neerufunktsioon teada</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="kidneyFunction" value="yes"> Jah</label>
+                                <label><input type="radio" name="kidneyFunction" value="no"> Ei</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Koostoime riskid (märgi kui tarvitad)</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="interactionGrapefruit" value="yes"> Greip/greibimahl</label>
+                            <label><input type="checkbox" name="interactionJohnsWort" value="yes"> Naistepuna</label>
+                            <label><input type="checkbox" name="interactionGinkgo" value="yes"> Ginkgo</label>
+                            <label><input type="checkbox" name="interactionLicorice" value="yes"> Lagrits</label>
+                            <label><input type="checkbox" name="interactionGarlic" value="yes"> Küüslauk &gt;1 küüs/päev</label>
+                            <label><input type="checkbox" name="interactionGinger" value="yes"> Ingver &gt;2 g/päev</label>
+                            <label><input type="checkbox" name="interactionTurmeric" value="yes"> Kurkum &gt;1 g/päev</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 6: TAIMRAVI -->
+                <section class="form-section">
+                    <h2>6. Taimravi ja looduslikud meetodid</h2>
+                    <p class="help-text">Märgi kasutus + taluvus</p>
+
+                    <div class="form-group">
+                        <label>Viirpuu (Crataegus)</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="hawthornTea" value="yes"> Tee</label>
+                            <label><input type="checkbox" name="hawthornExtract" value="yes"> Ekstrakt</label>
+                        </div>
+                        <input type="text" name="hawthornEffect" placeholder="Mõju (0-3)" style="margin-top: 10px;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Arjuna (Terminalia arjuna)</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="arjuna" value="yes"> Kasutan</label>
+                            <label><input type="radio" name="arjuna" value="no" checked> Ei kasuta</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Hibiscus</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="hibiscus" value="yes"> Kasutan</label>
+                            <label><input type="radio" name="hibiscus" value="no" checked> Ei kasuta</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Muud taimed</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="herbDanShen" value="yes"> Dan Shen (Salvia) - ETTEVAATUST antikoagulandiga!</label>
+                            <label><input type="checkbox" name="herbGinseng" value="yes"> Ginseng (Panax)</label>
+                            <label><input type="checkbox" name="herbAstragalus" value="yes"> Astragalus</label>
+                            <label><input type="checkbox" name="herbReishi" value="yes"> Reishi</label>
+                            <label><input type="checkbox" name="herbSeaweed" value="yes"> Merevetikas/kelp</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="herbsOther">Muud taimravid</label>
+                        <textarea id="herbsOther" name="herbsOther" rows="2" placeholder="Kirjelda..."></textarea>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 7: TOITUMINE -->
+                <section class="form-section">
+                    <h2>7. Toitumisprofiil ja eelistused</h2>
+
+                    <div class="form-group">
+                        <label>Söögirütm akendes</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="mealFrequency" value="2x"> 2× päevas</label>
+                            <label><input type="radio" name="mealFrequency" value="3x"> 3× päevas</label>
+                            <label><input type="radio" name="mealFrequency" value="flexible"> Paindlik</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Paast</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="fasting" value="no"> Ei</label>
+                            <label><input type="radio" name="fasting" value="12-14h"> 12-14 h</label>
+                            <label><input type="radio" name="fasting" value="other"> Muu</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="favoriteFood">Põhitoidud, mis maitsevad ja sobivad</label>
+                        <input type="text" id="favoriteFood" name="favoriteFood">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Piirangud</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="restrictGluten" value="yes"> Gluteen</label>
+                            <label><input type="checkbox" name="restrictDairy" value="yes"> Piim</label>
+                            <label><input type="checkbox" name="restrictMeat" value="yes"> Liha</label>
+                            <label><input type="checkbox" name="restrictSugar" value="yes"> Suhkur</label>
+                            <label><input type="checkbox" name="restrictSalt" value="yes"> Sool</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="waterIntake">Vedelik (l/päev)</label>
+                            <input type="number" id="waterIntake" name="waterIntake" min="0" max="10" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="coffeeCups">Kohv (tassi/päev)</label>
+                            <input type="number" id="coffeeCups" name="coffeeCups" min="0" max="20">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tee tüübid</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="teaGreen" value="yes"> Roheline</label>
+                            <label><input type="checkbox" name="teaHibiscus" value="yes"> Hibiskus</label>
+                            <label><input type="checkbox" name="teaBlack" value="yes"> Must</label>
+                            <label><input type="checkbox" name="teaHerbal" value="yes"> Ravimtaimed</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sool</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="saltIntake" value="normal"> Tavapärane</label>
+                            <label><input type="radio" name="saltIntake" value="<2g"> &lt;2 g Na eesmärk</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 8: KEHALISED PRAKTIKAD -->
+                <section class="form-section">
+                    <h2>8. Kehalised praktikad ja rütm</h2>
+
+                    <div class="form-group">
+                        <label>Hingamine</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="breathCoherent" value="yes"> Koherents 5-5</label>
+                            <label><input type="checkbox" name="breathAlternate" value="yes"> Vahelduvnina</label>
+                            <label><input type="checkbox" name="breathOther" value="yes"> Muu</label>
+                        </div>
+                        <input type="number" name="breathMinutes" placeholder="Minutit päevas" min="0" style="margin-top: 10px;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Liikumine</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="moveWalk" value="yes"> Jalutus</label>
+                            <label><input type="checkbox" name="move8Brocades" value="yes"> 8 Brokaati</label>
+                            <label><input type="checkbox" name="moveTaiji" value="yes"> Taiji</label>
+                            <label><input type="checkbox" name="moveYoga" value="yes"> Jooga (restoratiivne)</label>
+                        </div>
+                        <input type="number" name="moveMinutes" placeholder="Minutit päevas" min="0" style="margin-top: 10px;">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Vann/leotus (Epsom)</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="bathFrequency" value="0"> Ei kasuta</label>
+                            <label><input type="radio" name="bathFrequency" value="1-3"> 1-3× nädalas</label>
+                            <label><input type="radio" name="bathFrequency" value=">3"> &gt;3× nädalas</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 9: MEELE PRAKTIKAD -->
+                <section class="form-section">
+                    <h2>9. Meele- ja rütmipraktikad</h2>
+
+                    <div class="form-group">
+                        <label>Meditatsioon</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="meditZazen" value="yes"> Zazen</label>
+                            <label><input type="checkbox" name="meditMetta" value="yes"> Metta</label>
+                            <label><input type="checkbox" name="meditMantra" value="yes"> Mantra (YAM/OM)</label>
+                            <label><input type="checkbox" name="meditNone" value="yes"> Puudub</label>
+                        </div>
+                        <input type="number" name="meditMinutes" placeholder="Minutit päevas" min="0" style="margin-top: 10px;">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="calmingMusic">Muusikastiilid, mis rahustavad</label>
+                        <input type="text" id="calmingMusic" name="calmingMusic">
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 10: IDEOLOOGIA -->
+                <section class="form-section">
+                    <h2>10. Ideoloogia ja piirjooned</h2>
+
+                    <div class="form-group">
+                        <label>Looduslik enne ravimeid</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="naturalFirst" value="yes"> Jah</label>
+                            <label><input type="radio" name="naturalFirst" value="rather-yes"> Pigem jah</label>
+                            <label><input type="radio" name="naturalFirst" value="rather-no"> Pigem ei</label>
+                            <label><input type="radio" name="naturalFirst" value="no"> Ei</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Otsustusõigus</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="decisionMaker" value="me"> Mina otsustan lõpliku kombo</label>
+                            <label><input type="radio" name="decisionMaker" value="together"> Koos arstiga</label>
+                            <label><input type="radio" name="decisionMaker" value="doctor"> Ainult arst</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notWilling">Mida kindlasti EI soovi</label>
+                        <textarea id="notWilling" name="notWilling" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mida olen nõus proovima "kui vaja" järjekorras</label>
+                        <input type="text" name="willing1" placeholder="1. prioriteet" style="margin-bottom: 10px;">
+                        <input type="text" name="willing2" placeholder="2. prioriteet" style="margin-bottom: 10px;">
+                        <input type="text" name="willing3" placeholder="3. prioriteet">
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 11: RESSURSID -->
+                <section class="form-section">
+                    <h2>11. Ressursid ja eelarve</h2>
+
+                    <div class="form-group">
+                        <label>Aeg päevas minimaalpaketiks</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="timeDaily" value="12min"> 12 min</label>
+                            <label><input type="radio" name="timeDaily" value="30min"> 30 min</label>
+                            <label><input type="radio" name="timeDaily" value="60min"> 60 min</label>
+                            <label><input type="radio" name="timeDaily" value="other"> Muu</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Eelarve kuus</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="budgetMonthly" value="0-25"> 0-25 €</label>
+                            <label><input type="radio" name="budgetMonthly" value="25-75"> 25-75 €</label>
+                            <label><input type="radio" name="budgetMonthly" value="75-150"> 75-150 €</label>
+                            <label><input type="radio" name="budgetMonthly" value="150+"> 150+ €</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ligipääs</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="accessHealthStore" value="yes"> Loodustoodete pood</label>
+                            <label><input type="checkbox" name="accessIherb" value="yes"> iHerb</label>
+                            <label><input type="checkbox" name="accessTCM" value="yes"> TCM/Ayurveda praktik</label>
+                            <label><input type="checkbox" name="accessNone" value="yes"> Puudub</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kodune tugi</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="homeSupport" value="yes"> Keegi saab meenutada rutiine</label>
+                            <label><input type="radio" name="homeSupport" value="no"> Üksi</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 12: RISKID -->
+                <section class="form-section alert-danger">
+                    <h2>12. Riskiliinid ("punased lipud") - kohene tegutsemine</h2>
+                    <p><strong>Kui ilmneb ükski järgmistest, katkesta kava ja pöördu kohe erakorralisse:</strong></p>
+                    <ul>
+                        <li>Rindkerevalu &gt;5 min</li>
+                        <li>Rahus õhupuudus</li>
+                        <li>Minestus</li>
+                        <li>Pulss &gt;140 või &lt;40</li>
+                        <li>Vererõhk &lt;90/60</li>
+                        <li>Roosa vahune röga</li>
+                    </ul>
+                    <div class="form-group">
+                        <label><input type="checkbox" name="redFlagsUnderstood" value="yes" required> Olen tutvunud ja mõistan</label>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 13: DIAGNOSTIKA -->
+                <section class="form-section">
+                    <h2>13. Minimaalne diagnostika (üks kord alguses)</h2>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="diagEcho" value="done"> Ehhokardiograafia (EF%, diastool, klapid)</label>
+                        <label><input type="checkbox" name="diagHolter" value="done"> Holter 24-72 h (AF koormus %, pausid)</label>
+                        <label><input type="checkbox" name="diagBlood" value="done"> Verepaneel (K, Mg, kreatiniin/eGFR, ferritiin, TSH, NT-proBNP)</label>
+                        <label><input type="checkbox" name="diagMassage" value="done"> Massaaži-/manuaalteraapia sobivuse hinnang</label>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 14: OTSUSTUSPUU -->
+                <section class="form-section alert-info">
+                    <h2>14. Otsustuspuu (lühiversioon)</h2>
+                    <p><strong>Teadmiseks:</strong></p>
+                    <ul>
+                        <li>Kui EF &gt;40%, AF-koormus &lt;10%, turset pole → 3-6 kuud holistiline miinimum + jälgimine</li>
+                        <li>Kui EF 30-40% või AF 10-30% või kerge turse → hübriid: holistiline + miinimumravim</li>
+                        <li>Kui EF &lt;30% või AF &gt;30% või tugev turse → meditsiin esmalt, holistiline paralleelselt</li>
+                    </ul>
+                </section>
+
+                <!-- SEKTSIOON 15: PLAAN -->
+                <section class="form-section">
+                    <h2>15. Nädala/kuu plaan (paindlik aknapõhine)</h2>
+                    <div class="alert-info">
+                        <p><strong>Minimaalpakett päevas "Busy-12":</strong> 4 min hingamist + 8 min jalutust</p>
+                        <p><strong>Tavatase:</strong> hingamine 10-20 min, liikumine 15-30 min, soe leotus 1-3× nädalas</p>
+                        <p><strong>Kuu kontroll:</strong> kehakaalutrend, õhupuudus 0-3, väsimus 0-3, üks eesmärk saavutatud?</p>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 16: MENÜÜ -->
+                <section class="form-section">
+                    <h2>16. Menüü-eelistused ja talumatus</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="foodLikes">Meeldib</label>
+                            <input type="text" id="foodLikes" name="foodLikes">
+                        </div>
+                        <div class="form-group">
+                            <label for="foodDislikes">Ei meeldi</label>
+                            <input type="text" id="foodDislikes" name="foodDislikes">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="foodIntolerance">Talumatus/reaktsioonid (sh jood/kelp)</label>
+                        <textarea id="foodIntolerance" name="foodIntolerance" rows="2"></textarea>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 17: PAKETID -->
+                <section class="form-section">
+                    <h2>17. Paketivalikud (märgi, mida kaalud)</h2>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="packageNaturalMin" value="yes"> <strong>Looduslik miinimum:</strong> hingamine + jalutus + hibiskus + Mg õhtus</label>
+                        <label><input type="checkbox" name="packageNaturalWide" value="yes"> <strong>Looduslik lai:</strong> + viirpuu/arjuna/astragalus, zazen, Epsom 2-3×/näd</label>
+                        <label><input type="checkbox" name="packageHybrid" value="yes"> <strong>Hübriid miinimum:</strong> looduslik + vajadusel väike diureetik hommikuaknas</label>
+                        <label><input type="checkbox" name="packageRhythm" value="yes"> <strong>Rütmifookus:</strong> koherentshingamine + 8 Brokaati igas päevas aknas</label>
+                        <label><input type="checkbox" name="packageEnergy" value="yes"> <strong>Energiafookus:</strong> astragalus + reishi, stressi vähendamise päevikud</label>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 18: KOKKUVÕTE -->
+                <section class="form-section alert-success">
+                    <h2>18. Kokkuvõte ühel real (kasutus arstil/AI-l)</h2>
+                    <p id="oneLinerSummary" style="font-family: monospace; font-size: 0.9rem;">
+                        Täitke vorm ja see genereeritakse automaatselt.
+                    </p>
+                </section>
+
+                <!-- EXPORT VALIKUD -->
+                <section class="form-section export-options">
+                    <h2>Väljundi valikud</h2>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="exportTxt" checked> TXT fail</label>
+                        <label><input type="checkbox" name="exportPdf"> PDF fail</label>
+                        <label><input type="checkbox" name="exportJson" checked> JSON fail</label>
+                        <label><input type="checkbox" name="exportAiPrompt" checked> AI prompt</label>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='../index.html'">Tagasi</button>
+                    <button type="button" class="btn btn-secondary" onclick="saveForm()">Salvesta draft</button>
+                    <button type="button" class="btn btn-primary" onclick="exportFullProfile('txt')">Genereeri TXT</button>
+                    <button type="button" class="btn btn-primary" onclick="exportFullProfile('json')">Genereeri JSON</button>
+                    <button type="button" class="btn btn-primary" onclick="exportFullProfile('ai')">Kopeeri AI prompt</button>
+                </div>
+
+            </form>
+        </main>
+
+        <footer>
+            <p>© 2025 Meditsiiniportaal | Täisprofiil</p>
+        </footer>
+    </div>
+
+    <script src="../js/form-handler.js"></script>
+    <script src="../js/full-profile.js"></script>
+</body>
+</html>
