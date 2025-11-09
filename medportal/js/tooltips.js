@@ -1,3 +1,4 @@
+// VERSION: 1.2.0 - 2025-01-09
 // TOOLTIP SÜSTEEM
 // Laeb tooltipid JSON-ist ja lisab ? ikoonid
 

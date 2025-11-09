@@ -1,3 +1,4 @@
+// VERSION: 1.2.0 - 2025-01-09
 // ============================================
 // ÜLDISED VORMIFUNKTSIOONID
 // ============================================
@@ -138,9 +139,11 @@ function extractFormData(form) {
 
 // TXT eksport
 function generateTxt(data, title = 'Terviseprofiil') {
+    const now = new Date();
     let txt = `═══════════════════════════════════════════════════════════\n`;
     txt += `  ${title.toUpperCase()}\n`;
-    txt += `  Genereeritud: ${new Date().toLocaleString('et-EE')}\n`;
+    txt += `  Genereeritud: ${now.toLocaleString('et-EE', {timeZone: 'Europe/Tallinn', hour12: false})}\n`;
+    txt += `  UTC: ${now.toISOString()}\n`;
     txt += `═══════════════════════════════════════════════════════════\n\n`;
 
     Object.keys(data).forEach(key => {

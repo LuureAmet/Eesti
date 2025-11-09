@@ -4,9 +4,9 @@
 
 /* PROGRESS BAR */
 .form-progress {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     background: var(--bg-light);
-    padding: 20px;
+    padding: 15px;
     border-radius: 8px;
 }
 
@@ -37,8 +37,8 @@
     background: var(--bg-white);
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    padding: 30px;
-    margin-bottom: 30px;
+    padding: 20px;
+    margin-bottom: 20px;
     box-shadow: var(--shadow);
 }
 
@@ -52,7 +52,7 @@
 
 /* FORM GROUPS */
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .form-group label {

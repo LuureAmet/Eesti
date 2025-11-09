@@ -1,3 +1,4 @@
+// VERSION: 1.2.0 - 2025-01-09
 // ============================================
 // TÄISPROFIILI TÄIUSTATUD VERSIOON
 // ============================================
@@ -196,7 +197,7 @@ function generateFullTxt() {
 
     let txt = `═══════════════════════════════════════════════════════════\n`;
     txt += `  HOLISTILINE TERVISEPROFIIL - TÄISVERSIOON\n`;
-    txt += `  Genereeritud: ${now.toLocaleString('et-EE', {timeZone: 'Europe/Tallinn'})}\n`;
+    txt += `  Genereeritud: ${now.toLocaleString('et-EE', {timeZone: 'Europe/Tallinn', hour12: false})}\n`;
     txt += `  UTC: ${now.toISOString()}\n`;
     txt += `═══════════════════════════════════════════════════════════\n\n`;
 

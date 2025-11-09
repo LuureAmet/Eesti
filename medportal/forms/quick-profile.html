@@ -1,3 +1,4 @@
+<!-- VERSION: 1.2.0 - 2025-01-09 -->
 <!DOCTYPE html>
 <html lang="et">
 <head>
@@ -10,7 +11,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>⚡ Kiirprofiil</h1>
+            <h1>Kiirprofiil</h1>
             <p class="subtitle">5 minutit | 15 küsimust</p>
         </header>
 
@@ -26,7 +27,7 @@
 
                 <!-- 1. PÕHIANDMED -->
                 <section class="form-section">
-                    <h2>📋 Põhiandmed</h2>
+                    <h2>Põhiandmed</h2>
 
                     <div class="form-row">
                         <div class="form-group">
@@ -60,7 +61,7 @@
 
                 <!-- 2. PÕHIDIAGNOOS -->
                 <section class="form-section">
-                    <h2>🩺 Põhidiagnoos ja kaebused</h2>
+                    <h2>Põhidiagnoos ja kaebused</h2>
 
                     <div class="form-group">
                         <label for="mainDiagnosis">Põhidiagnoos *</label>
@@ -97,7 +98,7 @@
 
                 <!-- 3. RAVIMID -->
                 <section class="form-section">
-                    <h2>💊 Praegused ravimid</h2>
+                    <h2>Praegused ravimid</h2>
 
                     <div class="form-group">
                         <label>Kas võtad praegu ravimeid?</label>
@@ -124,7 +125,7 @@
 
                 <!-- 4. EELISTUSED -->
                 <section class="form-section">
-                    <h2>🌿 Ravi eelistused</h2>
+                    <h2>Ravi eelistused</h2>
 
                     <div class="form-group">
                         <label>Milline lähenemine on sulle kõige olulisem? *</label>
@@ -149,7 +150,7 @@
 
                 <!-- 5. ELUSTIIL -->
                 <section class="form-section">
-                    <h2>🏃 Elustiil</h2>
+                    <h2>Elustiil</h2>
 
                     <div class="form-row">
                         <div class="form-group">
@@ -180,7 +181,7 @@
 
                 <!-- 6. EESMÄRGID -->
                 <section class="form-section">
-                    <h2>🎯 Eesmärgid</h2>
+                    <h2>Eesmärgid</h2>
 
                     <div class="form-group">
                         <label for="goals">Mida tahad 3-6 kuu jooksul saavutada? *</label>
@@ -190,7 +191,7 @@
 
                 <!-- 7. LISAINFO -->
                 <section class="form-section">
-                    <h2>📝 Lisainfo</h2>
+                    <h2>Lisainfo</h2>
 
                     <div class="form-group">
                         <label for="additionalInfo">Muu oluline info (vabatahtlik)</label>
@@ -200,7 +201,7 @@
 
                 <!-- EXPORT VALIKUD -->
                 <section class="form-section export-options">
-                    <h2>💾 Väljundi valikud</h2>
+                    <h2>Väljundi valikud</h2>
 
                     <div class="checkbox-group">
                         <label><input type="checkbox" name="exportTxt" checked> TXT fail (tekst)</label>
@@ -213,19 +214,19 @@
                 <!-- NUPUD -->
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="window.location.href='../index.html'">← Tagasi</button>
-                    <button type="button" class="btn btn-secondary" onclick="saveForm()">💾 Salvesta draft</button>
+                    <button type="button" class="btn btn-secondary" onclick="saveForm()">Salvesta draft</button>
                     <button type="submit" class="btn btn-primary">Genereeri väljund →</button>
                 </div>
 
             </form>
 
             <div id="output" class="output-section hidden">
-                <h2>✅ Väljund genereeritud!</h2>
+                <h2>Väljund genereeritud!</h2>
                 <div class="output-buttons">
-                    <button class="btn btn-primary" onclick="downloadTxt()">📄 Lae alla TXT</button>
-                    <button class="btn btn-primary" onclick="downloadPdf()">📑 Lae alla PDF</button>
-                    <button class="btn btn-primary" onclick="downloadJson()">💾 Lae alla JSON</button>
-                    <button class="btn btn-secondary" onclick="copyAiPrompt()">📋 Kopeeri AI prompt</button>
+                    <button class="btn btn-primary" onclick="downloadTxt()">Lae alla TXT</button>
+                    <button class="btn btn-primary" onclick="downloadPdf()">Lae alla PDF</button>
+                    <button class="btn btn-primary" onclick="downloadJson()">Lae alla JSON</button>
+                    <button class="btn btn-secondary" onclick="copyAiPrompt()">Kopeeri AI prompt</button>
                 </div>
                 <div id="preview" class="output-preview"></div>
             </div>

@@ -1,3 +1,4 @@
+// VERSION: 1.2.0 - 2025-01-09
 // DÜNAAMILISTE VÄLJADE LISAMINE
 // Kasutaja saab ise välju lisada
 
