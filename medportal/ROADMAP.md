@@ -1,256 +1,262 @@
-# Arengu Teekaart
+# ROADMAP - Meigo Medical Medisiiniportaal
 
-Meditsiiniportaali tulevikuplaanid ja versioonid.
+Arendusplaan versioonide kaupa.
 
-## 🎯 Versioonid
+---
 
-### ✅ v1.0 - VALMIS (November 2025)
+## v1.2 - PRAEGU (10.11.2025)
+
+### ✅ VALMIS
 
 **Põhifunktsioonid:**
 - [x] 3 vormi tüüpi (Kiir, Täis, Päevalogi)
-- [x] TXT/JSON eksport
-- [x] AI prompt genereerimine
-- [x] localStorage salvestus (draft'id)
+- [x] 18-sektsiooniline täisprofiil
+- [x] TXT/JSON/CSV eksport
+- [x] AI prompt genereerimine (kohandatav)
+- [x] localStorage salvestus
 - [x] Progress tracking
 - [x] Responsive disain
-- [x] Dünaamilised tabelid (ravimid)
-- [x] Validatsioon
-- [x] 18-sektsiooniline täisprofiil
-- [x] Päevalogi CSV eksport
+- [x] Dünaamilised tabelid
+
+**UX täiustused (v1.2):**
+- [x] Toast teated (ilma alert-ideta)
+- [x] Number/Date lisaväljad (töötavad)
+- [x] Klikitavad kaardid (kogu kaart, mitte ainult nupp)
+- [x] Tags input (komaga/Enteriga sisestus)
+- [x] VERSION badge paremal ülal
+- [x] README/ROADMAP/Lingid (expandable lehe lõpus)
+
+**AI täiustused:**
+- [x] Prompt redaktor 18 checkboxiga
+- [x] Live preview promptist
+- [x] Vali kõik / Tühista kõik / Taasta vaikeväärtused
+- [x] Kopeeri või lae alla TXT
+
+**Konfigureeritav:**
+- [x] Kõik lingid `config/site-config.js`
+- [x] Prompt sektsioonid config-is
+- [x] README/ROADMAP teed
 
 ---
 
-## 🚀 v1.1 - LÄHIM TULEVIK (1-2 nädalat)
-
-### PDF Täiustused
-- [ ] jsPDF integratsioon
-- [ ] Korralik PDF genereerimine (mitte plain text)
-- [ ] PDF kujundus (logo, footer)
-- [ ] Mitme lehekülje tugi
-
-### Disaini täiustused
-- [ ] Prindivaade (CSS)
-- [ ] Tumedam režiim (dark mode)
-- [ ] Värvipaletid (vali teema)
-- [ ] Animatsioonid (smooth transitions)
+## v1.3 - JÄRGMINE (plaanis 2-3 nädalat)
 
 ### Kasutajakogemus
-- [ ] Vormi automaatne salvestus (iga 30 sek)
-- [ ] "Tagasi üles" nupp
-- [ ] Sektsioonide ahendamine/laiendamine
-- [ ] Klaviatuuri kiirkäsud
-- [ ] Vormi eelvaade (preview)
+
+- [ ] **Drag-and-drop prioriteedid**
+  - Ideoloogia/piirjooned järjestamine
+  - "Tugevalt eelistatud" / "Hoiduda" märkeruudud
+
+- [ ] **Kompaktne vs laiendatud vaade**
+  - Toggle nupp: Compact | Expanded
+  - Kompaktne peidab abitekstid, vähendab padding'uid
+  - Laiendatud näitab seletusi
+
+- [ ] **"Ei soovi" kiirkast üleval**
+  - Checkboxid: Röntgen, Süsteemsed vaktsiinid, Opioidid jne
+  - + plussiga lisamine
+
+- [ ] **Mitmikvalikud rohkematele väljadele**
+  - "Meeldib/Ei meeldi" toitude jaoks
+  - Aktiivsus (mitu tüüpi korraga)
+
+- [ ] **Salvestuse kellaaeg**
+  - Timestamp koos kuupäevaga
+  - Näita viimati salvestatud: "Uuendatud 10.11.2025 15:30"
+
+### AI Prompt täiustused
+
+- [ ] **2-osaline eksport**
+  - Osa 1: AI kokkuvõte (lühike, 200-300 sõna)
+  - Osa 2: Täisprofiil (JSON + renderatud tekst)
+  - Checkbox: "Lisa AI kokkuvõte algusesse"
+
+- [ ] **Prompt template valik**
+  - Kardiooloogia fookus
+  - Ennetusprofiil
+  - Postoperatiivne
+  - Üldine holistiline
 
 ---
 
-## 🌟 v1.2 - ANDMEBAAS (2-4 nädalat)
+## v1.4 - DATABASE (plaanis 1-2 kuud)
 
-### Ravimite andmebaas
-- [ ] JSON andmebaas (1000+ ravimit)
-- [ ] Autocomplete (ravimite otsimine)
-- [ ] Koostoime hoiatused
-- [ ] Annuste soovitused
+### Server-side funktsioonid
 
-### Taimede andmebaas
-- [ ] Taimeravide kataloog
-- [ ] Koostoimed ravimitega
-- [ ] Vastunäidustused
-- [ ] Annused ja viisid
+- [ ] **PHP backend**
+  - SQLite (lihtne start) VÕI MySQL (kui vaja)
+  - API endpoints: `/api/save`, `/api/load`, `/api/export`
 
-### Toitumise andmebaas
-- [ ] Toiduained (Na, K, Mg sisaldus)
-- [ ] Menüü soovitused
-- [ ] Kaloriarvutus (valikuline)
+- [ ] **Kasutajakontod (optional)**
+  - Login/Register (lihtne, ilma OAuth-ita esmalt)
+  - Salvesta mitu profiili
+  - Jagamise lingid (unique URL)
 
----
+- [ ] **Eksport server-side**
+  - PDF genereerimine jsPDF-ga
+  - Email saatmine (PDF attach)
 
-## 🔐 v1.3 - KASUTAJAD (1-2 kuud)
+### Database skeem
 
-### Kasutajate haldus
-- [ ] Registreerimine/sisselogimine
-- [ ] Kasutajaprofiilid
-- [ ] Mitme patsiendi haldus (perearst)
-- [ ] Rollid (patsient, arst, uurija)
+```sql
+CREATE TABLE profiles (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER,
+    version TEXT,
+    created_at DATETIME,
+    updated_at DATETIME,
+    data JSON
+);
 
-### Andmebaas (server)
-- [ ] PostgreSQL/MySQL integratsioon
-- [ ] PHP/Node.js backend
-- [ ] RESTful API
-- [ ] Turvaline salvestus (HTTPS, krüpteerimine)
-
-### Privaatsus
-- [ ] GDPR nõuded
-- [ ] Andmete kustutamine
-- [ ] Ekspordi ajalugu
-- [ ] Auditilogid
+CREATE TABLE drafts (
+    id INTEGER PRIMARY KEY,
+    profile_id INTEGER,
+    form_type TEXT,
+    data JSON,
+    saved_at DATETIME
+);
+```
 
 ---
 
-## 🤖 v2.0 - AI INTEGRATSIOON (2-3 kuud)
+## v1.5 - AI INTEGRATSIOON (plaanis 2-3 kuud)
 
-### AI Soovitused
-- [ ] Integratsıoon Claude API-ga
-- [ ] Integratsıoon OpenAI API-ga
-- [ ] Automaatsed soovitused
-- [ ] Päevaplaanide genereerimine
+### Cloud AI
 
-### AI Analüüs
-- [ ] Trendide tuvastamine (päevalogidest)
-- [ ] Hoiatused (nt kaal tõuseb kiiresti)
-- [ ] Mustrite äratundmine
-- [ ] Personaliseeritud nõuanded
+- [ ] **API calls**
+  - Claude API
+  - OpenAI API
+  - Kohalik LLaMA (optional)
 
-### AI Vastuste salvestus
-- [ ] Kasutaja salvestab AI vastused
-- [ ] Kaustad (vestlused, soovitused)
-- [ ] Võrdlus (eri AI vahel)
-- [ ] Eksport (kõik vastused)
+- [ ] **Vastuste salvestus**
+  - AI vastus koos promptiga
+  - Versiooni tracking (milline AI, millal)
+  - Võrdlus: erinevate AI-de vastused samale profillile
 
----
+- [ ] **Soovituste filter**
+  - Checkbox: "Näita ainult looduslikke"
+  - Checkbox: "Peida ideoloogia"
+  - Priority: Rütm | Energia | Turse/hingamine
 
-## 📊 v2.1 - VISUALISEERIMINE (3-4 kuud)
+### AI-põhine analüüs
 
-### Graafikud
-- [ ] Chart.js integratsioon
-- [ ] Kaal (trend joon)
-- [ ] BP (trend joon)
-- [ ] Sümptomid (tulpdiagramm)
-- [ ] Võrdlus (enne/pärast)
+- [ ] **Koostoime kontroll**
+  - Ravimite vs taimravi
+  - Automaatsed hoiatused (punased lipud)
 
-### Aruanded
-- [ ] Kuuaruanne (PDF)
-- [ ] Edusammud (progress report)
-- [ ] Statistika (keskmine BP, kaal jne)
-- [ ] Eksport arstile (ametlik aruanne)
+- [ ] **Personaliseeritud päevaplaan**
+  - Variant A: Miinimum Busy (12-15 min)
+  - Variant B: Tavatase (30-45 min)
+  - Variant C: Põhjalik (60+ min)
 
 ---
 
-## 🌍 v2.2 - MITMEKANALILINE (4-6 kuud)
+## v2.0 - PROFESSIONAALNE (plaanis 3-6 kuud)
 
-### Keeled
-- [ ] Inglise keel
-- [ ] Vene keel
-- [ ] Soome keel
-- [ ] Muu keele tugi
+### Arstidele
 
-### Platvormid
-- [ ] PWA (Progressive Web App)
-- [ ] Offline tugi
-- [ ] Mobiilirakendus (React Native?)
-- [ ] Desktop rakendus (Electron?)
+- [ ] **Admin paneel**
+  - Pakettide haldamine
+  - Soovituste tuunimine
+  - Patsientide nimekiri
 
----
+- [ ] **Template süsteem**
+  - Südamehaigused 50+ a
+  - Südamehaigused 65+ a
+  - Ennetusprofiil 30-50 a
+  - Postoperatiivne recovery
 
-## 🏥 v3.0 - PROFESSIONAALNE (6-12 kuud)
+### Laiendused
 
-### Arstide portaal
-- [ ] Arsti liidesе
-- [ ] Patsientide haldus
-- [ ] Märgistused/kommentaarid
-- [ ] Retseptid
-- [ ] Suhtlus (sõnumid)
+- [ ] **Ravimite andmebaas**
+  - Autotäitmine
+  - Koostoimete kontroll
+  - Hinna võrdlus (Eesti apteegid)
 
-### Integratsioonid
-- [ ] e-Tervis (Eesti)
-- [ ] HL7 FHIR standard
-- [ ] Labori tulemused
-- [ ] Apteegid (retseptid)
+- [ ] **Taimede andmebaas**
+  - Ladina nimed
+  - Annused
+  - Koostoimete reeglid
+  - Kust osta (EE)
 
-### Sertifikatsioonid
-- [ ] ISO 27001 (infoturbve)
-- [ ] MDR (meditsiinitoodete määrus)
-- [ ] CE märgistus (kui vaja)
+- [ ] **Digilogi integratsioon**
+  - Päevane tracking
+  - Graafikud (kaal, BP, pulss)
+  - CSV/JSON eksport arstile
 
----
+### Multi-keel
 
-## 💡 IDEED (tulevikus, prioriteet täpsustada)
-
-### Täiendavad funktsioonid
-- [ ] Ravimite meeldetuletused (teavitused)
-- [ ] Kalendri integratsioon (Google, Outlook)
-- [ ] Wearable integratsioon (Apple Watch, Fitbit)
-- [ ] EKG analüüs (kui kasutajal seade)
-- [ ] Video konsultatsioonid (arsti linki kaudu)
-
-### Teadus ja uuringud
-- [ ] Anonüümne andmete jagamine uurijatele
-- [ ] Statistilised analüüsid
-- [ ] Avalikud aruanded (anonüümsed)
-
-### Kogukond
-- [ ] Foorum (patsientide kogemusvahetus)
-- [ ] Artiklid (tervise nõuanded)
-- [ ] Videod (hingamisharjutused jne)
-- [ ] Eksperdid (taimraviga, toitumisega)
+- [ ] EST (praegu)
+- [ ] ENG
+- [ ] RUS
 
 ---
 
-## 🛠️ Tehnilised täiustused
+## v3.0 - ÖKOSÜSTEEM (plaanis 6-12 kuud)
 
-### Jõudlus
-- [ ] Lazy loading (pildid, sektsioonid)
-- [ ] Service worker (cache)
-- [ ] Minify CSS/JS
-- [ ] CDN (kui vaja)
+### Avalik API
 
-### Turvalisus
-- [ ] 2FA (kahe-faktorine autentimine)
-- [ ] CAPTCHA (robotite vastu)
-- [ ] Rate limiting
-- [ ] Input sanitization (XSS kaitse)
+- [ ] **API dokumentatsioon**
+- [ ] **Webhook'id** (uus profiil salvestatud → teavitus)
+- [ ] **OAuth** integratsioon
 
-### Testimine
-- [ ] Unit testid (Jest)
-- [ ] Integration testid
-- [ ] E2E testid (Cypress)
-- [ ] Accessibility testid (WCAG)
+### Teised platvormid
 
----
+- [ ] **Mobile app** (React Native / Flutter)
+- [ ] **Desktop app** (Electron)
+- [ ] **CLI tool** (Node.js)
 
-## 📅 Ajakava
+### Open Source
 
-| Versioon | Aeg | Prioriteet | Staatus |
-|----------|-----|------------|---------|
-| v1.0 | November 2025 | Kõrge | ✅ Valmis |
-| v1.1 | 1-2 nädalat | Kõrge | 🔄 Plaanis |
-| v1.2 | 2-4 nädalat | Keskmine | 📋 Plaanis |
-| v1.3 | 1-2 kuud | Keskmine | 📋 Plaanis |
-| v2.0 | 2-3 kuud | Kõrge | 📋 Plaanis |
-| v2.1 | 3-4 kuud | Madal | 📋 Plaanis |
-| v2.2 | 4-6 kuud | Madal | 📋 Plaanis |
-| v3.0 | 6-12 kuud | Keskmine | 💭 Idee |
+- [ ] **GitHub public release**
+- [ ] **Kogukonnapanus** (Issues, PR'id)
+- [ ] **Pluginate süsteem** (custom fields, custom AI integratsioonid)
 
 ---
 
-## 🤝 Kaasa löömine
+## Milestones
 
-Kui tahad mõnda funktsiooni arendada:
-
-1. **Kontrolli** kas see on juba plaanis (vaata üleval)
-2. **Loo** issue GitHubis
-3. **Kirjelda** funktsiooni ja kasutust
-4. **Tee** pull request
-
----
-
-## 📝 Märkmed
-
-### Prioriteedid (kasutaja tagasisidest)
-1. PDF täiustused (kõige rohkem küsitud)
-2. AI integratsioon (tulevikutrend)
-3. Kasutajate haldus (vajalik skaleerimiseks)
-4. Andmebaasid (ravimid, taimed)
-
-### Tehnilised piirangud
-- Praegu puudub server → localStorage piiratud (5-10 MB)
-- PDF genereerimine vajab täiendust
-- AI API'de võivad olla tasulised
-
-### Ärimudel (tulevikus)
-- v1.x - TASUTA (kõik funktsioonid)
-- v2.x - FREEMIUM (AI integration tasuline?)
-- v3.x - PROFESSIONAALNE (arstidele tasuline platvorm)
+| Versioon | Staatus | Kuupäev | Põhifookus |
+|----------|---------|---------|------------|
+| v1.0 | ✅ Valmis | 09.11.2025 | Põhivormid, eksport, tooltipid |
+| v1.1 | ✅ Valmis | 09.11.2025 | Kohandatud väljad, VERSION badge |
+| v1.2 | ✅ Valmis | 10.11.2025 | Toast UX, tags input, README/ROADMAP |
+| v1.3 | ⏳ Plaanis | 01.12.2025 | Drag-drop, kompaktne vaade, "Ei soovi" |
+| v1.4 | 📋 Plaanis | 01.01.2026 | Database (SQLite), kasutajad |
+| v1.5 | 📋 Plaanis | 01.02.2026 | AI integratsioon (API) |
+| v2.0 | 💡 Idee | 01.04.2026 | Template süsteem, admin paneel |
+| v3.0 | 💡 Idee | 01.10.2026 | API, mobile, open source |
 
 ---
 
-© 2025 Meditsiiniportaal | Arengu Teekaart
+## Prioriteedid (järgmine nädal)
+
+1. **Drag-and-drop** ideoloogia/piirjooned (SortableJS või vanilla)
+2. **Kompaktne/laiendatud vaade** toggle nupp
+3. **"Ei soovi" kast** ülesse (checkboxid + plussiga lisamine)
+4. **AI prompt 2-osaline** (kokkuvõte + täisprofiil)
+5. **Salvestuse kellaaeg** lisamine
+
+---
+
+## Tehnilised võlad
+
+- [ ] PDF eksport ei tööta (placeholder, kasuta `window.print()` esmalt)
+- [ ] Kellaajad on 24h, aga mitte kõik (kontrollida `input[type="time"]`)
+- [ ] Mõned lisaväljad ei salvesta (Number/Date - nüüd parandatud v1.2)
+
+---
+
+## Tagasiside kasutajatelt
+
+> "Toast teated on palju paremad kui alert'id!" - AK, 10.11.2025
+
+> "Klikitavad kaardid on intuitiivsed!" - AK, 10.11.2025
+
+> "Soovin näha kokkuvõtet enne AI-le saatmist." - Plaanis v1.3
+
+---
+
+**Meigo Medical Medisiiniportaal** | ROADMAP v1.2 | © 2025
+
+Vaata varasemaid versioone: `ROADMAP-v1.0.md`, `ROADMAP-v1.1.md`
