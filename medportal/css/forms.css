@@ -432,11 +432,6 @@
     display: none;
 }
 
-/* Lubada sektsioonile klikkida et avada */
-.form-section.compact h2::before {
-    content: "📁 ";
-}
-
 /* Lisa hover efekt */
 .form-section.compact h2:hover {
     color: var(--primary-color);
@@ -454,8 +449,4 @@
 
 .form-section.compact.expanded h2::after {
     content: " ▲";
-}
-
-.form-section.compact.expanded h2::before {
-    content: "📂 ";
 }

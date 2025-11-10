@@ -504,7 +504,7 @@ function showPromptEditor() {
                     <div style="background: #e0f7fa; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
                         <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600;">
                             <input type="checkbox" id="includeSummary" onchange="updatePromptPreview()" checked>
-                            📝 Lisa kokkuvõte (200-300 sõna)
+                            Lisa kokkuvõte (200-300 sõna)
                         </label>
                         <p style="font-size: 0.8rem; color: #546e7a; margin: 5px 0 0 28px;">
                             Genereerib lühikese kokkuvõtte enne täisprofiili
@@ -720,7 +720,7 @@ function generateSummary(d) {
 
     // Antikoagulandid (OLULINE!)
     if (d.anticoagulant === 'yes') {
-        summary += `⚠️ OLULINE: Võtab antikoagulanti (${d.anticoagulantName || 'täpsustamata'}), koostoimed taimedega tuleb hoolikalt kontrollida! `;
+        summary += `OLULINE: Võtab antikoagulanti (${d.anticoagulantName || 'täpsustamata'}), koostoimed taimedega tuleb hoolikalt kontrollida! `;
     }
 
     // Ei soovi (kui on valitud)
@@ -785,11 +785,11 @@ function generateAiPromptCustom(selectedSections = [], includeSummary = false) {
 
     // Lisa kokkuvõte kui valitud
     if (includeSummary) {
-        prompt += `📝 KIIRKOKKUVÕTE (200-300 sõna)\n`;
+        prompt += `KIIRKOKKUVÕTE (200-300 sõna)\n`;
         prompt += `───────────────────────────────────────────────────────────\n`;
         prompt += generateSummary(d);
         prompt += `\n═══════════════════════════════════════════════════════════\n\n`;
-        prompt += `📋 DETAILNE PROFIIL\n`;
+        prompt += `DETAILNE PROFIIL\n`;
         prompt += `───────────────────────────────────────────────────────────\n\n`;
     }
 
@@ -1005,10 +1005,10 @@ function toggleCompactView() {
 
     // Uuenda nupu tekst
     if (isCompactView) {
-        btn.innerHTML = '📄 Laiendatud vaade';
+        btn.innerHTML = 'Laiendatud vaade';
         showToast('Kompaktne vaade aktiveeritud - Kliki sektsiooni avamiseks');
     } else {
-        btn.innerHTML = '📋 Kompaktne vaade';
+        btn.innerHTML = 'Kompaktne vaade';
         showToast('Laiendatud vaade aktiveeritud');
     }
 }

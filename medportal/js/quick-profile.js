@@ -113,7 +113,7 @@ function generateAiPrompt(data) {
     prompt += `═══════════════════════════════════════════════════════════\n\n`;
 
     // PÕHIANDMED
-    prompt += `📋 PÕHIANDMED:\n`;
+    prompt += `PÕHIANDMED:\n`;
     prompt += `- Vanus: ${data.age || 'X'} aastat\n`;
     prompt += `- Sugu: ${data.gender || 'määramata'}\n`;
     prompt += `- Pikkus: ${data.height || 'X'} cm\n`;
@@ -124,13 +124,13 @@ function generateAiPrompt(data) {
     prompt += `\n`;
 
     // DIAGNOOS JA KAEBUSED
-    prompt += `🩺 DIAGNOOS JA KAEBUSED:\n`;
+    prompt += `DIAGNOOS JA KAEBUSED:\n`;
     prompt += `- Põhidiagnoos: ${data.mainDiagnosis || 'määramata'}\n`;
     prompt += `- Peamine kaebus:\n  ${data.mainComplaint || 'Kirjeldus puudub'}\n`;
     prompt += `\n`;
 
     // SÜMPTOMID
-    prompt += `📊 SÜMPTOMITE SKOOR (0-3):\n`;
+    prompt += `SÜMPTOMITE SKOOR (0-3):\n`;
     prompt += `- Õhupuudus: ${data.breathlessness || '0'}/3\n`;
     prompt += `- Väsimus: ${data.fatigue || '0'}/3\n`;
     prompt += `- Turse: ${data.swelling || '0'}/3\n`;
@@ -139,24 +139,24 @@ function generateAiPrompt(data) {
 
     // RAVIMID
     if (data.takingMeds === 'yes') {
-        prompt += `💊 PRAEGUSED RAVIMID:\n`;
+        prompt += `PRAEGUSED RAVIMID:\n`;
         prompt += `${data.medications || 'Nimekiri puudub'}\n`;
         if (data.anticoagulant) {
-            prompt += `⚠️ VÕTAB ANTIKOAGULANTI (verevedeldajat)\n`;
+            prompt += `OLULINE: VÕTAB ANTIKOAGULANTI (verevedeldajat)\n`;
         }
         prompt += `\n`;
     } else {
-        prompt += `💊 RAVIMID: Ei võta praegu ravimeid\n\n`;
+        prompt += `RAVIMID: Ei võta praegu ravimeid\n\n`;
     }
 
     // EELISTUSED
-    prompt += `🌿 RAVI EELISTUSED:\n`;
+    prompt += `RAVI EELISTUSED:\n`;
     prompt += `- Lähenemine: ${data.approach || 'määramata'}\n`;
     prompt += `- Aeg rutiinideks päevas: ${data.timeAvailable || 'määramata'}\n`;
     prompt += `\n`;
 
     // ELUSTIIL
-    prompt += `🏃 ELUSTIIL:\n`;
+    prompt += `ELUSTIIL:\n`;
     prompt += `- Aktiivsustase: ${data.activityLevel || 'määramata'}\n`;
     prompt += `- Uneaeg: ${data.sleepHours || 'X'} tundi ööpäevas\n`;
     if (data.smoking || data.alcohol || data.rural) {
@@ -170,13 +170,13 @@ function generateAiPrompt(data) {
     prompt += `\n`;
 
     // EESMÄRGID
-    prompt += `🎯 EESMÄRGID (3-6 kuud):\n`;
+    prompt += `EESMÄRGID (3-6 kuud):\n`;
     prompt += `${data.goals || 'Määramata'}\n`;
     prompt += `\n`;
 
     // LISAINFO
     if (data.additionalInfo) {
-        prompt += `📝 LISAINFO:\n`;
+        prompt += `LISAINFO:\n`;
         prompt += `${data.additionalInfo}\n`;
         prompt += `\n`;
     }
@@ -188,32 +188,32 @@ function generateAiPrompt(data) {
 
     prompt += `Palun soovita mulle holistilist ja praktilisi lahendusi:\n\n`;
 
-    prompt += `1. 📅 PÄEVAPLAAN:\n`;
+    prompt += `1. PÄEVAPLAAN:\n`;
     prompt += `   - Konkreetsed ajad ja kestused\n`;
     prompt += `   - Hingamisharjutused (tehnika ja kestus)\n`;
     prompt += `   - Liikumispraktikad (qigong, taiji, jalutused)\n`;
     prompt += `   - Toidukava (konkreetsed näited)\n\n`;
 
-    prompt += `2. 🌿 TAIMRAVI:\n`;
+    prompt += `2. TAIMRAVI:\n`;
     prompt += `   - Sobivad taimed ja annused\n`;
     prompt += `   - Koostoime riskide analüüs\n`;
     prompt += `   - Ajastus ja kasutusviis\n\n`;
 
-    prompt += `3. 💊 LISANDID:\n`;
+    prompt += `3. LISANDID:\n`;
     prompt += `   - Vajalikud mineraalid/vitamiinid\n`;
     prompt += `   - Annused ja ajastus\n\n`;
 
-    prompt += `4. ⚠️ OHUTUSMEETMED:\n`;
+    prompt += `4. OHUTUSMEETMED:\n`;
     prompt += `   - Punased lipud (millal pöörduda arsti poole)\n`;
     prompt += `   - Koostoimed (eriti kui võtan antikoagulanti)\n`;
     prompt += `   - Vastunäidustused\n\n`;
 
-    prompt += `5. 📊 JÄLGIMINE:\n`;
+    prompt += `5. JÄLGIMINE:\n`;
     prompt += `   - Mida mõõta (kaal, BP, pulss)\n`;
     prompt += `   - Kui sageli kontrollida\n`;
     prompt += `   - Milliseid märke jälgida\n\n`;
 
-    prompt += `6. 🎯 PRIORITEEDID:\n`;
+    prompt += `6. PRIORITEEDID:\n`;
     prompt += `   - TOP 3 asja, millega alustada\n`;
     prompt += `   - Millal oodata tulemusi\n`;
     prompt += `   - Kuidas hinnata progressi\n\n`;
@@ -221,7 +221,7 @@ function generateAiPrompt(data) {
     prompt += `TÄHTIS: Võta arvesse minu eelistust "${data.approach}" ja aega "${data.timeAvailable}".\n`;
 
     if (data.anticoagulant) {
-        prompt += `\n⚠️ OLULINE: Võtan antikoagulanti - palun väldi soovitusi, mis võivad koostoimesse minna!\n`;
+        prompt += `\nOLULINE: Võtan antikoagulanti - palun väldi soovitusi, mis võivad koostoimesse minna!\n`;
     }
 
     return prompt;

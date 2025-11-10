@@ -3,8 +3,8 @@
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.2.0",
-    date: "09.11.2025",
+    version: "1.3.0",
+    date: "10.01.2025",
 
     // README ja ROADMAP failide asukohad
     docs: {
