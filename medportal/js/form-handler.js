@@ -50,10 +50,30 @@ function saveForm() {
         }
     });
 
-    const formId = form.id || 'form_draft';
-    localStorage.setItem(formId, JSON.stringify(data));
+    // Lisa timestamp (24h formaat)
+    const timestamp = new Date().toLocaleString('et-EE', {
+        timeZone: 'Europe/Tallinn',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    });
 
-    alert('✅ Vorm salvestatud! Saad hiljem jätkata.');
+    const formId = form.id || 'form_draft';
+    const saveData = {
+        formData: data,
+        savedAt: timestamp,
+        savedAtISO: new Date().toISOString()
+    };
+
+    localStorage.setItem(formId, JSON.stringify(saveData));
+
+    // Uuenda timestamp kuva
+    updateSaveTimestamp(timestamp);
+
+    showToast('Vorm salvestatud!');
 }
 
 // Vormide laadimine localStorage'st
@@ -62,11 +82,15 @@ function loadForm() {
     if (!form) return;
 
     const formId = form.id || 'form_draft';
-    const savedData = localStorage.getItem(formId);
+    const savedDataStr = localStorage.getItem(formId);
 
-    if (!savedData) return;
+    if (!savedDataStr) return;
 
-    const data = JSON.parse(savedData);
+    const savedData = JSON.parse(savedDataStr);
+
+    // Toeta vana formaati (ilma timestamp-ita)
+    const data = savedData.formData || savedData;
+    const timestamp = savedData.savedAt;
 
     Object.keys(data).forEach(key => {
         const input = form.querySelector(`[name="${key}"]`);
@@ -84,7 +108,22 @@ function loadForm() {
     });
 
     updateProgress();
-    alert('ℹ️ Eelmine draft laetud!');
+
+    // Kuva timestamp kui on olemas
+    if (timestamp) {
+        updateSaveTimestamp(timestamp);
+    }
+
+    showToast('Draft laetud!');
+}
+
+// Uuenda salvestuse timestamp kuva
+function updateSaveTimestamp(timestamp) {
+    const timestampEl = document.getElementById('saveTimestamp');
+    if (timestampEl) {
+        timestampEl.textContent = `Viimati salvestatud: ${timestamp}`;
+        timestampEl.style.display = 'block';
+    }
 }
 
 // Vormi validatsioon

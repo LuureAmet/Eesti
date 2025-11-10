@@ -20,10 +20,46 @@
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressBar"></div>
                 </div>
-                <p class="progress-text">Täidetud: <span id="progressText">0%</span></p>
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-top: 10px;">
+                    <p class="progress-text" style="margin: 0;">Täidetud: <span id="progressText">0%</span></p>
+                    <button type="button" onclick="toggleCompactView()" class="btn-secondary" id="viewToggleBtn"
+                            style="font-size: 0.85rem; padding: 6px 12px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                        📋 Kompaktne vaade
+                    </button>
+                </div>
+                <p class="save-timestamp" id="saveTimestamp" style="font-size: 0.85rem; color: #6b7280; margin-top: 5px; text-align: center;">
+                    <!-- Timestamp kuvatakse siin pärast salvestamist -->
+                </p>
             </div>
 
             <form id="fullProfileForm">
+
+                <!-- EI SOOVI KIIRKAST -->
+                <section class="form-section" id="no-consent-section" style="background: #fff3cd; border-left: 4px solid #ff6b6b;">
+                    <h2 style="color: #d63031;">⚠️ Ei soovi / Kategooriline keeld</h2>
+                    <p style="font-size: 0.9rem; color: #6b7280; margin-bottom: 15px;">
+                        Märgi ära protseduurid, ravimid või meetodid, mida sa kindlasti EI soovi või mille suhtes sul on kategooriline keeld.
+                    </p>
+
+                    <div class="checkbox-group" id="no-consent-checkboxes">
+                        <label><input type="checkbox" name="noConsent_xray" value="yes"> Röntgen</label>
+                        <label><input type="checkbox" name="noConsent_ct" value="yes"> CT / MRI</label>
+                        <label><input type="checkbox" name="noConsent_vaccines" value="yes"> Vaktsiinid</label>
+                        <label><input type="checkbox" name="noConsent_opioids" value="yes"> Opioidid (tugevad valuvaigistid)</label>
+                        <label><input type="checkbox" name="noConsent_steroids" value="yes"> Kortikosteroidid</label>
+                        <label><input type="checkbox" name="noConsent_antibiotics" value="yes"> Antibiootikumid</label>
+                        <label><input type="checkbox" name="noConsent_surgery" value="yes"> Operatsioonid</label>
+                        <label><input type="checkbox" name="noConsent_bloodTransfusion" value="yes"> Vereülekanne</label>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 15px;">
+                        <button type="button" onclick="addNoConsentItem()" class="btn btn-secondary" style="font-size: 0.9rem; padding: 8px 16px;">
+                            ➕ Lisa oma keeld
+                        </button>
+                    </div>
+
+                    <div id="custom-no-consent-items" style="margin-top: 10px;"></div>
+                </section>
 
                 <!-- SEKTSIOON 0: PRIVAATSUS -->
                 <section class="form-section">

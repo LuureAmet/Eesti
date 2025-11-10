@@ -33,7 +33,7 @@ function handleLogSubmit(e) {
     // Salvesta localStorage'i
     saveDailyLog(formData);
 
-    alert('✓ Päevalogi salvestatud!');
+    showToast('Päevalogi salvestatud!');
 
     // Puhasta vorm
     form.reset();

@@ -401,3 +401,61 @@
         width: 100%;
     }
 }
+
+/* COMPACT VIEW */
+.form-section.compact {
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form-section.compact:hover {
+    background: var(--bg-light);
+    border-color: var(--primary-color);
+}
+
+.form-section.compact h2 {
+    margin-bottom: 0;
+    font-size: 1.2rem;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.form-section.compact h2::after {
+    content: " ▼";
+    font-size: 0.8rem;
+    color: var(--text-gray);
+}
+
+/* Peida kõik sisu peale pealkirja kompaktses vaates */
+.form-section.compact > *:not(h2) {
+    display: none;
+}
+
+/* Lubada sektsioonile klikkida et avada */
+.form-section.compact h2::before {
+    content: "📁 ";
+}
+
+/* Lisa hover efekt */
+.form-section.compact h2:hover {
+    color: var(--primary-color);
+}
+
+/* Expandable sections - kliki et avada üksik sektsioon */
+.form-section.compact.expanded {
+    padding: 20px;
+    cursor: default;
+}
+
+.form-section.compact.expanded > * {
+    display: block;
+}
+
+.form-section.compact.expanded h2::after {
+    content: " ▲";
+}
+
+.form-section.compact.expanded h2::before {
+    content: "📂 ";
+}

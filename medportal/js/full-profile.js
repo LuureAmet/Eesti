@@ -501,6 +501,15 @@ function showPromptEditor() {
             </div>
             <div class="modal-body">
                 <div class="prompt-controls">
+                    <div style="background: #e0f7fa; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 600;">
+                            <input type="checkbox" id="includeSummary" onchange="updatePromptPreview()" checked>
+                            📝 Lisa kokkuvõte (200-300 sõna)
+                        </label>
+                        <p style="font-size: 0.8rem; color: #546e7a; margin: 5px 0 0 28px;">
+                            Genereerib lühikese kokkuvõtte enne täisprofiili
+                        </p>
+                    </div>
                     <h4>Vali kaasatavad sektsioonid:</h4>
                     ${checkboxesHtml}
                     <div class="prompt-actions">
@@ -619,7 +628,8 @@ function showPromptEditor() {
 // Uuenda prompt preview
 function updatePromptPreview() {
     const selectedSections = getSelectedSections();
-    const prompt = generateAiPromptCustom(selectedSections);
+    const includeSummary = document.getElementById('includeSummary')?.checked || false;
+    const prompt = generateAiPromptCustom(selectedSections, includeSummary);
     const previewEl = document.getElementById('promptPreviewContent');
     if (previewEl) {
         previewEl.textContent = prompt;
@@ -654,26 +664,134 @@ function resetToDefaults() {
 // Kopeeri prompt editorist
 function copyPromptFromEditor() {
     const selectedSections = getSelectedSections();
-    const prompt = generateAiPromptCustom(selectedSections);
+    const includeSummary = document.getElementById('includeSummary')?.checked || false;
+    const prompt = generateAiPromptCustom(selectedSections, includeSummary);
     copyToClipboard(prompt); // Toast on juba copyToClipboard sees
 }
 
 // Lae alla prompt TXT-na
 function downloadPromptTxt() {
     const selectedSections = getSelectedSections();
-    const prompt = generateAiPromptCustom(selectedSections);
+    const includeSummary = document.getElementById('includeSummary')?.checked || false;
+    const prompt = generateAiPromptCustom(selectedSections, includeSummary);
     const filename = `ai-prompt_${formatDate()}.txt`;
     downloadFile(prompt, filename, 'text/plain');
 }
 
+// Genereeri lühike kokkuvõte (200-300 sõna)
+function generateSummary(d) {
+    let summary = '';
+
+    // Põhiandmed
+    const ageText = d.age ? `${d.age}-aastane` : 'Täpsustamata vanusega';
+    const genderText = d.gender || 'täpsustamata soost';
+    const heightText = d.height ? `${d.height}cm` : 'X';
+    const weightText = d.weight ? `${d.weight}kg` : 'X';
+    const bmiText = d.bmi ? ` (BMI ${d.bmi})` : '';
+
+    summary += `${ageText} ${genderText} patsient, pikkus ${heightText}, kaal ${weightText}${bmiText}. `;
+
+    // Põhidiagnoos
+    if (d.diagnoses) {
+        summary += `Põhidiagnoos: ${d.diagnoses}. `;
+    }
+
+    // Peamised sümptomid (kui on märgitud 2-3)
+    const symptoms = [];
+    if (d.breathlessness >= 2) symptoms.push(`õhupuudus (${d.breathlessness}/3)`);
+    if (d.swelling >= 2) symptoms.push(`turse (${d.swelling}/3)`);
+    if (d.fatigue >= 2) symptoms.push(`väsimus (${d.fatigue}/3)`);
+    if (d.chestPain >= 2) symptoms.push(`rindkerevalu (${d.chestPain}/3)`);
+    if (d.arrhythmia >= 2) symptoms.push(`rütmihäired (${d.arrhythmia}/3)`);
+
+    if (symptoms.length > 0) {
+        summary += `Peamised sümptomid: ${symptoms.join(', ')}. `;
+    }
+
+    // Ravimid
+    if (d.medicationSummary && d.medicationSummary.length > 0) {
+        const medNames = d.medicationSummary.slice(0, 3).map(m => m.name).join(', ');
+        summary += `Võtab ravimeid: ${medNames}`;
+        if (d.medicationSummary.length > 3) {
+            summary += ` (+${d.medicationSummary.length - 3} lisaks)`;
+        }
+        summary += '. ';
+    }
+
+    // Antikoagulandid (OLULINE!)
+    if (d.anticoagulant === 'yes') {
+        summary += `⚠️ OLULINE: Võtab antikoagulanti (${d.anticoagulantName || 'täpsustamata'}), koostoimed taimedega tuleb hoolikalt kontrollida! `;
+    }
+
+    // Ei soovi (kui on valitud)
+    const noConsentItems = [];
+    if (d.noConsent_xray === 'yes') noConsentItems.push('Röntgen');
+    if (d.noConsent_vaccines === 'yes') noConsentItems.push('vaktsiinid');
+    if (d.noConsent_opioids === 'yes') noConsentItems.push('opioidid');
+    if (d.noConsent_surgery === 'yes') noConsentItems.push('operatsioonid');
+
+    if (noConsentItems.length > 0) {
+        summary += `EI SOOVI: ${noConsentItems.join(', ')}. `;
+    }
+
+    // Taimravi ja toitumine
+    if (d.herbalRemedies) {
+        const herbsShort = d.herbalRemedies.substring(0, 100);
+        summary += `Taimravi: ${herbsShort}${d.herbalRemedies.length > 100 ? '...' : ''}. `;
+    }
+
+    if (d.dietType) {
+        summary += `Dieedi tüüp: ${d.dietType}. `;
+    }
+
+    // Liikumine ja praktikad
+    if (d.walkDaily) {
+        summary += `Jalutuskäik: ${d.walkDaily}. `;
+    }
+
+    if (d.breathingPractice) {
+        summary += `Hingamistehnikad: Jah. `;
+    }
+
+    // Ressursid
+    if (d.budgetMonthly) {
+        summary += `Eelarve: ${d.budgetMonthly} €/kuu. `;
+    }
+
+    if (d.timeDaily) {
+        summary += `Aeg päevas: ${d.timeDaily}. `;
+    }
+
+    // Eesmärgid
+    if (d.treatmentGoals) {
+        const goalsShort = d.treatmentGoals.substring(0, 80);
+        summary += `Eesmärgid: ${goalsShort}${d.treatmentGoals.length > 80 ? '...' : ''}. `;
+    }
+
+    // Lõpetav soovitus
+    summary += `\n\nSOOVITUS: Vajalik holistilik lähenemine, mis arvestab patsiendi keeldudega ja eelistab naturaalset/toetavat ravi. Täpsem info detailses profiilis allpool.`;
+
+    return summary;
+}
+
 // Genereeri kohandatud AI prompt valitud sektsioonidega
-function generateAiPromptCustom(selectedSections = []) {
+function generateAiPromptCustom(selectedSections = [], includeSummary = false) {
     const d = formDataGlobal;
 
     let prompt = `═══════════════════════════════════════════════════════════\n`;
     prompt += `HOLISTILINE MEDITSIINILINE KONSULTATSIOON\n`;
     prompt += `Täisprofiil | ${new Date().toLocaleDateString('et-EE', {timeZone: 'Europe/Tallinn'})}\n`;
     prompt += `═══════════════════════════════════════════════════════════\n\n`;
+
+    // Lisa kokkuvõte kui valitud
+    if (includeSummary) {
+        prompt += `📝 KIIRKOKKUVÕTE (200-300 sõna)\n`;
+        prompt += `───────────────────────────────────────────────────────────\n`;
+        prompt += generateSummary(d);
+        prompt += `\n═══════════════════════════════════════════════════════════\n\n`;
+        prompt += `📋 DETAILNE PROFIIL\n`;
+        prompt += `───────────────────────────────────────────────────────────\n\n`;
+    }
 
     // Kui ei ole valitud ühtegi, kasuta kõiki
     if (selectedSections.length === 0) {
@@ -854,4 +972,85 @@ function generateAiPromptAdvanced() {
 function formatDate() {
     const now = new Date();
     return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
+}
+
+// Kompaktne vs laiendatud vaade
+let isCompactView = localStorage.getItem('compactView') === 'true';
+
+function toggleCompactView() {
+    isCompactView = !isCompactView;
+    localStorage.setItem('compactView', isCompactView);
+
+    const sections = document.querySelectorAll('.form-section');
+    const btn = document.getElementById('viewToggleBtn');
+
+    sections.forEach(section => {
+        if (isCompactView) {
+            section.classList.add('compact');
+            section.classList.remove('expanded');
+
+            // Lisa click handler sektsioonile
+            const h2 = section.querySelector('h2');
+            if (h2 && !h2.hasAttribute('data-click-handler')) {
+                h2.setAttribute('data-click-handler', 'true');
+                h2.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    section.classList.toggle('expanded');
+                });
+            }
+        } else {
+            section.classList.remove('compact', 'expanded');
+        }
+    });
+
+    // Uuenda nupu tekst
+    if (isCompactView) {
+        btn.innerHTML = '📄 Laiendatud vaade';
+        showToast('Kompaktne vaade aktiveeritud - Kliki sektsiooni avamiseks');
+    } else {
+        btn.innerHTML = '📋 Kompaktne vaade';
+        showToast('Laiendatud vaade aktiveeritud');
+    }
+}
+
+// Taasta vaade pärast lehel laadimist
+document.addEventListener('DOMContentLoaded', () => {
+    if (isCompactView) {
+        toggleCompactView();
+    }
+});
+
+// "Ei soovi" kasti kohandatud keeldude lisamine
+let noConsentCounter = 0;
+function addNoConsentItem() {
+    const itemText = prompt('Lisa oma keeld (nt. "Gamma kiiritamine", "MRT kontrastaine", jne):');
+
+    if (!itemText || itemText.trim() === '') {
+        showToast('Palun sisesta keelduva protseduuri/ravimi nimetus!', 3000);
+        return;
+    }
+
+    noConsentCounter++;
+    const fieldName = `noConsent_custom_${noConsentCounter}`;
+
+    const container = document.getElementById('custom-no-consent-items');
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #ffe0e0; padding: 8px 12px; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: space-between;';
+
+    itemDiv.innerHTML = `
+        <label style="margin: 0; display: flex; align-items: center; gap: 8px;">
+            <input type="checkbox" name="${fieldName}" value="yes" checked>
+            <span style="font-weight: 600; color: #d63031;">${itemText}</span>
+        </label>
+        <button type="button" onclick="this.closest('.form-group').remove()" class="btn-danger-sm"
+                style="background: #d63031; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+            Eemalda
+        </button>
+    `;
+
+    container.appendChild(itemDiv);
+
+    showToast(`Keeld "${itemText}" lisatud!`);
 }
