@@ -227,13 +227,62 @@ function generatePdf(data, title = 'Terviseprofiil') {
     return txtContent;
 }
 
-// Kopeeri lõikelauale
+// Toast teade (ilma alert-ita)
+function showToast(message, duration = 2000) {
+    // Eemalda vana toast kui on
+    const oldToast = document.getElementById('toast');
+    if (oldToast) oldToast.remove();
+
+    const toast = document.createElement('div');
+    toast.id = 'toast';
+    toast.textContent = message;
+    toast.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #10b981;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        z-index: 10000;
+        font-weight: 600;
+        animation: slideIn 0.3s ease;
+    `;
+
+    // Lisa animation
+    if (!document.getElementById('toastCss')) {
+        const css = document.createElement('style');
+        css.id = 'toastCss';
+        css.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(400px); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(400px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(css);
+    }
+
+    document.body.appendChild(toast);
+
+    // Eemalda pärast duration
+    setTimeout(() => {
+        toast.style.animation = 'slideOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
+}
+
+// Kopeeri lõikelauale (ilma alert-ita)
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
-        alert('✅ Kopeeritud lõikelauale!');
+        showToast('Kopeeritud lõikelauale!');
     }).catch(err => {
         console.error('Kopeerimine ebaõnnestus:', err);
-        alert('❌ Kopeerimine ebaõnnestus!');
+        showToast('Kopeerimine ebaõnnestus!', 3000);
     });
 }
 

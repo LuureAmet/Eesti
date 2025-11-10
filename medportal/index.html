@@ -98,5 +98,21 @@
     <!-- Config ja dokumendid/lingid -->
     <script src="config/site-config.js"></script>
     <script src="js/docs-and-links.js"></script>
+
+    <!-- Tee kaardid klikitavaks -->
+    <script>
+        document.querySelectorAll('.form-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Kui klikitakse juba lingi peale, ära midagi tee
+                if (e.target.tagName === 'A' || e.target.closest('a')) return;
+
+                // Leia esimene link kaardis
+                const link = card.querySelector('a.btn');
+                if (link) {
+                    window.location.href = link.href;
+                }
+            });
+        });
+    </script>
 </body>
 </html>

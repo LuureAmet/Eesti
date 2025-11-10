@@ -655,8 +655,7 @@ function resetToDefaults() {
 function copyPromptFromEditor() {
     const selectedSections = getSelectedSections();
     const prompt = generateAiPromptCustom(selectedSections);
-    copyToClipboard(prompt);
-    alert('AI prompt kopeeritud lõikelauale!');
+    copyToClipboard(prompt); // Toast on juba copyToClipboard sees
 }
 
 // Lae alla prompt TXT-na

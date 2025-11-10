@@ -2,6 +2,8 @@
 // DÜNAAMILISTE VÄLJADE LISAMINE
 // Kasutaja saab ise välju lisada
 
+let customFieldCounter = 0; // Unikaalne counter
+
 // Lisa "Lisa väli" nupud igale sektsioonile
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('.form-section');
@@ -98,12 +100,13 @@ function addCustomField(button) {
     const options = document.getElementById('customFieldOptions')?.value || '';
 
     if (!label) {
-        alert('Palun sisesta välja nimetus!');
+        showToast('Palun sisesta välja nimetus!', 3000);
         return;
     }
 
-    // Genereeri unikaalne nimi
-    const fieldName = 'custom_' + label.toLowerCase().replace(/[^a-z0-9]/g, '_') + '_' + Date.now();
+    // Genereeri unikaalne nimi (kasutab counterit, mitte Date.now)
+    customFieldCounter++;
+    const fieldName = 'custom_' + label.toLowerCase().replace(/[^a-z0-9]/g, '_') + '_' + customFieldCounter;
 
     // Loo väli
     const fieldGroup = document.createElement('div');
@@ -143,7 +146,7 @@ function addCustomField(button) {
         case 'radio':
             const opts = options.split(',').map(o => o.trim()).filter(o => o);
             if (opts.length === 0) {
-                alert('Palun lisa valikud!');
+                showToast('Palun lisa valikud!', 3000);
                 return;
             }
             fieldHtml += `<div class="radio-group">`;
@@ -173,5 +176,6 @@ function addCustomField(button) {
     // Sulge modal
     modal.remove();
 
-    alert('Väli lisatud!');
+    // Näita toast teadet
+    showToast(`Väli "${label}" lisatud!`);
 }

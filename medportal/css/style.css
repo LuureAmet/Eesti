@@ -107,6 +107,7 @@ main {
     transition: all 0.3s ease;
     position: relative;
     box-shadow: var(--shadow);
+    cursor: pointer; /* Klikitav */
 }
 
 .form-card:hover {
