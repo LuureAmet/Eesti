@@ -784,6 +784,796 @@ const MED_INFO_DB = {
                 <li><a href="https://en.wikipedia.org/wiki/Baduanjin_qigong" target="_blank">Wikipedia: Eight Pieces of Brocade</a></li>
             </ul>
         `
+    },
+
+    // ================================================================
+    // UNI JA NORSKAMINE
+    // ================================================================
+
+    'norskamine_ei_hairi': {
+        title: 'Norskamine (ei häiri)',
+        shortInfo: 'Kerge norskamine, mis ei häiri und ega teisi.',
+        ourInfo: `
+            <h4>Norskamine - kerge vorm</h4>
+            <p><strong>Mis see on:</strong> Norskamine on ülemiste hingamisteede osaline ahenemine une ajal.</p>
+            <p><strong>Kerge vorm:</strong> Ei häiri und ega teisi isikuid. Tavaliselt ohutust.</p>
+            <p><strong>Mõjutavad tegurid:</strong> Kehaaasend (selili), alkohol, ninakinnisus.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Snoring" target="_blank">Wikipedia: Snoring</a></li>
+            </ul>
+        `
+    },
+
+    'norskamine_elukaaslast': {
+        title: 'Norskamine (häirib elukaaslast)',
+        shortInfo: 'Valjunev norskamine, mis häirib partneri und.',
+        ourInfo: `
+            <h4>Norskamine - mõõdukas vorm</h4>
+            <p><strong>Partneri une häirimine:</strong> Võib viidata uneapnoe riskile.</p>
+            <p><strong>Soovitused:</strong></p>
+            <ul>
+                <li>Magamine külili (mitte selili)</li>
+                <li>Kaalu langetamine (kui ülekaal)</li>
+                <li>Alkoholist loobumine õhtuti</li>
+                <li>Konsulteeri arstiga (uneuuringu vajadus)</li>
+            </ul>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.sleepfoundation.org/snoring" target="_blank">Sleep Foundation: Snoring</a></li>
+            </ul>
+        `
+    },
+
+    'norskamine_mind': {
+        title: 'Norskamine (häirib mind)',
+        shortInfo: 'Norskamine häirib enda und - võib viidata uneapnoele.',
+        ourInfo: `
+            <h4>Norskamine - raske vorm</h4>
+            <p><strong>HOIATUS:</strong> Kui norskamine äratab sind või tunned lämmatust, võib olla tegemist uneapnoega.</p>
+            <p><strong>Uneapnoe riskifaktorid:</strong> Ülekaal, vanusk >40, meessoost, ninakinnisus.</p>
+            <p><strong>Sümptomid:</strong> Väsimus päeval, peavalu hommikul, kontsentratsioonihäired.</p>
+            <p><strong>VAJALIK:</strong> Arsti konsultatsioon + uneuurring (polüsomnograafia).</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Sleep_apnea" target="_blank">Wikipedia: Sleep Apnea</a></li>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4549693/" target="_blank">NCBI: Obstructive Sleep Apnea</a></li>
+            </ul>
+        `
+    },
+
+    'norskamine_joomaastmest': {
+        title: 'Norskamine (sõltub joomaastmest)',
+        shortInfo: 'Norskamine süveneb alkoholi tarbimise korral.',
+        ourInfo: `
+            <h4>Norskamine ja alkohol</h4>
+            <p><strong>Mehhanism:</strong> Alkohol lõdvestab kurgu lihaseid, suurendades norskamist ja uneapnoe riski.</p>
+            <p><strong>Soovitus:</strong> Väldi alkoholi 3-4 tundi enne magamaminekut.</p>
+            <p><strong>Alternatiivid:</strong> Melatoniin (0.5-3mg), magneesium (200-400mg), hibiskustee (rahustav).</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2845906/" target="_blank">NCBI: Alcohol and Sleep Apnea</a></li>
+            </ul>
+        `
+    },
+
+    'unenaod_puuduvad': {
+        title: 'Unenäod puuduvad',
+        shortInfo: 'Unenägusid ei mäleta või neid ei esine.',
+        ourInfo: `
+            <h4>Unenägude puudumine</h4>
+            <p><strong>Põhjused:</strong> REM-une häired, stress, ravimid (beta-blokaatorid, SSRI'd), alkohol.</p>
+            <p><strong>Normaalne:</strong> Paljud inimesed ei mäleta unenägusid (ei tähenda halba und).</p>
+            <p><strong>Kui muret tekitab:</strong> Konsulteeri arstiga, eriti kui kaasneb väsimus või meeleoluhäired.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Dream" target="_blank">Wikipedia: Dream</a></li>
+            </ul>
+        `
+    },
+
+    'unenaod_tavalised': {
+        title: 'Tavalised unenäod',
+        shortInfo: 'Normaalsed, neutraalsed unenäod.',
+        ourInfo: `
+            <h4>Tavalised unenäod</h4>
+            <p><strong>Mis see on:</strong> Normaalne REM-une osa, ajutegevus une ajal.</p>
+            <p><strong>Funktsioon:</strong> Mälestuste töötlemine, emotsioonide reguleerimine, õppimine.</p>
+            <p><strong>Tervis:</strong> Korrapärased unenäod on tervise märk.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3491655/" target="_blank">NCBI: Function of Dreams</a></li>
+            </ul>
+        `
+    },
+
+    'painajad_harv': {
+        title: 'Painajad (harv)',
+        shortInfo: 'Harvad painajad - tavaliselt põhjustatud stressist või toitumisest.',
+        ourInfo: `
+            <h4>Painajad - harv</h4>
+            <p><strong>Levinud põhjused:</strong> Stress, ärevus, raske toit enne und, alkohol.</p>
+            <p><strong>Soovitused:</strong></p>
+            <ul>
+                <li>Väldi rasket toitu 2-3h enne und</li>
+                <li>Vähenda ekraaniaega õhtuti</li>
+                <li>Rahustav rutiin (tee, lugemine, hingamine)</li>
+                <li>Magneesium (200-400mg õhtul)</li>
+            </ul>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Nightmare" target="_blank">Wikipedia: Nightmare</a></li>
+            </ul>
+        `
+    },
+
+    'painajad_sage': {
+        title: 'Painajad (sage)',
+        shortInfo: 'Sagedased painajad - võib viidata PTSD-le, ärevusele või ravimite kõrvalmõjule.',
+        ourInfo: `
+            <h4>Painajad - sage (OLULINE)</h4>
+            <p><strong>HOIATUS:</strong> Sagedased painajad (>1x nädalas) võivad viidata:</p>
+            <ul>
+                <li>PTSD (post-traumaatiline stressihäire)</li>
+                <li>Ärevushäire, depressioon</li>
+                <li>Ravimite kõrvalmõjud (SSRI'd, beta-blokaatorid)</li>
+                <li>Uneapnoe (hapnikupuudus)</li>
+            </ul>
+            <p><strong>VAJALIK:</strong> Psühholoogi/psühhiaatri konsultatsioon.</p>
+            <p><strong>Ravi:</strong> Imagery Rehearsal Therapy (IRT), CBT, ravimid (prazosin PTSD korral).</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5078511/" target="_blank">NCBI: Nightmare Disorder</a></li>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4400203/" target="_blank">NCBI: Treatment of Nightmares</a></li>
+            </ul>
+        `
+    },
+
+    'obe': {
+        title: 'Kehaväline kogemus (OBE)',
+        shortInfo: 'Out-of-body experience - kogemus kehast väljumisest. (belief)',
+        ourInfo: `
+            <h4>Kehaväline kogemus (OBE) - BELIEF</h4>
+            <p><strong>Mis see on:</strong> Subjektiivne kogemus, kus inimene tunneb, et vaatleb oma keha väljastpoolt.</p>
+            <p><strong>Teaduslik seletatus:</strong> Ajutegevuse muutus (ajukoore stimulatsioon, vähi ajuosa), unehalvatus, meditatsio on.</p>
+            <p><strong>Spirituaalne vaade:</strong> Mõned usundid peavad seda hinge rändamiseks astraalplaanile.</p>
+            <p><strong>MEIE SEISUKOHT:</strong> See on belief-väli. Kaasame infot, kuid meditsiinipersonalile ei kajastata vaikimisi.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Out-of-body_experience" target="_blank">Wikipedia: Out-of-body experience</a></li>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4217543/" target="_blank">NCBI: Neuroscience of OBEs</a></li>
+            </ul>
+        `
+    },
+
+    'prohvetlik': {
+        title: 'Prohvetlikud unenäod',
+        shortInfo: 'Unenäod, mis ennustavad tulevikku. (belief)',
+        ourInfo: `
+            <h4>Prohvetlikud unenäod - BELIEF</h4>
+            <p><strong>Mis see on:</strong> Unenäod, mida inimene tõlgendab tuleviku ennustamisena.</p>
+            <p><strong>Teaduslik seletatus:</strong> Psühholoogiline nähtus (confirmation bias, selektiivne mälu), mitte tegelik tuleviku nägemine.</p>
+            <p><strong>Spirituaalne vaade:</strong> Paljud kultuurid usuvad, et unenäod võivad näidata tulevikku või hoiatada ohtude eest.</p>
+            <p><strong>MEIE SEISUKOHT:</strong> Belief-väli. Info on olemas, kuid meditsiinipersonalile ei kajastata.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Precognition" target="_blank">Wikipedia: Precognition</a></li>
+            </ul>
+        `
+    },
+
+    'samani_rannak': {
+        title: 'Šamaani rännak',
+        shortInfo: 'Šamanistlik praktika, mis hõlmab vaimset reisi teispoolsusesse. (belief)',
+        ourInfo: `
+            <h4>Šamaani rännak - BELIEF</h4>
+            <p><strong>Mis see on:</strong> Šamanistlik praktika, kus šamaan siseneb transsiseisundisse ja "rändab" vaimsesse maailma.</p>
+            <p><strong>Meetodid:</strong> Trummi rütm, laul, meditatsioon, mõnikord entogeenid (ayahuasca, peyote).</p>
+            <p><strong>Teaduslik seletatus:</strong> Muutunud teadvuseseisund, ajutegevuse muutus (theta-lained).</p>
+            <p><strong>MEIE SEISUKOHT:</strong> Belief-väli. Šamanism on kultuuriline/spirituaalne praktika. Ei kajastata meditsiinipersonalile vaikimisi.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Shamanism" target="_blank">Wikipedia: Shamanism</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Shamanic_journeying" target="_blank">Wikipedia: Shamanic Journeying</a></li>
+            </ul>
+        `
+    },
+
+    'muu_paranormaalne': {
+        title: 'Muu spirituaalne kogemus',
+        shortInfo: 'Muud spirituaalsed või paranormaalsed kogemused une ajal. (belief)',
+        ourInfo: `
+            <h4>Muud spirituaalsed kogemused - BELIEF</h4>
+            <p><strong>Näited:</strong> Kohtumised lahkunud hingedega, inglitega, vaimsed sõnumid, telepaafia unes.</p>
+            <p><strong>Teaduslik seletatus:</strong> REM-une omapära, ajutegevuse muutused, psühholoogilised mehhanismid.</p>
+            <p><strong>MEIE SEISUKOHT:</strong> Belief-väli. Kaasame infot, kuid meditsiinipersonalile ei kajastata vaikimisi.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Paranormal" target="_blank">Wikipedia: Paranormal</a></li>
+            </ul>
+        `
+    },
+
+    // ============================================
+    // PRIVAATSUS JA NÕUSOLEK (27 KIRJET)
+    // ============================================
+
+    // JAGAMISE TASE (10 kirjet)
+    'arst': {
+        title: 'Jagamine arstiga',
+        shortInfo: 'Meditsiiniline konsultatsioon koos täisprofiili jagamisega.',
+        ourInfo: `
+            <h4>Jagamine arstiga</h4>
+            <p><strong>Mis see on:</strong> Perearstile või spetsialistile esitatav täisprofiil.</p>
+            <p><strong>Hõlmab:</strong> Kaebused, ajalugu, ravimid, allergiad, riskitegurid, elustiil.</p>
+            <p><strong>OLULINE:</strong> Belief-väljad jäetakse vaikimisi välja (eraldi valik vajalik).</p>
+            <p><strong>Privaatsus:</strong> Arst on ametisaladuse kandja. Teie andmed on kaitstud.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.riigiteataja.ee/akt/128122010011" target="_blank">Ravimiseadus (Eesti)</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Medical_confidentiality" target="_blank">Wikipedia: Medical confidentiality</a></li>
+            </ul>
+        `
+    },
+
+    'ai_arst': {
+        title: 'Jagamine AI-arstiga',
+        shortInfo: 'Tehisintellekti põhine konsultatsioon (ChatGPT, Claude, Gemini jne).',
+        ourInfo: `
+            <h4>AI-arst konsultatsioon</h4>
+            <p><strong>Mis see on:</strong> Large Language Model (LLM) põhine meditsiiniline nõustamine.</p>
+            <p><strong>Populaarsed AI-d:</strong> ChatGPT-4, Claude Sonnet, Google Gemini, Perplexity.</p>
+            <p><strong>OLULINE:</strong> AI ei asenda arsti! Kasuta alati koos arsti järelevalvega.</p>
+            <p><strong>Privaatsus:</strong> Kontrolli AI teenuse privaatsuspoliitikat. Mõned LLM-id salvestavad andmeid.</p>
+            <p><strong>Soovitus:</strong> Kasuta lokaalseid AI-mudeleid (Llama, Mistral) tundlike andmete puhul.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.nature.com/articles/s41591-023-02448-8" target="_blank">Nature Medicine: AI in clinical practice (2023)</a></li>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10261409/" target="_blank">NCBI: Large language models in medicine</a></li>
+            </ul>
+        `
+    },
+
+    'ai_test': {
+        title: 'AI testimiseks',
+        shortInfo: 'Jagamine AI süsteemide testimiseks ja arendamiseks.',
+        ourInfo: `
+            <h4>AI testimine ja arendus</h4>
+            <p><strong>Mis see on:</strong> Andmete jagamine AI mudelite treenimiseks või testimiseks.</p>
+            <p><strong>HOIATUS:</strong> Ära jaga tundlikke andmeid avalikesse testidesse!</p>
+            <p><strong>Soovitus:</strong> Kasuta anonümiseeritud või pseudonümiseeritud andmeid.</p>
+            <p><strong>GDPR:</strong> Kontrolli, et andmeid kasutatakse kooskõlas GDPR-ga.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://gdpr.eu/" target="_blank">GDPR info (English)</a></li>
+                <li><a href="https://www.ema.europa.eu/en/about-us/how-we-work/big-data" target="_blank">EMA: Big data and AI</a></li>
+            </ul>
+        `
+    },
+
+    'pere_liige': {
+        title: 'Jagamine pereliikmetega',
+        shortInfo: 'Profiili jagamine abikaasa, laste või vanemate jaoks.',
+        ourInfo: `
+            <h4>Jagamine pereliikmetega</h4>
+            <p><strong>Mis see on:</strong> Oma terviseinfo jagamine lähedastega.</p>
+            <p><strong>Kasulik:</strong> Eakate hooldamine, laste tervis, partneri tugi kroonilise haiguse korral.</p>
+            <p><strong>OLULINE:</strong> Sinu otsus, mida jagad. Ära tunneta survet!</p>
+            <p><strong>Soovitus:</strong> Jaga ainult olulist infot (ravimid, allergiad, riskid).</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6371135/" target="_blank">NCBI: Family health information sharing</a></li>
+            </ul>
+        `
+    },
+
+    'anon_uurija': {
+        title: 'Anonüümne uurija',
+        shortInfo: 'Teaduslik uurimistöö - andmed anonümiseeritakse.',
+        ourInfo: `
+            <h4>Anonüümne uurimistöö</h4>
+            <p><strong>Mis see on:</strong> Teadusuuringutes osalemine ilma isikuandmeteta.</p>
+            <p><strong>Anonümiseerimine:</strong> Kõik identifitseerivad andmed eemaldatakse (nimi, isikukood, aadress).</p>
+            <p><strong>OLULINE:</strong> Küsi uuringu eetikakomitee kinnitust!</p>
+            <p><strong>Soovitus:</strong> Loe informeeritud nõusolekut tähelepanelikult.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3168648/" target="_blank">NCBI: Data anonymization methods</a></li>
+                <li><a href="https://ec.europa.eu/info/law/law-topic/data-protection_en" target="_blank">EU Data Protection</a></li>
+            </ul>
+        `
+    },
+
+    'avalik_osint': {
+        title: 'Avalik OSINT',
+        shortInfo: 'Open-source intelligence - avalikult kättesaadavad andmed.',
+        ourInfo: `
+            <h4>Avalik OSINT (Open-Source Intelligence)</h4>
+            <p><strong>Mis see on:</strong> Andmete avaldamine avalikult (nt blogid, foorumid, sotsiaalmeedia).</p>
+            <p><strong>HOIATUS:</strong> Kord avaldatud andmeid ei saa tagasi võtta!</p>
+            <p><strong>RISK:</strong> Identifitseerimine, stigma, diskrimineerimine töökohal või kindlustuses.</p>
+            <p><strong>SOOVITUS:</strong> ÄRA jaga tundlikke meditsiinilisi andmeid avalikult!</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Open-source_intelligence" target="_blank">Wikipedia: OSINT</a></li>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5977668/" target="_blank">NCBI: Social media and health privacy</a></li>
+            </ul>
+        `
+    },
+
+    'med_test': {
+        title: 'Meditsiinilised testid',
+        shortInfo: 'Andmete jagamine meditsiiniliste testide/uuringute jaoks.',
+        ourInfo: `
+            <h4>Meditsiinilised testid ja uuringud</h4>
+            <p><strong>Mis see on:</strong> Kliinilised uuringud, diagnostilised testid, farmakoloogilised uuringud.</p>
+            <p><strong>OLULINE:</strong> Kontrolli uuringu protokolli ja eetikakomitee kinnitust.</p>
+            <p><strong>Nõusolek:</strong> Pead allkirjastama informeeritud nõusoleku.</p>
+            <p><strong>Õigused:</strong> Saad igal ajal uuringust loobuda.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ema.europa.eu/en/human-regulatory/research-development/clinical-trials" target="_blank">EMA: Clinical trials</a></li>
+                <li><a href="https://clinicaltrials.gov/" target="_blank">ClinicalTrials.gov (USA)</a></li>
+            </ul>
+        `
+    },
+
+    'politsei': {
+        title: 'Politsei',
+        shortInfo: 'Andmete jagamine õiguskaitseorganitele (erandlik!).',
+        ourInfo: `
+            <h4>Politsei ja õiguskaitse</h4>
+            <p><strong>HOIATUS:</strong> Ära jaga meditsiinilisi andmeid politseile ilma õigusliku aluseta!</p>
+            <p><strong>Seaduslik alus:</strong> Kohtuotsus, prokuratuuri nõue, erakorraline olukord (elu päästmine).</p>
+            <p><strong>Ametisaladus:</strong> Arst ei tohi jagada andmeid ilma sinu nõusolekuta, välja arvatud seaduses sätestatud juhtudel.</p>
+            <p><strong>Soovitus:</strong> Konsulteeri juristiga enne andmete jagamist.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.riigiteataja.ee/akt/128122010011" target="_blank">Ravimiseadus § 30 (Eesti)</a></li>
+            </ul>
+        `
+    },
+
+    'sojatootaja': {
+        title: 'Sõjaväe tööandja',
+        shortInfo: 'Meditsiinilise profiili jagamine sõjaväe/kaitseväe töötervise teenistusega.',
+        ourInfo: `
+            <h4>Sõjaväe tööandja ja töötervishoid</h4>
+            <p><strong>Mis see on:</strong> Terviseinfo jagamine Kaitseväe või NATO töötervise teenistusega.</p>
+            <p><strong>Kohustuslik:</strong> Teatud ametikohtadel (lennundus, allveeteenistus, eriüksused).</p>
+            <p><strong>Hõlmab:</strong> Füüsiline võimekus, vaimne tervis, vaktsineerimised, riskitegurid.</p>
+            <p><strong>OLULINE:</strong> Teatud diagnoosid võivad välistada teenistuse (epilepsia, raskemad psühhiaatrilised häired).</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.kaitsevagi.ee/" target="_blank">Kaitsevägi (Eesti)</a></li>
+                <li><a href="https://www.nato.int/cps/en/natohq/topics_49168.htm" target="_blank">NATO: Medical support</a></li>
+            </ul>
+        `
+    },
+
+    'jumalale': {
+        title: 'Jumalale / Kõrgemale jõule (belief)',
+        shortInfo: 'Spirituaalne jagamine - palve, rituaal, usund. (belief)',
+        ourInfo: `
+            <h4>Jumalale / Kõrgemale jõule - BELIEF</h4>
+            <p><strong>Mis see on:</strong> Spirituaalne või usuline praktika, kus tervisemure jagatakse palves või rituaalis.</p>
+            <p><strong>Multireligioosne:</strong> Kristlus, islam, judaism, budism, hinduism, maausulised traditsioonid.</p>
+            <p><strong>MEIE SEISUKOHT:</strong> See on belief-väli. Austame erinevaid usundeid ja spirituaalseid praktikaid.</p>
+            <p><strong>OLULINE:</strong> Palve ja rituaalid EI ASENDA meditsiinilist ravi! Kasuta alati koos arsti nõuannetega.</p>
+            <p><strong>Info:</strong> Vajuta "+" nupule "Palve" või "Rituaal" jaoks, et lisada konkreetne praktika.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2802370/" target="_blank">NCBI: Prayer and health outcomes</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Faith_healing" target="_blank">Wikipedia: Faith healing</a></li>
+            </ul>
+        `
+    },
+
+    // NÕUSOLEK (7 kirjet)
+    'consent_measurements': {
+        title: 'Nõusolek: Kodused mõõtmised',
+        shortInfo: 'Nõustumine koduste mõõtmiste jagamisega (vererõhk, kaal, pulsisagedus jne).',
+        ourInfo: `
+            <h4>Nõusolek koduste mõõtmiste jagamiseks</h4>
+            <p><strong>Mis see on:</strong> Nõustumine, et jagad oma koduseid mõõtmisi (vererõhk, glükoos, kaal, saturatsioon jne).</p>
+            <p><strong>Kasulik:</strong> Krooniliste haiguste jälgimine (hüpertensioon, diabeet, südamepuudulikkus).</p>
+            <p><strong>Privaatsus:</strong> Andmed võivad olla salvestatud nutiseadmetes (Apple Health, Google Fit jne).</p>
+            <p><strong>Soovitus:</strong> Jaga ainult usaldusväärsetele allikatele (arst, perekond).</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6352086/" target="_blank">NCBI: Home monitoring and chronic disease</a></li>
+            </ul>
+        `
+    },
+
+    'consent_herbs': {
+        title: 'Nõusolek: Taimravi',
+        shortInfo: 'Nõustumine taimravimite ja looduslike meetodite jagamisega.',
+        ourInfo: `
+            <h4>Nõusolek taimravi jagamiseks</h4>
+            <p><strong>Mis see on:</strong> Nõustumine, et jagad oma taimravimite ja looduslike meetodite kasutust.</p>
+            <p><strong>OLULINE:</strong> Taimravimitel on koostoimed! Arst peab teadma, mida kasutad.</p>
+            <p><strong>Näited:</strong> Naistepuna (koostoime antikoagulantidega), ginkgo (veritsusrisk), johanneserohi (vähendab paljude ravimite toimet).</p>
+            <p><strong>Soovitus:</strong> Jaga alati arstile, eriti enne operatsioone või uute ravimite alustamist.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3875280/" target="_blank">NCBI: Herb-drug interactions</a></li>
+                <li><a href="https://nccih.nih.gov/health/herbsataglance.htm" target="_blank">NCCIH: Herbs at a glance</a></li>
+            </ul>
+        `
+    },
+
+    'consent_breathing': {
+        title: 'Nõusolek: Hingamisharjutused',
+        shortInfo: 'Nõustumine hingamisharjutuste ja praktikate jagamisega.',
+        ourInfo: `
+            <h4>Nõusolek hingamisharjutuste jagamiseks</h4>
+            <p><strong>Mis see on:</strong> Nõustumine, et jagad oma hingamisharjutuste praktikat (Wim Hof, pranayama, buteyko jne).</p>
+            <p><strong>Kasulik:</strong> Ärevuse vähendamine, une parandamine, stressijuhtimine.</p>
+            <p><strong>HOIATUS:</strong> Mõned hingamisharjutused (nt Wim Hof hyperventilation) võivad põhjustada pearinglust või minestamist.</p>
+            <p><strong>Soovitus:</strong> Ära tee intensiivseid hingamisharjutusi ilma juhendajata.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6137615/" target="_blank">NCBI: Breathing exercises and stress</a></li>
+                <li><a href="https://www.wimhofmethod.com/" target="_blank">Wim Hof Method</a></li>
+            </ul>
+        `
+    },
+
+    'kutsu_koju_arsti': {
+        title: 'Kutsu koju arsti',
+        shortInfo: 'Nõustumine koduvisiidi tegemiseks (perearst või eriarst).',
+        ourInfo: `
+            <h4>Koduvisiit - arsti kutsumine koju</h4>
+            <p><strong>Mis see on:</strong> Arsti koduvisiit patsiendi juurde (eakad, liikumispuudega, raskelt haiged).</p>
+            <p><strong>Teenus:</strong> Paljud perearstid pakuvad koduvisiiti (eriti COVID-19 pandeemia järel).</p>
+            <p><strong>Kasulik:</strong> Eakad, liikumispuudega, palavik + nõrkus, palavik vastsündinutel.</p>
+            <p><strong>Soovitus:</strong> Helista enne perearsti registratuuri ja küsi koduvisiidi võimalust.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.haigekassa.ee/inimesele/tervishoiuteenused" target="_blank">Haigekassa: Tervishoiuteenused</a></li>
+            </ul>
+        `
+    },
+
+    'palve': {
+        title: 'Palve (belief)',
+        shortInfo: 'Usuline või spirituaalne palve tervenemise või abi saamiseks. (belief)',
+        ourInfo: `
+            <h4>Palve - BELIEF</h4>
+            <p><strong>Mis see on:</strong> Usuline või spirituaalne praktika, kus palutakse Jumalat / kõrgemat jõudu / universumit abi või tervenemise eest.</p>
+            <p><strong>Multireligioosne:</strong></p>
+            <ul>
+                <li><strong>Kristlus:</strong> Palve Jumalale, pühakutele (Maarja, Peetrus jne)</li>
+                <li><strong>Islam:</strong> Dua (palve Allahile)</li>
+                <li><strong>Judaism:</strong> Tefillah</li>
+                <li><strong>Hinduism:</strong> Puja, mantra</li>
+                <li><strong>Budism:</strong> Meditatsioon, mantra</li>
+                <li><strong>Maausulised:</strong> Palve loodusele, eellastele, vaimudele</li>
+            </ul>
+            <p><strong>MEIE SEISUKOHT:</strong> Austame kõiki usundeid ja spirituaalseid praktikaid.</p>
+            <p><strong>OLULINE:</strong> Palve EI ASENDA meditsiinilist ravi!</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2802370/" target="_blank">NCBI: Prayer and health outcomes</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Intercessory_prayer" target="_blank">Wikipedia: Intercessory prayer</a></li>
+            </ul>
+        `
+    },
+
+    'rituaal': {
+        title: 'Rituaal (belief)',
+        shortInfo: 'Usuline või spirituaalne rituaal tervenemise või kaitse eesmärgil. (belief)',
+        ourInfo: `
+            <h4>Rituaal - BELIEF</h4>
+            <p><strong>Mis see on:</strong> Usuline või spirituaalne tseremoonia, mis on suunatud tervenemisele, kaitsele või puhastusele.</p>
+            <p><strong>Näited:</strong></p>
+            <ul>
+                <li><strong>Kristlus:</strong> Haigete salvamine, ristimärgid, palverännakud</li>
+                <li><strong>Maausulised:</strong> Suitsurituaalid (salvei, sandalipuu), rauaritualid</li>
+                <li><strong>Slaavi:</strong> Vannitusrituaalid, hõõrumine kasevihtadega</li>
+                <li><strong>Šamanism:</strong> Šamaani rännak, trumming, entogeenide kasutus (ayahuasca jne)</li>
+                <li><strong>New Age:</strong> Kristallide kasutamine, Reiki, energeetiline puhastus</li>
+            </ul>
+            <p><strong>MEIE SEISUKOHT:</strong> See on belief-väli. Austame erinevaid traditsioone.</p>
+            <p><strong>HOIATUS:</strong> Rituaalid EI ASENDA meditsiinilist ravi!</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://en.wikipedia.org/wiki/Healing_ritual" target="_blank">Wikipedia: Healing ritual</a></li>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4249681/" target="_blank">NCBI: Traditional healing practices</a></li>
+            </ul>
+        `
+    },
+
+    'kutsun_koju_new_age': {
+        title: 'Kutsu koju New Age praktik (belief)',
+        shortInfo: 'Alternatiivse tervishoiu praktiku kutsumine koju (Reiki, kristallid, bioenergia jne). (belief)',
+        ourInfo: `
+            <h4>New Age praktik koduvisiit - BELIEF</h4>
+            <p><strong>Mis see on:</strong> Alternatiivse tervishoiu praktiku kutsumine koju (energeetiline ravi, Reiki, kristallravi, aura puhastus jne).</p>
+            <p><strong>HOIATUS:</strong> Need praktikad EI OLE teaduslikult tõestatud!</p>
+            <p><strong>RISK:</strong> Võib viivitada meditsiinilise ravi alustamist. Osad praktikud on ebakompetentsed või petavad kliente.</p>
+            <p><strong>MEIE SEISUKOHT:</strong> See on belief-väli. Kui valid seda teed, tee seda koos meditsiinilise raviga (mitte asendusena!).</p>
+            <p><strong>Soovitus:</strong> Kontrolli praktiku kvalifikatsiooni ja arvustusi.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3068720/" target="_blank">NCBI: Complementary and alternative medicine</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/New_Age" target="_blank">Wikipedia: New Age</a></li>
+            </ul>
+        `
+    },
+
+    // EI JAGATA (11 kirjet)
+    'no_kodu_olukord': {
+        title: 'Ei jagata: Kodu olukord',
+        shortInfo: 'Ei soovi jagada koduolukorra infot (elamistingimused, ruumikitsikus, ebahügieeniline jne).',
+        ourInfo: `
+            <h4>Ei jagata: Kodu olukord</h4>
+            <p><strong>Mis see on:</strong> Info koduse olukorra kohta (elamistingimused, ruumikitsikus, niiskus, hallitus, ebahügieeniline keskkond).</p>
+            <p><strong>Miks oluline:</strong> Koduolukord mõjutab tervist (astma, allergia, nakkushaigused, vaimne tervis).</p>
+            <p><strong>PRIVAATSUS:</strong> Võid valida selle info EI JAGATA, kui tunned, et see on liiga isiklik või piinlik.</p>
+            <p><strong>OLULINE:</strong> Arst ei mõista sind, kui sa ei jaga. Arst ei kohtuõigusta, tema ülesanne on aidata!</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4025465/" target="_blank">NCBI: Housing and health</a></li>
+            </ul>
+        `
+    },
+
+    'no_kodu_vagivald': {
+        title: 'Ei jagata: Koduvägivald',
+        shortInfo: 'Ei soovi jagada infot koduvägivalla, ahistamise või ahistava keskkonna kohta.',
+        ourInfo: `
+            <h4>Ei jagata: Koduvägivald - OLULINE!</h4>
+            <p><strong>HOIATUS:</strong> Koduvägivald on tõsine probleem. Arst saab sind aidata!</p>
+            <p><strong>Privaatsus:</strong> Arst on ametisaladuse kandja. Ta EI räägi seda kellelegi (välja arvatud eluohtliku olukorra puhul).</p>
+            <p><strong>ABI:</strong></p>
+            <ul>
+                <li><strong>Naiste tugitelefonid:</strong> 1492 (Eesti), 112 (hädaabi)</li>
+                <li><strong>Politsei:</strong> 112</li>
+                <li><strong>Sotsiaaltöötaja:</strong> Kohalik omavalitsus</li>
+            </ul>
+            <p><strong>OLULINE:</strong> Sa ei ole üksi! Abi on olemas!</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.sm.ee/koduvagivallaohvrite-aitamine" target="_blank">Sotsiaalministeerium: Koduvägivalla ohvrite aitamine</a></li>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2573966/" target="_blank">NCBI: Domestic violence and health</a></li>
+            </ul>
+        `
+    },
+
+    'no_sotsiaal': {
+        title: 'Ei jagata: Sotsiaalne olukord',
+        shortInfo: 'Ei soovi jagada infot sotsiaalse isolatsiooni, üksindustunde, suhete probleemide kohta.',
+        ourInfo: `
+            <h4>Ei jagata: Sotsiaalne olukord</h4>
+            <p><strong>Mis see on:</strong> Info sotsiaalse isolatsiooni, üksindustunde, suhete probleemide, perekonna konfliktide kohta.</p>
+            <p><strong>Miks oluline:</strong> Sotsiaalne isolatsioon suurendab depressiooni, ärevuse, südamehaiguste riski.</p>
+            <p><strong>PRIVAATSUS:</strong> Võid valida selle info EI JAGATA, kui tunned, et see on liiga isiklik.</p>
+            <p><strong>OLULINE:</strong> Arst ei kohtuõigusta! Tema eesmärk on aidata, mitte hinnata.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3874845/" target="_blank">NCBI: Social isolation and health</a></li>
+            </ul>
+        `
+    },
+
+    'no_finants': {
+        title: 'Ei jagata: Finantsolukord',
+        shortInfo: 'Ei soovi jagada infot finantsolukorra, sissetulekute, vaesuse kohta.',
+        ourInfo: `
+            <h4>Ei jagata: Finantsolukord</h4>
+            <p><strong>Mis see on:</strong> Info sissetulekute, vaesuse, võlgade, finantsstress'i kohta.</p>
+            <p><strong>Miks oluline:</strong> Finantsstress mõjutab vaimset tervist ja ravimite ostuvõimet.</p>
+            <p><strong>PRIVAATSUS:</strong> Võid valida selle info EI JAGATA.</p>
+            <p><strong>OLULINE:</strong> Arst ei küsi seda, et kohtuõigustada! Ta peab teadma, kas sul on raha ravimite ostmiseks. Odavamaid alternatiive on saadaval!</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5798257/" target="_blank">NCBI: Financial stress and health</a></li>
+            </ul>
+        `
+    },
+
+    'no_vaimne': {
+        title: 'Ei jagata: Vaimne olukord',
+        shortInfo: 'Ei soovi jagada infot vaimse tervise, ärevuse, depressiooni, emotsionaalsete probleemide kohta.',
+        ourInfo: `
+            <h4>Ei jagata: Vaimne olukord</h4>
+            <p><strong>Mis see on:</strong> Info vaimse tervise, ärevuse, depressiooni, emotsionaalsete probleemide kohta.</p>
+            <p><strong>HOIATUS:</strong> Vaimne tervis on sama oluline kui füüsiline tervis!</p>
+            <p><strong>PRIVAATSUS:</strong> Võid valida selle info EI JAGATA, kuid see võib piirata arsti võimet sind aidata.</p>
+            <p><strong>OLULINE:</strong> Arst on ametisaladuse kandja. Ta ei räägi seda kellelegi!</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.who.int/news-room/fact-sheets/detail/mental-health-strengthening-our-response" target="_blank">WHO: Mental health</a></li>
+            </ul>
+        `
+    },
+
+    'no_psyhh': {
+        title: 'Ei jagata: Psühhiaatriline olukord',
+        shortInfo: 'Ei soovi jagada infot psühhiaatriliste diagnoosid, ravimite, hospitaliseerimine kohta.',
+        ourInfo: `
+            <h4>Ei jagata: Psühhiaatriline olukord</h4>
+            <p><strong>Mis see on:</strong> Info psühhiaatriliste diagnoosid (bipolaarne häire, skisofreen, PTSD jne), ravimite, hospitaliseerimine kohta.</p>
+            <p><strong>HOIATUS:</strong> Psühhiaatrilised ravimid võivad olla elu päästev! Ära peida seda infot arstilt!</p>
+            <p><strong>KOOSTOIMED:</strong> Psühhiaatrilised ravimid (SSRI, antipsühhootikumid) on koostoimetes paljude teiste ravimitega.</p>
+            <p><strong>PRIVAATSUS:</strong> Võid valida selle info EI JAGATA, kuid see suurendab riskide võimalust.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3736944/" target="_blank">NCBI: Psychiatric medication interactions</a></li>
+            </ul>
+        `
+    },
+
+    'no_puue': {
+        title: 'Ei jagata: Puue',
+        shortInfo: 'Ei soovi jagada infot puude, liikumispuude, nägemis- või kuulmispuude kohta.',
+        ourInfo: `
+            <h4>Ei jagata: Puue</h4>
+            <p><strong>Mis see on:</strong> Info puude, liikumispuude, nägemis- või kuulmispuude kohta.</p>
+            <p><strong>Miks oluline:</strong> Puue mõjutab ravimite manustamist (nt suukaudsed ravimid vs plastrid), füüsilist aktiivsust, rehabilitatsiooni.</p>
+            <p><strong>PRIVAATSUS:</strong> Võid valida selle info EI JAGATA.</p>
+            <p><strong>OLULINE:</strong> Arst peab teadma, et kohandada ravi ja juhiseid.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.who.int/news-room/fact-sheets/detail/disability-and-health" target="_blank">WHO: Disability and health</a></li>
+            </ul>
+        `
+    },
+
+    'no_religioon': {
+        title: 'Ei jagata: Religioon',
+        shortInfo: 'Ei soovi jagada infot religioon, usund, spirituaalsed veendumused kohta.',
+        ourInfo: `
+            <h4>Ei jagata: Religioon ja usund</h4>
+            <p><strong>Mis see on:</strong> Info religioon, usund, spirituaalsed veendumused kohta.</p>
+            <p><strong>Miks oluline:</strong> Usundid võivad piirata ravimeetodeid (nt Jehoova tunnistajad ei akcepteeri veretransfusiooni).</p>
+            <p><strong>PRIVAATSUS:</strong> Võid valida selle info EI JAGATA.</p>
+            <p><strong>OLULINE:</strong> Arst peab teadma, kas on usulisi piiranguid, et vältida konflikte.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4263906/" target="_blank">NCBI: Religion and healthcare</a></li>
+            </ul>
+        `
+    },
+
+    'no_eluharjumused': {
+        title: 'Ei jagata: Eluharjumused',
+        shortInfo: 'Ei soovi jagada infot eluharjumuste kohta (dieet, uni, füüsiline aktiivsus, stress jne).',
+        ourInfo: `
+            <h4>Ei jagata: Eluharjumused</h4>
+            <p><strong>Mis see on:</strong> Info eluharjumuste kohta (dieet, uni, füüsiline aktiivsus, stress, töörütm jne).</p>
+            <p><strong>Miks oluline:</strong> Eluharjumused mõjutavad tervise oluliselt (südamehaigused, diabeet, vaimne tervis).</p>
+            <p><strong>PRIVAATSUS:</strong> Võid valida selle info EI JAGATA.</p>
+            <p><strong>OLULINE:</strong> Ilma selleta arst ei saa anda elustiilinõuandeid.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.who.int/news-room/fact-sheets/detail/healthy-diet" target="_blank">WHO: Healthy diet</a></li>
+            </ul>
+        `
+    },
+
+    'no_entogeenid': {
+        title: 'Ei jagata: Entogeenide kasutus',
+        shortInfo: 'Ei soovi jagada infot entogeenide (ayahuasca, psilotsübiin, mescaline jne) kasutuse kohta.',
+        ourInfo: `
+            <h4>Ei jagata: Entogeenide kasutus</h4>
+            <p><strong>Mis see on:</strong> Entogeenid on psühhoaktiivsed ained, mida kasutatakse spirituaalsetes või terapeutilistes eesmärkides (ayahuasca, psilotsübiin, mescaline, ibogain jne).</p>
+            <p><strong>HOIATUS:</strong> Entogeenid on enamasti illegaalsed! Eestis on need keelatud (välja arvatud teadusuuringud).</p>
+            <p><strong>MEDITSIINILINE RISK:</strong> Koostoimed ravimitega (SSRI + DMT = serotoniini sündroom!), psühhoos, flashback'id.</p>
+            <p><strong>PRIVAATSUS:</strong> Võid valida selle info EI JAGATA, kuid see suurendab riskide võimalust.</p>
+            <p><strong>OLULINE:</strong> Arst ei räägi politseile! Tema ülesanne on sind aidata, mitte karistada.</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6007659/" target="_blank">NCBI: Psychedelic therapy</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Entheogen" target="_blank">Wikipedia: Entheogen</a></li>
+            </ul>
+        `
+    },
+
+    'no_soltuvusained': {
+        title: 'Ei jagata: Sõltuvusained',
+        shortInfo: 'Ei soovi jagada infot sõltuvusainete (alkohol, tubakas, kanep, CBD, kava, kratom, opioidid jne) kasutuse kohta.',
+        ourInfo: `
+            <h4>Ei jagata: Sõltuvusained</h4>
+            <p><strong>Mis see on:</strong> Info sõltuvusainete kasutuse kohta (alkohol, tubakas, kanep, CBD, kava, kratom, opioidid, stimulandid jne).</p>
+            <p><strong>HOIATUS:</strong> Sõltuvusained on koostoimetes paljude ravimitega!</p>
+            <ul>
+                <li><strong>Alkohol:</strong> Maksakoormus, koostoimed (metronidazool, varfariin jne)</li>
+                <li><strong>Kanep/CBD:</strong> Koostoimed antikoagulantidega, sedatiivsed ravimid</li>
+                <li><strong>Kava:</strong> Hepatotoksiline (maksahaigus!)</li>
+                <li><strong>Kratom:</strong> Opioidne toime, sõltuvuse risk</li>
+                <li><strong>Opioidid:</strong> Sõltuvuse risk, hingamise pärssiv toime</li>
+            </ul>
+            <p><strong>PRIVAATSUS:</strong> Võid valida selle info EI JAGATA, kuid see suurendab riskide võimalust.</p>
+            <p><strong>OLULINE:</strong> Arst EI räägi politseile! Tema ülesanne on sind aidata!</p>
+        `,
+        externalInfo: `
+            <p><strong>Lisalugemist:</strong></p>
+            <ul>
+                <li><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4827335/" target="_blank">NCBI: Substance use and drug interactions</a></li>
+                <li><a href="https://nida.nih.gov/" target="_blank">NIDA: National Institute on Drug Abuse (USA)</a></li>
+            </ul>
+        `
     }
 };
 
@@ -1860,4 +2650,155 @@ function quickAddMusic(key, name) {
 
     container.appendChild(itemDiv);
     showToast(`${name} lisatud muusikasse!`);
+}
+
+// ================================================================
+// QUICK ADD: UNI JA NORSKAMINE
+// ================================================================
+
+function quickAddSleep(key, name) {
+    if (!quickAddCounters.sleep) quickAddCounters.sleep = 0;
+    quickAddCounters.sleep++;
+
+    const containerId = 'quickAddedSleep';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`Container ${containerId} not found`);
+        return;
+    }
+
+    const itemId = `sleep_quick_${quickAddCounters.sleep}`;
+    const fieldName = `sleep_${key}_${quickAddCounters.sleep}`;
+
+    // Määra värv belief vs. tavaline
+    const isbelief = ['obe', 'prohvetlik', 'samani_rannak', 'muu_paranormaalne'].includes(key);
+    const bgColor = isbelief ? '#f3f4f6' : '#eff6ff';
+    const borderColor = isbelief ? '#9ca3af' : '#3b82f6';
+    const textColor = isbelief ? '#4b5563' : '#1e3a8a';
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = `background: ${bgColor}; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid ${borderColor};`;
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: ${textColor}; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}${isbelief ? ' <span style="font-size: 0.75rem; color: #6b7280;">(belief)</span>' : ''}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: ${borderColor}; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Sagedus</label>
+                <select name="${fieldName}_frequency" style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    <option value="">Vali...</option>
+                    <option value="every_night">Iga öö</option>
+                    <option value="often">Sageli (3-5x nädalas)</option>
+                    <option value="sometimes">Mõnikord (1-2x nädalas)</option>
+                    <option value="rare">Harva</option>
+                </select>
+            </div>
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Raskusaste (0-10)</label>
+                <input type="number" name="${fieldName}_severity" min="0" max="10"
+                       style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+            </div>
+        </div>
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: vallandajad, mustrind..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}
+
+// ================================================================
+// QUICK ADD: PRIVAATSUS JA NÕUSOLEK
+// ================================================================
+
+function quickAddPrivacy(key, name) {
+    if (!quickAddCounters.privacy) quickAddCounters.privacy = 0;
+    quickAddCounters.privacy++;
+
+    // Määra container vastavalt kategooriale
+    let containerId;
+    let categoryLabel;
+    let bgColor, borderColor, textColor;
+
+    if (key.startsWith('no_')) {
+        // EI JAGATA
+        containerId = 'quickAddedPrivacyNoShare';
+        categoryLabel = 'Ei jagata';
+        bgColor = '#fee2e2';
+        borderColor = '#ef4444';
+        textColor = '#991b1b';
+    } else if (key.startsWith('consent_') || ['palve', 'rituaal', 'kutsun_koju_arsti', 'kutsun_koju_new_age'].includes(key)) {
+        // NÕUSOLEK
+        containerId = 'quickAddedPrivacyConsent';
+        categoryLabel = 'Nõusolek';
+        bgColor = '#fef3c7';
+        borderColor = '#f59e0b';
+        textColor = '#d97706';
+    } else {
+        // JAGAMISE TASE
+        containerId = 'quickAddedPrivacyShare';
+        categoryLabel = 'Jagamise tase';
+        const isbelief = ['jumalale'].includes(key);
+        bgColor = isbelief ? '#f3f4f6' : '#f0fdf4';
+        borderColor = isbelief ? '#9ca3af' : '#10b981';
+        textColor = isbelief ? '#4b5563' : '#047857';
+    }
+
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`Container ${containerId} not found`);
+        return;
+    }
+
+    const itemId = `privacy_quick_${quickAddCounters.privacy}`;
+    const fieldName = `privacy_${key}_${quickAddCounters.privacy}`;
+
+    const isbelief = ['jumalale', 'palve', 'rituaal', 'kutsun_koju_new_age'].includes(key);
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = `background: ${bgColor}; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid ${borderColor};`;
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: ${textColor}; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}${isbelief ? ' <span style="font-size: 0.75rem; color: #6b7280;">(belief)</span>' : ''}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: ${borderColor}; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: tingimused, piirangud..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud (${categoryLabel})!`);
 }

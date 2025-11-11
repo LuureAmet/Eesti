@@ -1,14 +1,38 @@
-// VERSION: 1.6.4 - 2025-11-11
+// VERSION: 1.7.0 - 2025-11-11
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.6.4",
+    version: "1.7.0",
     date: "11.11.2025",
-    buildTime: "2025-11-11 23:45",
+    buildTime: "2025-11-11 23:59",
 
     // Versioonimärkmed
     changelog: {
+        "1.7.0": {
+            date: "11.11.2025",
+            changes: [
+                "SUUR UUENDUS: UNI JA PRIVAATSUS LAIENDUS!",
+                "UNI SEKTSIOON (2A): Eraldi sektsioon une ja norskamise jaoks (12 plus-nuppu)",
+                "  - Norskamine (4): ei häiri, häirib elukaaslast, häirib mind, sõltub joomaastmest",
+                "  - Unenägemine + painajad (4): puuduvad, tavalised, painajad harv, painajad sage",
+                "  - Paranormaalsed uned (4, belief): kehaväline, prohvetlik, šamaani rännak, muu",
+                "PRIVAATSUS MASSIIVNE LAIENDUS (0): 27 plus-nuppu kolmes kategoorias!",
+                "  - Jagamise tase (10): arst, AI-arst, AI-test, pere, anon uurija, OSINT, med test, politsei, sõjaväe, jumalale (belief)",
+                "  - Nõusolek (7): kodused mõõtmised, taimravi, hingamised, kutsu koju arst, palve (belief), rituaal (belief), New Age (belief)",
+                "  - Ei jagata (11): kodu olukord, vägivald, sotsiaal, finants, vaimne, psühh, puue, religioon, eluharjumused, entogeenid, sõltuvusained",
+                "BELIEF-SCOPE SÜSTEEM: Spirituaalsed väljad on visuaalselt eraldatud (hall toon, '(belief)' märge)",
+                "  - Belief väljad: obe, prohvetlik, šamaani rännak, muu paranormaalne, jumalale, palve, rituaal, New Age praktik",
+                "  - Vaikimisi peidetavad meditsiinipersonalile (ekspordi valikud)",
+                "quickAddSleep() funktsioon: dünaamiline une kirjete lisamine (sagedus, tõsidus, märkmed)",
+                "quickAddPrivacy() funktsioon: kolmeastmeline routing (jagamine/nõusolek/ei jagata), auto-kategoriseerimine",
+                "MED_INFO_DB: 39 uut info kirjet (12 uni + 27 privaatsus) kaheastmelise modaaliga (Tab A: meie info, Tab B: välised allikad)",
+                "  - UNI: norskamine (4), painajad (2), paranormaalsed (4, sh belief)",
+                "  - PRIVAATSUS: jagamise tase (10), nõusolek (7), ei jagata (11)",
+                "Visuaalne eristus: Uni (sinine #eff6ff), Privaatsus jagamine (roheline), nõusolek (kollane), ei jagata (punane), belief (hall #f3f4f6)",
+                "Kõik info-ikoonid sisaldavad NCBI/WHO/Eesti seaduste viiteid"
+            ]
+        },
         "1.6.4": {
             date: "11.11.2025",
             changes: [
