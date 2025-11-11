@@ -317,6 +317,27 @@
                             <label><input type="checkbox" name="urban" value="yes"> Linn</label>
                             <label><input type="checkbox" name="nightShift" value="yes"> Öötöö</label>
                         </div>
+
+                        <!-- KIIRVALIKU NUPUD ELUPAIGA JAOKS -->
+                        <div class="quick-add-section" style="background: #fef9c3; border-color: #eab308; margin-top: 15px;">
+                            <h4>Kiirvalik - Elupaik</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #eab308; color: #713f12;"
+                                        onclick="quickAddResidence('kortermajas', 'Kortermajas')">Kortermajas</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #eab308; color: #713f12;"
+                                        onclick="quickAddResidence('maaelu', 'Maaelu')">Maaelu</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #eab308; color: #713f12;"
+                                        onclick="quickAddResidence('linn', 'Linn')">Linn</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #eab308; color: #713f12;"
+                                        onclick="quickAddResidence('öötöö', 'Öötöö')">Öötöö</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Lisa elupaik + täpsustused (korrus, lift, jne)
+                            </p>
+                        </div>
+
+                        <!-- LISATUD ELUPAIGAD (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedResidence"></div>
                     </div>
 
                     <div class="form-group">
@@ -470,6 +491,38 @@
                         </div>
                     </div>
 
+                    <!-- KIIRVALIKU NUPUD KAEBUSTE JAOKS -->
+                    <div class="quick-add-section" style="background: #fef2f2; border-color: #ef4444; margin-top: 15px;">
+                        <h4>Kiirvalik - Kaebused</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('peavalu', 'Peavalu')">Peavalu</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('liigesevalu', 'Liigesevalu')">Liigesevalu</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('seljavalu', 'Seljavalu')">Seljavalu</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('iiveldus', 'Iiveldus')">Iiveldus</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('migreen', 'Migreen')">Migreen</button>
+                        </div>
+                        <h4 style="margin-top: 10px; font-size: 0.95rem;">Naiste kaebused</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('menstruaalivalud', 'Menstruaalivalud')">Menstruaalivalud</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('pms', 'PMS')">PMS</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('kuumad_hood', 'Kuumad hood')">Kuumad hood</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                            Lisa kaebus + raskusaste (0-3) + täpsustused
+                        </p>
+                    </div>
+
+                    <!-- LISATUD KAEBUSED (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedComplaints"></div>
+
                     <!-- KAEBUSTE LISAMINE -->
                     <div class="form-group" style="margin-top: 20px;">
                         <button type="button" onclick="addComplaint()" class="btn btn-secondary" style="font-size: 0.9rem; padding: 8px 16px;">
@@ -524,6 +577,29 @@
                             <label><input type="radio" name="exerciseTolerance" value="work-capable"> Töövõimeline</label>
                         </div>
                         <textarea name="exerciseToleranceDesc" rows="2" placeholder="Kirjelda koormustaluvust muudmoodi (valikuline)..." style="margin-top: 10px;"></textarea>
+
+                        <!-- KIIRVALIKU NUPUD LIIKUMISE JAOKS -->
+                        <div class="quick-add-section" style="background: #dbeafe; border-color: #3b82f6; margin-top: 15px;">
+                            <h4>Kiirvalik - Liikumise viisid</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddMobility('kõndimine', 'Kõndimine')">Kõndimine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddMobility('jalgratas', 'Jalgrattasõit')">Jalgrattasõit</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddMobility('ujumine', 'Ujumine')">Ujumine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddMobility('mägimatk', 'Matkamine')">Matkamine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddMobility('rulluisutamine', 'Rulluisutamine')">Rulluisutamine</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Lisa liikumisviis + distants (km) + sagedus (x/nädal)
+                            </p>
+                        </div>
+
+                        <!-- LISATUD LIIKUMISVIISID (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedMobility"></div>
                     </div>
                 </section>
 
@@ -978,6 +1054,27 @@
                             <label><input type="radio" name="bathFrequency" value="1-3"> 1-3× nädalas</label>
                             <label><input type="radio" name="bathFrequency" value=">3"> &gt;3× nädalas</label>
                         </div>
+
+                        <!-- KIIRVALIKU NUPUD VANN/SAUN -->
+                        <div class="quick-add-section" style="background: #e0f2fe; border-color: #0284c7; margin-top: 15px;">
+                            <h4>Kiirvalik - Vann/Saun/Vesi</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                        onclick="quickAddBath('epsom_vann', 'Epsom soola vann')">Epsom vann</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                        onclick="quickAddBath('saun', 'Saun')">Saun</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                        onclick="quickAddBath('külm_dušš', 'Külm dušš')">Külm dušš</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                        onclick="quickAddBath('jalavannikud', 'Jalavannikud')">Jalavannikud</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Lisa teraapia + sagedus + täpsustused
+                            </p>
+                        </div>
+
+                        <!-- LISATUD VANN/SAUN (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedBaths"></div>
                     </div>
                 </section>
 
@@ -988,6 +1085,27 @@
                     <div class="form-group">
                         <label for="calmingMusic">Muusikastiilid, mis rahustavad</label>
                         <input type="text" id="calmingMusic" name="calmingMusic">
+
+                        <!-- KIIRVALIKU NUPUD MUUSIKA -->
+                        <div class="quick-add-section" style="background: #f3e8ff; border-color: #9333ea; margin-top: 15px;">
+                            <h4>Kiirvalik - Muusika/Heliteraapia</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #9333ea; color: #581c87;"
+                                        onclick="quickAddMusic('klassikaline_muusika', 'Klassikaline')">Klassikaline</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #9333ea; color: #581c87;"
+                                        onclick="quickAddMusic('loodus_helid', 'Loodushelid')">Loodushelid</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #9333ea; color: #581c87;"
+                                        onclick="quickAddMusic('meditatsioon_muusika', 'Meditatsioonimuusika')">Meditatsioon</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #9333ea; color: #581c87;"
+                                        onclick="quickAddMusic('binauraalsed_lööid', 'Binauraalsed lööid')">Binauraalsed</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Lisa muusika + sagedus + ajastus
+                            </p>
+                        </div>
+
+                        <!-- LISATUD MUUSIKA (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedMusic"></div>
                     </div>
                 </section>
 

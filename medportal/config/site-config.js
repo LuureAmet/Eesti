@@ -1,21 +1,38 @@
-// VERSION: 1.5.0 - 2025-11-11
+// VERSION: 1.6.0 - 2025-11-11
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.5.0",
+    version: "1.6.0",
     date: "11.11.2025",
-    buildTime: "2025-11-11 21:00",
+    buildTime: "2025-11-11 22:30",
 
     // Versioonimärkmed
     changelog: {
+        "1.6.0": {
+            date: "11.11.2025",
+            changes: [
+                "✨ MASSIIVNE PLUS-NUPPUDE LAIENDUS - 6 uut sektsiooni!",
+                "📍 ELUPAIK: Plus-nupud (kortermajas, maaelu, linn, öötöö) + quickAddResidence()",
+                "🚶 LIIKUMINE: Plus-nupud (kõndimine, jalgratas, ujumine, matkamine, rulluisutamine) + quickAddMobility()",
+                "🤕 KAEBUSED: Plus-nupud üldistele kaebustele (peavalu, liigesevalu, seljavalu, iiveldus, migreen)",
+                "👩 NAISTE KAEBUSED: Plus-nupud (menstruaalivalud, PMS, kuumad hood) - nüüd eraldi kategooria!",
+                "🛁 VANN/SAUN: Plus-nupud (Epsom vann, saun, külm dušš, jalavannikud) + quickAddBath()",
+                "🎵 MUUSIKA: Plus-nupud (klassikaline, loodushelid, meditatsioon, binauraalsed) + quickAddMusic()",
+                "📊 MED_INFO_DB laiendatud 17 uue kirjega (9 kaebust + 4 vann/saun + 4 muusika)",
+                "🔧 3 uut quickAdd funktsiooni: quickAddComplaint(), quickAddBath(), quickAddMusic()",
+                "🎨 Visuaalselt eristuvad värvid: kaebused (punane), vann (sinine), muusika (lilla)",
+                "📝 Kõik plus-nupud sisaldavad info-ikoone + täpsustus välju",
+                "💯 Vorm nüüd kaetud laiemalt plus-nuppude süsteemiga!"
+            ]
+        },
         "1.5.0": {
             date: "11.11.2025",
             changes: [
                 "🎯 SUUR UUENDUS: PROFIILIFILTRI SÜSTEEM!",
                 "Esimene asi vormis: Rasedus → Vanus → Sugu → Meditsiinilised riskid",
                 "Meditsiiniliselt õiged vanusekategooriad (vastsündinu → oldest-old)",
-                "Reaalajas hoiatused ja nõuanded vastavalt profii file",
+                "Reaalajas hoiatused ja nõuanded vastavalt profiilile",
                 "Rasedus aktiveerib automaatselt 'naine' ja näitab ohutusnõuandeid",
                 "AF+antikoagulant, eGFR, Child-Pugh jälgimine",
                 "Profiilifiltri kokkuvõte (sticky header)",

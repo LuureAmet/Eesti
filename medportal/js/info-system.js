@@ -536,6 +536,172 @@ const MED_INFO_DB = {
         externalInfo: `<p>Geneetiline nõustamine võib olla vajalik. Varajane skriining oluline.</p>`
     },
 
+    // ELUPAIK / ELUKESKKOND
+    'kortermajas': {
+        title: 'Kortermajas elamine',
+        shortInfo: 'Kortermaja - korruseid, lift, rahulus, naabrid.',
+        ourInfo: `<h4>Kortermajas</h4><p>Elamine kortermajas mõjutab liikumist (trepid, lift), mürataset, õhukvaliteeti.</p>`,
+        externalInfo: `<p>Kõrgemad korused ilma liftita = täiendav füüsiline koormus. Müra võib mõjutada und.</p>`
+    },
+    'maaelu': {
+        title: 'Maaelu',
+        shortInfo: 'Maapiirkond - rohkem liikumist, vähem stressi, värske õhk.',
+        ourInfo: `<h4>Maaelu</h4><p>Parem õhukvaliteet, väiksem müratase, rohkem füüsilist tööd (aia-, maatööd).</p>`,
+        externalInfo: `<p>Võib olla kaugemal tervishoiust. Rohkem liikumist igapäevaselt.</p>`
+    },
+    'linn': {
+        title: 'Linn',
+        shortInfo: 'Linnas elamine - kiire tempo, stress, müra, saastatus.',
+        ourInfo: `<h4>Linnas elamine</h4><p>Kõrgem stressitase, õhusaaste, müra. Parem ligipääs tervishoiule.</p>`,
+        externalInfo: `<p>Õhusaaste mõjutab südant ja kopse. Stressihaldus oluline.</p>`
+    },
+    'öötöö': {
+        title: 'Öötöö',
+        shortInfo: 'Öine töögraafik - tsirkaadne rütm häiritud.',
+        ourInfo: `<h4>Öötöö</h4><p>Häirib tsirkaadset rütmi, suurendab metaboolse sündroomi, diabeedi, südamehaiguste riski.</p>`,
+        externalInfo: `<p>Pikaajaline öötöö: kõrgem vähirisk, hormonaalse tasakaalu häired.</p>`
+    },
+
+    // LIIKUMISE VIISID / KÕNNITEMPO
+    'jalgratas': {
+        title: 'Jalgrattasõit',
+        shortInfo: 'Sõit jalgrattaga - madala koormaga kardio, sobib liigestele.',
+        ourInfo: `<h4>Jalgrattasõit</h4><p>Liigeste sõbralik, parandab südame tervist, tugevdab jalgu.</p>`,
+        externalInfo: `<p>30-60 min, 3-5× nädalas. Sobib ülekaalulisusele ja artriidile.</p>`
+    },
+    'rulluisutamine': {
+        title: 'Rulluisutamine',
+        shortInfo: 'Rulluiskudega - tasakaal, kardio, koordinatsioon.',
+        ourInfo: `<h4>Rulluisutamine</h4><p>Parandab tasakaalu, kardio vastupidavust, tugevdab jalgu.</p>`,
+        externalInfo: `<p>Kaitsevahendid vajalikud! Sobib noorematele ja heal tasakaalul olijatele.</p>`
+    },
+    'ujumine': {
+        title: 'Ujumine',
+        shortInfo: 'Terviklik treening - ei koorma liigeseid.',
+        ourInfo: `<h4>Ujumine</h4><p>Kaasab kõiki lihasgruppe, ei koorma liigeseid. Suurepärane eakatele ja artriidile.</p>`,
+        externalInfo: `<p>20-30 min, 2-3× nädalas. Parandab kopsumahtuvust.</p>`
+    },
+    'mägimatk': {
+        title: 'Mägimatk/Matkarada',
+        shortInfo: 'Matkamine - kõrgem koormus, vastupidavus, looduses.',
+        ourInfo: `<h4>Matkamine</h4><p>Parandab vastupidavust, tugevdab jalgu, vaimne taastumine looduses.</p>`,
+        externalInfo: `<p>Sobib keskmise koormustaluvusega inimestele. Algajatele: alusta tasaselt.</p>`
+    },
+    'kõndimine': {
+        title: 'Tavaline kõndimine',
+        shortInfo: 'Kõige lihtsam liikumisviis - sobib kõigile.',
+        ourInfo: `<h4>Kõndimine</h4><p>Madala intensiivsusega, ohutum, parandab südame tervist ja meeleolu.</p>`,
+        externalInfo: `<p>10 000 sammu päevas = 40% vähem kardiovaskulaarset riski.</p>`
+    },
+
+    // KAEBUSED / SÜMPTOMID
+    'peavalu': {
+        title: 'Peavalu',
+        shortInfo: 'Sage või kroonilinevalu pea piirkonnas.',
+        ourInfo: `<h4>Peavalu</h4><p>Võib olla põhjustatud stressist, hüpertensioonist, madalast veresuhkrustliikumispuudusest.</p>`,
+        externalInfo: `<p>Sage hüpertensiooni ja stressi marker. Võib vajada uuringuid.</p>`
+    },
+    'iiveldus': {
+        title: 'Iiveldus',
+        shortInfo: 'Oksendamis tunne, seedetrakti häire.',
+        ourInfo: `<h4>Iiveldus</h4><p>Võib olla põhjustatud seedehäiretest, ravimitest, stress.</p>`,
+        externalInfo: `<p>Kui püsiv, võib viidata mao/seedetrakti probleemidele.</p>`
+    },
+    'liigesevalu': {
+        title: 'Liigesevalu (artralgia)',
+        shortInfo: 'Valu liigestes - põletik, kulumine.',
+        ourInfo: `<h4>Liigesevalu</h4><p>Võib olla artriit, artroosuurehape.</p>`,
+        externalInfo: `<p>Põletikuline valu vajab antiinflam. ravi. Konsulteer reumaloloogiga.</p>`
+    },
+    'seljavalu': {
+        title: 'Seljavalu',
+        shortInfo: 'Valu selgroo piirkonnas.',
+        ourInfo: `<h4>Seljavalu</h4><p>Sag põhjus: lihas või ligamendi venimine, kettahaigus.</p>`,
+        externalInfo: `<p>Kroonilisel juhul võib vajada füsioterpaati vkonservatiivset ravi.</p>`
+    },
+    'kurguvalu': {
+        title: 'Kurguvalu',
+        shortInfo: 'Valu neelamisel, äge infektsioon.',
+        ourInfo: `<h4>Kurguvalu</h4><p>Tavaliselt viirusnakkus. Bakteriaalse põhjusevajab antibiootikume.</p>`,
+        externalInfo: `<p>Kui püsiv >1 nädal, konsulteeri arstiga.</p>`
+    },
+    'menstruaalivalud': {
+        title: 'Menstruaalivalud (düsmenorröa)',
+        shortInfo: 'Valulik menstruatsioon, krambid.',
+        ourInfo: `<h4>Menstruaalivalud</h4><p>Emaka kontraktsioonid. Sagedane noortel naistel.</p>`,
+        externalInfo: `<p>Ravi: MSPVA-d (ibuprofen), soojendus, magneesium.</p>`
+    },
+    'pms': {
+        title: 'PMS (premenstruaalne sündroom)',
+        shortInfo: 'Emotsionaalsed ja füüsilised sümptomid enne menstruatsiooni.',
+        ourInfo: `<h4>PMS</h4><p>Hormonaalsed kõikumised. Sümptomid: tuju muutused, turse, rinnavalu.</p>`,
+        externalInfo: `<p>Ravi: B6, magneesium, regulaarne liikumine, toitumine.</p>`
+    },
+    'kuumad_hood': {
+        title: 'Kuumadhood (menopaus)',
+        shortInfo: 'Äkiline kuumatunne, higistamine - menopaus.',
+        ourInfo: `<h4>Kuumad hood</h4><p>Östrogeenikõikumised. Sage menopausi sümptom.</p>`,
+        externalInfo: `<p>Ravi: HRT, taimtoidulisandid (viirpuu, must ürt), eluviis.</p>`
+    },
+    'migreen': {
+        title: 'Migreen',
+        shortInfo: 'Tugev pulseeriv peavalu, sageli ühepoolne.',
+        ourInfo: `<h4>Migreen</h4><p>Neuroologne häire. Võib kaasneda auraga (visuaalsed häired).</p>`,
+        externalInfo: `<p>Ravi: triptaanid, profülaktika (magneesium, B2, CoQ10).</p>`
+    },
+
+    // VANN / SAUN / VEETERAAPIA
+    'epsom_vann': {
+        title: 'Epsom soola vann',
+        shortInfo: 'Magnees soola vannid - lihaste lõõgastus.',
+        ourInfo: `<h4>Epsom soolavann</h4><p>MgSO4 imendub nahka, lõõgastab lihaseid, vähendab põletikku.</p>`,
+        externalInfo: `<p>Soovitus: 1-2 tassi soola, 20 min, 2-3× nädalas.</p>`
+    },
+    'külm_dušš': {
+        title: 'Külm dušš',
+        shortInfo: 'Lühike külm vann/duš - toon, immuunsus.',
+        ourInfo: `<h4>Külm dušš</h4><p>Stimuleerib vereringet, parandab immuunvastust tugevdab vaimset vastupidavust.</p>`,
+        externalInfo: `<p>Alusta soojast, lõpeta 30-60 sek külmaga. Järk-järgult pikenda.</p>`
+    },
+    'saun': {
+        title: 'Saun',
+        shortInfo: 'Aurusaun - detoks, lõõgastus, kardioteraapia.',
+        ourInfo: `<h4>Saun</h4><p>Parandab vereringet, vähendab vererõkku, aitab taastumsel.</p>`,
+        externalInfo: `<p>Ettevaatust: südamepuudulikkus, madal RR. 15-20 min, 2-3× nädalas.</p>`
+    },
+    'jalavannikud': {
+        title: 'Jalavannikud',
+        shortInfo: 'Soojad jalavannikud - vereringe, lõõgastus.',
+        ourInfo: `<h4>Jalavannikud</h4><p>Parandab perifeerset vereringet, lõõgastab enne und.</p>`,
+        externalInfo: `<p>Lisa Epsom soola või eeterlikke õlisid (lavendel).</p>`
+    },
+
+    // MUUSIKA / HELITERAAPIA
+    'klassikaline_muusika': {
+        title: 'Klassikaline muusika',
+        shortInfo: 'Bach, Mozart, Beethoven - rahustav, parandab fookust.',
+        ourInfo: `<h4>Klassikaline muusika</h4><p>Vähendab stressi, parandab südame rütmivariatiivsust (HRV).</p>`,
+        externalInfo: `<p>Mozart efekt: parandab ruumilist mõtlemist ja mälu.</p>`
+    },
+    'binauraalsed_lööid': {
+        title: 'Binauraalsed lööid',
+        shortInfo: 'Spetsiaalsed helid aju lainete mõjutamiseks.',
+        ourInfo: `<h4>Binauraalsed lööid</h4><p>Erineva sagedusega helid mõlemassse kõrva - sünkroniseerimisvad aju laineid.</p>`,
+        externalInfo: `<p>Delta (une), theta (meditatsioon), alfa (rahustus), beta (fookus).</p>`
+    },
+    'loodus_helid': {
+        title: 'Loodushelid',
+        shortInfo: 'Laine kohina, vihmaheli linnulaul - stressi vähendamine.',
+        ourInfo: `<h4>Loodushelid</h4><p>Rahustav toime, vähendab kortisooli.</p>`,
+        externalInfo: `<p>Suurepärane une parandamiseks ja meditatsiooni taustaks.</p>`
+    },
+    'meditatsioon_muusika': {
+        title: 'Meditatsioonimuusika',
+        shortInfo: 'Aeglane, harmoonilne - meditatsioonileks.',
+        ourInfo: `<h4>Meditatsioonimusika</h4><p>Aeglane tempo (<60 bpm), aitab saavutada sisemist rahu.</p>`,
+        externalInfo: `<p>Sobib joogale, hingamispraktikatele, õhtuseks lõõgastuseks.</p>`
+    },
+
     // PRAKTIKAD
     'koherentshingamine': {
         title: 'Koherentshingamine (5-5)',
@@ -1391,4 +1557,307 @@ function quickAddFamilyRisk(key, name) {
 
     container.appendChild(itemDiv);
     showToast(`${name} lisatud perekondliku riskina!`);
+}
+
+// Quick add residence type
+function quickAddResidence(key, name) {
+    if (!quickAddCounters.residence) quickAddCounters.residence = 0;
+    quickAddCounters.residence++;
+
+    const containerId = 'quickAddedResidence';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        // Find the residence section
+        const residenceGroup = document.querySelector('.form-group:has([name="residence"])');
+        if (!residenceGroup) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        residenceGroup.parentNode.insertBefore(container, residenceGroup.nextSibling);
+    }
+
+    const itemId = `residence_quick_${quickAddCounters.residence}`;
+    const fieldName = `residence_${key}_${quickAddCounters.residence}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #fef9c3; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #eab308;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #713f12; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #eab308; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (korrus, lift, rahulikkus, naabrid)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: 5. korrus, lift olemas, rahulik piirkond..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud elupaika!`);
+}
+
+// Quick add mobility type (walking/transport)
+function quickAddMobility(key, name) {
+    if (!quickAddCounters.mobility) quickAddCounters.mobility = 0;
+    quickAddCounters.mobility++;
+
+    const containerId = 'quickAddedMobility';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        // Find the walking/mobility section
+        const mobilityGroup = document.querySelector('.form-group:has([name="walkingDistance"])');
+        if (!mobilityGroup) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        mobilityGroup.parentNode.insertBefore(container, mobilityGroup.nextSibling);
+    }
+
+    const itemId = `mobility_quick_${quickAddCounters.mobility}`;
+    const fieldName = `mobility_${key}_${quickAddCounters.mobility}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #dbeafe; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #3b82f6;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #1e3a8a; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #3b82f6; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Distants (km)</label>
+                <input type="number" name="${fieldName}_distance" min="0.1" max="100" step="0.1" placeholder="Nt: 2.5"
+                       style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+            </div>
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Sagedus (x/nädal)</label>
+                <input type="number" name="${fieldName}_frequency" min="1" max="7" placeholder="Nt: 5"
+                       style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+            </div>
+        </div>
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: hommikul tööle, õhtul koju..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud liikumisviisi!`);
+}
+
+// Quick add complaint
+function quickAddComplaint(key, name) {
+    if (!quickAddCounters.complaint) quickAddCounters.complaint = 0;
+    quickAddCounters.complaint++;
+
+    const containerId = 'quickAddedComplaints';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        // Find the complaints section
+        const complaintsSection = document.querySelector('.symptom-grid');
+        if (!complaintsSection) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        complaintsSection.parentNode.insertBefore(container, complaintsSection.nextSibling);
+    }
+
+    const itemId = `complaint_quick_${quickAddCounters.complaint}`;
+    const fieldName = `complaint_${key}_${quickAddCounters.complaint}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #fef2f2; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #ef4444;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #991b1b; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Raskusaste (0-3)</label>
+            <input type="number" name="${fieldName}_severity" min="0" max="3" value="0" placeholder="0=puudub, 1=kerge, 2=mõõdukas, 3=raske"
+                   style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+        </div>
+        <div style="margin-left: 24px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: sagedus, ajastus, mis aitab..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud kaebustesse!`);
+}
+
+// Quick add bath/sauna therapy
+function quickAddBath(key, name) {
+    if (!quickAddCounters.bath) quickAddCounters.bath = 0;
+    quickAddCounters.bath++;
+
+    const containerId = 'quickAddedBaths';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        // Find the bath section
+        const bathGroup = document.querySelector('.form-group:has([name="bathFrequency"])');
+        if (!bathGroup) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        bathGroup.parentNode.insertBefore(container, bathGroup.nextSibling);
+    }
+
+    const itemId = `bath_quick_${quickAddCounters.bath}`;
+    const fieldName = `bath_${key}_${quickAddCounters.bath}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #e0f2fe; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #0284c7;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #075985; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #0284c7; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Sagedus (x/nädal)</label>
+            <input type="number" name="${fieldName}_frequency" min="1" max="7" placeholder="Nt: 3"
+                   style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+        </div>
+        <div style="margin-left: 24px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: kestus, temperatuur, lisandid..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}
+
+// Quick add music therapy
+function quickAddMusic(key, name) {
+    if (!quickAddCounters.music) quickAddCounters.music = 0;
+    quickAddCounters.music++;
+
+    const containerId = 'quickAddedMusic';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        // Find the music section
+        const musicGroup = document.querySelector('.form-group:has([name="calmingMusic"])');
+        if (!musicGroup) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        musicGroup.parentNode.insertBefore(container, musicGroup.nextSibling);
+    }
+
+    const itemId = `music_quick_${quickAddCounters.music}`;
+    const fieldName = `music_${key}_${quickAddCounters.music}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #f3e8ff; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #9333ea;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #581c87; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #9333ea; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Sagedus</label>
+                <select name="${fieldName}_frequency" style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    <option value="">Vali...</option>
+                    <option value="daily">Igapäev</option>
+                    <option value="often">Sageli</option>
+                    <option value="sometimes">Mõnikord</option>
+                </select>
+            </div>
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Millal</label>
+                <select name="${fieldName}_timing" style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    <option value="">Vali...</option>
+                    <option value="morning">Hommik</option>
+                    <option value="work">Töö ajal</option>
+                    <option value="evening">Õhtu</option>
+                    <option value="sleep">Enne und</option>
+                </select>
+            </div>
+        </div>
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: lemmikunäitlejad, platvormid..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud muusikasse!`);
 }
