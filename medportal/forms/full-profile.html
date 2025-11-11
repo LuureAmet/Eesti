@@ -281,7 +281,34 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Koormustaluvus</label>
+                        <label>Koormustaluvus ja töö</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD TÖÖTÜÜPIDELE -->
+                        <div class="quick-add-section" style="background: #dbeafe; border-color: #3b82f6; margin-bottom: 15px;">
+                            <h4>Levinumad tööd/tegevused</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('mesatöö', 'Mesatöö')">Mesatöö</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('öövalvur', 'Öövalvur')">Öövalvur</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('istutöö', 'Istutöö')">Istutöö</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('ehitustöö', 'Ehitustöö')">Ehitustöö</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('hooldus', 'Hooldus')">Hooldus</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('transport', 'Transport/juht')">Transport/juht</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali töötüübid, mis mõjutavad füüsilist koormustaluvust
+                            </p>
+                        </div>
+
+                        <!-- LISATUD TÖÖD (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedJobTypes"></div>
+
+                        <label style="margin-top: 15px;">Kõnnitempo ja distants</label>
                         <div class="radio-group">
                             <label><input type="radio" name="exerciseTolerance" value="<100m"> &lt;100 m</label>
                             <label><input type="radio" name="exerciseTolerance" value="100-500m"> 100-500 m</label>

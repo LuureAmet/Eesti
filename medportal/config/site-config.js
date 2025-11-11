@@ -1,14 +1,22 @@
-// VERSION: 1.4.1 - 2025-01-11
+// VERSION: 1.4.2 - 2025-11-11
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.4.1",
-    date: "11.01.2025",
-    buildTime: "2025-01-11 16:15",
+    version: "1.4.2",
+    date: "11.11.2025",
+    buildTime: "2025-11-11 17:30",
 
     // Versioonimärkmed
     changelog: {
+        "1.4.2": {
+            date: "11.11.2025",
+            changes: [
+                "UUENDUS: Koormustaluvus - plus-nupud töötüüpidele (mesatöö, öövalvur, istutöö, ehitustöö, hooldus, transport)",
+                "MED_INFO_DB laiendatud 6 töötüübi infoga",
+                "Koormustaluvuse sektsioon struktureeritud: tööd + kõnnitempo"
+            ]
+        },
         "1.4.1": {
             date: "11.01.2025",
             changes: [

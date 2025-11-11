@@ -276,6 +276,44 @@ const MED_INFO_DB = {
         externalInfo: `<p>CT kasutab kiir</p>`
     },
 
+    // KOORMUSTALUVUS / TÖÖD
+    'mesatöö': {
+        title: 'Mesatöö',
+        shortInfo: 'Raske füüsiline töö lihatöötlemises - kõrge südame koormus.',
+        ourInfo: `<h4>Mesatöö</h4><p>Raske füüsiline töö, mis nõuab head südame koormustaluvust ja lihasjõudu.</p>`,
+        externalInfo: `<p>Tavaliselt 8-12h vahetused, külm keskkond, raske tõstmine.</p>`
+    },
+    'öövalvur': {
+        title: 'Öövalvur',
+        shortInfo: 'Öine töögraafik - mõjutab und ja ainevahetust.',
+        ourInfo: `<h4>Öövalvur</h4><p>Öötöö mõjutab tsirkaadset rütmi, und, ainevahetust ja kardiovaskulaarset tervist.</p>`,
+        externalInfo: `<p>Risk: metaboolne sündroom, diabeet, südame-veresoonkonna haigused.</p>`
+    },
+    'istutöö': {
+        title: 'Istutöö',
+        shortInfo: 'Istuv kontorit00 - madal füüsiline aktiivsus.',
+        ourInfo: `<h4>Istutöö</h4><p>Pikaajaline istumine suurendab kardiovaskulaarset riski ja ainevahetushäireid.</p>`,
+        externalInfo: `<p>Soovitus: iga tunni tagant 5-10 min liikumist.</p>`
+    },
+    'ehitustöö': {
+        title: 'Ehitustöö',
+        shortInfo: 'Füüsiliselt nõudlik töö - kõrge trauma risk.',
+        ourInfo: `<h4>Ehitustöö</h4><p>Raske füüsiline töö, mis nõuab head koormustaluvust ja lihasjõudu.</p>`,
+        externalInfo: `<p>Risk: luu-lihaskonna vigastused, krooniline valu.</p>`
+    },
+    'hooldus': {
+        title: 'Hooldus',
+        shortInfo: 'Hooldus/õendus - mõõdukas füüsiline ja emotsionaalne koormus.',
+        ourInfo: `<h4>Hooldustöö</h4><p>Nõuab head füüsilist vormi (patsientide liigutamine) ja emotsionaalset vastupidavust.</p>`,
+        externalInfo: `<p>Sage läbipõlemine, krooniline stress.</p>`
+    },
+    'transport': {
+        title: 'Transport/juht',
+        shortInfo: 'Pikaajaline istumine roolis - madal aktiivsus.',
+        ourInfo: `<h4>Juhitöö</h4><p>Pikk istumine, stress, ebaregulaarne toitumine - kardiovaskulaarne risk.</p>`,
+        externalInfo: `<p>Soovitus: regulaarsed pausid, venitused, liikumine.</p>`
+    },
+
     // PRAKTIKAD
     'koherentshingamine': {
         title: 'Koherentshingamine (5-5)',
@@ -694,4 +732,55 @@ function quickAddNoConsent(key, name) {
 
     container.appendChild(itemDiv);
     showToast(`${name} keeld lisatud!`);
+}
+
+// Quick add job type for exercise tolerance
+function quickAddJobType(key, name) {
+    if (!quickAddCounters.jobtype) quickAddCounters.jobtype = 0;
+    quickAddCounters.jobtype++;
+
+    const containerId = 'quickAddedJobTypes';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        const section = document.querySelector('.form-group:has([name="exerciseTolerance"])');
+        if (!section) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        section.parentNode.insertBefore(container, section);
+    }
+
+    const itemId = `jobtype_quick_${quickAddCounters.jobtype}`;
+    const fieldName = `jobType_${key}_${quickAddCounters.jobtype}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #dbeafe; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #3b82f6;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #1e40af; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #3b82f6; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: tööstaaž, vahetuste graafik..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud koormustaluvuse juurde!`);
 }
