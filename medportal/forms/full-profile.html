@@ -170,7 +170,38 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Aktiivsus</label>
+                        <label>Füüsiline aktiivsus</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD TEGEVUSTELE -->
+                        <div class="quick-add-section" style="background: #f0f9ff; border-color: #0ea5e9; margin-bottom: 15px;">
+                            <h4>Levinumad tegevused</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('jalutamine', 'Jalutamine')">Jalutamine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('jooksmine', 'Jooksmine')">Jooksmine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('ujumine', 'Ujumine')">Ujumine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('rattasõit', 'Rattasõit')">Rattasõit</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('jõusaal', 'Jõusaal')">Jõusaal</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('jooga', 'Jooga')">Jooga</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('aeroobika', 'Aeroobika')">Aeroobika</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('tants', 'Tants')">Tants</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali tegevused, millega regulaarselt tegeled
+                            </p>
+                        </div>
+
+                        <!-- LISATUD TEGEVUSED (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedActivities"></div>
+
+                        <label style="margin-top: 15px;">Üldine aktiivsuse tase</label>
                         <div class="radio-group">
                             <label><input type="radio" name="activity" value="walking"> Kõnd</label>
                             <label><input type="radio" name="activity" value="physical"> Füüsiline töö</label>

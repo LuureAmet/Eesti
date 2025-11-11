@@ -1,14 +1,23 @@
-// VERSION: 1.4.3 - 2025-11-11
+// VERSION: 1.4.4 - 2025-11-11
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.4.3",
+    version: "1.4.4",
     date: "11.11.2025",
-    buildTime: "2025-11-11 18:00",
+    buildTime: "2025-11-11 18:30",
 
     // Versioonimärkmed
     changelog: {
+        "1.4.4": {
+            date: "11.11.2025",
+            changes: [
+                "UUENDUS: Füüsiline aktiivsus - plus-nupud 8 tegevusele (jalutamine, jooksmine, ujumine, rattasõit, jõusaal, jooga, aeroobika, tants)",
+                "MED_INFO_DB laiendatud aktiivsuse infoga",
+                "quickAddActivity() funktsioon - sagedus ja kestus väljadega",
+                "Aktiivsuse sektsioon struktureeritud: tegevused + üldine tase"
+            ]
+        },
         "1.4.3": {
             date: "11.11.2025",
             changes: [

@@ -314,6 +314,56 @@ const MED_INFO_DB = {
         externalInfo: `<p>Soovitus: regulaarsed pausid, venitused, liikumine.</p>`
     },
 
+    // AKTIIVSUS / FÜÜSILINE TEGEVUS
+    'jalutamine': {
+        title: 'Jalutamine',
+        shortInfo: 'Kõige lihtsam ja ohutum liikumisviis - sobib kõigile.',
+        ourInfo: `<h4>Jalutamine</h4><p>Madala intensiivsusega aeroobne tegevus. Parandab südame tervist, vähendab stressi.</p>`,
+        externalInfo: `<p>Soovitus: 30 min päevas, 5× nädalas. Algajatele: alusta 10 minutiga.</p>`
+    },
+    'jooksmine': {
+        title: 'Jooksmine',
+        shortInfo: 'Kõrge intensiivsusega kardiotrenn - parandab vastupidavust.',
+        ourInfo: `<h4>Jooksmine</h4><p>Suurendab südame võimsust, põletab kaloreid efektiivselt.</p>`,
+        externalInfo: `<p>Ettevaatust: liigese- ja põlveprobleemide korral konsulteeri arstiga.</p>`
+    },
+    'ujumine': {
+        title: 'Ujumine',
+        shortInfo: 'Terviklik kehatreening ilma liigeskoormata - suurepärane kardio.',
+        ourInfo: `<h4>Ujumine</h4><p>Kaasab kõiki lihasgruppe, ei koorma liigeseid. Sobib artriidi, ülekaalulisuse korral.</p>`,
+        externalInfo: `<p>Soovitus: 20-30 min, 2-3× nädalas.</p>`
+    },
+    'rattasõit': {
+        title: 'Rattasõit',
+        shortInfo: 'Madalama koormaga kardiotrenn - sobib põlveprobleemide korral.',
+        ourInfo: `<h4>Rattasõit</h4><p>Parandab vastupidavust ja jalamuskulatuuri tugevust, madal koormuse risk.</p>`,
+        externalInfo: `<p>Soovitus: 30-60 min, 3-5× nädalas.</p>`
+    },
+    'jõusaal': {
+        title: 'Jõusaal',
+        shortInfo: 'Jõutreening - suurendab lihasmassi ja luutihedust.',
+        ourInfo: `<h4>Jõusaal</h4><p>Treenib lihaseid ja luustikku. Parandab ainevahetust ja insuliinitundlikkust.</p>`,
+        externalInfo: `<p>Soovitus: 2-3× nädalas, koos treeneriga kui algaja.</p>`
+    },
+    'jooga': {
+        title: 'Jooga',
+        shortInfo: 'Painduvus, tasakaal ja rahustus - vähendab stressi.',
+        ourInfo: `<h4>Jooga</h4><p>Parandab painduvust, tasakaalu, rahustab närvisüsteemi.</p>`,
+        externalInfo: `<p>Sobib kõigile, eriti stressis olijatele ja vanematele.</p>`
+    },
+    'aeroobika': {
+        title: 'Aeroobika',
+        shortInfo: 'Rühmatreening muusikaga - kardio ja koordinatsioon.',
+        ourInfo: `<h4>Aeroobika</h4><p>Energiline rühmatreening, parandab südame tervist ja meeleolu.</p>`,
+        externalInfo: `<p>Soovitus: 30-45 min, 2-3× nädalas.</p>`
+    },
+    'tants': {
+        title: 'Tants',
+        shortInfo: 'Lõbus liikumisviis - parandab koordinatsiooni ja meeleolu.',
+        ourInfo: `<h4>Tants</h4><p>Ühendab kardio, tasakaalu ja sotsiaalse aspekti. Suurepärane vanematele.</p>`,
+        externalInfo: `<p>Parandab mälu, vähendab dementsuse riski.</p>`
+    },
+
     // PRAKTIKAD
     'koherentshingamine': {
         title: 'Koherentshingamine (5-5)',
@@ -804,4 +854,67 @@ function selectAllTools() {
     selectTool('stepCounter', 'stepParams');
     selectTool('dailyWeight', 'weightParams');
     showToast('Kõik 3 tööriista valitud!');
+}
+
+// Quick add physical activity
+function quickAddActivity(key, name) {
+    if (!quickAddCounters.activity) quickAddCounters.activity = 0;
+    quickAddCounters.activity++;
+
+    const containerId = 'quickAddedActivities';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        const activityGroup = document.querySelector('.form-group:has([name="activity"])');
+        if (!activityGroup) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        activityGroup.parentNode.insertBefore(container, activityGroup.nextSibling);
+    }
+
+    const itemId = `activity_quick_${quickAddCounters.activity}`;
+    const fieldName = `activity_${key}_${quickAddCounters.activity}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #f0f9ff; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #0ea5e9;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #075985; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #0ea5e9; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Sagedus (x/nädal)</label>
+                <input type="number" name="${fieldName}_frequency" min="1" max="7" placeholder="Nt: 3"
+                       style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+            </div>
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Kestus (min)</label>
+                <input type="number" name="${fieldName}_duration" min="5" max="180" placeholder="Nt: 30"
+                       style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+            </div>
+        </div>
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: hommikul, grupitreening..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
 }
