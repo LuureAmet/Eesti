@@ -715,3 +715,74 @@
     color: #6b7280;
     margin-bottom: 4px;
 }
+
+/* ============================================
+   PROFIILIFILTRI STIILID
+   ============================================ */
+
+.age-category-btn {
+    padding: 10px 15px;
+    background: white;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #475569;
+}
+
+.age-category-btn:hover {
+    background: #f1f5f9;
+    border-color: #0284c7;
+}
+
+.age-category-btn.selected {
+    background: #0284c7;
+    border-color: #0369a1;
+    color: white;
+    font-weight: 700;
+}
+
+.profile-warning {
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 4px solid;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-warning.error {
+    background: #fef2f2;
+    border-color: #ef4444;
+    color: #991b1b;
+}
+
+.profile-warning.warning {
+    background: #fef3c7;
+    border-color: #f59e0b;
+    color: #92400e;
+}
+
+.profile-warning.info {
+    background: #eff6ff;
+    border-color: #3b82f6;
+    color: #1e40af;
+}
+
+.profile-warning.success {
+    background: #f0fdf4;
+    border-color: #22c55e;
+    color: #166534;
+}

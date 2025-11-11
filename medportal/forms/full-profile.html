@@ -34,6 +34,156 @@
 
             <form id="fullProfileForm">
 
+                <!-- ═══════════════════════════════════════════════════════════ -->
+                <!-- PROFIILIFILTRI SEKTSIOON - ESIMENE ASI! -->
+                <!-- ═══════════════════════════════════════════════════════════ -->
+                <section class="form-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: 3px solid #5a67d8; position: sticky; top: 0; z-index: 100;">
+                    <h2 style="color: white; margin-bottom: 15px; text-align: center;">⚕️ Profiili Filter - Alusta siit!</h2>
+
+                    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+
+                        <!-- PROFIILIFILTRI OLEK (näitab mida on valitud) -->
+                        <div id="profileFilterStatus" style="background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 12px; margin-bottom: 20px; border-radius: 6px; display: none;">
+                            <h4 style="margin: 0 0 8px 0; color: #1e40af;">📋 Valitud profiil:</h4>
+                            <div id="profileFilterSummary" style="color: #334155; font-size: 0.95rem;"></div>
+                        </div>
+
+                        <!-- 1. RASEDUS/IMETAMINE - ESIMENE KÜSIMUS! -->
+                        <div class="form-group" style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b; margin-bottom: 20px;">
+                            <label style="font-weight: 700; color: #92400e; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+                                🤰 1. Kas oled praegu rase või imetad?
+                                <span class="info-icon" style="cursor: help;" title="See on KÕIGE OLULISEM küsimus - muudab kogu profiili ohutust!">i
+                                    <div class="info-popup">Rasedus/imetamine määrab kindlad ohutusreeglid taimedele ja ravimitele!</div>
+                                </span>
+                            </label>
+                            <div class="radio-group" style="display: flex; gap: 20px; margin-top: 10px;">
+                                <label style="font-size: 1.05rem;">
+                                    <input type="radio" name="pregnancyStatus" value="pregnant" onchange="updateProfileFilter()">
+                                    Rase
+                                </label>
+                                <label style="font-size: 1.05rem;">
+                                    <input type="radio" name="pregnancyStatus" value="breastfeeding" onchange="updateProfileFilter()">
+                                    Imetan
+                                </label>
+                                <label style="font-size: 1.05rem;">
+                                    <input type="radio" name="pregnancyStatus" value="no" onchange="updateProfileFilter()" checked>
+                                    Ei
+                                </label>
+                            </div>
+                            <div id="pregnancyWeeks" style="display: none; margin-top: 15px; padding: 10px; background: white; border-radius: 6px;">
+                                <label>Kui kaua rase (nädalat)?</label>
+                                <input type="number" name="pregnancyWeeksCount" min="1" max="42" placeholder="Nt: 12" style="width: 100px; padding: 6px;">
+                            </div>
+                        </div>
+
+                        <!-- 2. VANUS - TEINE KÜSIMUS -->
+                        <div class="form-group" style="background: #e0f2fe; padding: 15px; border-radius: 8px; border-left: 4px solid #0284c7; margin-bottom: 20px;">
+                            <label style="font-weight: 700; color: #075985; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+                                📅 2. Vanus
+                                <span class="info-icon" style="cursor: help;" title="Vanus mõjutab annuseid, koormust ja ohutust">i
+                                    <div class="info-popup">Vali vanusekategooria või sisesta täpne vanus</div>
+                                </span>
+                            </label>
+
+                            <!-- Kiirvalik kategooriad -->
+                            <div style="margin: 15px 0;">
+                                <h4 style="color: #64748b; font-size: 0.9rem; margin-bottom: 8px;">Kiirvalik (meditsiinilised kategooriad):</h4>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px;">
+                                    <button type="button" class="age-category-btn" data-age-range="0-0.08" onclick="selectAgeCategory(this, '0-0.08', 'Vastsündinu (0-28 päeva)')">Vastsündinu (0-28 p)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="0.08-1" onclick="selectAgeCategory(this, '0.08-1', 'Imik (1-12 kuud)')">Imik (1-12 kuud)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="1-3" onclick="selectAgeCategory(this, '1-3', 'Väikelaps (1-3 a)')">Väikelaps (1-3 a)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="3-5" onclick="selectAgeCategory(this, '3-5', 'Eelkooliealine (3-5 a)')">Eelkooliealine (3-5)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="6-11" onclick="selectAgeCategory(this, '6-11', 'Kooliealine (6-11 a)')">Kooliealine (6-11)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="12-17" onclick="selectAgeCategory(this, '12-17', 'Nooruk (12-17 a)')">Nooruk (12-17)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="18-39" onclick="selectAgeCategory(this, '18-39', 'Noor täiskasvanu (18-39 a)')">Noor täisk. (18-39)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="40-64" onclick="selectAgeCategory(this, '40-64', 'Keskealine (40-64 a)')">Keskealine (40-64)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="65-74" onclick="selectAgeCategory(this, '65-74', 'Young-old (65-74 a)')">Young-old (65-74)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="75-84" onclick="selectAgeCategory(this, '75-84', 'Middle-old (75-84 a)')">Middle-old (75-84)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="85-120" onclick="selectAgeCategory(this, '85-120', 'Oldest-old (≥85 a)')">Oldest-old (≥85)</button>
+                                </div>
+                            </div>
+
+                            <!-- Täpne vanus -->
+                            <div style="margin-top: 15px;">
+                                <label style="color: #64748b; font-size: 0.9rem;">Või sisesta täpne vanus:</label>
+                                <input type="number" id="exactAge" name="exactAge" min="0" max="120" placeholder="Nt: 42"
+                                       onchange="updateProfileFilter()"
+                                       style="width: 100px; padding: 8px; margin-left: 10px; border: 2px solid #cbd5e1; border-radius: 6px;">
+                                <span style="color: #64748b; margin-left: 8px;">aastat</span>
+                            </div>
+
+                            <input type="hidden" id="ageCategory" name="ageCategory">
+                            <input type="hidden" id="ageCategoryLabel" name="ageCategoryLabel">
+                        </div>
+
+                        <!-- 3. SUGU -->
+                        <div class="form-group" style="background: #fce7f3; padding: 15px; border-radius: 8px; border-left: 4px solid #ec4899; margin-bottom: 20px;">
+                            <label style="font-weight: 700; color: #9f1239; font-size: 1.1rem;">
+                                ⚧️ 3. Sugu
+                            </label>
+                            <div class="radio-group" style="display: flex; gap: 20px; margin-top: 10px;">
+                                <label style="font-size: 1.05rem;">
+                                    <input type="radio" id="genderMale" name="gender" value="male" onchange="updateProfileFilter()">
+                                    Mees
+                                </label>
+                                <label style="font-size: 1.05rem;">
+                                    <input type="radio" id="genderFemale" name="gender" value="female" onchange="updateProfileFilter()">
+                                    Naine
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 4. MEDITSIINILISED RISKIFAKTORID (Valikuline, kuid oluline) -->
+                        <details style="margin-top: 20px; background: #f1f5f9; padding: 15px; border-radius: 8px;">
+                            <summary style="cursor: pointer; font-weight: 700; color: #475569; font-size: 1.05rem;">
+                                🏥 Täpsemad meditsiinilised riskid (valikuline, kuid oluline AI arstile)
+                            </summary>
+
+                            <div style="margin-top: 15px; display: grid; gap: 15px;">
+                                <!-- AF + Antikoagulant -->
+                                <div style="background: white; padding: 12px; border-radius: 6px; border-left: 3px solid #ef4444;">
+                                    <label style="display: flex; align-items: center; gap: 8px; font-weight: 600; color: #7f1d1d;">
+                                        <input type="checkbox" name="afAnticoagulant" value="yes" onchange="updateProfileFilter()">
+                                        AF + Antikoagulant (DOAC/Varfariin)
+                                        <span class="info-icon" style="cursor: help;">i
+                                            <div class="info-popup">Kodade virvendus + verehüübimist vältiv ravim - KÕRGE KOOSTOIME RISK!</div>
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <!-- eGFR -->
+                                <div style="background: white; padding: 12px; border-radius: 6px; border-left: 3px solid #f59e0b;">
+                                    <label style="font-weight: 600; color: #78350f;">Neerufunktsioon (eGFR):</label>
+                                    <select name="egfr" onchange="updateProfileFilter()" style="width: 100%; padding: 8px; margin-top: 8px; border: 2px solid #cbd5e1; border-radius: 6px;">
+                                        <option value="">Ei tea / normaalne</option>
+                                        <option value="90+">≥90 (Normaalne)</option>
+                                        <option value="60-89">60-89 (Kerge langus)</option>
+                                        <option value="45-59">45-59 (Mõõdukas langus)</option>
+                                        <option value="30-44">30-44 (Mõõdukas-raske)</option>
+                                        <option value="15-29">15-29 (Raske)</option>
+                                        <option value="<15">&lt;15 / Dialüüs</option>
+                                    </select>
+                                </div>
+
+                                <!-- Child-Pugh -->
+                                <div style="background: white; padding: 12px; border-radius: 6px; border-left: 3px solid #f59e0b;">
+                                    <label style="font-weight: 600; color: #78350f;">Maksafunktsioon (Child-Pugh):</label>
+                                    <select name="childPugh" onchange="updateProfileFilter()" style="width: 100%; padding: 8px; margin-top: 8px; border: 2px solid #cbd5e1; border-radius: 6px;">
+                                        <option value="">Ei tea / normaalne</option>
+                                        <option value="A">A (Kerge)</option>
+                                        <option value="B">B (Mõõdukas)</option>
+                                        <option value="C">C (Raske)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- HOIATUSED JA NÕUANDED (ilmuvad vastavalt valikutele) -->
+                        <div id="profileWarnings" style="margin-top: 20px;"></div>
+
+                    </div>
+                </section>
+
                 <!-- EI SOOVI KIIRKAST -->
                 <section class="form-section" id="no-consent-section" style="background: #fff3cd; border-left: 4px solid #ff6b6b;">
                     <h2 style="color: #d63031;">Ei soovi / Kategooriline keeld</h2>
@@ -1088,6 +1238,7 @@
     <script src="../js/tooltips.js"></script>
     <script src="../js/custom-fields.js"></script>
     <script src="../js/info-system.js"></script>
+    <script src="../js/profile-filter.js"></script>
     <script src="../js/full-profile.js"></script>
 
     <!-- Config ja dokumendid/lingid -->

@@ -1,14 +1,28 @@
-// VERSION: 1.4.7 - 2025-11-11
+// VERSION: 1.5.0 - 2025-11-11
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.4.7",
+    version: "1.5.0",
     date: "11.11.2025",
-    buildTime: "2025-11-11 20:15",
+    buildTime: "2025-11-11 21:00",
 
     // Versioonimärkmed
     changelog: {
+        "1.5.0": {
+            date: "11.11.2025",
+            changes: [
+                "🎯 SUUR UUENDUS: PROFIILIFILTRI SÜSTEEM!",
+                "Esimene asi vormis: Rasedus → Vanus → Sugu → Meditsiinilised riskid",
+                "Meditsiiniliselt õiged vanusekategooriad (vastsündinu → oldest-old)",
+                "Reaalajas hoiatused ja nõuanded vastavalt profii file",
+                "Rasedus aktiveerib automaatselt 'naine' ja näitab ohutusnõuandeid",
+                "AF+antikoagulant, eGFR, Child-Pugh jälgimine",
+                "Profiilifiltri kokkuvõte (sticky header)",
+                "profile-filter.js + CSS stiilid",
+                "AI arstile õige järjekord: rasedus → vanus → elundid → koostoimed"
+            ]
+        },
         "1.4.7": {
             date: "11.11.2025",
             changes: [
