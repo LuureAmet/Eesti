@@ -1,0 +1,1217 @@
+jergne jutu eelkoku vote, kuid poe lindel kas koi kn kokuvoetud: 
+
+TÄIELIK KOKKUVÕTE - Kõik 3 osa
+
+Olen läbi lugenud kogu sinu strateegia (Part 1/3 + 2/3 + 3/3). Siin on struktureeritud ülevaade:
+📋 I. TEHNILISED ASJAD (GPT analüüs):
+JSON Normaliseerimine:
+
+    Kaks JSON-i → üks "canonical" versioon
+    Scope taksonoomia: universal | demographic | organ | context | modality | belief
+    toCanonical() funktsioon
+
+AI Promptid - 2 tüüpi:
+
+    LIHTNE LÜHI-PROMPT - kiire konsult
+    TÄIELIK PROMPT - põhjalik (specialty-mode, LISP otsustuspuu)
+
+Specialty režiimid:
+
+    family-medicine, cardiology, hepatology, nephrology, Ayurveda, TCM, naturopathy, sports, rural-traditions
+
+"i"-nupu kaheastmeline modaal:
+
+    Tab A: Sise-Wiki (kuidas kasutada, doosid, koostoimed)
+    Tab B: Avalikud allikad (erinevad keeled, DOI-d)
+
+🔧 II. SINU MUUDATUSED JA LAIENDUSED:
+0. PRIVAATSUS JA NÕUSOLEK - MASSIIVNE LAIENDUS:
+"Jagamise tase" plusid:
+
+    ✅ "Jumalale" (+ multireligioosne info nupp)
+    ✅ "AI arst" (+ alamvalik: eri teaduslikud AI-d)
+    ✅ "AI testimiseks" (+ 10 levinumat AI-d)
+    ✅ "Politsei"
+    ✅ "Sotsiaaltöötaja"
+    ✅ Arst, pereliikmele, anonüümsele uurijale, avalikult (OSINT), meditsiini-testimiseks
+
+"Nõusolek" plusid:
+
+    ✅ "Palve" (+ eri regioonide/usundite palve tüübid - mitmetasandiline menüü)
+    ✅ "Rituaal" (+ eri usundite rituaalid: kristlus, maausulised, rulerituaalid)
+    ✅ "Luban koju arsti kutsuda"
+    ✅ "Luban koju new-age ravitsejat"
+
+"Millist andmestikku EI jagata" plusid:
+
+    ✅ Kodu olukord
+    ✅ Kodu vägivald
+    ✅ Sotsiaalne olukord
+    ✅ Finants olukord
+    ✅ Vaimne olukord
+    ✅ Psühholoogiline olukord
+    ✅ Puue
+    ✅ Religioosne olukord
+    ✅ Eluharjumused
+    ✅ Entheogenide kasutus
+    ✅ Sõltuvusained (terve list: alkohol, tubakas, kanep, CBD, kava, kratom, opioidid, stimulandid jne)
+
+1. PÕHILINE ELUPAIK:
+
+    ❌ EEMALDA topelt linnukeste menüü (plusid juba olemas!)
+
+2. FÜÜSILINE AKTIIVSUS:
+
+    ✅ LISA "Üldine aktiivsuse tase" (madal/mõõdukas/kõrge)
+    ❌ EEMALDA linnukeste menüüd
+
+3. UNI - ERALDI SEKTSIOON + PLUSID:
+
+    ✅ Norskamine plusid (+ sätted: "ei häiri/häirib elukaaslast/ennast", "oleneb joomisastmest")
+    ✅ Unenegamine plusid
+    ✅ Painajad plusid (+ info: levinumad liigid, vallandajad)
+    ✅ Paranormaalsed uned plusid (+ valikud: kehaväline, prohvetlik, šamaani rännak jne)
+        🏷️ Scope: belief
+
+4. KAEBUSED - LISA:
+
+    ✅ Tinnitus
+    ✅ Peapööritus
+    ✅ Kõhukeeramine
+    ✅ Kõhukinnisus
+    ✅ Kõhulahtisus
+    ✅ Valguse talumatus
+
+5. KOORMUSTALUVUS JA TÖÖ - LISA:
+
+    ✅ Metsatöö
+    ✅ Poe lett
+    ✅ Transpordi juht
+    ✅ Söekaevandus
+    ✅ Advokaat
+    ✅ Poliitik
+    ✅ Sõjaväelane
+    ✅ Tehases töö
+    ✅ Rutiine töö (linttöö)
+    ✅ Pakendamine
+    ✅ Pakkide tõstmine
+    ✅ Jalgrataga kuller (Bolt, Post jne)
+
+6. LIIKUMISE VIISID - LISA (vaimsed/mittefüüsilised):
+
+    ✅ Laev
+    ✅ Paat
+    ✅ Lennuk
+    ✅ Remote view
+    ✅ Levitatsioon
+    ✅ Ajarändamine
+    ✅ Lonkimine
+    ✅ Šamaani rännak
+    ✅ Tähtevälised rännud
+    ✅ Teised vaimsed/mittefüüsilised liikumised
+        🏷️ Scope: belief
+        📌 Pane kõige vähem tõenäolised lõppu
+
+7. TÖÖRIISTAD - LISA (bioenergia/vaimsed):
+
+    ✅ Kiirvaliku ees nupp: "< Lisa kõik 3"
+    ✅ Bioenergia mõõtjad
+    ✅ Eluenergia mõõtjad
+    ✅ Aura mõõtjad (Vene ja Ida teadlased)
+    ✅ Pendel
+    ✅ Hiina meditsiini pulsi hindamine
+    ✅ Nõiad kes mõõdavad
+    ✅ Uro-dev tugi
+    ✅ Teorilised mõõtevahendid
+        🏷️ Scope: belief
+        📌 Info nupu alla: "informatiivne, mitte diagnostiline"
+
+8. VANN/SAUN:
+
+    ✅ Liiguta Kehaliste praktikate esimeseks
+    ✅ Lisa Ravidussid plusidesse
+
+9. TOITUMISE PIIRANGUD - LISA PÕHJUSED:
+
+Olemas: meditsiiniline, talumatus, eelistus, usuline, eetiline
+
+LISA:
+
+    ✅ "Naine ei luba"
+    ✅ "Elukaaslane ei luba"
+    ✅ "Tunnetus"
+    ✅ "Paranoia" (või neutraalsemalt: "hirm tundmatu ees")
+
+10. TOITUMISPROFIIL:
+
+    ✅ "Söögirütm akendes" → liiguta plusside alla
+    ✅ Lisa täpsustused:
+        Paast
+        "Söödan millal juhtub" (hobo eluviis)
+        Linnakiirtoit
+        Magusaltuvus
+
+11. TOITUMINE - LISA:
+
+    ✅ 22 rikka toitu (rasvased lihad, maks, juustud, koor, šokolaad, pähklid jne)
+    ✅ Tava-toidud lusikaga (putrud, supid, hautised, kiirtoit linnas)
+        📌 Info nupp: miks see oluline
+
+12. TAIMRAVI - LISA:
+
+    ✅ Kultuurideülesed taimed (Ayurveda, TCM, Põhjala, Slaavi, maailma rahvamed)
+    ✅ Imetamine (+ info: kus saab, kuidas)
+        🏷️ Scope: modality | belief
+
+13. KOOSTOIME RISKID - LISA:
+
+Olemas: greip, naistepuna, ginkgo, lagrits, küüslauk>1, ingver>2g, kurkum>1g
+
+LISA:
+
+    ✅ Šokolaad/kakao (kofeiin + teobromiin; antikoagulandi/HTN puhul)
+    ✅ Alkohol (hepato/koostoimed)
+    ✅ Kofeiin kogus (kohv/tee/energiajoogid)
+    ✅ Kanep/CBD (antikoagulandi + sedatiivid)
+    ✅ Kava (maksarisk)
+    ✅ Kratom (mitu koostoimeriski + hoiatus)
+
+14. ANTIKOAGULANT - "MAAKELI" SELGITUS:
+
+Hetkel: "Antikoagulant?" checkbox
+
+UUENDA:
+
+    ✅ Lisa selgitus: "Mis see on? Verevedeldaja. Aitab ära hoida trombe, kuid suurendab veritsuse riski."
+    ✅ Lisa valikud (plus-menüü):
+        Varfariin
+        DOAC-id: apiksabaan, rivaroksabaan, dabigatraan, edoksabaan
+        Antitrombotsütaarsed (eraldi): aspiriin, klopidogreel
+    ✅ Info nupp: milliseid taimi vältida, mis asendada
+
+15. MINIMAALNE DIAGNOSTIKA:
+
+    ✅ Plus-nuppude süsteem
+    ✅ Info asjad külge (Tab A/B)
+
+16. RESSURSID JA EELARVE:
+
+    ✅ Kõik plusside alla
+    ✅ Lisa valik: "Puudub"
+    ✅ Apteek (+ alammenüü: Eesti keti valik, piirkond)
+        Esimene valik: Apteek (eri apteegid, piirkonnad)
+        Teine valik: Loodustoodete pood
+        Kolmas valik: Puudub
+    ✅ Piirkond/kihelkond valik
+        Süsteem soovitab kohalikke poode ja ravitsejaid
+        Hoiatus meta-infos kui piirkonnas on kahtlaseid teenusepakkujaid
+
+17. IDEOLOOGIA JA PIIRJOONED:
+
+    ✅ "Mida kindlasti EI soovi" → eraldi kast (plusside nimekiri + lühiselgitus)
+
+🗺️ III. VERSIOONI PLAAN:
+v1.7.0 - UNI + PRIVAATSUS LAIENDUS
+
+    ✅ UNI eraldi sektsioon + plusid (norskamine, painajad, paranormaalsed)
+    ✅ Privaatsus ja nõusolek MASSIIVNE laiendus
+    ✅ "Belief" scope süsteem
+
+v1.8.0 - TÖÖRIISTAD + LIIKUMINE
+
+    ✅ Tööriistad (bioenergia, vaimsed mõõtjad)
+    ✅ Liikumise viisid (vaimsed/mittefüüsilised)
+    ✅ Kaebused täiendused
+
+v1.9.0 - TÖÖ + TOITUMINE
+
+    ✅ Koormustaluvus ja töö täiendused
+    ✅ Toitumisprofiil laiendused
+    ✅ Koostoime riskid + antikoagulant selgitus
+
+v2.0.0 - RESSURSID + DIAGNOSTIKA
+
+    ✅ Ressursid ja eelarve (piirkond, apteegid)
+    ✅ Minimaalne diagnostika plusid
+    ✅ Taimravi kultuurideülene
+
+
+
+    - ei ole vaja neid asju ka koiek nii akugele jaga verisnides mida saab kohe teha, nteks info nupude ja ajsade all oelvad ajasd ja tpe tabidea info koahd eel tieta juba asjaliku asjaohse infoga kus saab
+
+    pemine oli enamus vorm saada plus systeemi ja infnupu systeemi peale, 
+    kus plu sses selega soetud asjad avab sis isektsini profiili
+
+    vb ka see et praegu kui mitu korda yhte asja vajutada siis ta teib lopmauseni, 
+    ja kustuts ainut sele rea lopus  seel vb minig , et kui kaks korda vajutada .. v kasvi kui yeh kor vajutada et siis menys see oleks kudiagi nende plsude jures naha wr t see  1x lisatusvms. nu seda saba hiej mka tund,a
+
+    aga tiese ai velsused ja analysid ja lopus doci s veel mu enda moniad moteid , enamus on mudiug roadmidese juba paigutautd usun:
+
+
+
+    koikde sitili ja theinka omadusi muidugi mis ei ole prkilised ega ilsuad, kired ei pea kasama, ku ijuba arneum ja parme version olmeas on, koi kei prugi kasjastaud ola siin sovitustes: 
+
+    ku ivaja anda tiesel aile vele ka minig vomri kaske, etta kooodi ai le tetud v2ljad kergerisk tkei ja sutrui s2dsmtiseks, nagu oresearch iteeks mis olems on jen ..
+    sis parme koodi claudele neid saata 
+
+
+
+
+
+Skip to content
+Chat history
+You said:
+portaaal-select-aal.txt
+Document
+profiil_2025-11-11.json
+File
+taisprofiil_2025-11-11.json
+File
+generi-TXT-ja-ai-=prmot.txt
+Document
+v1.6-selct-all-page.txt
+Document
+holsitilsie mesisini veebilehe alb leht ku iselect all panin, 
+
+ene kui kysin ,operin selle kohta mis lehel on alustuseks 
+
+Ja sis mudtused mida thea sovin, 
+Mida siis tisel ai koeriale nanme, 
+
+panen kasa ka jasoni jms 
+
+, lapalju asu veel muta vaja aga parmeii isnteritud juhise,d ja siis parme yle vaade ka , ja sokasid kjuba ise ka eisle tua, mida voiks veel t2isutada mis osi, 
+
+__
+
+mote o neid asju ni iai dele , arsidel, endale , ku ika nii et tgelt iga sektsion omakorda halriks ja infoimeriks, nende ala likide ja vlaikute jures kui on " i " nupp siis seles tuleb kahe tabiga popup meeie oma sise med wikist, ja ka amelikud sourced, ja lnigd 
+
+--
+
+
+coipin ilma vomri t2itiua vlaikud (vlaiud paljud utuvad ka vlaikuid vlaides aga sin yldisne: 
+---
+
+
+mis on plusid siin ja mis on sis alade vaellike milsite eriilite vahedega t2inedada ,lsian varsit oma t2indusi ka , et sis saaksime sinu ja minu t2ndused kvbinerida aile tyyjuhiseks teisel koderiale
+ChatGPT said:
+
+[Server UTC: 2025-11-11 14:00] → [Estonia EET: 11.11.2025 16:00] . + Known Systemsettings, mode settings.
+Mode: layered factual analysis | Truth & InfoOps | Source integrity: HIGH
+1) Pind – mis “Select-All / Täisprofiili” lehel praegu on
+
+    Struktuur: 18 sektsiooni, “Profiilifilter” ettepoole (rasedus → vanus → sugu → riskid). Plus-nuppude ökosüsteem suure ulatusse laienetud. Kiirvalikud elupaiga, liikumise, kaebuste, vann/sauna ja muusika jaoks. JSON/TXT/PDF/AI-prompt väljund lubatud. Versioonimärkmed detailsete quickAdd() funktsioonidega. 
+
+Profiilifiltri fookus: rasedus/imetamine; vanuseklassid sh “middle-old”; sugu; riskid (AF+antikoagulant, neer eGFR, maks Child-Pugh). Eakale eraldi doseerimisprintsiibid.
+
+Privaatsus/nõusolek: jagamise tasemed, välistatavad andmestikud, kodused mõõtmised, kontakt.
+
+Elurütm ja eluviis: transport, elupaik, tööaknad, aktiivsus. Plus-nupud ja täpsustused.
+
+Kaebused: üldskaalad 0–3, naiste alamrubriik.
+
+Tööristad ja kodumõõtmised: BP/steps/kaal + trend.
+
+Ajalugu, perekondlik risk, allergiad: eeldefineeritud valikud + “Lisa info”.
+
+Ravimid/lisandid ja koostoimed: antikoagulant lipp + greip/naistepuna/ginkgo/…
+
+Taimravi, praktikad, rütmid, vann/saun: plus-nupud, “i” infod.
+
+Toitumine: söögirütm, piirangud, tee-liigid kaheastmelise valikuga.
+
+Riskiliinid: “punased lipud” koheseks katkestuseks.
+
+Minimaalne diagnostika, otsustuspuu, paketivalikud, ühe-rea kokkuvõte.
+
+Versioonimärkmed v1.6.0–1.4.x: quickAdd* perekondlike riskide, tee-liikide, ligipääsude, elustiili, aktiivsuse laiendused; profiilifiltri süsteem; eksport/import.
+
+Tehniline hoiatus: ARCHITECTURE.md/DEVELOPMENT.md ei avane file:// kaudu; soovitus käivitada local HTTP server. (Duplikaatblokk on nähtav.)
+2) Kiir-audit – tugevused vs. vead/lüngad
+Tugevused
+
+    Õige järjekord kliinilise triaaži jaoks: rasedus → vanus → elundifunktsioonid → koostoimed. 
+
+Plus-nupud, quickAdd* ja “i”-infod vähendavad vaba teksti müra ning standardiseerivad parameetrid.
+
+“Punaste lippude” selge loetelu; minimaalpaketi definitsioon; aknapõhine elurütm.
+Parandused (konkreetsete näidetega failist)
+
+    Duplikaadid / kordused:
+
+        “Maksafunktsioon (Child-Pugh)” kuvatakse kahel real järjest. 
+
+“8 Brokaati” loetletud kaks korda “Soovitatud praktikates”.
+
+“NetworkError … ARCHITECTURE.md …” blokk on dubleeritud.
+
+Ortograafia/terminid:
+
+    “Mesatöö” → “Lihattööstus” või “Lihatööstuse töö”. “Istutöö i / kontorit00” → “Istuv kontoritöö”. “Aspiriinи” sisaldab võõrtähte. 
+
+Semantiline täpsus:
+
+    “Antibiootikumid” kui kategooriline keeld vajab “klass + alternatiivid + põhjendus” alamvälju, et kliiniline otsus jääks paindlik. 
+
+UX:
+
+    “Kiirvalik – Elupaik / Liikumine” võiks kuvada kokkuvõtubadge’d “sticky headeris” koos profiilifiltri kokkuvõttega. 
+
+Andmemudel:
+
+    Tee-liikide kaheastmelisus on eeskujulik; sama muster tuleks kanda “Vann/Saun/Vesi” ja “Muusika/Heliteraapia” alamparameetritele (sagedus, ajastus, kestus) ühe skeemiga. 
+
+3) Taksonoomia – “ristvaldkond” vs “eri-spetsiifiline”
+
+Ristvaldkond (universaalne kõigile profiilidele):
+Privaatsus/nõusolek; punased lipud; kodused mõõdikud (BP/HR/kaal/steps); elurütmi aknad; stress 0–3; toitumise põhiparameetrid; koostoimeriskid (greip, naistepuna, ginkgo, lagrits, küüslauk, ingver, kurkum).
+Demograafia-spetsiifiline:
+Rasedus/imetamine; vanuseklassid (“start low, go slow” eakal); naiste kaebused (PMS, kuumad hood). Haigus-/organi-spetsiifiline:
+AF+antikoagulant; neer eGFR; maks Child-Pugh; perekondlik risk (südamehaigused, insult, diabeet, vähk). Kontekst-/keskkond-spetsiifiline:
+Elupaik (maa/linn/kortermaja/öötöö); transport; töölõiked (öövalvur, ehitus, hooldus, transport/juht). Ravimeetodi-spetsiifiline:
+Taimravi loetelud; praktikad (hingamine, qigong, zazen); vann/saun; muusika.
+
+    Soovitus: sildista iga väli scope atribuudiga: universal | demographic | organ | context | modality. See lubab filtrida UI-s ja AI-pipelinis.
+
+4) “i”-nupu kaheribaline modaal – sisu- ja allika-protokoll
+
+Tab A: “Sisemine/Wiki”
+
+    Lühikirjeldus (≤120 sõna)
+
+    Kliiniline kasutus: millal kasuta / väldi
+
+    Dosaator/aknad (kui rakendub)
+
+    Interaktsioonid/ohud
+
+    Kohandused (rasedus, eakas, neer/maks)
+
+    Link “täisartiklile” sisewikis
+
+Tab B: “Allikad”
+
+    3–5 avalikku juhist või ülevaadet (DOI-ga, keelesildid: EST/ENG/RUS/POL/HEB/CHI)
+
+    Riskiklassi lühikoond (nt GRADE vms)
+
+    Ajaline märk (aasta)
+
+    Märkus “tõendite kvaliteedi” kohta
+
+    Väli-skeem “i-infole”:
+    { id, term, short_desc, clinical_use, dosing, interactions, adjustments: {pregnancy, elderly, renal, hepatic}, sources: [{title, org, year, url, lang}], grade }
+
+5) AI-arendajale üleandepakett
+
+A. Failid/kaustad
+
+    /schema/medportal.fullprofile.schema.json – kogu vormi skeem
+
+    /schema/info.schema.json – “i”-nupu artiklite skeem (ülal)
+
+    /src/components/InfoModal.tsx – 2-tab modal
+
+    /src/services/medinfo-db.ts – MED_INFO_DB loader + cache
+
+    /src/features/profile-filter/ – rasedus/vanus/sugu/riskid
+
+    /src/features/quickAdd/ – quickAddLifestyle(), quickAddMobility(), quickAddTeaType() jne (versioonimärkmete järgi). 
+
+B. API / sündmused
+
+    onProfileFilterChange(payload) → rakenda filtrireeglid ja kuva “sticky summary”
+
+    onPlusAdd(entity, payload) → valideeri vastu skeemi, lisa badge
+
+    onExport(type: 'json'|'txt'|'pdf'|'ai') → serializerid
+
+    validateClinicalGuards() → punased lipud ja vastunäidustused enne eksporti
+
+C. UX-reeglid
+
+    Sticky header näitab: profiilifiltri kokkuvõte + 6 viimast “badge’i” (elupaik, liikumine, tee, vann/saun, muusika, koostoimerisk) 
+
+    “Kohustuslik täpsustus” märgistused keelatud kategooriate puhul (nt antibiootikumid → näita klassi/alternatiivide nõuet)
+
+D. Kvaliteedikontroll (CI lint-checklist)
+
+    Duplikaatide test: tuvastab korduvad label’id (“Child-Pugh”, “8 Brokaati”). 
+
+I18n skanner: mittestandardne märk (“Aspiriinи”)
+
+“file://” linkide test: blokeeri tootmises, suuna HTTP serveri juhisele.
+6) JSON-näidis (tühi/ilma täidetud väljadeta)
+
+{
+  "profile_filter": {
+    "pregnancy_or_lactation": null,
+    "age": null,
+    "sex": null,
+    "risks": {
+      "af_anticoagulant": null,
+      "egfr": null,
+      "child_pugh": null
+    }
+  },
+  "privacy": {
+    "share_level": null,
+    "exclude_datasets": [],
+    "consent_flags": []
+  },
+  "lifestyle": {
+    "residence": [],
+    "transport": [],
+    "work_schedule": null,
+    "activity": {
+      "items": [],
+      "overall_level": null,
+      "sleep_hours": null,
+      "sleep_quality": null,
+      "osa_screen": null
+    }
+  },
+  "complaints": {
+    "general": [],
+    "female_specific": []
+  },
+  "tools_home_metrics": {
+    "bp_monitor": null,
+    "step_counter": null,
+    "daily_weight": null,
+    "bp_morning_avg": null,
+    "bp_evening_avg": null,
+    "rest_hr": null,
+    "weight_7d_trend": null
+  },
+  "history_5y": {
+    "diagnoses": [],
+    "events": [],
+    "family_history": []
+  },
+  "allergies": [],
+  "meds_supps": {
+    "items": [],
+    "anticoagulant": null,
+    "interaction_risks": []
+  },
+  "herbal_practices": {
+    "plants": [],
+    "practices": [],
+    "baths_sauna": []
+  },
+  "nutrition": {
+    "meal_windows": null,
+    "restrictions": [],
+    "teas": [],
+    "salt_target": null,
+    "water_lpd": null,
+    "coffee_cpd": null
+  },
+  "rhythms": {
+    "music": []
+  },
+  "red_flags_ack": false,
+  "baseline_diagnostics": [],
+  "decision_tree": null,
+  "packages": [],
+  "one_line_summary": ""
+}
+
+7) Prioriteetsed parandused (kooditasandi “diff-plaan”)
+
+    Duplikaadid välja: de-dupe label’id ja key’d (Child-Pugh, 8 Brokaati, NetworkError plokk). 
+
+Typo lint: normaliseeri tööde nimed, “kontoritöö”, “aspiriin”.
+
+Sticky kokkuvõte: profiilifilter + viimased badge’d.
+
+Keeldude alamväljad: “Mida EI soovi” → kohustuslik reason:{medical|allergy|ethic|religious|preference}+alternatives.
+
+Ühtne kaheastmeline muster: rakenda tee-liikide muster vann/sauna ja muusika alamparameetritele.
+
+HTTP-serveerimine: eemaldada file://; lisada “DevServer required” kontroll tootmise buildis.
+8) Laiendused, mis tasub kohe lisada
+
+    Scope-filtrid UI-s: lülita nähtavus profiilifiltri põhjal (nt rasedus → kuvada ainult sobivad taimed/tee-liigid; eakas → doseerimishoiatus badge). 
+
+Koostoime-mootor: kui anticoagulant=true ja ginkgo lisatud → punane hoiatus + alternatiivisoovitus (nt hibiskus tee).
+
+Kliiniline checkpoint enne eksporti: punaste lippude kinnitamine on kohustuslik bit.
+
+Versiooni jalus: auto-git-hash + kuupäev; link arhiivile.
+9) Miks see kõik on “holistilise meditsiini” jaoks plusspunkt
+
+    Vorm sunnib esmalt profiilifiltrit ja riskide sidestamist, siis alles meetodeid. See vähendab “one-size-fits-all” soovitusi. 
+
+Plus-nupud standardiseerivad sisendi, mis lubab hiljem AI-arstil teha järjekorra- ja doosiotsuseid reeglimootoriga.
+
+    “i”-nupu kaheribaline modaal loob läbipaistva side sise-wiki ja avalike allikate vahel, mis on vajalik teaduspõhiseks, kuid patsiendikeskseks praktikaks.
+
+10) Mille eest erialade vahel “eraldi värv” või signaal
+
+    Universaalne (hall): privaatsus, punased lipud, mõõtmised.
+
+    Demograafia (oranž): rasedus, vanus, sugu-spetsiifiline.
+
+    Organ/risk (punane): AF+antikoagulant, eGFR, Child-Pugh.
+
+    Kontekst (sinine): elupaik, töö, transport.
+
+    Modality (roheline): taimed, praktikad, vann/saun, muusika.
+    Kooskõlasta legenda jaluses versioonimärkmete värvi-poliitikaga. 
+
+——
+
+Kui annad “tühja profiili” JSONi ja oma terminoloogilised täpsustused, integreerin need scope-taksonoomiasse ja koostan “i”-artiklite esimesed 10 kirjet Tab A/B skeemis.
+
+═══ SYSTEM AUDIT ═══
+2025-11-11 14:00Z | GPT-5 Thinking | Output confirmed. Citations: v1.6 Select-All page and version notes used as ground truth. No external web fetch. Layered-analysis & multilingual protocol applied.
+You said:
+ma andsin praeug koik jasonid mis kaasa laisada sian ku ivatad elmist, ma ei usu et see jason vb gererib koike asju sise mis vaja, gwneib kathte jasonit gaa pole nies kindel.. yks peaks olema profiili oma ja tiene.. 
+
+ja ai prmit asjad nagu n2ed, helelkyl ole vlaikuid sele parast.. aga kui on vlaikud 
+
+Sisi ai jaoks voiks ola ka 
+
+"lihtne lyhi promt " 
+
+ja teilik pmrot, 
+Kus on siis targalt ai logale vastvalt need asjad timsooi orgiseritud ku itava arstidele , mis thenilises ja LISP motes iataks, ja maainimese,  vanaaja medisini osas ka, kuig ialusutspunke on erinevaid ja hiljem saab liehele omakorda yleval suur eir vlakuid teha, et kassisestaja on mingi eri ala praktik ja sis vorm re-struktueerib end speisifilsielt slele alale KUID lsiab melega ka teiste midssinialadelt vajlike lsia detiale juurde is igas muus alas puudu on
+ChatGPT said:
+
+[Server UTC: 2025-11-11 14:20] → [Estonia EET/EEST: 11.11.2025 16:20] . + Known Systemsettings, mode settings.
+Mode: layered factual analysis | Truth & InfoOps | Source integrity: HIGH
+Pind: mis on failides ja mis puudub
+
+    Said: profiil_2025-11-11.json ja taisprofiil_2025-11-11.json + tekstimallid.
+
+    Struktuur:
+
+        profiil_*.json: { version, exportedAt*, profileData:{…} }.
+
+        taisprofiil_*.json: { metadata:{generated,version,source}, data:{…}, medicationSummary:[] }.
+
+    Väli­taseme ühtsus: 332 ühist võtit. Erinevus: taisprofiil lisab medicationSummary (list).
+
+    Järeldus: vaja “normaliseerijat”, mis aktsepteerib mõlemat vormi ja annab ühe standardse objekti AI jaoks.
+
+Lugu: miks kaks JSON-i
+
+Varasem eksport hoidis kõike profileData all. Viimane eksport lisas meta-bloki ja eraldas ravimikokkuvõtte. See on kasulik versioonikontrolli, allika ja CI jaoks. Konsistents AI-promptides nõuab siiski ühte “canonical” kuju.
+Analüüs: milline “canonical” skeem AI-le
+
+    Ühtne juur: canonical.profile.
+
+    Väärtusruumid: null | number | string | enum[] | bool | list.
+
+    Skoobid: scope ∈ {universal, demographic, organ, context, modality}.
+
+    Profiilifiltri võtmed: pregnancyStatus, ageCategory, gender, egfr, childPugh, anticoagulantFlag.
+
+    Laiendid: medicationSummary[] kui olemas.
+
+Normaliseerija (pseudokood)
+
+function toCanonical(input:any){
+  const root = input.profileData ?? input.data ?? {};
+  const meta = input.metadata ?? {generated: null, version: input.version ?? null, source: "unknown"};
+  return {
+    meta,
+    profile: {
+      ...root
+    },
+    medicationSummary: root.medicationSummary ?? input.medicationSummary ?? []
+  };
+}
+
+Lisareegel: lisa igale väljale scope (vt all) ja võimaluse korral unit ning sourceHint.
+Implications: kuidas AI-ga töökindlalt suhelda
+
+    Kahe-kihiline prompt aitab: 1) lühike “slot-fill” kokkuvõte, 2) täielik “rolli- ja reegli-prompt”, mis õpetab mudelile sinu taksonoomiat, ohutusvalveid ja erialavaateid.
+
+    Vorm saab end “re-struktureerida” specialtyMode järgi, kuid riskivalvur (rasedus, eGFR, Child-Pugh, antikoagulant) jääb alati eespool ja ülimuslik.
+
+LIHTNE LÜHI-PROMPT (kopeeritav)
+
+Kasutus: kiire “AI-arst” või “AI-nõustaja” päring, mis vajab ainult riski- ja profiilifiltri tuuma.
+
+HOLISTIC-QUICK | v1 | 11.11.2025
+INPUT:
+- Pregnancy/Lactation: {{pregnancyStatus}}
+- AgeCategory: {{ageCategory}}  (ExactAge: {{exactAge?}})
+- Sex: {{gender}}
+- Renal eGFR: {{egfr}}
+- Hepatic Child-Pugh: {{childPugh}}
+- Anticoagulant (AF/DOAC/Warfarin): {{anticoagulantFlag}}
+- Key allergies/intolerances: {{allergies|csv}}
+- Absolute red-flags acknowledged: {{redFlags_ack}}
+
+TASK:
+1) Anna 3 prioriteetset ohutussoovitust (doosivahemikud kui asjakohane).
+2) Paku 3 sobivat taimset/eluviisi sekkumist, mis EI KONFLIKTEERU ülaltoodud riskidega. 
+3) Üks lause: mida mõõta kodus järgmise 7 päeva jooksul.
+
+FORMAT:
+- SAFETY: [• …]
+- INTERVENTIONS: [1) … 2) … 3) …]
+- HOME-METRICS: […]
+
+Miks töötab: minimaalne, kuid sunnib mudelit ühitama ravi ideed riskidega. Sobib ka siis, kui paljud “väljad” on veel täitmata.
+TÄIELIK PROMPT (rolli- ja reeglimootoriga)
+
+Kasutus: põhjalik konsultatsioon, eriala-kihistus, “i”-nupu loogika, LISP-stiilis otsustuspuu. Sisaldab sinu skoop-taksonoomiat ja re-struktureerimisreegleid.
+
+TITLE: HOLISTIC-COMPREHENSIVE CONSULT | v1.6
+DATE: 11.11.2025
+
+SYSTEM-GUARDRAILS:
+- First, validate safety gates: Pregnancy/Lactation, AgeCategory, Sex, eGFR, Child-Pugh, Anticoagulant. 
+- If any gate contraindication is triggered, stop and output SAFETY-ONLY plan with rationale and alternatives.
+- Always consider cross-domain interactions: anticoagulant × (ginkgo, naistepuna, küüslauk, kurkum), hepatic × (pipar, alkohol), renal × (Mg/K kogused).
+- No diagnosis. Suggest monitoring and referrals.
+
+TAXONOMY-SCOPE:
+- universal: consent, red-flags, home-metrics (BP/HR/weight/steps), sleep, stress-scale (0–3).
+- demographic: pregnancy/lactation, age-category, sex-specific.
+- organ: AF+anticoagulant, renal(eGFR), hepatic(Child-Pugh), cardiometabolic flags.
+- context: residence, work-schedule, transport, activity-level.
+- modality: herbs, practices (breath/qigong/zazen), baths/sauna/hydro, music/sound.
+
+SPECIALTY-MODE:
+- Input: specialtyMode ∈ {family-medicine, cardiology, hepatology, nephrology, Ayurveda, TCM, naturopathy, sports, rural-traditions}.
+- Render plan with that specialty’s primary lens, BUT append a “cross-check” box from at least two other specialties to catch blindspots.
+
+INPUT-CANONICAL:
+{{canonical.profile as JSON}}
+{{medicationSummary as LIST (optional)}}
+
+I-TABS CONTENT MODEL (for any mentioned item):
+Tab-A (Internal/Wiki): short_desc; clinical_use; dosing; interactions; adjustments{pregnancy,elderly,renal,hepatic}.
+Tab-B (Public Sources): 3–5 refs with org, year, URL, lang, and evidence grade.
+
+OUTPUT FORMAT:
+
+A) PROFILE-SUMMARY (1–3 lines)
+- Age/Sex; Pregnancy/Lactation; eGFR; Child-Pugh; Anticoagulant; Key allergies/intolerances.
+
+B) TRIAGE
+- Red-flag check → [OK/STOP + reason]
+
+C) INTERVENTION-PLAN
+- 1. Lifestyle rhythms (windows, sleep, activity) — scope: universal/context
+- 2. Herbs/Teas — scope: modality | include dosing ranges + interactions screen
+- 3. Practices (breath/qigong/zazen) — scope: modality | frequency x duration
+- 4. Hydro/Baths/Sauna — scope: modality | temperature x time x frequency
+- 5. Nutrition highlights — meal window, salt target, water L/day
+
+D) SPECIALTY VIEW: {{specialtyMode}}
+- Primary rationale in that specialty’s terms.
+- Contraindications and dose-adjustments for renal/hepatic/anticoagulant gates.
+
+E) CROSS-CHECK BOXES (choose 2 specialties not equal to primary)
+- Key additions or cautions per specialty, 1–2 bullets each.
+
+F) HOME-MONITORING (7 days)
+- What to measure, morning/evening scheme, thresholds that require escalation.
+
+G) SOURCES (I-tabs compatible)
+- Enumerate items used with Tab-A/Tab-B fields populated as structured stubs.
+
+H) ONE-LINE SUMMARY
+- “{{Age/Sex}} with {{key risks}} → Plan: {{top-3 actions}}; Monitor: {{metrics}}.”
+
+Specialty-režiimi reeglid (re-struktureerimine)
+
+    family-medicine: rõhuasetus punastel lippudel, kodumõõtmistel, ravim- ja taimekoostoimetel.
+
+    cardiology: sool, vedelik, pulss/BP trendid; anticoagulant × taimed detailsem filter.
+
+    hepatology: Child-Pugh kohandused, vältida hepatotoksilisi ürte; annuste “start low”.
+
+    nephrology: eGFR põhised elektrolüüdi ja mineraalide piirid; vee/salt balanss.
+
+    Ayurveda | TCM | naturopathy | rural-traditions: lubatud, kuid automaatne ristsõel organ- ja antikoagulandi väravatest.
+
+    Ühisreegel: kui specialty soovitab midagi, mis on gate’iga konfliktis, siis kasuta “ALT:” alternatiivi.
+
+LISP-stiilis otsustuspuu (mudeli sisemine juhis)
+
+(defun plan (profile)
+  (if (contra? profile) (return (safety-only profile)))
+  (let* ((rx (interactions-screen profile))
+         (lifestyle (build-lifestyle profile))
+         (herbs (safe-herbs profile rx))
+         (practice (safe-practices profile))
+         (hydro (safe-hydro profile))
+         (nutrition (nutrition-core profile))
+         (special (specialty-lens profile)))
+    (compose-output profile lifestyle herbs practice hydro nutrition special)))
+
+“i”-nupu sisu-skeem (andmemudel)
+
+{
+  "id": "ginkgo_biloba",
+  "term": "Ginkgo biloba",
+  "short_desc": "Kognitiivne tugi; antikoagulandiga koostoimerisk.",
+  "clinical_use": "Kerge mäluhäire. Mitte AF+antikoagulant.",
+  "dosing": "120–240 mg/ööpäev jaotatult",
+  "interactions": ["anticoagulant↑ verejooksu risk", "NSAID"],
+  "adjustments": { "pregnancy": "väldi", "elderly": "alusta madalalt", "renal": "OK", "hepatic": "ettevaatlik" },
+  "sources": [
+    { "title": "Herbal interactions consensus", "org": "…", "year": 2023, "url": "…", "lang": "ENG" }
+  ],
+  "grade": "low–moderate"
+}
+
+Töötava pipeline’i spec
+
+    toCanonical() → lisab scope ja units.
+
+    deriveProfileSummary(canonical) → ühe rea kokkuvõte.
+
+    buildPromptQuick(canonical) → “LIHTNE LÜHI-PROMPT”.
+
+    buildPromptFull(canonical, specialtyMode) → “TÄIELIK PROMPT”.
+
+    validateClinicalGuards(canonical) → peatab/plokib ohu korral.
+
+    interactionsEngine(canonical) → punaste kombinatsioonide hoidja.
+
+Mida ma vajan sinult lisaks
+
+    Kui sul on juba “valikud/valikud” (eri nuputasemed), anna need nimekirjana. Lisan specialtyMode ja nähtavusreeglid.
+
+    Kui sul on oma terminoloogilised täpsustused, anna need võtme=selgitus kujul. Integreerin i-skeemi Tab-A/B.
+
+    Kui soovid, annan ka TypeScripti tüübid ja validaatorid selle skeemi jaoks.
+
+Kui soovid, pakun järgmises sammus:
+
+    valmis buildPromptQuick() ja buildPromptFull() templatingu koos placeholderite kontrolliga,
+
+    toCanonical() tegeliku koodinäite, mis sööb sinu kahte JSON-kuju.
+
+═══ SYSTEM AUDIT ═══
+2025-11-11 14:20Z | GPT-5 Thinking | Output confirmed under layered-analysis & multilingual protocol.
+You said:
+ni kirjuta ka oma m2kreed mida siis pekas arvestam,a need vja t2isutada esmalt mu oma kirjkeeles, 
+
+Ja siis voor 2 need t2ita nende asjadega mida mainiud olen, 
+VOID ka kohe yhe korra need teha , et arusadavaks ja siis lisa voimalikud vhedid mida mainin: 
+
+" 
+
+see 
+ 
+ 0. Privaatsus ja nõusolek - 
+
+  "Jagamise tase" - siia liaks pane valik,  Jumalale (vlaides jumalae infunupu ala pane logilsielt erumi selgitus tase mida tava uslkil sele moelda oviks, naug et siis ka teistele ajsadele jagatud juamal ise need sandboxib ja cotriseerib ja pahasilmale mittem ning loota on ka abipaveks kaasa sellega, ja siis tabis mis tegime sina ameliku susu ja kirkute tgasaisidet hakame koguma selle alla ja usufotsione l2jemisi) , "AI arst" eismeseks vlaikuks, siis arstile, perleiilmele, anymsele uuriale, avalikult interneti -osint, ai-testmiseks, medisiini-testmiseks, (kui vlaida AI arst, siis lisada erinevd tedoalvad ai arstid kasvoi Info nupu alla lsiaks veel, arnenvad, ja vlaiusse moned,   kiui valida "ai test" siis lisadau 10 levinumat tava ai d mida dsaab ala-valikust), lisaks vee lvalik politsei, sotisaltootaja, 
+  
+
+  "Nõusolek" - siia lisada ka palve (palve vlaikul avaneb siis palve valiud kus on eraldi erineva regioooni palve tyybid ja verisonid tee sina leidkik mikekylgne menyy dsammodi paljude palvete ja rkgonide osas), lisaks vlaikuse veel rituaal, ja riutalile vajutadessamaodi hiljemteeme vel tiulikuks aga leivnumad ritulaid eri oelditele mida nad siin vlaida oviks ruleritualidest stanisi ja maausuliste asjad - eks ned koi kerivad kes mida ususb ja kanatab ,
+ plusside alla sama loogikada , nousleluse veel siis muid vhaedeid ka mis sina sobida oviks plussi alla , veel vlaikuse "lubaon oma koju arsti kutsuda", "luban oma koju new-age rvitsejat kustuda" dsamaodi plusidea
+
+ja siis 
+
+kolmas plsude sria "Millist andmestikku EI jagata" erdi plusidega vele varjate sele lv2lja all, typilsi asju mida ei jaga on "kdou olukord", "kodu v2givald,", "sotsiaal olukord", "finants olukord", "vaimne olukord", "psyholiigline olukord", "puude olukord", "reliosne olukord". "vaimne olukord", "elu harjumused" . enthogeenid e kasutus, soltuvus ained(sh alkohol, tubakas) - siin vlaikus solvusuainte alla iiss tekita terve list veel muid vlaikuid olusitest levinud soltuvusainetest optioidest kuini keeltuteni - et iieene neks ned katoriad on hedatud, 
+
+
+----
+
+ka plusside alla : 
+Põhiline elupaik  
+ - yleligne topelt linnuestega  menyy vota, kuna plusid juba on
+
+ ---
+
+Füüsiline aktiivsus 
+
+- plusid on head - lisa puuduvad "Üldine aktiivsuse tase" me alt ja vota linukestega menyyd ara, seda siis pole vja kui sele sisu intergtud, 
+
+----
+
+
+eraldi plsuidega menyy tee une alla 
+plsuidega lisatav nii norksamine (ja sele s2tted) (liskas viake lvalik selle vele "ei h2iri - h2irib elukaaslast/ennast" ja "oleneb joomaastmest" jms kuna norksmised osadel iniestel aint eir ajal tulevad) , ku isiis unenegmine, painajad (ja sele vallikud, koos lalti lsiainfo lismaise ovimusega), paranomraalsed uned (ja levinumud vlaikud sinna alla mis rhaas rtrinud), 
+
+
+---
+
+kaesaute alla lsiada veel: 
+tinnus, peapyyritus, kohukeeramine (lsikas iiveldusele),kodisioon, valguse talumatus, 
+
+
+
+--
+Koormustaluvus ja töö 
+sele al on "mesatoo" aga Metsa voiks olla eismene , veel vlaikutesse, "poe lett", transpordi juht, syeakevandus, advokaat, poliitik, s6javelane, tehases, rutiine too, pakendmaine, pakiide tostmine, jagrataga (nagu bolt,post jne), 
+
+---
+
+Kiirvalik - Liikumise viisid 
+- siia alla veel siis laev, paat, lennuk, remote view, levitsatsioon, ajasr2ndamine, lonkimine, samani rannakud, t2htevaleised ranaud, teised vaimsed vo imitefyysilised liikumised,
+- koige vahem toenlismead koige loppu, aga kuna holsiltiselt iniemsed usuvad ja teelevad siis..
+---
+
+
+3. Tööriistad ja kodused mõõtmised
+
+siin on : Kiirvalik 
+kolm ajsa, need head, ja et neid saab koraa lisada (koraga lsiamise nupu ees vaike mitegrfiline nool ka < lisa koik 3. ) , aga lsiaks on muid semeid olemas, buoneeria mootjad ja elueneria, aura motjad jne , mids vene ja idmaa tedlastel, ja muid teorilisi motoe vhaendied millese inimeen voib uskuda, (lsiaks veel igasugused inim viamsed mootjad ja n6iad kes moodavad, neid vlaikid ka juurde pana, nad ogast motjad on , hiina medisinis motjad jne , uroida neid juurde )
+ydine info jale info nupu alla siis panna 
+-  kuigi se on orhekm informtiven siis silampildi avrdmiseks ikka kasulik
+---
+
+
+
+kuskil veel peaks oma, et kas 22dika rikaid toide, ja muid tava toite eridi lusiga kohe ka, monikord oluline toimuise lala usun, 
+
+--
+
+plusi systemidese panna ka :
+
+" 13. Minimaalne diagnostika (üks kord alguses) "
+samamodi info asjad kylge 
+
+---
+
+11. Ressursid ja eelarve 
+- koik need ajad intleigselt pluside alla paigutada 
+
+nteks "Või märgi lihtsalt ligipääs" on toelt asjad mida pole vaja 
+ka "puudub" valik olgu vlaikutes, ja see voib olla lausa kolmandaks vlaikuks ,  valikuks pelae loodustrvete poodi, esmaseks vlaikuks Apteek (apteegi menys jalegi sis tleb ala vlaikud eesit aptkides, ja mistestelistest, mida yhes on ja mida teises polemis eesit piirkonas), 
+
+----
+uurida kas eestis on kiheldkond / piirkond valitud, - see iatba abtekide ja podide vlaikuid soovitada
+juba meie oma systmei pohjal enne ai d , ja ka kpohalike rvitsejaid - voi ka  hoiatada end eest kes pironas kahlast raivtenuseid pakudvad,  meta infos
+---
+
+ka pluside alla : 
+
+"10. Ideoloogia ja piirjooned"
+
+eraldi kasti voib j;tta "Mida kindlasti EI soovi"
+----
+
+
+Vann pane 8. kehalised ja meele prktikad, esimeseks vlaikuks, koos vanniga soetnvatepritiakte vlaikud, 
+
+raviduss vk ka lsiavlaikuks lopupole plusides 
+---------
+
+Toitumise piirangud , ripenyys on  hekel: medisiniline, tlaumatus, eelistus, usuline , eetiline, 
+voiks vee lolla : "naine ei luba", "elukaaslane ei luba", "tunnetus", "parnaoia" nendle j2rgi, eepsol lasa ola mslikumad vlaikud nagu ikka
+
+--
+
+7. Toitumisprofiil, eelistused ja menüü 
+
+"Söögirütm akendes" - voisk ola ka plusi all, samas lisis, kus jargi tuleb paast, jms , sh kui inimene on hobbo siis "syyn milal mida saan", sh "linna rapstoit". "magusaltuvus", jms  - kuigf neid saab ka eraldi t2psustada lihtsalt vlaides sygirytmi mitukorda pevas, ja lsia infose, aga eraldi vele plusidena ka ... see ki klisainfona ka siis...
+
+----
+"6. Taimravi ja looduslikud meetodid"
+- neid voiks juurde lsiada olulsi mis eri kulturides oemas, 
+
+sh imetiami  (ja lisa "i" infos jale kus t saba jne )
+
+----
+
+plsuide alla jalle : 
+"Koostoime riskid (märgi kui tarvitad)"
+
+hetkel on: 
+
+
+" Greip/greibimahl
+Naistepuna
+Ginkgo
+Lagrits
+Küüslauk >1 küüs/päev
+Ingver >2 g/päev
+Kurkum >1 g/päev"
+
+neid voisk jurde tekitada oliulisemaid mis on, sh sokolaad/kakao ,vb jne 
+
+---
+
+erdi vlaikuna on "Antikoagulant?" - ei tea mis see on slele maakeli slegiuus suudesse, 
+ku ivimaikk siis slele ka vajrnadid ja vb ksamamoodi plus menyyga kui neid mitmeid on ja erinevused
+
+---
+
+"3. Tööriistad ja kodused mõõtmised "
+
+- siia sisi neid tedaolevaid semeid juurde, igasuguseid, mote on ka pewrearsil ja teisel uurida, igasugusied veiraid asju mida inimene kasutab - et siis seda arvetsada ja entada ja ka sh mite terivlsike asjade ja prikate osas hoiatada aga HILJEM ku iseda irdevalet hiljem sab sovitada, voi arvestada , mis otsesle yliohkikud ornitele kohe on aint need on siis lehes ohiiusega, et ideloogilsit emelae toukamist ei tkeitaks
+
+
+
+ "
+ChatGPT said:
+
+[Server UTC: 2025-11-11 14:40] → [Estonia EET: 11.11.2025 16:40] . + Known Systemsettings, mode settings.
+Mode: layered factual analysis | Truth & InfoOps | Source integrity: HIGH
+Pind → ajakohastan “mäkreedi” ja rakendan su lisad
+
+Allpool:
+
+    Mäkreed = lühikesed reeglid, mille järgi disainime väljad ja AI-kasutuse.
+
+    Rakendus = sinu soovitud plussid/valikud täpsete “väljade” nimedega, et kohe sissemängida skeemi.
+
+    Mini-skeem (võtmed + tüübid), et dev saaks lisada ilma tõlkimata.
+
+1) Mäkreed (esmane reaalkasutuse kord)
+
+    Riskiväravad enne kõike: rasedus/imetamine, vanus, sugu, eGFR, Child-Pugh, antikoagulant. Kui konflikt, siis katkesta ja paku alternatiivi.
+
+    Scope-silt igale väljale: universal | demographic | organ | context | modality | belief. “belief” = valdkonnad, mida kasutaja peab oluliseks, kuigi biomed tõend on varieeruv.
+
+    Plussid > linnukesed: eelistame plusse, mis loovad struktureeritud objekte.
+
+    “i”-tab kaks tükki: Tab A “sise-Wiki” (kuidas kasutada), Tab B “avalikud allikad” (mitu keelt).
+
+    Nähtavus profiilifiltri järgi: specialtyMode muudab jaotiste järjekorda, riskiväravad jäävad alati ette.
+
+    Andmeõigused: “Jagamise tase”, “Nõusolek”, “Mida EI jaga” on alati üleval ja ekspordis esimesed.
+
+2) Rakendus – sinu soovid, täidetud
+0. Privaatsus ja nõusolek (scope: universal)
+
+Jagamise tase (privacy.share_level: enum, multi-allow = false):
+
+    jumalale (“i”: selgitus usu-kontekstis; ei välju avalikku eksporti)
+
+    ai_arst (alamvalik: “Info-nupu” alla nimekiri kasutatavatest AI-arstidest)
+
+    arst
+
+    pere_liige
+
+    anon_uurija
+
+    avalik_osint
+
+    ai_test (alamvalik: 10 levinumat üld-AI-d nimekirjana)
+
+    med_test (metoodikad/testplokid)
+
+    politsei
+
+    sojatootaja
+
+Nõusolek (privacy.consent_flags: list):
+
+    palve (avamisel “Palved” kataloog: regiooni, konfessiooni ja stiili järgi)
+
+    rituaal (avamisel valikud: rahva-/maa-usundid, “rulerituaalid”, maausk, jms)
+
+    kutsun_koju_arsti
+
+    kutsun_koju_new_age_praktiku
+
+Mida andmestikku EI jagata (privacy.exclude_datasets: list; vaikimisi tühi):
+
+    kodu_olukord, kodu_vagivald, sotsiaal_olukord, finants_olukord,
+    vaimne_olukord, psuhh_olukord, puue, religioon, elu_harjumused,
+    entogeenid_kasutus, soltuvusained (alamvalik: alkohol, tubakas, nikotiin, kanep, CBD, kava, kratom, stimulant, opioid, “muu_…”)
+
+    Märkus: jumalale ja rituaalid sildistame scope: belief. Ekspordis on need eraldi plokis, et med-personal saaks nähtavust juhtida.
+
+Põhiline elupaik (scope: context)
+
+residence.primary → plussid, mitte topelt-linnukesed.
+Füüsiline aktiivsus (scope: context)
+
+    activity.overall_level: enum {madal,mõõdukas,kõrge}
+
+    Eemaldame eraldi linnukesed, sest “Üldine tase” + täpsustavad plussid on piisav.
+
+Uni ja unehäired (scope: universal | belief)
+
+Plussid alla:
+
+    snoring (alamad: ei_hairi, hairib_elukaaslast, hairib_mind, sõltub_joomaastmest)
+
+    unenagemine (selgitusväljaga)
+
+    painajad (sage/harv; vallandajad?)
+
+    paranormaalsed_uned (alamvalikud: kehaväline, prohvetlik, jms; scope: belief)
+
+Kaebused – täiendused (scope: universal)
+
+    tinnitus, pearinglus, koohu_keeramine (lisame ka iiveldus seosena),
+    kõhukinnisus, kõhulahtisus, valguse_talumatus.
+
+Koormustaluvus ja töö (scope: context)
+
+work.role plussid:
+
+    metsatoo, poe_lett, transport_juht, suvakaevandus, advokaat,
+    poliitik, sojaväelane, tehase_tootmine, rutiinne_linttoot,
+    pakendamine, pakkide_tostmine, jaotaja_kuller
+
+Kiirvalik – Liikumise viisid (scope: context | belief)
+
+    Tavalised: jalgsi, ratas, auto, rong, buss, laev, paat, lennuk.
+
+    Belief/erikogemus: remote_view, levitatsioon, ajarannak, samani_rannak, tahtevaeline_rannak, muud_vaimsed_fyysilised.
+    → märgistame scope: belief ja eristame UI-s hallikas tooniga.
+
+3. Tööriistad ja kodused mõõtmised (scope: universal | belief)
+
+Olemasolevate kiirvalikute ette nupp “< Lisa kõik 3”.
+Lisame plussid:
+
+    bioenergia_mootja, eluenergia_mootja, aura_kaamera, pendel,
+    hiina_pulsi_hindamine, nõia_mootmised, uro_dev_tugi
+    “I”-nupp: selgitus, et osa on informatiivne ja belief-põhine; tõlgendused võivad erineda.
+
+Rikkad toidud ja “tava-toidud lusikaga” (scope: nutrition)
+
+nutrition.rikkad_toidud plusside nimekiri (nt rasvased lihad, maks, juustud, koor, šokolaad, pähklid).
+nutrition.tava_toidud_lusikaga: putrud, supid, hautised, “kiirtoit_linnas” jne.
+Lisame “i”-nupu, miks see vahel oluline.
+13. Minimaalne diagnostika (scope: universal)
+
+Teeme plussidest sisendi: baseline_diagnostics + Tab A/B “i”-sisud iga testi kohta.
+11. Ressursid ja eelarve (scope: context)
+
+    Muudame kõik plussideks.
+
+    ligipaas: apteek | loodusravi_pood | puudub
+
+    Apteegi alammenüü: “Eesti keti valik”, piirkond → soovitused.
+
+    Märgistus “kohalikud ravitsejad”: näita, kuid lisa hoiatus_meta, kui piirkonnas on teatava teenuse kuritarvituste ajalugu.
+
+10. Ideoloogia ja piirjooned (scope: belief)
+
+    Eraldi kast: “Mida kindlasti EI soovi” → vaba plussinimekiri + lühiselgitus.
+
+8. Vann/saun ja kehalised-meele praktikad (scope: modality)
+
+    Tõstame “Vann” esimese plussina praktikate alla.
+
+    Lisame “ravidussvannid” kui alampluss.
+
+Toitumise piirangud – uued põhjused (scope: nutrition)
+
+Olemas: meditsiiniline, talumatus, eelistus, usuline, eetiline.
+Lisame: partner_ei_luba, elukaaslane_ei_luba, tunnetus, paranoia (nimetame neutraalsemalt hirm_tundmatu_ees kui soovid).
+7. Toitumisprofiil, eelistused ja menüü (scope: nutrition)
+
+    “Söögirütm akendes” liigub plusside alla.
+
+    Täpsustused: paast, hobbi_eluviis_hobo_syya_millal_juhtub, linnakiirtoit, magusaltuvus.
+
+6. Taimravi ja looduslikud meetodid (scope: modality | belief)
+
+    Lisame kultuurideülesed plokid (Ayurveda, TCM, Põhjala, Slaavi, Maailma-rahvamed).
+
+    “i”-nupp alati koos legaalsus- ja koostoime märkustega.
+
+Koostoime riskid (scope: organ | modality)
+
+Olemas: greip, naistepuna, ginkgo, lagrits, küüslauk>1, ingver>2g, kurkum>1g.
+Lisame:
+
+    kakao/šokolaad (kofeiin+teobromiin; antikoagulandi/HTN puhul jälgida)
+
+    alkohol (hepato/koostoimed)
+
+    kofeiin_kogus (kohv/tee/energiajoogid)
+
+    kanep/CBD (antikoagulandi ja sedatiividega ettevaatlik)
+
+    kava (maksarisk)
+
+    kratom (mitu koostoimeriski; “i” hoiatus)
+
+Antikoagulant – “maakeli” selgitus (scope: organ)
+
+Väli: risks.anticoagulant.flag + risks.anticoagulant.type
+
+    Mis see on? Verevedeldaja. Aitab ära hoida trombe, kuid suurendab veritsuse riski.
+
+    Levinud tüübid (vali menüüst):
+
+        varfariin
+
+        DOAC: apiksabaan, rivaroksabaan, dabigatraan, edoksabaan
+
+        Antitrombotsütaarsed (ERI väli): aspiriin, klopidogreel
+
+    “i”-nupp: milliseid taimi ja doose vältida või piirata; mis asendada.
+
+3. Tööriistad – lisa selgitus
+
+Belief-seadmete puhul “i”-nupp selgitab, et anduri lugemid on vaieldavad, mõeldud enesejälgimiseks, mitte diagnoosiks.
+3) Mini-skeem (lisatavad võtmed; JSON-ish)
+
+{
+  "privacy": {
+    "share_level": "jumalale|ai_arst|arst|pere_liige|anon_uurija|avalik_osint|ai_test|med_test|politsei|sojatootaja",
+    "consent_flags": ["palve","rituaal","kutsun_koju_arsti","kutsun_koju_new_age_praktiku"],
+    "exclude_datasets": ["kodu_olukord","kodu_vagivald","sotsiaal_olukord","finants_olukord","vaimne_olukord","psuhh_olukord","puue","religioon","elu_harjumused","entogeenid_kasutus","soltuvusained"]
+  },
+  "residence": { "primary": ["…"] },
+  "activity": { "overall_level": "madal|mõõdukas|kõrge" },
+  "sleep": {
+    "snoring": ["ei_hairi","hairib_elukaaslast","hairib_mind","sõltub_joomaastmest"],
+    "unenagemine": true,
+    "painajad": "puudub|harv|sage",
+    "paranormaalsed_uned": ["kehaväline","prohvetlik","muu"]
+  },
+  "complaints_extra": ["tinnitus","pearinglus","koohu_keeramine","iiveldus","kohukinnisus","kohulahtisus","valguse_talumatus"],
+  "work": { "role": ["metsatoo","poe_lett","transport_juht","suvakaevandus","advokaat","poliitik","sojavaelane","tehase_tootmine","rutiinne_linttoot","pakendamine","pakkide_tostmine","jaotaja_kuller"] },
+  "mobility": {
+    "modes": ["jalgsi","ratas","auto","rong","buss","laev","paat","lennuk","remote_view","levitatsioon","ajarannak","samani_rannak","tahtevaeline_rannak","muud_vaimsed_fyysilised"]
+  },
+  "home_tools": {
+    "std": ["bp_monitor","step_counter","daily_weight"],
+    "belief": ["bioenergia_mootja","eluenergia_mootja","aura_kaamera","pendel","hiina_pulsi_hindamine","noia_mootmised","uro_dev_tugi"]
+  },
+  "nutrition": {
+    "rikkad_toidud": ["…"],
+    "tava_toidud_lusikaga": ["…"],
+    "restrictions_reason_extra": ["partner_ei_luba","elukaaslane_ei_luba","tunnetus","hirm_tundmatu_ees"],
+    "meal_windows_plus": ["paast","hobo_syya_millal_juhtub","linnakiirtoit","magusaltuvus"]
+  },
+  "baseline_diagnostics": ["…"],
+  "resources": {
+    "ligipaas": ["apteek","loodusravi_pood","puudub"],
+    "apteek_piirkond": "…",
+    "hoiatus_meta": "…"
+  },
+  "ideology": {
+    "piirjooned": ["…"],
+    "mida_ei_soovi": ["…"]
+  },
+  "risks": {
+    "anticoagulant": {
+      "flag": true,
+      "type": ["varfariin","apiksabaan","rivaroksabaan","dabigatraan","edoksabaan"],
+      "antiplatelet": ["aspiriin","klopidogreel"]
+    },
+    "interaction_risks_extra": ["kakao","alkohol","kofeiin","kanep_CBD","kava","kratom"]
+  },
+  "_scope": { "belief": ["…väljaloendid ülalt…"] }
+}
+
+Kuidas AI-s kasutada
+
+    Lihtne lühiprompt: jääb samaks. Lisame vaid uued võtmed, kui need on täidetud.
+
+    Täis-prompt: specialtyMode peegeldab usulisi/rituaalseid valikuid eraldi kastis, kuid med-riskid jäävad esimesele kohale.
+
+    Ekspordis: belief-väljad on eraldi plokis ja vaikimisi peidetavad.
+
+Kui soovid, koostan kohe ka TypeScripti tüübid ja näidiskomponendi “Plussilist + i-tab” ühe jaotise jaoks, et saad otse koodi tõsta.
+
+═══ SYSTEM AUDIT ═══
+2025-11-11 14:40Z | GPT-5 Thinking | Output confirmed. Layered-analysis & multilingual protocol applied.
+
+
+ChatGPT can make mistakes. Check important info. See Cookie Preferences.
