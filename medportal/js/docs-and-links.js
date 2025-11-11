@@ -270,7 +270,17 @@ function addDocsSection(containerSelector = 'body') {
                 const text = await fetchMd(SITE_CONFIG.docs.readme);
                 document.getElementById('readmeContent').innerHTML = miniMd(text);
             } catch (err) {
-                document.getElementById('readmeContent').innerHTML = `<p style="color:red;">Ei saanud laadida: ${SITE_CONFIG.docs.readme} (${err.message})</p>`;
+                // Fallback: näita juhend kui NetworkError (file:// protocol)
+                document.getElementById('readmeContent').innerHTML = `
+                    <div style="background: #fef3c7; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                        <p style="margin: 0 0 0.5rem 0;"><strong>NetworkError:</strong> README.md ei saa laadida file:// protokolli kaudu.</p>
+                        <p style="margin: 0; font-size: 0.9rem;">Lahendus: Käivita local server:</p>
+                        <pre style="background: #1f2937; color: #10b981; padding: 0.5rem; border-radius: 4px; margin: 0.5rem 0;">cd medportal
+python3 -m http.server 8000</pre>
+                        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Seejärel ava: <code>http://localhost:8000/forms/full-profile.html</code></p>
+                    </div>
+                    <p style="color: #6b7280;">Või vaata README.md otse GitHubis: <a href="https://github.com/LuureAmet/Eesti/blob/main/medportal/README.md" target="_blank">Ava GitHubis</a></p>
+                `;
             }
             e.target.dataset.loaded = '1';
         }
@@ -283,7 +293,17 @@ function addDocsSection(containerSelector = 'body') {
                 const text = await fetchMd(SITE_CONFIG.docs.roadmap);
                 document.getElementById('roadmapContent').innerHTML = miniMd(text);
             } catch (err) {
-                document.getElementById('roadmapContent').innerHTML = `<p style="color:red;">Ei saanud laadida: ${SITE_CONFIG.docs.roadmap} (${err.message})</p>`;
+                // Fallback: näita juhend kui NetworkError (file:// protocol)
+                document.getElementById('roadmapContent').innerHTML = `
+                    <div style="background: #fef3c7; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                        <p style="margin: 0 0 0.5rem 0;"><strong>NetworkError:</strong> ROADMAP.md ei saa laadida file:// protokolli kaudu.</p>
+                        <p style="margin: 0; font-size: 0.9rem;">Lahendus: Käivita local server:</p>
+                        <pre style="background: #1f2937; color: #10b981; padding: 0.5rem; border-radius: 4px; margin: 0.5rem 0;">cd medportal
+python3 -m http.server 8000</pre>
+                        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Seejärel ava: <code>http://localhost:8000/forms/full-profile.html</code></p>
+                    </div>
+                    <p style="color: #6b7280;">Või vaata ROADMAP.md otse GitHubis: <a href="https://github.com/LuureAmet/Eesti/blob/main/medportal/ROADMAP.md" target="_blank">Ava GitHubis</a></p>
+                `;
             }
             e.target.dataset.loaded = '1';
         }

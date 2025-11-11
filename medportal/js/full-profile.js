@@ -1054,3 +1054,41 @@ function addNoConsentItem() {
 
     showToast(`Keeld "${itemText}" lisatud!`);
 }
+
+// Kaebuste lisamine
+let complaintCounter = 0;
+function addComplaint() {
+    const complaintText = prompt('Lisa kaebus (nt. "Pearinglus kõndides", "Õhupuudus ronimisel", jne):');
+
+    if (!complaintText || complaintText.trim() === '') {
+        showToast('Palun sisesta kaebuse kirjeldus!', 3000);
+        return;
+    }
+
+    complaintCounter++;
+    const fieldName = `complaint_custom_${complaintCounter}`;
+
+    const container = document.getElementById('custom-complaints-list');
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #f3f4f6; padding: 10px 12px; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: start; gap: 10px; border-left: 3px solid #3b82f6;';
+
+    itemDiv.innerHTML = `
+        <div style="flex: 1;">
+            <label style="margin: 0 0 5px 0; display: block; font-weight: 600; color: #1f2937;">${complaintText}</label>
+            <input type="number" name="${fieldName}_score" min="0" max="3" placeholder="Skoor 0-3"
+                   style="width: 80px; padding: 4px 8px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 0.9rem;">
+            <textarea name="${fieldName}_notes" rows="2" placeholder="Lisainfo (valikuline)..."
+                      style="width: 100%; margin-top: 5px; padding: 6px; border: 1px solid #d1d5db; border-radius: 4px; font-size: 0.9rem;"></textarea>
+        </div>
+        <button type="button" onclick="this.closest('.form-group').remove()" class="btn-danger-sm"
+                style="background: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+            Eemalda
+        </button>
+    `;
+
+    container.appendChild(itemDiv);
+
+    showToast(`Kaebus "${complaintText}" lisatud!`);
+}

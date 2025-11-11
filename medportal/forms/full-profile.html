@@ -241,6 +241,19 @@
                         </div>
                     </div>
 
+                    <!-- KAEBUSTE LISAMINE -->
+                    <div class="form-group" style="margin-top: 20px;">
+                        <button type="button" onclick="addComplaint()" class="btn btn-secondary" style="font-size: 0.9rem; padding: 8px 16px;">
+                            + Lisa kaebus
+                        </button>
+                    </div>
+                    <div id="custom-complaints-list" style="margin-top: 10px;"></div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="complaintsNotes">Kaebuste lisam&auml;rkmed</label>
+                        <textarea id="complaintsNotes" name="complaintsNotes" rows="3" placeholder="Lisa täpsustusi kaebuste kohta..."></textarea>
+                    </div>
+
                     <div class="form-group">
                         <label for="nightWaking">Öine ülesärkamise sagedus (korda/öö)</label>
                         <input type="number" id="nightWaking" name="nightWaking" min="0">
@@ -254,6 +267,7 @@
                             <label><input type="radio" name="exerciseTolerance" value=">500m"> &gt;500 m</label>
                             <label><input type="radio" name="exerciseTolerance" value="work-capable"> Töövõimeline</label>
                         </div>
+                        <textarea name="exerciseToleranceDesc" rows="2" placeholder="Kirjelda koormustaluvust muudmoodi (valikuline)..." style="margin-top: 10px;"></textarea>
                     </div>
                 </section>
 
@@ -394,7 +408,7 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <button type="button" class="add-row-btn" onclick="addMedicationRow()">+ Lisa rida</button>
+                        <button type="button" class="add-row-btn" onclick="addMedicationRow()">+ Lisa ravim</button>
                     </div>
 
                     <div class="form-group" style="margin-top: 20px;">
