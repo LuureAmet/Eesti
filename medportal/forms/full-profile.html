@@ -500,9 +500,9 @@
                     </div>
                 </section>
 
-                <!-- SEKTSIOON 7: TOITUMINE -->
+                <!-- SEKTSIOON 7: TOITUMINE JA MENÜÜ -->
                 <section class="form-section">
-                    <h2>7. Toitumisprofiil ja eelistused</h2>
+                    <h2>7. Toitumisprofiil, eelistused ja menüü</h2>
 
                     <div class="form-group">
                         <label>Söögirütm akendes</label>
@@ -525,6 +525,22 @@
                     <div class="form-group">
                         <label for="favoriteFood">Põhitoidud, mis maitsevad ja sobivad</label>
                         <input type="text" id="favoriteFood" name="favoriteFood">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="foodLikes">Meeldib</label>
+                            <input type="text" id="foodLikes" name="foodLikes">
+                        </div>
+                        <div class="form-group">
+                            <label for="foodDislikes">Ei meeldi</label>
+                            <input type="text" id="foodDislikes" name="foodDislikes">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="foodIntolerance">Talumatus/reaktsioonid (sh jood/kelp)</label>
+                        <textarea id="foodIntolerance" name="foodIntolerance" rows="2"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -752,28 +768,9 @@
                     </div>
                 </section>
 
-                <!-- SEKTSIOON 16: MENÜÜ -->
+                <!-- SEKTSIOON 16: PAKETID -->
                 <section class="form-section">
-                    <h2>16. Menüü-eelistused ja talumatus</h2>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="foodLikes">Meeldib</label>
-                            <input type="text" id="foodLikes" name="foodLikes">
-                        </div>
-                        <div class="form-group">
-                            <label for="foodDislikes">Ei meeldi</label>
-                            <input type="text" id="foodDislikes" name="foodDislikes">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="foodIntolerance">Talumatus/reaktsioonid (sh jood/kelp)</label>
-                        <textarea id="foodIntolerance" name="foodIntolerance" rows="2"></textarea>
-                    </div>
-                </section>
-
-                <!-- SEKTSIOON 17: PAKETID -->
-                <section class="form-section">
-                    <h2>17. Paketivalikud (märgi, mida kaalud)</h2>
+                    <h2>16. Paketivalikud (märgi, mida kaalud)</h2>
                     <div class="checkbox-group">
                         <label><input type="checkbox" name="packageNaturalMin" value="yes"> <strong>Looduslik miinimum:</strong> hingamine + jalutus + hibiskus + Mg õhtus</label>
                         <label><input type="checkbox" name="packageNaturalWide" value="yes"> <strong>Looduslik lai:</strong> + viirpuu/arjuna/astragalus, zazen, Epsom 2-3×/näd</label>
@@ -783,9 +780,9 @@
                     </div>
                 </section>
 
-                <!-- SEKTSIOON 18: KOKKUVÕTE -->
+                <!-- SEKTSIOON 17: KOKKUVÕTE -->
                 <section class="form-section alert-success">
-                    <h2>18. Kokkuvõte ühel real (kasutus arstil/AI-l)</h2>
+                    <h2>17. Kokkuvõte ühel real (kasutus arstil/AI-l)</h2>
                     <p id="oneLinerSummary" style="font-family: monospace; font-size: 0.9rem;">
                         Täitke vorm ja see genereeritakse automaatselt.
                     </p>
@@ -805,10 +802,15 @@
                 <div class="form-actions">
                     <button type="button" class="btn btn-secondary" onclick="window.location.href='../index.html'">Tagasi</button>
                     <button type="button" class="btn btn-secondary" onclick="saveForm()">Salvesta draft</button>
+                    <button type="button" class="btn btn-secondary" onclick="exportProfile()">Ekspordi profiil</button>
+                    <button type="button" class="btn btn-secondary" onclick="importProfile()">Impordi profiil</button>
                     <button type="button" class="btn btn-primary" onclick="exportFullProfile('txt')">Genereeri TXT</button>
                     <button type="button" class="btn btn-primary" onclick="exportFullProfile('json')">Genereeri JSON</button>
                     <button type="button" class="btn btn-primary" onclick="exportFullProfile('ai')">Kopeeri AI prompt</button>
                 </div>
+
+                <!-- Hidden file input for profile import -->
+                <input type="file" id="profileImportInput" accept=".json" style="display: none;">
 
             </form>
         </main>

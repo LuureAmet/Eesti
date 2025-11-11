@@ -952,6 +952,60 @@ function generateAiPromptCustom(selectedSections = [], includeSummary = false) {
         }
     }
 
+    // CUSTOM COMPLAINTS (lisatud kaebused)
+    const customComplaints = Object.keys(d).filter(k => k.startsWith('complaint_custom_'));
+    if (customComplaints.length > 0) {
+        prompt += `LISATUD KAEBUSED:\n`;
+        const complaintGroups = {};
+        customComplaints.forEach(key => {
+            const match = key.match(/complaint_custom_(\d+)_(score|notes)/);
+            if (match) {
+                const id = match[1];
+                const type = match[2];
+                if (!complaintGroups[id]) complaintGroups[id] = {};
+                complaintGroups[id][type] = d[key];
+            }
+        });
+        Object.keys(complaintGroups).forEach(id => {
+            const complaint = complaintGroups[id];
+            if (complaint.score) {
+                prompt += `- Skoor ${complaint.score}/3`;
+                if (complaint.notes) prompt += `: ${complaint.notes}`;
+                prompt += `\n`;
+            }
+        });
+        prompt += `\n`;
+    }
+
+    // Kaebuste lisämärkmed
+    if (d.complaintsNotes) {
+        prompt += `KAEBUSTE MÄRKMED:\n${d.complaintsNotes}\n\n`;
+    }
+
+    // CUSTOM FIELDS (kohandatud väljad)
+    const customFields = Object.keys(d).filter(k => k.startsWith('custom_') && !k.includes('_hidden'));
+    if (customFields.length > 0) {
+        prompt += `KOHANDATUD VÄLJAD:\n`;
+        customFields.forEach(key => {
+            const value = d[key];
+            if (value) {
+                const label = key.replace(/^custom_/, '').replace(/_\d+$/, '').replace(/_/g, ' ');
+                prompt += `- ${label}: ${value}\n`;
+            }
+        });
+        prompt += `\n`;
+    }
+
+    // EI SOOVI custom items
+    const noConsentCustom = Object.keys(d).filter(k => k.startsWith('noConsent_custom_') && d[k] === 'yes');
+    if (noConsentCustom.length > 0) {
+        prompt += `EI SOOVI (kohandatud):\n`;
+        noConsentCustom.forEach(key => {
+            prompt += `- ${key.replace('noConsent_custom_', 'Item ')}\n`;
+        });
+        prompt += `\n`;
+    }
+
     prompt += `───────────────────────────────────────────────────────────\n`;
     prompt += `PALUN SOOVITA:\n\n`;
     prompt += `1. Holistilist päevaplaani (hingamine, liikumine, toitumine)\n`;
@@ -1091,4 +1145,127 @@ function addComplaint() {
     container.appendChild(itemDiv);
 
     showToast(`Kaebus "${complaintText}" lisatud!`);
+}
+
+// Profiili eksport JSON failina
+function exportProfile() {
+    const form = document.querySelector('form');
+    if (!form) {
+        showToast('Vormi ei leitud!', 3000);
+        return;
+    }
+
+    const formData = new FormData(form);
+    const data = {};
+
+    // Koguge kõik vorm data
+    formData.forEach((value, key) => {
+        if (data[key]) {
+            if (!Array.isArray(data[key])) {
+                data[key] = [data[key]];
+            }
+            data[key].push(value);
+        } else {
+            data[key] = value;
+        }
+    });
+
+    // Lisa metadata
+    const profile = {
+        version: SITE_CONFIG.version,
+        exportedAt: new Date().toISOString(),
+        exportedAtLocal: new Date().toLocaleString('et-EE', {
+            timeZone: 'Europe/Tallinn',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        }),
+        profileData: data
+    };
+
+    // Genereeri failinimi kuupäevaga
+    const dateStr = new Date().toISOString().split('T')[0];
+    const filename = `profiil_${dateStr}.json`;
+
+    // Allalaadimine
+    const jsonStr = JSON.stringify(profile, null, 2);
+    downloadFile(jsonStr, filename, 'application/json');
+
+    showToast('Profiil eksporditud!');
+}
+
+// Profiili import JSON failist
+function importProfile() {
+    const fileInput = document.getElementById('profileImportInput');
+    if (!fileInput) {
+        showToast('Faili sisend ei leitud!', 3000);
+        return;
+    }
+
+    // Event handler faili valimiseks
+    fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const profile = JSON.parse(event.target.result);
+
+                // Validate struktuuri
+                if (!profile.profileData) {
+                    throw new Error('Vale profiili formaat: profileData puudub');
+                }
+
+                const data = profile.profileData;
+                const form = document.querySelector('form');
+
+                if (!form) {
+                    throw new Error('Vormi ei leitud');
+                }
+
+                // Täitke vorm importitud andmetega
+                Object.keys(data).forEach(key => {
+                    const input = form.querySelector(`[name="${key}"]`);
+
+                    if (!input) return;
+
+                    if (input.type === 'radio') {
+                        const radio = form.querySelector(`input[name="${key}"][value="${data[key]}"]`);
+                        if (radio) radio.checked = true;
+                    } else if (input.type === 'checkbox') {
+                        if (Array.isArray(data[key])) {
+                            data[key].forEach(val => {
+                                const checkbox = form.querySelector(`input[name="${key}"][value="${val}"]`);
+                                if (checkbox) checkbox.checked = true;
+                            });
+                        } else {
+                            input.checked = data[key] === 'yes' || data[key] === input.value;
+                        }
+                    } else {
+                        input.value = data[key];
+                    }
+                });
+
+                updateProgress();
+
+                // Näita success teade koos versiooniga
+                const versionInfo = profile.version ? ` (v${profile.version})` : '';
+                showToast(`Profiil imporditud${versionInfo}!`, 3000);
+
+            } catch (err) {
+                console.error('Import error:', err);
+                showToast(`Import ebaõnnestus: ${err.message}`, 4000);
+            }
+        };
+
+        reader.readAsText(file);
+        fileInput.value = ''; // Reset file input
+    };
+
+    // Trigger file picker
+    fileInput.click();
 }
