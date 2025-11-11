@@ -1,14 +1,22 @@
-// VERSION: 1.4.0 - 2025-01-11
+// VERSION: 1.4.1 - 2025-01-11
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.4.0",
+    version: "1.4.1",
     date: "11.01.2025",
-    buildTime: "2025-01-11 15:45",
+    buildTime: "2025-01-11 16:15",
 
     // Versioonimärkmed
     changelog: {
+        "1.4.1": {
+            date: "11.01.2025",
+            changes: [
+                "PARANDUS: Docs path - nüüd näitab õigeid faile (ARCHITECTURE, DEVELOPMENT, FILE-GUIDE)",
+                "Versiooniinfo parandatud footerisse",
+                "Plus-nuppude süsteem laiendamine (järgmistes versioonides)"
+            ]
+        },
         "1.4.0": {
             date: "11.01.2025",
             changes: [
@@ -35,10 +43,11 @@ const SITE_CONFIG = {
         }
     },
 
-    // README ja ROADMAP failide asukohad
+    // Dokumendifailide asukohad
     docs: {
-        readme: "../README.md",
-        roadmap: "../ROADMAP.md"
+        architecture: "../docs/ARCHITECTURE.md",
+        development: "../docs/DEVELOPMENT.md",
+        fileGuide: "../docs/FILE-GUIDE.md"
     },
 
     // Lisalinkide sektsioon

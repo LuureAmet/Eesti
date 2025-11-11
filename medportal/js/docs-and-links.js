@@ -173,7 +173,7 @@ function addLinksSection(containerSelector = 'body') {
     }
 }
 
-// Lisa README/ROADMAP kokkuklapitav sektsioon
+// Lisa dokumentatsiooni kokkuklapitav sektsioon
 function addDocsSection(containerSelector = 'body') {
     const container = document.querySelector(containerSelector) || document.body;
 
@@ -181,13 +181,17 @@ function addDocsSection(containerSelector = 'body') {
     section.className = 'docs-section';
     section.innerHTML = `
         <h3>Projekti dokumendid</h3>
-        <details id="readmeBox">
-            <summary>README.md</summary>
-            <article id="readmeContent" class="md-content">Laadimine...</article>
+        <details id="architectureBox">
+            <summary>ARCHITECTURE.md - Arhitektuur</summary>
+            <article id="architectureContent" class="md-content">Laadimine...</article>
         </details>
-        <details id="roadmapBox">
-            <summary>ROADMAP.md</summary>
-            <article id="roadmapContent" class="md-content">Laadimine...</article>
+        <details id="developmentBox">
+            <summary>DEVELOPMENT.md - Arendus</summary>
+            <article id="developmentContent" class="md-content">Laadimine...</article>
+        </details>
+        <details id="fileGuideBox">
+            <summary>FILE-GUIDE.md - Failide juhend</summary>
+            <article id="fileGuideContent" class="md-content">Laadimine...</article>
         </details>
         <div class="footer-note">Inspired by Meigo Medical</div>
     `;
@@ -263,46 +267,66 @@ function addDocsSection(containerSelector = 'body') {
         document.head.appendChild(css);
     }
 
-    // Lazy load README
-    document.getElementById('readmeBox').addEventListener('toggle', async function(e) {
+    // Lazy load ARCHITECTURE
+    document.getElementById('architectureBox').addEventListener('toggle', async function(e) {
         if (e.target.open && !e.target.dataset.loaded) {
             try {
-                const text = await fetchMd(SITE_CONFIG.docs.readme);
-                document.getElementById('readmeContent').innerHTML = miniMd(text);
+                const text = await fetchMd(SITE_CONFIG.docs.architecture);
+                document.getElementById('architectureContent').innerHTML = miniMd(text);
             } catch (err) {
-                // Fallback: näita juhend kui NetworkError (file:// protocol)
-                document.getElementById('readmeContent').innerHTML = `
+                document.getElementById('architectureContent').innerHTML = `
                     <div style="background: #fef3c7; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
-                        <p style="margin: 0 0 0.5rem 0;"><strong>NetworkError:</strong> README.md ei saa laadida file:// protokolli kaudu.</p>
+                        <p style="margin: 0 0 0.5rem 0;"><strong>NetworkError:</strong> ARCHITECTURE.md ei saa laadida file:// protokolli kaudu.</p>
                         <p style="margin: 0; font-size: 0.9rem;">Lahendus: Käivita local server:</p>
                         <pre style="background: #1f2937; color: #10b981; padding: 0.5rem; border-radius: 4px; margin: 0.5rem 0;">cd medportal
 python3 -m http.server 8000</pre>
                         <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Seejärel ava: <code>http://localhost:8000/forms/full-profile.html</code></p>
                     </div>
-                    <p style="color: #6b7280;">Või vaata README.md otse GitHubis: <a href="https://github.com/LuureAmet/Eesti/blob/main/medportal/README.md" target="_blank">Ava GitHubis</a></p>
+                    <p style="color: #6b7280;">Või vaata otse GitHubis: <a href="https://github.com/LuureAmet/Eesti/blob/main/medportal/docs/ARCHITECTURE.md" target="_blank">Ava GitHubis</a></p>
                 `;
             }
             e.target.dataset.loaded = '1';
         }
     });
 
-    // Lazy load ROADMAP
-    document.getElementById('roadmapBox').addEventListener('toggle', async function(e) {
+    // Lazy load DEVELOPMENT
+    document.getElementById('developmentBox').addEventListener('toggle', async function(e) {
         if (e.target.open && !e.target.dataset.loaded) {
             try {
-                const text = await fetchMd(SITE_CONFIG.docs.roadmap);
-                document.getElementById('roadmapContent').innerHTML = miniMd(text);
+                const text = await fetchMd(SITE_CONFIG.docs.development);
+                document.getElementById('developmentContent').innerHTML = miniMd(text);
             } catch (err) {
-                // Fallback: näita juhend kui NetworkError (file:// protocol)
-                document.getElementById('roadmapContent').innerHTML = `
+                document.getElementById('developmentContent').innerHTML = `
                     <div style="background: #fef3c7; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
-                        <p style="margin: 0 0 0.5rem 0;"><strong>NetworkError:</strong> ROADMAP.md ei saa laadida file:// protokolli kaudu.</p>
+                        <p style="margin: 0 0 0.5rem 0;"><strong>NetworkError:</strong> DEVELOPMENT.md ei saa laadida file:// protokolli kaudu.</p>
                         <p style="margin: 0; font-size: 0.9rem;">Lahendus: Käivita local server:</p>
                         <pre style="background: #1f2937; color: #10b981; padding: 0.5rem; border-radius: 4px; margin: 0.5rem 0;">cd medportal
 python3 -m http.server 8000</pre>
                         <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Seejärel ava: <code>http://localhost:8000/forms/full-profile.html</code></p>
                     </div>
-                    <p style="color: #6b7280;">Või vaata ROADMAP.md otse GitHubis: <a href="https://github.com/LuureAmet/Eesti/blob/main/medportal/ROADMAP.md" target="_blank">Ava GitHubis</a></p>
+                    <p style="color: #6b7280;">Või vaata otse GitHubis: <a href="https://github.com/LuureAmet/Eesti/blob/main/medportal/docs/DEVELOPMENT.md" target="_blank">Ava GitHubis</a></p>
+                `;
+            }
+            e.target.dataset.loaded = '1';
+        }
+    });
+
+    // Lazy load FILE-GUIDE
+    document.getElementById('fileGuideBox').addEventListener('toggle', async function(e) {
+        if (e.target.open && !e.target.dataset.loaded) {
+            try {
+                const text = await fetchMd(SITE_CONFIG.docs.fileGuide);
+                document.getElementById('fileGuideContent').innerHTML = miniMd(text);
+            } catch (err) {
+                document.getElementById('fileGuideContent').innerHTML = `
+                    <div style="background: #fef3c7; padding: 1rem; border-radius: 6px; margin: 1rem 0;">
+                        <p style="margin: 0 0 0.5rem 0;"><strong>NetworkError:</strong> FILE-GUIDE.md ei saa laadida file:// protokolli kaudu.</p>
+                        <p style="margin: 0; font-size: 0.9rem;">Lahendus: Käivita local server:</p>
+                        <pre style="background: #1f2937; color: #10b981; padding: 0.5rem; border-radius: 4px; margin: 0.5rem 0;">cd medportal
+python3 -m http.server 8000</pre>
+                        <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem;">Seejärel ava: <code>http://localhost:8000/forms/full-profile.html</code></p>
+                    </div>
+                    <p style="color: #6b7280;">Või vaata otse GitHubis: <a href="https://github.com/LuureAmet/Eesti/blob/main/medportal/docs/FILE-GUIDE.md" target="_blank">Ava GitHubis</a></p>
                 `;
             }
             e.target.dataset.loaded = '1';
