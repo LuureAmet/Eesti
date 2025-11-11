@@ -402,6 +402,82 @@ const MED_INFO_DB = {
         externalInfo: `<p>10 000 sammu päevas vähendab kardiovaskulaarset riski 40%.</p>`
     },
 
+    // JOOGID / TEE LIIGID
+    'roheline_tee': {
+        title: 'Roheline tee',
+        shortInfo: 'Antioksüdantide ja katehiinide allikas - parandab ainevahetust.',
+        ourInfo: `<h4>Roheline tee</h4><p>Sisaldab EGCG-d - võimas antioksüdant. Parandab ainevahetust, toetab südant.</p>`,
+        externalInfo: `<p>Soovitus: 2-3 tassi päevas. Sisaldab kofeiini (vähem kui kohv).</p>`
+    },
+    'must_tee': {
+        title: 'Must tee',
+        shortInfo: 'Fermenteeritud tee - rohkem kofeiini, parandab tähelepanu.',
+        ourInfo: `<h4>Must tee</h4><p>Kõrgem kofeiinisisaldus kui rohelisel. Parandab vereringe, sisaldab teanniini.</p>`,
+        externalInfo: `<p>Sisaldab ca 40-70 mg kofeiini tassi kohta.</p>`
+    },
+    'hibiskus_tee': {
+        title: 'Hibiskus tee',
+        shortInfo: 'Vererõhku langetav, C-vitamiinirikas, kofeiinivaba.',
+        ourInfo: `<h4>Hibiskus tee</h4><p>Tõendatud vererõhku langetav toime. C-vitamiinirikas, antioksüdantide allikas.</p>`,
+        externalInfo: `<p>Uuringud: langetas süstoolset RR 7-8 mmHg. Täiesti kofeiinivaba.</p>`
+    },
+    'oolong_tee': {
+        title: 'Oolong tee',
+        shortInfo: 'Poolfermendeeritud - rohelise ja musta vahepeal.',
+        ourInfo: `<h4>Oolong tee</h4><p>Tasakaalustatud kofeiinisisaldus, parandab ainevahetust ja rasva põletamist.</p>`,
+        externalInfo: `<p>Traditsiooniline Hiina tee, sobib seedimise parandamiseks.</p>`
+    },
+    'valge_tee': {
+        title: 'Valge tee',
+        shortInfo: 'Kõige vähem töödeldud - õrn, antioksüdante rohkelt.',
+        ourInfo: `<h4>Valge tee</h4><p>Minimaalselt töödeldud, kõrgeim antioksüdantide tase, madal kofeiin.</p>`,
+        externalInfo: `<p>Hinnalisim tee liik, õrn maitse.</p>`
+    },
+    'ravimtaimede_tee': {
+        title: 'Ravimtaimede tee',
+        shortInfo: 'Kofeiinivabad taimeteeded - rahustav, seedimist toetav.',
+        ourInfo: `<h4>Ravimtaimede teed</h4><p>Näiteks kummeli, piparmündi, lavendli teed. Kofeiinivabad, rahustav toime.</p>`,
+        externalInfo: `<p>Sobib õhtul, parandab und, vähendab ärevust.</p>`
+    },
+    'matcha': {
+        title: 'Matcha',
+        shortInfo: 'Jahvatatud roheline tee - maksimum antioksüdante ja L-teanniini.',
+        ourInfo: `<h4>Matcha</h4><p>Kogu teeleht jahvatatud - maksimaalsed toitained. L-teanniin + kofeiin = rahulik tähelepanu.</p>`,
+        externalInfo: `<p>Sisaldab 10× rohkem antioksüdante kui tavaline roheline tee.</p>`
+    },
+
+    // TOITUMISE PIIRANGUD
+    'gluteenivaba': {
+        title: 'Gluteenivaba',
+        shortInfo: 'Gluteeni vältimine - vajalik tsöliaakia või gluteenitalumatuse korral.',
+        ourInfo: `<h4>Gluteenivaba dieet</h4><p>Väldi nisu, rukki, otraid. Vajalik tsöliaakia, gluteenitalumatuse korral.</p>`,
+        externalInfo: `<p>Asenda: kvinoaga, riisiga, kartuli, maisi, tatrajahuga.</p>`
+    },
+    'piimatooted_vaba': {
+        title: 'Piimatoodete vältimine',
+        shortInfo: 'Laktoositalumatus või piima valguallergia.',
+        ourInfo: `<h4>Piimatoodete vältimine</h4><p>Laktoositalumatus või kasiini allergia. Väldi piima, juustu, jogurtit.</p>`,
+        externalInfo: `<p>Asenda: kookos-, mandli-, kaerapiimaga. Veendu kaltsiumisisalduses.</p>`
+    },
+    'lihatoidud_vaba': {
+        title: 'Lihatoidud',
+        shortInfo: 'Taimetoiduline või liha vältimine tervislikel põhjustel.',
+        ourInfo: `<h4>Liha vältimine</h4><p>Vegetaarlus, veganlik eluviis või tervislik põhjus (südamehaigused).</p>`,
+        externalInfo: `<p>Veendu piisavas B12, raua, valgu saamisses. Võib vajada toidulisandeid.</p>`
+    },
+    'madal_suhkur': {
+        title: 'Madal suhkur',
+        shortInfo: 'Suhkru piiramine - diabeet, kaalulangetamine.',
+        ourInfo: `<h4>Madal suhkur</h4><p>Väldi lihtsa suhkru ja kiireid süsivesikuid. Sobib diabeedile, kaalutõstule.</p>`,
+        externalInfo: `<p>Jälgi glükeemilist indeksit. Eelista täisteravilju, kaunvilju.</p>`
+    },
+    'madal_sool': {
+        title: 'Madal sool',
+        shortInfo: 'Soola piiramine - hüpertensioon, südamepuudulikkus.',
+        ourInfo: `<h4>Madal sool (< 2 g Na)</h4><p>Vajalik hüpertensiooni, südamepuudulikkuse, neeruhaiguste korral.</p>`,
+        externalInfo: `<p>Eesmärk: alla 2 g naatriumit (5 g soola) päevas. Väldi töödeldud toitu.</p>`
+    },
+
     // PRAKTIKAD
     'koherentshingamine': {
         title: 'Koherentshingamine (5-5)',
@@ -1006,4 +1082,136 @@ function quickAddLifestyle(key, name) {
 
     container.appendChild(itemDiv);
     showToast(`${name} lisatud eluviisile!`);
+}
+
+// Quick add tea type (second level)
+function quickAddTeaType(key, name) {
+    if (!quickAddCounters.teatype) quickAddCounters.teatype = 0;
+    quickAddCounters.teatype++;
+
+    const containerId = 'quickAddedTeaTypes';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        // Find the tea section checkbox group
+        const teaSection = document.querySelector('.form-group:has([name="teaGreen"])');
+        if (!teaSection) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        teaSection.parentNode.insertBefore(container, teaSection.nextSibling);
+    }
+
+    const itemId = `teatype_quick_${quickAddCounters.teatype}`;
+    const fieldName = `teaType_${key}_${quickAddCounters.teatype}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #ecfdf5; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #10b981;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #065f46; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #10b981; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Tassi päevas</label>
+                <input type="number" name="${fieldName}_cups" min="1" max="10" placeholder="Nt: 2"
+                       style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+            </div>
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Aeg (hommik/õhtu)</label>
+                <select name="${fieldName}_timing" style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    <option value="">Vali...</option>
+                    <option value="morning">Hommik</option>
+                    <option value="afternoon">Päev</option>
+                    <option value="evening">Õhtu</option>
+                    <option value="anytime">Kogu päev</option>
+                </select>
+            </div>
+        </div>
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: brändi eelistused, valmistusviis..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}
+
+// Quick add dietary restriction
+function quickAddRestriction(key, name) {
+    if (!quickAddCounters.restriction) quickAddCounters.restriction = 0;
+    quickAddCounters.restriction++;
+
+    const containerId = 'quickAddedRestrictions';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        const restrictionGroup = document.querySelector('.form-group:has([name="restrictGluten"])');
+        if (!restrictionGroup) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        restrictionGroup.parentNode.insertBefore(container, restrictionGroup.nextSibling);
+    }
+
+    const itemId = `restriction_quick_${quickAddCounters.restriction}`;
+    const fieldName = `restriction_${key}_${quickAddCounters.restriction}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #fef2f2; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #ef4444;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #991b1b; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Põhjus</label>
+            <select name="${fieldName}_reason" style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+                <option value="">Vali põhjus...</option>
+                <option value="medical">Meditsiiniline</option>
+                <option value="allergy">Allergia</option>
+                <option value="intolerance">Talumatus</option>
+                <option value="preference">Eelistus</option>
+                <option value="religious">Usundiline</option>
+                <option value="ethical">Eetiline</option>
+            </select>
+        </div>
+        <div style="margin-left: 24px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: raskusaste, alternatiivsed toidud..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud piirangutesse!`);
 }

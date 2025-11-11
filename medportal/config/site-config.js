@@ -1,14 +1,24 @@
-// VERSION: 1.4.5 - 2025-11-11
+// VERSION: 1.4.6 - 2025-11-11
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.4.5",
+    version: "1.4.6",
     date: "11.11.2025",
-    buildTime: "2025-11-11 19:00",
+    buildTime: "2025-11-11 19:45",
 
     // Versioonimärkmed
     changelog: {
+        "1.4.6": {
+            date: "11.11.2025",
+            changes: [
+                "UUENDUS: Tee liigid - KAHEASTMELINE SÜSTEEM - plus-nupud 7 tee liigile (roheline, must, hibiskus, oolong, valge, matcha, ravimtaimede)",
+                "quickAddTeaType() funktsioon - tasside arv ja ajastuse valikuga",
+                "UUENDUS: Toitumise piirangud - plus-nupud 5 piirangule (gluteenivaba, piimatoodete vältimine, liha, madal suhkur, madal sool)",
+                "quickAddRestriction() funktsioon - põhjuse valikuga (meditsiiniline, allergia, talumatus, eelistus, usundiline, eetiline)",
+                "MED_INFO_DB laiendatud 7 tee liigi + 5 piirangu infoga"
+            ]
+        },
         "1.4.5": {
             date: "11.11.2025",
             changes: [

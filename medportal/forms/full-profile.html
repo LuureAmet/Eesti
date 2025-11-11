@@ -678,7 +678,32 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Piirangud</label>
+                        <label>Toitumise piirangud</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD PIIRANGUTELE -->
+                        <div class="quick-add-section" style="background: #fef2f2; border-color: #ef4444; margin-bottom: 15px;">
+                            <h4>Levinumad piirangud</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #ef4444;"
+                                        onclick="quickAddRestriction('gluteenivaba', 'Gluteenivaba')">Gluteenivaba</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #ef4444;"
+                                        onclick="quickAddRestriction('piimatooted_vaba', 'Piimatoodete vältimine')">Ilma piimatoodeteta</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #ef4444;"
+                                        onclick="quickAddRestriction('lihatoidud_vaba', 'Lihatoidud')">Liha vältimine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #ef4444;"
+                                        onclick="quickAddRestriction('madal_suhkur', 'Madal suhkur')">Madal suhkur</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #ef4444;"
+                                        onclick="quickAddRestriction('madal_sool', 'Madal sool')">Madal sool</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali piirangud koos põhjuse ja täpsustustega
+                            </p>
+                        </div>
+
+                        <!-- LISATUD PIIRANGUD (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedRestrictions"></div>
+
+                        <label style="margin-top: 15px;">Või märgi lihtsalt piirangud</label>
                         <div class="checkbox-group">
                             <label><input type="checkbox" name="restrictGluten" value="yes"> Gluteen</label>
                             <label><input type="checkbox" name="restrictDairy" value="yes"> Piim</label>
@@ -701,6 +726,35 @@
 
                     <div class="form-group">
                         <label>Tee tüübid</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD TEE LIIKIDELE (kaheastmeline) -->
+                        <div class="quick-add-section" style="background: #ecfdf5; border-color: #10b981; margin-bottom: 15px;">
+                            <h4>Levinumad tee liigid</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('roheline_tee', 'Roheline tee')">Roheline tee</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('must_tee', 'Must tee')">Must tee</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('hibiskus_tee', 'Hibiskus tee')">Hibiskus tee</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('oolong_tee', 'Oolong tee')">Oolong tee</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('valge_tee', 'Valge tee')">Valge tee</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('matcha', 'Matcha')">Matcha</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('ravimtaimede_tee', 'Ravimtaimede tee')">Ravimtaimede tee</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali tee liigid koos tasside arvu ja ajastusega
+                            </p>
+                        </div>
+
+                        <!-- LISATUD TEE LIIGID (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedTeaTypes"></div>
+
+                        <label style="margin-top: 15px;">Või märgi lihtsalt tee kasutamine</label>
                         <div class="checkbox-group">
                             <label><input type="checkbox" name="teaGreen" value="yes"> Roheline</label>
                             <label><input type="checkbox" name="teaHibiscus" value="yes"> Hibiskus</label>
