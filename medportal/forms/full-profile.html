@@ -212,34 +212,127 @@
                     <div id="custom-no-consent-items" style="margin-top: 10px;"></div>
                 </section>
 
-                <!-- SEKTSIOON 0: PRIVAATSUS -->
+                <!-- SEKTSIOON 0: PRIVAATSUS JA NÕUSOLEK -->
                 <section class="form-section">
                     <h2>0. Privaatsus ja nõusolek</h2>
+                    <p class="help-text">Vali kellele ja millises ulatuses soovid oma terviset eavet jagada. Belief-väljad on valikulised.</p>
 
-                    <div class="form-group">
-                        <label>Jagamise tase</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="shareDoctor" value="yes"> Ainult arstile</label>
-                            <label><input type="checkbox" name="shareFamily" value="yes"> Pereliikmega</label>
-                            <label><input type="checkbox" name="shareAnonymous" value="yes"> Anonüümselt uurijale</label>
+                    <!-- KIIRVALIKU PLUS-NUPUD - JAGAMISE TASE -->
+                    <div class="quick-add-section" style="background: #f0fdf4; border-color: #10b981; margin-bottom: 15px;">
+                        <h4>Jagamise tase - kellele jagan</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                    onclick="quickAddPrivacy('arst', 'Arst')">Arst</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                    onclick="quickAddPrivacy('ai_arst', 'AI arst')">AI arst</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                    onclick="quickAddPrivacy('ai_test', 'AI testimiseks')">AI testimiseks</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                    onclick="quickAddPrivacy('pere_liige', 'Pereliikmele')">Pereliikmele</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                    onclick="quickAddPrivacy('anon_uurija', 'Anonüümsele uurijale')">Anonüümsele uurijale</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                    onclick="quickAddPrivacy('avalik_osint', 'Avalikult (OSINT)')">Avalikult (OSINT)</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                    onclick="quickAddPrivacy('med_test', 'Meditsiini testimiseks')">Meditsiini testimiseks</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                    onclick="quickAddPrivacy('politsei', 'Politsei')">Politsei</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                    onclick="quickAddPrivacy('sojatootaja', 'Sotsiaaltöötaja')">Sotsiaaltöötaja</button>
                         </div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                            Vali kes võivad sinu terviseandemeid näha ja kasutada
+                        </p>
                     </div>
 
-                    <div class="form-group">
-                        <label for="noShare">Millist andmestikku EI jagata</label>
-                        <input type="text" id="noShare" name="noShare" placeholder="Näiteks: psühholoogilised andmed">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Nõusolek</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="consentMeasurements" value="yes"> Kodused mõõtmised</label>
-                            <label><input type="checkbox" name="consentHerbs" value="yes"> Teetaust (taimed)</label>
-                            <label><input type="checkbox" name="consentBreathing" value="yes"> Hingamis-/meditatsioonirutiin</label>
+                    <!-- BELIEF PLUSID - JAGAMISE TASE -->
+                    <div class="quick-add-section" style="background: #f3f4f6; border-color: #9ca3af; margin-bottom: 15px;">
+                        <h4>Jagamise tase - spirituaalsed <span style="color: #6b7280; font-size: 0.85rem;">(belief)</span></h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #9ca3af; color: #4b5563;"
+                                    onclick="quickAddPrivacy('jumalale', 'Jumalale (palve)')">Jumalale (palve)</button>
                         </div>
+                        <p style="font-size: 0.85rem; color: #6b7280; margin-top: 8px; margin-bottom: 0;">
+                            Belief-väljad ei kajastata meditsiinipersonalile vaikimisi
+                        </p>
                     </div>
 
-                    <div class="form-row">
+                    <!-- LISATUD JAGAMISE TASE (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedPrivacyShare"></div>
+
+                    <!-- KIIRVALIKU PLUS-NUPUD - NÕUSOLEK -->
+                    <div class="quick-add-section" style="background: #fef3c7; border-color: #f59e0b; margin-top: 15px;">
+                        <h4>Nõusolek - mida luban</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #d97706;"
+                                    onclick="quickAddPrivacy('consent_measurements', 'Kodused mõõtmised')">Kodused mõõtmised</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #d97706;"
+                                    onclick="quickAddPrivacy('consent_herbs', 'Taimravi')">Taimravi</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #d97706;"
+                                    onclick="quickAddPrivacy('consent_breathing', 'Hingamis-/meditatsioon')">Hingamis-/meditatsioon</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #d97706;"
+                                    onclick="quickAddPrivacy('kutsun_koju_arsti', 'Kutsun koju arsti')">Kutsun koju arsti</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                            Millega nõustud või mida oled valmis tegema
+                        </p>
+                    </div>
+
+                    <!-- BELIEF PLUSID - NÕUSOLEK -->
+                    <div class="quick-add-section" style="background: #f3f4f6; border-color: #9ca3af; margin-top: 15px;">
+                        <h4>Nõusolek - spirituaalsed <span style="color: #6b7280; font-size: 0.85rem;">(belief)</span></h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #9ca3af; color: #4b5563;"
+                                    onclick="quickAddPrivacy('palve', 'Palve (minu usundi järgi)')">Palve</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #9ca3af; color: #4b5563;"
+                                    onclick="quickAddPrivacy('rituaal', 'Rituaal (minu usundi järgi)')">Rituaal</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #9ca3af; color: #4b5563;"
+                                    onclick="quickAddPrivacy('kutsun_koju_new_age', 'Kutsun koju new-age praktiku')">New-age praktik</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #6b7280; margin-top: 8px; margin-bottom: 0;">
+                            Spirituaalsed või usundipõhised praktikad
+                        </p>
+                    </div>
+
+                    <!-- LISATUD NÕUSOLEK (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedPrivacyConsent"></div>
+
+                    <!-- KIIRVALIKU PLUS-NUPUD - EI JAGATA ANDMESTIKKE -->
+                    <div class="quick-add-section" style="background: #fee2e2; border-color: #ef4444; margin-top: 15px;">
+                        <h4>Millist andmestikku EI jagata</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddPrivacy('no_kodu_olukord', 'Kodu olukord')">Kodu olukord</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddPrivacy('no_kodu_vagivald', 'Kodu vägivald')">Kodu vägivald</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddPrivacy('no_sotsiaal', 'Sotsiaalne olukord')">Sotsiaalne olukord</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddPrivacy('no_finants', 'Finantsolukord')">Finantsolukord</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddPrivacy('no_vaimne', 'Vaimne olukord')">Vaimne olukord</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddPrivacy('no_psuhh', 'Psühholoogiline olukord')">Psühholoogiline olukord</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddPrivacy('no_puue', 'Puue')">Puue</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddPrivacy('no_religioon', 'Religioon')">Religioon</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddPrivacy('no_elu_harjumused', 'Eluharjumused')">Eluharjumused</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddPrivacy('no_entogeenid', 'Entogeenide kasutus')">Entogeenide kasutus</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddPrivacy('no_soltuvusained', 'Sõltuvusained')">Sõltuvusained</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                            Vali väljad, mida EI soovi jagada (isegi valikulise jagamise korral)
+                        </p>
+                    </div>
+
+                    <!-- LISATUD EI JAGATA (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedPrivacyNoShare"></div>
+
+                    <div class="form-row" style="margin-top: 20px;">
                         <div class="form-group">
                             <label for="emergencyContact">Kontakt hädaolukorraks</label>
                             <input type="text" id="emergencyContact" name="emergencyContact">
@@ -248,6 +341,11 @@
                             <label for="emergencyPhone">Telefon</label>
                             <input type="tel" id="emergencyPhone" name="emergencyPhone">
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="privacyNotes">Privaatsuse lisam&auml;rkmed</label>
+                        <textarea id="privacyNotes" name="privacyNotes" rows="2" placeholder="Lisa täpsustusi privaatsuse või nõusoleku kohta..."></textarea>
                     </div>
                 </section>
 
@@ -540,7 +638,89 @@
                         <label for="nightWaking">Öine ülesärkamise sagedus (korda/öö)</label>
                         <input type="number" id="nightWaking" name="nightWaking" min="0">
                     </div>
+                </section>
 
+                <!-- SEKTSIOON 2A: UNI JA NORSKAMINE -->
+                <section class="form-section">
+                    <h2>2A. Uni ja norskamine</h2>
+                    <p class="help-text">Uni mõjutab tervist ja ravimite toimet. Belief-väljade info jaoks vajuta "i" nuppu.</p>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sleepHours">Und (tundi/öö)</label>
+                            <input type="number" id="sleepHours" name="sleepHours" min="0" max="24" step="0.5">
+                        </div>
+                        <div class="form-group">
+                            <label for="sleepQuality">Une kvaliteet (0-10)</label>
+                            <input type="number" id="sleepQuality" name="sleepQuality" min="0" max="10">
+                        </div>
+                    </div>
+
+                    <!-- KIIRVALIKU PLUS-NUPUD - NORSKAMINE -->
+                    <div class="quick-add-section" style="background: #eff6ff; border-color: #3b82f6; margin-top: 15px;">
+                        <h4>Norskamine</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('norskamine_ei_hairi', 'Ei häiri')">Ei häiri</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('norskamine_elukaaslast', 'Häirib elukaaslast')">Häirib elukaaslast</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('norskamine_mind', 'Häirib mind')">Häirib mind</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('norskamine_joomaastmest', 'Sõltub joomaastmest')">Sõltub joomaastmest</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                            Norskamine võib viidata hingamisraskustele une ajal (nt uneapnoe)
+                        </p>
+                    </div>
+
+                    <!-- LISATUD NORSKAMINE (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedSleep"></div>
+
+                    <!-- KIIRVALIKU PLUS-NUPUD - UNENÄGEMINE -->
+                    <div class="quick-add-section" style="background: #eff6ff; border-color: #3b82f6; margin-top: 15px;">
+                        <h4>Unenägemine ja painajad</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('unenaod_puuduvad', 'Unenäod puuduvad')">Ei näe unenägusid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('unenaod_tavalised', 'Tavalised unenäod')">Tavalised unenäod</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddSleep('painajad_harv', 'Painajad (harv)')">Painajad (harv)</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddSleep('painajad_sage', 'Painajad (sage)')">Painajad (sage)</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                            Sagedased painajad võivad viidata ärevusele, PTSD-le või ravimite kõrvalmõjule
+                        </p>
+                    </div>
+
+                    <!-- KIIRVALIKU PLUS-NUPUD - PARANORMAALSED UNED (BELIEF) -->
+                    <div class="quick-add-section" style="background: #f3f4f6; border-color: #9ca3af; margin-top: 15px;">
+                        <h4>Paranormaalsed või spirituaalsed kogemused une ajal <span style="color: #6b7280; font-size: 0.85rem;">(belief)</span></h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #9ca3af; color: #4b5563;"
+                                    onclick="quickAddSleep('obe', 'Kehaväline kogemus (OBE)')">Kehaväline kogemus</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #9ca3af; color: #4b5563;"
+                                    onclick="quickAddSleep('prohvetlik', 'Prohvetlikud unenäod')">Prohvetlikud unenäod</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #9ca3af; color: #4b5563;"
+                                    onclick="quickAddSleep('samani_rannak', 'Šamaani rännak')">Šamaani rännak</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #9ca3af; color: #4b5563;"
+                                    onclick="quickAddSleep('muu_paranormaalne', 'Muu spirituaalne')">Muu spirituaalne</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #6b7280; margin-top: 8px; margin-bottom: 0;">
+                            Belief-väljad on valikulised ja ei kajastata meditsiinipersonalile vaikimisi
+                        </p>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="sleepNotes">Une lisam&auml;rkmed</label>
+                        <textarea id="sleepNotes" name="sleepNotes" rows="3" placeholder="Lisa täpsustusi une, norskamise või unenägude kohta..."></textarea>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 3: KOORMUSTALUVUS JA TÖÖ -->
+                <section class="form-section">
                     <div class="form-group">
                         <label>Koormustaluvus ja töö</label>
 
