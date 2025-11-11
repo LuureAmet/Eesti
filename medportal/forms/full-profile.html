@@ -134,7 +134,34 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Eluviis</label>
+                        <label>Eluviis ja transport</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD ELUVIISILE -->
+                        <div class="quick-add-section" style="background: #fef3c7; border-color: #f59e0b; margin-bottom: 15px;">
+                            <h4>Transport ja reisimine</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('auto_kasutamine', 'Auto kasutamine')">Auto</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('ühistransport', 'Ühistransport')">Ühistransport</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('rattaga_tööle', 'Rattaga tööle')">Rattaga tööle</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('jalutades_tööle', 'Jalutades tööle')">Jalutades tööle</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('tööreisid', 'Tööreisid')">Tööreisid</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('rahvusvaheline_reis', 'Rahvusvaheline reis')">Rahvusvaheline reis</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali transpordi- ja reisimisviisid, mis mõjutavad eluviisi
+                            </p>
+                        </div>
+
+                        <!-- LISATUD ELUVIISI FAKTORID (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedLifestyle"></div>
+
+                        <label style="margin-top: 15px;">Põhiline elupaik</label>
                         <div class="checkbox-group">
                             <label><input type="checkbox" name="rural" value="yes"> Maaelu</label>
                             <label><input type="checkbox" name="urban" value="yes"> Linn</label>

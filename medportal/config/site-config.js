@@ -1,14 +1,23 @@
-// VERSION: 1.4.4 - 2025-11-11
+// VERSION: 1.4.5 - 2025-11-11
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.4.4",
+    version: "1.4.5",
     date: "11.11.2025",
-    buildTime: "2025-11-11 18:30",
+    buildTime: "2025-11-11 19:00",
 
     // Versioonimärkmed
     changelog: {
+        "1.4.5": {
+            date: "11.11.2025",
+            changes: [
+                "UUENDUS: Eluviis ja transport - plus-nupud 6 transpordiliigile (auto, ühistransport, rattaga tööle, jalutades tööle, tööreisid, rahvusvaheline reis)",
+                "MED_INFO_DB laiendatud eluviisi faktorite infoga",
+                "quickAddLifestyle() funktsioon",
+                "Eluviisi sektsioon struktureeritud: transport + põhiline elupaik"
+            ]
+        },
         "1.4.4": {
             date: "11.11.2025",
             changes: [

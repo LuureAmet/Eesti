@@ -364,6 +364,44 @@ const MED_INFO_DB = {
         externalInfo: `<p>Parandab mälu, vähendab dementsuse riski.</p>`
     },
 
+    // ELUVIIS / TRANSPORT
+    'auto_kasutamine': {
+        title: 'Auto kasutamine',
+        shortInfo: 'Regulaarne autoga sõitmine - pikad istumised, stress.',
+        ourInfo: `<h4>Auto kasutamine</h4><p>Pikad istumised roolis suurendavad kardiovaskulaarset riski, lülisamba probleeme.</p>`,
+        externalInfo: `<p>Soovitus: pausid iga 2 tunni järel, venitused, ergonoomika.</p>`
+    },
+    'ühistransport': {
+        title: 'Ühistransport',
+        shortInfo: 'Bussid, rongid - nakkusrisk, stress, ebaregulaarsus.',
+        ourInfo: `<h4>Ühistransport</h4><p>Võib suurendada nakkusriski, stressi. Positiivne: rohkem liikumist kui autoga.</p>`,
+        externalInfo: `<p>Võib olla parem alternatiiv kui auto sõitmine (rohkem jalutamist).</p>`
+    },
+    'tööreisid': {
+        title: 'Tööreisid',
+        shortInfo: 'Regulaarsed reisid tööks - unehäired, stress, toitumisprobleemid.',
+        ourInfo: `<h4>Tööreisid</h4><p>Ajavahesid vahetus, ebaregulaarne uni ja toitumine - kardiovaskulaarne risk.</p>`,
+        externalInfo: `<p>Sage lendamine: veenilaiendite risk, jetlag, stress.</p>`
+    },
+    'rahvusvaheline_reis': {
+        title: 'Rahvusvaheline reis',
+        shortInfo: 'Sagedased reisid välismaale - ajavahede mõju, stress.',
+        ourInfo: `<h4>Rahvusvaheline reisimine</h4><p>Ajavahede muutus, unehäired, stress, toitumismuutused.</p>`,
+        externalInfo: `<p>Jetlag mõjutab südame rütmi, ainevahetust, immuunsust.</p>`
+    },
+    'rattaga_tööle': {
+        title: 'Rattaga tööle',
+        shortInfo: 'Igapäevane jalgrattaga sõit - suurepärane kardio, keskkonnasõbralik.',
+        ourInfo: `<h4>Rattaga tööle</h4><p>Igapäevane liikumine, parandab südame tervist, vähendab stressi.</p>`,
+        externalInfo: `<p>Uuringud näitavad: rattaga tööle sõitjatel parem südame tervis.</p>`
+    },
+    'jalutades_tööle': {
+        title: 'Jalutades tööle',
+        shortInfo: 'Jalgsi tööle - parim madala intensiivsusega liikumine.',
+        ourInfo: `<h4>Jalutades tööle</h4><p>Igapäevane jalutuskäik parandab südame tervist, meeleolu, vähendab stressi.</p>`,
+        externalInfo: `<p>10 000 sammu päevas vähendab kardiovaskulaarset riski 40%.</p>`
+    },
+
     // PRAKTIKAD
     'koherentshingamine': {
         title: 'Koherentshingamine (5-5)',
@@ -917,4 +955,55 @@ function quickAddActivity(key, name) {
 
     container.appendChild(itemDiv);
     showToast(`${name} lisatud!`);
+}
+
+// Quick add lifestyle factor
+function quickAddLifestyle(key, name) {
+    if (!quickAddCounters.lifestyle) quickAddCounters.lifestyle = 0;
+    quickAddCounters.lifestyle++;
+
+    const containerId = 'quickAddedLifestyle';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        const lifestyleGroup = document.querySelector('.form-group:has([name="rural"])');
+        if (!lifestyleGroup) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        lifestyleGroup.parentNode.insertBefore(container, lifestyleGroup.nextSibling);
+    }
+
+    const itemId = `lifestyle_quick_${quickAddCounters.lifestyle}`;
+    const fieldName = `lifestyle_${key}_${quickAddCounters.lifestyle}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #fef3c7; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #f59e0b;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #92400e; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #f59e0b; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: kui sageli, kui kaua..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud eluviisile!`);
 }
