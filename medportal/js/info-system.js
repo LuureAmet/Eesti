@@ -478,6 +478,64 @@ const MED_INFO_DB = {
         externalInfo: `<p>Eesmärk: alla 2 g naatriumit (5 g soola) päevas. Väldi töödeldud toitu.</p>`
     },
 
+    // LIGIPÄÄS / RESSURSID
+    'loodustoodete_pood': {
+        title: 'Loodustoodete pood',
+        shortInfo: 'Kohalik pood toidulisandite, taimravimite ja mahetoodete jaoks.',
+        ourInfo: `<h4>Loodustoodete pood</h4><p>Kohalik toodete allikas - toidulisandid, vitamiinid, taimtehed, mahetooted.</p>`,
+        externalInfo: `<p>Tavaliselt kvaliteet edasimüüjatest parem, saad nõu.</p>`
+    },
+    'iherb': {
+        title: 'iHerb',
+        shortInfo: 'Rahvusvaheline platvorm toidulisandite ja mahetoodete tellimiseks.',
+        ourInfo: `<h4>iHerb</h4><p>USA platvorm laia valikuga toidulisandeid, vitamiine. Saab Eestisse tellida.</p>`,
+        externalInfo: `<p>Suur valik, hea hinna-kvaliteedi suhe. Tarneaeg 1-2 nädalat.</p>`
+    },
+    'tcm_praktik': {
+        title: 'TCM/Ayurveda praktik',
+        shortInfo: 'Juurdepääs traditsioonilistele looduslikele raviviiside praktikutele.',
+        ourInfo: `<h4>TCM/Ayurveda praktik</h4><p>Traditsiooniline Hiina meditsiin (TCM) või Ayurveda praktik. Isikupärane lähenemine.</p>`,
+        externalInfo: `<p>Võib pakkuda akupunktuuri, taimravimeid, eluviisi nõustamist.</p>`
+    },
+    'retseptiravimid': {
+        title: 'Retseptiravimid aptees',
+        shortInfo: 'Tavaapteek retseptiravimite väljastamiseks.',
+        ourInfo: `<h4>Retseptiravimid</h4><p>Apteek, kust saad arsti ettekirjutusega ravimeid.</p>`,
+        externalInfo: `<p>Osa ravimeid hüvitatakse tervisekassa poolt.</p>`
+    },
+    'internet_tellimus': {
+        title: 'Internetist tellimised',
+        shortInfo: 'Võimalus tellida tooteid ja lisandeid internetist.',
+        ourInfo: `<h4>Internetist tellimised</h4><p>Juurdepääs rahvusvahelistele platvormidele (iHerb, Amazon, jne).</p>`,
+        externalInfo: `<p>Laiem valik, paremad hinnad. Oluline kontrollida kvaliteeti ja päritolu.</p>`
+    },
+
+    // PEREKONDLIK RISK
+    'süda_perekond': {
+        title: 'Südamehaigused perekonnas',
+        shortInfo: 'Pereliikmete südamehaigused alla 65 aasta vanuselt - suurendab riski.',
+        ourInfo: `<h4>Perekondlik südameriski</h4><p>Kui vanemad, õed-vennad haigestusid alla 65a - sinu risk on kõrgem.</p>`,
+        externalInfo: `<p>Geneetiline risk. Oluline ennetav seireaeg ja eluviis.</p>`
+    },
+    'insult_perekond': {
+        title: 'Insult perekonnas',
+        shortInfo: 'Pereliikmete insult alla 65 aasta vanuselt.',
+        ourInfo: `<h4>Perekondlik insuldi risk</h4><p>Geneetiline risk suurem, kui perekonnaliikmed läbisid insuldi alla 65a.</p>`,
+        externalInfo: `<p>Kontrolli vererõhku, kolesterooli regulaarselt.</p>`
+    },
+    'diabeet_perekond': {
+        title: 'Diabeet perekonnas',
+        shortInfo: 'Pereliikmete diabeet - tüüp 2 risk suurem.',
+        ourInfo: `<h4>Perekondlik diabeet</h4><p>2. tüübi diabeet on pärilik. Kui vanemad või õed-vennad, risk 2-6× kõrgem.</p>`,
+        externalInfo: `<p>Kontrolli vere glükoosi, veendu tervislikki toitumisus ja liikumises.</p>`
+    },
+    'vähk_perekond': {
+        title: 'Vähk perekonnas',
+        shortInfo: 'Vähk perekonnaliikmete seas - geneetiline risk.',
+        ourInfo: `<h4>Perekondlik vähirisk</h4><p>Teatud vähiliigid on pärilikud (rinna-, munasarja-, käärsoole vähk).</p>`,
+        externalInfo: `<p>Geneetiline nõustamine võib olla vajalik. Varajane skriining oluline.</p>`
+    },
+
     // PRAKTIKAD
     'koherentshingamine': {
         title: 'Koherentshingamine (5-5)',
@@ -1214,4 +1272,123 @@ function quickAddRestriction(key, name) {
 
     container.appendChild(itemDiv);
     showToast(`${name} lisatud piirangutesse!`);
+}
+
+// Quick add access resource
+function quickAddAccess(key, name) {
+    if (!quickAddCounters.access) quickAddCounters.access = 0;
+    quickAddCounters.access++;
+
+    const containerId = 'quickAddedAccess';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        const accessGroup = document.querySelector('.form-group:has([name="accessHealthStore"])');
+        if (!accessGroup) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        accessGroup.parentNode.insertBefore(container, accessGroup.nextSibling);
+    }
+
+    const itemId = `access_quick_${quickAddCounters.access}`;
+    const fieldName = `access_${key}_${quickAddCounters.access}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #f0fdf4; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #22c55e;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #15803d; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #22c55e; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: asukoht, kaugus, kasutussagedus..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud ligipääsule!`);
+}
+
+// Quick add family risk
+function quickAddFamilyRisk(key, name) {
+    if (!quickAddCounters.familyrisk) quickAddCounters.familyrisk = 0;
+    quickAddCounters.familyrisk++;
+
+    const containerId = 'quickAddedFamilyRisks';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        const riskGroup = document.querySelector('.form-group:has([name="familyRisk"])');
+        if (!riskGroup) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        container.style.marginBottom = '15px';
+        riskGroup.parentNode.insertBefore(container, riskGroup.nextSibling);
+    }
+
+    const itemId = `familyrisk_quick_${quickAddCounters.familyrisk}`;
+    const fieldName = `familyRisk_${key}_${quickAddCounters.familyrisk}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #fef3c7; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #f59e0b;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #92400e; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #f59e0b; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Kes</label>
+                <select name="${fieldName}_who" style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    <option value="">Vali...</option>
+                    <option value="mother">Ema</option>
+                    <option value="father">Isa</option>
+                    <option value="sibling">Õde/vend</option>
+                    <option value="grandparent">Vanaisa/vanaema</option>
+                </select>
+            </div>
+            <div>
+                <label style="font-size: 0.9rem; color: #64748b;">Vanus</label>
+                <input type="number" name="${fieldName}_age" min="1" max="100" placeholder="Nt: 58"
+                       style="width: 100%; padding: 4px; border: 1px solid #cbd5e1; border-radius: 4px;">
+            </div>
+        </div>
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: täpsem diagnoos, tüsistused..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud perekondliku riskina!`);
 }

@@ -1,14 +1,24 @@
-// VERSION: 1.4.6 - 2025-11-11
+// VERSION: 1.4.7 - 2025-11-11
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.4.6",
+    version: "1.4.7",
     date: "11.11.2025",
-    buildTime: "2025-11-11 19:45",
+    buildTime: "2025-11-11 20:15",
 
     // Versioonimärkmed
     changelog: {
+        "1.4.7": {
+            date: "11.11.2025",
+            changes: [
+                "UUENDUS: Ligipääs terviseallikatele - plus-nupud 5 ressursile (loodustoodete pood, iHerb, TCM/Ayurveda, retseptiravimid, internet)",
+                "quickAddAccess() funktsioon",
+                "UUENDUS: Perekondlik risk - plus-nupud 4 haigusele (südamehaigused, insult, diabeet, vähk)",
+                "quickAddFamilyRisk() funktsioon - kellega ja vanusega",
+                "MED_INFO_DB laiendatud 9 kirjega (5 ressursi + 4 perekondliku riski)"
+            ]
+        },
         "1.4.6": {
             date: "11.11.2025",
             changes: [

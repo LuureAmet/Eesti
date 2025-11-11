@@ -493,7 +493,30 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Perekondlik risk (süda/insult &lt;65 a)</label>
+                        <label>Perekondlik risk (haigused perekonnas &lt;65 a)</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD PEREKONDLIKULE RISKILE -->
+                        <div class="quick-add-section" style="background: #fef3c7; border-color: #f59e0b; margin-bottom: 15px;">
+                            <h4>Levinumad perekondlikud riskid</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddFamilyRisk('süda_perekond', 'Südamehaigused')">Südamehaigused</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddFamilyRisk('insult_perekond', 'Insult')">Insult</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddFamilyRisk('diabeet_perekond', 'Diabeet')">Diabeet</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddFamilyRisk('vähk_perekond', 'Vähk')">Vähk</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali haigused, mis esinevad perekonnas alla 65 aasta vanuselt
+                            </p>
+                        </div>
+
+                        <!-- LISATUD PEREKONDLIKUD RISKID (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedFamilyRisks"></div>
+
+                        <label style="margin-top: 15px;">Või märgi lihtsalt perekondlik risk</label>
                         <div class="radio-group">
                             <label><input type="radio" name="familyRisk" value="yes"> Jah</label>
                             <label><input type="radio" name="familyRisk" value="no"> Ei</label>
@@ -879,7 +902,32 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Ligipääs</label>
+                        <label>Ligipääs terviseallikatele</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD LIGIPÄÄSULE -->
+                        <div class="quick-add-section" style="background: #f0fdf4; border-color: #22c55e; margin-bottom: 15px;">
+                            <h4>Saadaolevad ressursid</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
+                                        onclick="quickAddAccess('loodustoodete_pood', 'Loodustoodete pood')">Loodustoodete pood</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
+                                        onclick="quickAddAccess('iherb', 'iHerb')">iHerb</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
+                                        onclick="quickAddAccess('tcm_praktik', 'TCM/Ayurveda praktik')">TCM/Ayurveda</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
+                                        onclick="quickAddAccess('retseptiravimid', 'Retseptiravimid')">Retseptiravimid</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
+                                        onclick="quickAddAccess('internet_tellimus', 'Internetist tellimised')">Internet</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali ressursid, millele sul on juurdepääs
+                            </p>
+                        </div>
+
+                        <!-- LISATUD LIGIPÄÄSUD (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedAccess"></div>
+
+                        <label style="margin-top: 15px;">Või märgi lihtsalt ligipääs</label>
                         <div class="checkbox-group">
                             <label><input type="checkbox" name="accessHealthStore" value="yes"> Loodustoodete pood</label>
                             <label><input type="checkbox" name="accessIherb" value="yes"> iHerb</label>
