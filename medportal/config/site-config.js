@@ -1,14 +1,22 @@
-// VERSION: 1.4.2 - 2025-11-11
+// VERSION: 1.4.3 - 2025-11-11
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.4.2",
+    version: "1.4.3",
     date: "11.11.2025",
-    buildTime: "2025-11-11 17:30",
+    buildTime: "2025-11-11 18:00",
 
     // Versioonimärkmed
     changelog: {
+        "1.4.3": {
+            date: "11.11.2025",
+            changes: [
+                "UUENDUS: Tööriistad - kiirvaliku nupud (vererõhumõõtja, sammulugeja, kaal)",
+                "'Kõik kolm' nupp - valib kõik tööriistad korraga",
+                "selectTool() ja selectAllTools() funktsioonid"
+            ]
+        },
         "1.4.2": {
             date: "11.11.2025",
             changes: [

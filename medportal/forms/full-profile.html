@@ -323,6 +323,24 @@
                 <section class="form-section">
                     <h2>3. Tööriistad ja kodused mõõtmised</h2>
 
+                    <!-- KIIRVALIKU NUPUD -->
+                    <div class="quick-add-section" style="background: #f0fdf4; border-color: #10b981; margin-bottom: 20px;">
+                        <h4>Kiirvalik</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                    onclick="selectTool('bpMonitor', 'bpParams')">Vererõhumõõtja</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                    onclick="selectTool('stepCounter', 'stepParams')">Sammulugeja</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                    onclick="selectTool('dailyWeight', 'weightParams')">Kaal igal hommikul</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #059669; color: white; background: #10b981; font-weight: 600;"
+                                    onclick="selectAllTools()">Kõik kolm</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                            Kiireks valikuks - märgib tööriista "Olemas" ja avab parameetrid
+                        </p>
+                    </div>
+
                     <div class="form-group">
                         <label>Vererõhumõõtja</label>
                         <div class="radio-group">

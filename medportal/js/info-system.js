@@ -784,3 +784,24 @@ function quickAddJobType(key, name) {
     container.appendChild(itemDiv);
     showToast(`${name} lisatud koormustaluvuse juurde!`);
 }
+
+// Quick select tool - for Tööriistad section
+function selectTool(fieldName, paramsId) {
+    // Find the "yes" radio button for this tool
+    const yesRadio = document.querySelector(`input[name="${fieldName}"][value="yes"]`);
+    if (yesRadio) {
+        yesRadio.checked = true;
+        // Trigger the onchange event to show params
+        const event = new Event('change');
+        yesRadio.dispatchEvent(event);
+        showToast('Tööriist valitud!');
+    }
+}
+
+// Select all three tools at once
+function selectAllTools() {
+    selectTool('bpMonitor', 'bpParams');
+    selectTool('stepCounter', 'stepParams');
+    selectTool('dailyWeight', 'weightParams');
+    showToast('Kõik 3 tööriista valitud!');
+}
