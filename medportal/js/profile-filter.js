@@ -95,38 +95,38 @@ function updateProfileSummary() {
 
     // Rasedus/imetamine
     if (profileFilter.pregnancy === 'pregnant') {
-        summary.push(`🤰 <strong>Rase</strong>${profileFilter.pregnancyWeeks ? ` (${profileFilter.pregnancyWeeks} nädalat)` : ''}`);
+        summary.push(`<strong>Rase</strong>${profileFilter.pregnancyWeeks ? ` (${profileFilter.pregnancyWeeks} nädalat)` : ''}`);
     } else if (profileFilter.pregnancy === 'breastfeeding') {
-        summary.push('🤱 <strong>Imetan</strong>');
+        summary.push('<strong>Imetan</strong>');
     }
 
     // Vanus
     if (profileFilter.exactAge) {
-        summary.push(`📅 <strong>${profileFilter.exactAge} aastat</strong>`);
+        summary.push(`<strong>${profileFilter.exactAge} aastat</strong>`);
     } else if (profileFilter.ageCategoryLabel) {
-        summary.push(`📅 <strong>${profileFilter.ageCategoryLabel}</strong>`);
+        summary.push(`<strong>${profileFilter.ageCategoryLabel}</strong>`);
     }
 
     // Sugu
     if (profileFilter.gender === 'male') {
-        summary.push('⚧️ <strong>Mees</strong>');
+        summary.push('<strong>Mees</strong>');
     } else if (profileFilter.gender === 'female') {
-        summary.push('⚧️ <strong>Naine</strong>');
+        summary.push('<strong>Naine</strong>');
     }
 
     // AF + Antikoagulant
     if (profileFilter.afAnticoagulant) {
-        summary.push('⚠️ <strong>AF + Antikoagulant</strong>');
+        summary.push('[!] <strong>AF + Antikoagulant</strong>');
     }
 
     // eGFR
     if (profileFilter.egfr) {
-        summary.push(`🫘 <strong>eGFR: ${profileFilter.egfr}</strong>`);
+        summary.push(`<strong>eGFR: ${profileFilter.egfr}</strong>`);
     }
 
     // Child-Pugh
     if (profileFilter.childPugh) {
-        summary.push(`🫀 <strong>Child-Pugh: ${profileFilter.childPugh}</strong>`);
+        summary.push(`<strong>Child-Pugh: ${profileFilter.childPugh}</strong>`);
     }
 
     // Näita kokkuvõtet ainult kui midagi on valitud
@@ -147,7 +147,7 @@ function updateProfileWarnings() {
     if (profileFilter.pregnancy === 'pregnant') {
         warnings.push({
             type: 'error',
-            icon: '🚫',
+            icon: '[!]',
             title: 'VÄLDI RASEDUSE KORRAL:',
             items: [
                 'Ginkgo biloba (kaasasünni defektid)',
@@ -162,7 +162,7 @@ function updateProfileWarnings() {
 
         warnings.push({
             type: 'success',
-            icon: '✅',
+            icon: '[OK]',
             title: 'OHUTUD VALIKUD:',
             items: [
                 'Ingver (väikestes kogustes, iivelduse vastu)',
@@ -176,7 +176,7 @@ function updateProfileWarnings() {
     if (profileFilter.pregnancy === 'breastfeeding') {
         warnings.push({
             type: 'warning',
-            icon: '⚠️',
+            icon: '[HOIATUS]',
             title: 'ETTEVAATUST IMETAMISEL:',
             items: [
                 'Väldi ginkgo, ginseng, naistepuna',
@@ -191,7 +191,7 @@ function updateProfileWarnings() {
     if (profileFilter.afAnticoagulant) {
         warnings.push({
             type: 'error',
-            icon: '🩸',
+            icon: '[RISK]',
             title: 'AF + ANTIKOAGULANT - VEREJOOKSU RISK:',
             items: [
                 'VÄLDI: ginkgo, viirpuu, naistepuna, lagrits',
@@ -212,7 +212,7 @@ function updateProfileWarnings() {
 
         warnings.push({
             type: severity,
-            icon: '🫘',
+            icon: '[eGFR]',
             title: 'NEERUFUNKTSIOON VÄHENENUD:',
             items: [
                 'Jälgi Mg, K koguseid (hüperkaleemia risk)',
@@ -228,7 +228,7 @@ function updateProfileWarnings() {
     if (profileFilter.childPugh && profileFilter.childPugh !== '' && profileFilter.childPugh !== 'A') {
         warnings.push({
             type: profileFilter.childPugh === 'C' ? 'error' : 'warning',
-            icon: '🫀',
+            icon: '[MAKS]',
             title: 'MAKSAFUNKTSIOON HÄIRITUD:',
             items: [
                 'Vähenda ravimite ja taimede annuseid',
@@ -243,7 +243,7 @@ function updateProfileWarnings() {
     if (profileFilter.ageCategory && (profileFilter.ageCategory.startsWith('65') || profileFilter.ageCategory.startsWith('75') || profileFilter.ageCategory.startsWith('85'))) {
         warnings.push({
             type: 'info',
-            icon: '👴',
+            icon: '[65+]',
             title: 'EAKAS - "START LOW, GO SLOW":',
             items: [
                 'Alusta väiksematest annustest',
@@ -259,7 +259,7 @@ function updateProfileWarnings() {
     if (profileFilter.ageCategory && (profileFilter.ageCategory.startsWith('0-') || profileFilter.ageCategory.startsWith('1-') || profileFilter.ageCategory.startsWith('3-') || profileFilter.ageCategory.startsWith('6-') || profileFilter.ageCategory.startsWith('12-'))) {
         warnings.push({
             type: 'warning',
-            icon: '👶',
+            icon: '[LAPS]',
             title: 'LAPS - ERIREEGLID:',
             items: [
                 'Väldi stimuleerivaid adaptogeene (Panax ginseng)',
@@ -290,5 +290,5 @@ document.addEventListener('DOMContentLoaded', function() {
     // Algne profiili uuendamine
     updateProfileFilter();
 
-    console.log('Profiilifiltri süsteem aktiveeritud! ✅');
+    console.log('Profiilifiltri süsteem aktiveeritud!');
 });

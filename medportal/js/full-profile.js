@@ -298,7 +298,7 @@ function generateFullTxt() {
         txt += `Ravimeid ei kasuta\n`;
     }
     if (d.anticoagulant === 'yes') {
-        txt += `\n⚠ ANTIKOAGULANT (verevedeldaja): ${d.anticoagulantName || 'N/A'} ${d.anticoagulantDose || ''}\n`;
+        txt += `\n[!] ANTIKOAGULANT (verevedeldaja): ${d.anticoagulantName || 'N/A'} ${d.anticoagulantDose || ''}\n`;
         txt += `Neerufunktsioon teada: ${d.kidneyFunction || 'N/A'}\n`;
     }
     txt += `\n`;
@@ -427,7 +427,7 @@ function generateFullTxt() {
     if (!d.bpMorning && !d.bpEvening) missingFields.push('vererõhk');
 
     if (missingFields.length > 0) {
-        txt += `⚠ VÄLJA JÄETUD VÄLJAD: ${missingFields.join(', ')}\n\n`;
+        txt += `[!] VÄLJA JÄETUD VÄLJAD: ${missingFields.join(', ')}\n\n`;
     }
 
     txt += `═══════════════════════════════════════════════════════════\n`;
@@ -846,7 +846,7 @@ function generateAiPromptCustom(selectedSections = [], includeSummary = false) {
                 prompt += `- ${med.name} ${med.dose} (${med.timing})\n`;
             });
             if (d.anticoagulant === 'yes') {
-                prompt += `\n⚠ VÕTAB ANTIKOAGULANTI: ${d.anticoagulantName || 'ei täpsustatud'}\n`;
+                prompt += `\n[!] VÕTAB ANTIKOAGULANTI: ${d.anticoagulantName || 'ei täpsustatud'}\n`;
                 prompt += `OLULINE: Väldi koostoimeid (Dan Shen, ginkgo, naistepuna jne)!\n`;
             }
             prompt += `\n`;

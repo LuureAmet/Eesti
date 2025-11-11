@@ -1,12 +1,12 @@
-# Meigo Medical Medisiiniportaal v1.2
+# Meigo Medical Medisiiniportaal v1.6
 
 **Holistiline tervisevormide süsteem** - patsiendid saavad koostada põhjalikke terviseprofiili vorme ja eksportida neid arstile, AI-le või endale.
 
 ## Versioon
 
-**v1.2.0** - 10.11.2025
+**v1.6.0** - 11.11.2025
 
-Vaata varasemaid versioone: `README-v1.0.md`, `README-v1.1.md`
+Vaata varasemaid versioone: `README-v1.0.md`, `archive/v1.2.0/`
 
 ---
 
@@ -20,27 +20,37 @@ Vaata varasemaid versioone: `README-v1.0.md`, `README-v1.1.md`
 
 ## Funktsioonid
 
-### v1.2 (HETKEL)
+### v1.6.0 (HETKEL) - 11.11.2025
 
+**MASSIIVNE PLUS-NUPPUDE LAIENDUS:**
+- [x] **50+ plus-nuppud**: Kiirvalikud 6 sektsioonis
+- [x] **Elupaik**: 4 valikut (kortermajas, maaelu, linn, öötöö)
+- [x] **Liikumine**: 5 valikut (kõndimine, jalgratas, ujumine, matkamine)
+- [x] **Kaebused**: 9 valikut (peavalu, liigesevalu, naiste kaebused)
+- [x] **Vann/Saun**: 4 valikut (Epsom vann, saun, külm dušš)
+- [x] **Muusika**: 4 valikut (klassikaline, meditatsioon, binauraalsed)
+- [x] **MED_INFO_DB**: 50+ info kirjet, kaheastmeline modaal
+
+**v1.5.0 - PROFIILIFILTRI SÜSTEEM:**
+- [x] **Profiilifiltrid**: Rasedus → Vanus → Sugu → Meditsiinilised riskid
+- [x] **11 vanusekategooriat**: Vastsündinu kuni oldest-old
+- [x] **Reaalajas hoiatused**: Rasedus, antikoagulant, eGFR, Child-Pugh
+- [x] **Sticky header**: Profiili kokkuvõte
+
+**v1.3-v1.4 - UX JA KIIRVALIKUD:**
 - [x] **3 vormi tüüpi**: Kiirprofiil, Täisprofiil (18 sektsiooni), Päevalogi
-- [x] **Eksport**: TXT, JSON, AI prompt (kohandatav checkboxidega)
+- [x] **Eksport**: TXT, JSON, AI prompt (kohandatav)
 - [x] **AI prompt redaktor**: 18 sektsiooni vali/tühista
-- [x] **Tooltipid**: ? ikoonid koos abitekstiga
-- [x] **Kohandatud väljad**: Lisa Number/Date/Text välju ise
-- [x] **VERSION badge**: Paremal ülal nurgas (v1.2.0 + kuupäev)
-- [x] **README/ROADMAP/Lingid**: Lehe lõpus expandable
-- [x] **Toast teated**: Smooth UI (ilma alert-ideta)
-- [x] **Tags input**: Komaga/Enteriga mitmikvalikud
+- [x] **Tooltipid**: Info ikoonid kaheastmelise sisuga
 - [x] **localStorage**: Draft'ide salvestus
-- [x] **Responsive**: Töötab mobile ja desktop
+- [x] **Toast teated**: Smooth UI feedback
 
-### Plaanis (v1.3+)
+### Plaanis (v1.7+)
 
-- [ ] Drag-and-drop prioriteedid
-- [ ] Kompaktne/laiendatud vaade
-- [ ] SQL database integratsioon
-- [ ] PDF täiustused (jsPDF)
-- [ ] Kasutajakontod
+- [ ] **UNI sektsioon**: Norskamine, painajad, paranormaalsed uned
+- [ ] **PRIVAATSUS laiendus**: Jagamise tase, nõusolek, belief-scope
+- [ ] **Tööriistad**: Bioenergia/vaimsed mõõtjad
+- [ ] **Toitumine**: Rikkad toidud, piirangud laiendus
 
 ---
 

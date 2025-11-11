@@ -151,7 +151,7 @@ function validateForm(form) {
 
     if (!isValid && firstInvalid) {
         firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        alert('⚠️ Palun täida kõik nõutud väljad!');
+        alert('[!] Palun täida kõik nõutud väljad!');
     }
 
     return isValid;
