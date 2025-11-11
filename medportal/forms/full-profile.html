@@ -41,22 +41,23 @@
                         Märgi ära protseduurid, ravimid või meetodid, mida sa kindlasti EI soovi või mille suhtes sul on kategooriline keeld.
                     </p>
 
-                    <div class="checkbox-group" id="no-consent-checkboxes">
-                        <label><input type="checkbox" name="noConsent_xray" value="yes"> Röntgen</label>
-                        <label><input type="checkbox" name="noConsent_ct" value="yes"> CT / MRI</label>
-                        <label><input type="checkbox" name="noConsent_vaccines" value="yes"> Vaktsiinid</label>
-                        <label><input type="checkbox" name="noConsent_opioids" value="yes"> Opioidid (tugevad valuvaigistid)</label>
-                        <label><input type="checkbox" name="noConsent_steroids" value="yes"> Kortikosteroidid</label>
-                        <label><input type="checkbox" name="noConsent_antibiotics" value="yes"> Antibiootikumid</label>
-                        <label><input type="checkbox" name="noConsent_surgery" value="yes"> Operatsioonid</label>
-                        <label><input type="checkbox" name="noConsent_bloodTransfusion" value="yes"> Vereülekanne</label>
+                    <!-- KIIRVALIKU PLUS-NUPUD -->
+                    <div class="quick-add-section" style="background: #fee2e2; border-color: #ef4444;">
+                        <h4>Levinumad keelud</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('rontgen', 'Röntgen')">Röntgen</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('ct', 'CT / MRI')">CT / MRI</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('vaktsiinid', 'Vaktsiinid')">Vaktsiinid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('opioidid', 'Opioidid')">Opioidid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('steroidid', 'Kortikosteroidid')">Steroidid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('antibiootikumid', 'Antibiootikumid')">Antibiootikumid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('operatsioonid', 'Operatsioonid')">Operatsioonid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('vereylekanne', 'Vereülekanne')">Vereülekanne</button>
+                        </div>
                     </div>
 
-                    <div class="form-group" style="margin-top: 15px;">
-                        <button type="button" onclick="addNoConsentItem()" class="btn btn-secondary" style="font-size: 0.9rem; padding: 8px 16px;">
-                            + Lisa oma keeld
-                        </button>
-                    </div>
+                    <!-- LISATUD KEELUD (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedNoConsents"></div>
 
                     <div id="custom-no-consent-items" style="margin-top: 10px;"></div>
                 </section>

@@ -262,6 +262,20 @@ const MED_INFO_DB = {
         `
     },
 
+    // EI SOOVI / KEELUD
+    'rontgen': {
+        title: 'Röntgen',
+        shortInfo: 'Röntgenikiiritus diagnostikaks.',
+        ourInfo: `<h4>Röntgen</h4><p>Kiirguspõhine pildistamine luude ja organite nägemiseks.</p>`,
+        externalInfo: `<p>Madal kiirgusannuses diagnostika meetod.</p>`
+    },
+    'ct': {
+        title: 'CT / MRI',
+        shortInfo: 'Kompuutertomograafia või magnetresonantstomograafia.',
+        ourInfo: `<h4>CT / MRI</h4><p>Detailsed kehaskaneeringud.</p>`,
+        externalInfo: `<p>CT kasutab kiir</p>`
+    },
+
     // PRAKTIKAD
     'koherentshingamine': {
         title: 'Koherentshingamine (5-5)',
@@ -630,4 +644,54 @@ function quickAddPractice(practiceKey, practiceName) {
 
     container.appendChild(itemDiv);
     showToast(`${practiceName} lisatud!`);
+}
+
+// Quick add no-consent item
+function quickAddNoConsent(key, name) {
+    if (!quickAddCounters.noconsent) quickAddCounters.noconsent = 0;
+    quickAddCounters.noconsent++;
+
+    const containerId = 'quickAddedNoConsents';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        const section = document.querySelector('#no-consent-section');
+        if (!section) return;
+        container = document.createElement('div');
+        container.id = containerId;
+        container.style.marginTop = '15px';
+        section.appendChild(container);
+    }
+
+    const itemId = `noconsent_quick_${quickAddCounters.noconsent}`;
+    const fieldName = `noConsent_${key}_${quickAddCounters.noconsent}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #fee2e2; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #dc2626;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #991b1b; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+                ${MED_INFO_DB[key] ? `<span class="info-icon" onclick="openInfoModal('${key}')">i<div class="info-popup">${MED_INFO_DB[key].shortInfo}</div></span>` : ''}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #dc2626; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa põhjendus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Põhjendus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Miks keeldud..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} keeld lisatud!`);
 }
