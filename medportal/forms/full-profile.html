@@ -345,14 +345,26 @@
                         <textarea id="diagnoses" name="diagnoses" rows="3" placeholder="Näiteks: Südamepuudulikkus, AF, hüpertensioon..."></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label>Sündmused</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="eventHospital" value="yes"> Haiglaravi</label>
-                            <label><input type="checkbox" name="eventER" value="yes"> EMO külastus</label>
-                            <label><input type="checkbox" name="eventCardioversion" value="yes"> Kardioversioon</label>
-                            <label><input type="checkbox" name="eventAblation" value="yes"> Ablatsioon</label>
-                            <label><input type="checkbox" name="eventNone" value="yes"> Puudub</label>
+                    <!-- SÜNDMUSED -->
+                    <div class="form-group" id="eventSection">
+                        <label style="font-weight: 600; font-size: 1.05rem; margin-bottom: 10px; display: block;">Sündmused</label>
+
+                        <div class="quick-add-section">
+                            <h4>Levinumad sündmused</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" onclick="quickAddEvent('haiglaravi', 'Haiglaravi')">Haiglaravi</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddEvent('emo', 'EMO külastus')">EMO külastus</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddEvent('kardioversioon', 'Kardioversioon')">Kardioversioon</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddEvent('ablatsioon', 'Ablatsioon')">Ablatsioon</button>
+                            </div>
+                        </div>
+
+                        <div id="quickAddedEvents"></div>
+
+                        <div style="margin-top: 10px;">
+                            <label>
+                                <input type="checkbox" name="eventNone" value="yes"> Puudub
+                            </label>
                         </div>
                     </div>
 
@@ -364,17 +376,27 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Allergiad/ülitundlikkus</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="allergies" value="no"> Puudub</label>
-                            <label><input type="radio" name="allergies" value="yes"> On</label>
-                        </div>
-                    </div>
+                    <!-- ALLERGIAD -->
+                    <div class="form-group" id="allergySection">
+                        <label style="font-weight: 600; font-size: 1.05rem; margin-bottom: 10px; display: block;">Allergiad/ülitundlikkus</label>
 
-                    <div class="form-group" id="allergiesDetail" class="hidden">
-                        <label for="allergiesText">Kirjelda allergiad</label>
-                        <textarea id="allergiesText" name="allergiesText" rows="2"></textarea>
+                        <div class="quick-add-section">
+                            <h4>Levinumad allergiad</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" onclick="quickAddAllergy('penitsilliin', 'Penitsilliin')">Penitsilliin</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddAllergy('aspirin', 'Aspiriinи')">Aspiriin</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddAllergy('kontrast', 'Kontrastaine')">Kontrastaine</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddAllergy('tolv', 'Tolm')">Tolm</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddAllergy('toiduallergia', 'Toidud')">Toidud</button>
+                            </div>
+                        </div>
+
+                        <div id="quickAddedAllergies"></div>
+
+                        <div style="margin-top: 10px;">
+                            <label for="allergiesOther">Muud allergiad (ei ole nimekirjas)</label>
+                            <textarea id="allergiesOther" name="allergiesOther" rows="2" placeholder="Kirjelda teisi allergiad..."></textarea>
+                        </div>
                     </div>
                 </section>
 
@@ -460,49 +482,31 @@
                 </section>
 
                 <!-- SEKTSIOON 6: TAIMRAVI -->
-                <section class="form-section">
+                <section class="form-section" id="herbSection">
                     <h2>6. Taimravi ja looduslikud meetodid</h2>
-                    <p class="help-text">Märgi kasutus + taluvus</p>
+                    <p class="help-text">Vali tavalisemad plus-nuppudega või lisa kohandatud</p>
 
-                    <div class="form-group">
-                        <label>Viirpuu (Crataegus)</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="hawthornTea" value="yes"> Tee</label>
-                            <label><input type="checkbox" name="hawthornExtract" value="yes"> Ekstrakt</label>
-                        </div>
-                        <input type="text" name="hawthornEffect" placeholder="Mõju (0-3)" style="margin-top: 10px;">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Arjuna (Terminalia arjuna)</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="arjuna" value="yes"> Kasutan</label>
-                            <label><input type="radio" name="arjuna" value="no" checked> Ei kasuta</label>
+                    <!-- KIIRVALIKU PLUS-NUPUD -->
+                    <div class="quick-add-section">
+                        <h4>Tavalisemad südamele toetavad taimed</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('viirpuu', 'Viirpuu')">Viirpuu</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('arjuna', 'Arjuna')">Arjuna</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('hibiscus', 'Hibiskus')">Hibiskus</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('ginseng', 'Ginseng')">Ginseng</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('astragalus', 'Astragalus')">Astragalus</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('reishi', 'Reishi')">Reishi</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('merevetikas', 'Merevetikas/Kelp')">Merevetikas/Kelp</button>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Hibiscus</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="hibiscus" value="yes"> Kasutan</label>
-                            <label><input type="radio" name="hibiscus" value="no" checked> Ei kasuta</label>
-                        </div>
-                    </div>
+                    <!-- LISATUD TAIMED (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedHerbs"></div>
 
-                    <div class="form-group">
-                        <label>Muud taimed</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="herbDanShen" value="yes"> Dan Shen (Salvia) - ETTEVAATUST antikoagulandiga!</label>
-                            <label><input type="checkbox" name="herbGinseng" value="yes"> Ginseng (Panax)</label>
-                            <label><input type="checkbox" name="herbAstragalus" value="yes"> Astragalus</label>
-                            <label><input type="checkbox" name="herbReishi" value="yes"> Reishi</label>
-                            <label><input type="checkbox" name="herbSeaweed" value="yes"> Merevetikas/kelp</label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="herbsOther">Muud taimravid</label>
-                        <textarea id="herbsOther" name="herbsOther" rows="2" placeholder="Kirjelda..."></textarea>
+                    <!-- KOHANDATUD TAIMRAVID -->
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="herbsOther">Muud taimravid (ei ole nimekirjas)</label>
+                        <textarea id="herbsOther" name="herbsOther" rows="2" placeholder="Kirjelda teisi taimravimeid..."></textarea>
                     </div>
                 </section>
 
@@ -590,29 +594,30 @@
                     </div>
                 </section>
 
-                <!-- SEKTSIOON 8: KEHALISED PRAKTIKAD -->
-                <section class="form-section">
-                    <h2>8. Kehalised praktikad ja rütm</h2>
+                <!-- SEKTSIOON 8: KEHALISED JA MEELE PRAKTIKAD -->
+                <section class="form-section" id="practiceSection">
+                    <h2>8. Kehalised ja meele praktikad</h2>
+                    <p class="help-text">Vali tavalisemad plus-nuppudega või lisa kohandatud</p>
 
-                    <div class="form-group">
-                        <label>Hingamine</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="breathCoherent" value="yes"> Koherents 5-5</label>
-                            <label><input type="checkbox" name="breathAlternate" value="yes"> Vahelduvnina</label>
-                            <label><input type="checkbox" name="breathOther" value="yes"> Muu</label>
+                    <!-- KIIRVALIKU PLUS-NUPUD -->
+                    <div class="quick-add-section">
+                        <h4>Soovitatud praktikad</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" onclick="quickAddPractice('koherentshingamine', 'Koherents 5-5')">Koherents 5-5</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddPractice('vahelduvninahingamine', 'Vahelduvnina')">Vahelduvnina</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddPractice('jalutamine', 'Jalutamine')">Jalutamine</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddPractice('8brokaati', '8 Brokaati')">8 Brokaati</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddPractice('zazen', 'Zazen')">Zazen</button>
                         </div>
-                        <input type="number" name="breathMinutes" placeholder="Minutit päevas" min="0" style="margin-top: 10px;">
                     </div>
 
-                    <div class="form-group">
-                        <label>Liikumine</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="moveWalk" value="yes"> Jalutus</label>
-                            <label><input type="checkbox" name="move8Brocades" value="yes"> 8 Brokaati</label>
-                            <label><input type="checkbox" name="moveTaiji" value="yes"> Taiji</label>
-                            <label><input type="checkbox" name="moveYoga" value="yes"> Jooga (restoratiivne)</label>
-                        </div>
-                        <input type="number" name="moveMinutes" placeholder="Minutit päevas" min="0" style="margin-top: 10px;">
+                    <!-- LISATUD PRAKTIKAD (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedPractices"></div>
+
+                    <!-- MUUD PRAKTIKAD -->
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="practicesOther">Muud praktikad (ei ole nimekirjas)</label>
+                        <textarea id="practicesOther" name="practicesOther" rows="2" placeholder="Kirjelda teisi praktikaid (jooga, taiji, mantra, jne)..."></textarea>
                     </div>
 
                     <div class="form-group">
@@ -625,20 +630,9 @@
                     </div>
                 </section>
 
-                <!-- SEKTSIOON 9: MEELE PRAKTIKAD -->
+                <!-- SEKTSIOON 9: RÜTMIPRAKTIKAD -->
                 <section class="form-section">
-                    <h2>9. Meele- ja rütmipraktikad</h2>
-
-                    <div class="form-group">
-                        <label>Meditatsioon</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="meditZazen" value="yes"> Zazen</label>
-                            <label><input type="checkbox" name="meditMetta" value="yes"> Metta</label>
-                            <label><input type="checkbox" name="meditMantra" value="yes"> Mantra (YAM/OM)</label>
-                            <label><input type="checkbox" name="meditNone" value="yes"> Puudub</label>
-                        </div>
-                        <input type="number" name="meditMinutes" placeholder="Minutit päevas" min="0" style="margin-top: 10px;">
-                    </div>
+                    <h2>9. Rütmipraktikad ja harjumused</h2>
 
                     <div class="form-group">
                         <label for="calmingMusic">Muusikastiilid, mis rahustavad</label>
@@ -826,9 +820,32 @@
         </footer>
     </div>
 
+    <!-- Info Modal -->
+    <div id="infoModal" class="info-modal">
+        <div class="info-modal-content">
+            <div class="info-modal-header">
+                <h3 id="infoModalTitle">Info</h3>
+                <button class="info-modal-close" onclick="closeInfoModal()">&times;</button>
+            </div>
+            <div class="info-modal-tabs">
+                <button class="info-modal-tab active" onclick="switchInfoTab(0)">Meie andmebaas</button>
+                <button class="info-modal-tab" onclick="switchInfoTab(1)">Välised allikad</button>
+            </div>
+            <div class="info-modal-body">
+                <div id="infoTab0" class="info-tab-content active">
+                    <p id="infoContent0">Laen...</p>
+                </div>
+                <div id="infoTab1" class="info-tab-content">
+                    <p id="infoContent1">Laen...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/form-handler.js"></script>
     <script src="../js/tooltips.js"></script>
     <script src="../js/custom-fields.js"></script>
+    <script src="../js/info-system.js"></script>
     <script src="../js/full-profile.js"></script>
 
     <!-- Config ja dokumendid/lingid -->

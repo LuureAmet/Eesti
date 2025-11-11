@@ -450,3 +450,268 @@
 .form-section.compact.expanded h2::after {
     content: " ▲";
 }
+
+/* ============================================
+   PLUS-NUPPUDE SÜSTEEM
+   ============================================ */
+
+.quick-add-section {
+    background: #f0f9ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.quick-add-section h4 {
+    font-size: 0.9rem;
+    margin: 0 0 10px 0;
+    color: #1e40af;
+    font-weight: 600;
+}
+
+.quick-add-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.quick-add-btn {
+    background: white;
+    border: 1px solid #3b82f6;
+    color: #3b82f6;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.quick-add-btn:hover {
+    background: #3b82f6;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.quick-add-btn:active {
+    transform: translateY(0);
+}
+
+.quick-add-btn::before {
+    content: "+";
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* ============================================
+   INFO IKOONID
+   ============================================ */
+
+.info-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: #fbbf24;
+    color: white;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: help;
+    margin-left: 6px;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.info-icon:hover {
+    background: #f59e0b;
+    transform: scale(1.1);
+}
+
+/* Info popup (hover) */
+.info-popup {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: #fef3c7;
+    border: 1px solid #fbbf24;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: #78350f;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    line-height: 1.4;
+}
+
+.info-icon:hover .info-popup {
+    opacity: 1;
+}
+
+.info-popup::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: #fbbf24;
+}
+
+/* Info modal (click) */
+.info-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.info-modal.active {
+    display: flex;
+}
+
+.info-modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.info-modal-header {
+    background: #3b82f6;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-modal-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.info-modal-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s ease;
+}
+
+.info-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.info-modal-tabs {
+    display: flex;
+    background: #f3f4f6;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.info-modal-tab {
+    flex: 1;
+    padding: 12px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #6b7280;
+    transition: all 0.2s ease;
+}
+
+.info-modal-tab.active {
+    background: white;
+    color: #3b82f6;
+    border-bottom: 3px solid #3b82f6;
+}
+
+.info-modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    max-height: calc(80vh - 150px);
+}
+
+.info-tab-content {
+    display: none;
+}
+
+.info-tab-content.active {
+    display: block;
+}
+
+/* ============================================
+   INLINE "LISA INFO" VÄLJAD
+   ============================================ */
+
+.inline-info-toggle {
+    display: inline-block;
+    margin-left: 10px;
+    color: #3b82f6;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.inline-info-toggle:hover {
+    color: #2563eb;
+}
+
+.inline-info-field {
+    display: none;
+    margin-top: 8px;
+    padding: 10px;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+}
+
+.inline-info-field.active {
+    display: block;
+}
+
+.inline-info-field textarea {
+    width: 100%;
+    min-height: 60px;
+    padding: 8px;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    resize: vertical;
+}
+
+.inline-info-field label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
