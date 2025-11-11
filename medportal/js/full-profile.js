@@ -1269,3 +1269,32 @@ function importProfile() {
     // Trigger file picker
     fileInput.click();
 }
+
+// Tööriistad - compact view toggle
+function toggleToolParams(fieldName, paramsId) {
+    const paramsDiv = document.getElementById(paramsId);
+    if (!paramsDiv) return;
+
+    const selectedValue = document.querySelector(`input[name="${fieldName}"]:checked`)?.value;
+
+    // Näita parameetreid ainult kui valitud "yes" või "Olemas" või "Jah"
+    if (selectedValue === 'yes') {
+        paramsDiv.style.display = 'block';
+    } else {
+        paramsDiv.style.display = 'none';
+    }
+}
+
+// Page load - kontrolli olemasolevad valikud ja näita vastavad parameetrid
+document.addEventListener('DOMContentLoaded', function() {
+    // Kontrolli kõiki tööriista välju ja näita parameetreid kui juba valitud
+    const toolMappings = [
+        { field: 'bpMonitor', params: 'bpParams' },
+        { field: 'stepCounter', params: 'stepParams' },
+        { field: 'dailyWeight', params: 'weightParams' }
+    ];
+
+    toolMappings.forEach(tool => {
+        toggleToolParams(tool.field, tool.params);
+    });
+});

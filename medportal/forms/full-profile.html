@@ -278,54 +278,60 @@
                     <div class="form-group">
                         <label>Vererõhumõõtja</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="bpMonitor" value="yes"> Olemas</label>
-                            <label><input type="radio" name="bpMonitor" value="no"> Puudub</label>
+                            <label><input type="radio" name="bpMonitor" value="yes" onchange="toggleToolParams('bpMonitor', 'bpParams')"> Olemas</label>
+                            <label><input type="radio" name="bpMonitor" value="no" onchange="toggleToolParams('bpMonitor', 'bpParams')"> Puudub</label>
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="bpMorning">Keskmine BP hommikul (mmHg)</label>
-                            <input type="text" id="bpMorning" name="bpMorning" placeholder="120/80">
+                    <div id="bpParams" class="tool-params" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bpMorning">Keskmine BP hommikul (mmHg)</label>
+                                <input type="text" id="bpMorning" name="bpMorning" placeholder="120/80">
+                            </div>
+                            <div class="form-group">
+                                <label for="bpEvening">Keskmine BP õhtul (mmHg)</label>
+                                <input type="text" id="bpEvening" name="bpEvening" placeholder="120/80">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="bpEvening">Keskmine BP õhtul (mmHg)</label>
-                            <input type="text" id="bpEvening" name="bpEvening" placeholder="120/80">
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label for="restingHR">Pulss rahus (lpm)</label>
-                        <input type="number" id="restingHR" name="restingHR" min="30" max="200">
+                        <div class="form-group">
+                            <label for="restingHR">Pulss rahus (lpm)</label>
+                            <input type="number" id="restingHR" name="restingHR" min="30" max="200">
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label>Sammulugeja/telefon</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="stepCounter" value="yes"> Jah</label>
-                            <label><input type="radio" name="stepCounter" value="no"> Ei</label>
+                            <label><input type="radio" name="stepCounter" value="yes" onchange="toggleToolParams('stepCounter', 'stepParams')"> Jah</label>
+                            <label><input type="radio" name="stepCounter" value="no" onchange="toggleToolParams('stepCounter', 'stepParams')"> Ei</label>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="dailySteps">Päevane sammude tase</label>
-                        <input type="number" id="dailySteps" name="dailySteps" min="0">
+                    <div id="stepParams" class="tool-params" style="display: none;">
+                        <div class="form-group">
+                            <label for="dailySteps">Päevane sammude tase</label>
+                            <input type="number" id="dailySteps" name="dailySteps" min="0">
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label>Kaal igal hommikul</label>
                         <div class="radio-group">
-                            <label><input type="radio" name="dailyWeight" value="yes"> Jah</label>
-                            <label><input type="radio" name="dailyWeight" value="no"> Ei</label>
+                            <label><input type="radio" name="dailyWeight" value="yes" onchange="toggleToolParams('dailyWeight', 'weightParams')"> Jah</label>
+                            <label><input type="radio" name="dailyWeight" value="no" onchange="toggleToolParams('dailyWeight', 'weightParams')"> Ei</label>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Viimase 7 päeva kaalutrend</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="weightTrend" value="up"> Tõuseb</label>
-                            <label><input type="radio" name="weightTrend" value="stable"> Stabiilne</label>
-                            <label><input type="radio" name="weightTrend" value="down"> Langeb</label>
+                    <div id="weightParams" class="tool-params" style="display: none;">
+                        <div class="form-group">
+                            <label>Viimase 7 päeva kaalutrend</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="weightTrend" value="up"> Tõuseb</label>
+                                <label><input type="radio" name="weightTrend" value="stable"> Stabiilne</label>
+                                <label><input type="radio" name="weightTrend" value="down"> Langeb</label>
+                            </div>
                         </div>
                     </div>
                 </section>
