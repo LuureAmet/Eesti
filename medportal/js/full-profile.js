@@ -1285,6 +1285,79 @@ function toggleToolParams(fieldName, paramsId) {
     }
 }
 
+// Tühjenda vorm
+function clearForm() {
+    if (!confirm('Kas oled kindel, et soovid vormi täielikult tühjendada? Kõik sisestatud andmed lähevad kaotsi!')) {
+        return;
+    }
+
+    const form = document.querySelector('form');
+    if (!form) return;
+
+    // Reset vorm
+    form.reset();
+
+    // Eemalda kõik dünaamiliselt lisatud elemendid
+    const dynamicContainers = [
+        'quickAddedHerbs',
+        'quickAddedEvents',
+        'quickAddedAllergies',
+        'quickAddedPractices',
+        'custom-complaints-list',
+        'custom-no-consent-items'
+    ];
+
+    dynamicContainers.forEach(id => {
+        const container = document.getElementById(id);
+        if (container) {
+            container.innerHTML = '';
+        }
+    });
+
+    // Kustuta localStorage draft
+    localStorage.removeItem('fullProfileDraft');
+
+    // Update progress
+    updateProgress();
+
+    showToast('Vorm tühjendatud!', 2000);
+}
+
+// Versiooniinfo laadimine
+function loadVersionInfo() {
+    if (typeof SITE_CONFIG === 'undefined') return;
+
+    // Versioon, kuupäev, build time
+    const versionEl = document.getElementById('appVersion');
+    const dateEl = document.getElementById('appDate');
+    const buildTimeEl = document.getElementById('appBuildTime');
+
+    if (versionEl) versionEl.textContent = SITE_CONFIG.version || 'N/A';
+    if (dateEl) dateEl.textContent = SITE_CONFIG.date || 'N/A';
+    if (buildTimeEl) buildTimeEl.textContent = SITE_CONFIG.buildTime || 'N/A';
+
+    // Changelog
+    const changelogEl = document.getElementById('changelogContent');
+    if (changelogEl && SITE_CONFIG.changelog) {
+        let html = '';
+
+        Object.keys(SITE_CONFIG.changelog).forEach(version => {
+            const versionData = SITE_CONFIG.changelog[version];
+            html += `<div style="margin-bottom: 20px; border-left: 3px solid #3b82f6; padding-left: 15px;">`;
+            html += `<h4 style="margin: 0 0 5px 0; color: #1f2937;">v${version} <span style="font-weight: normal; color: #6b7280; font-size: 0.9rem;">(${versionData.date})</span></h4>`;
+            html += `<ul style="margin: 5px 0; padding-left: 20px; color: #374151;">`;
+
+            versionData.changes.forEach(change => {
+                html += `<li style="margin: 3px 0;">${change}</li>`;
+            });
+
+            html += `</ul></div>`;
+        });
+
+        changelogEl.innerHTML = html;
+    }
+}
+
 // Page load - kontrolli olemasolevad valikud ja näita vastavad parameetrid
 document.addEventListener('DOMContentLoaded', function() {
     // Kontrolli kõiki tööriista välju ja näita parameetreid kui juba valitud
@@ -1297,4 +1370,7 @@ document.addEventListener('DOMContentLoaded', function() {
     toolMappings.forEach(tool => {
         toggleToolParams(tool.field, tool.params);
     });
+
+    // Laadi versiooniinfo
+    loadVersionInfo();
 });

@@ -1,10 +1,39 @@
-// VERSION: 1.2.0 - 2025-01-09
+// VERSION: 1.4.0 - 2025-01-11
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.3.0",
-    date: "10.01.2025",
+    version: "1.4.0",
+    date: "11.01.2025",
+    buildTime: "2025-01-11 15:45",
+
+    // Versioonimärkmed
+    changelog: {
+        "1.4.0": {
+            date: "11.01.2025",
+            changes: [
+                "SUUR UUENDUS: Plus-nuppude süsteem levinumatele valikutele",
+                "Info ikoonid (i) - hover popup + klikk avab modal detailse infoga",
+                "Inline 'Lisa info' väljad iga valiku juurde täpsustusteks",
+                "Meditsiini info andmebaas (20+ elementi: taimed, sündmused, allergiad, praktikad)",
+                "Refaktoritud: Taimed, Sündmused, Allergiad, Praktikad sektsioonid",
+                "Profiili import/export funktsioon (JSON)",
+                "Tööriistad compact view - parameetrid peidetakse kui 'Puudub'"
+            ]
+        },
+        "1.3.0": {
+            date: "10.01.2025",
+            changes: [
+                "Menüü liitmine: sektsioonid 7 ja 16 üheks",
+                "AI prompt parandused (custom fields, kaebused)",
+                "Kaebuste lisamine dünaamiliselt",
+                "Koormustaluvuse kirjeldus",
+                "'Lisa ravim' nupu tekst",
+                "24h kellaformaat",
+                "Salvestamise ajatempel"
+            ]
+        }
+    },
 
     // README ja ROADMAP failide asukohad
     docs: {
