@@ -1155,64 +1155,33 @@
                         </p>
                     </div>
 
+                    <!-- KODUSED MÕÕTMISED (PLUS-SÜSTEEM) -->
                     <div class="form-group">
-                        <label>Vererõhumõõtja</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="bpMonitor" value="yes" onchange="toggleToolParams('bpMonitor', 'bpParams')"> Olemas</label>
-                            <label><input type="radio" name="bpMonitor" value="no" onchange="toggleToolParams('bpMonitor', 'bpParams')"> Puudub</label>
-                        </div>
-                    </div>
-
-                    <div id="bpParams" class="tool-params" style="display: none;">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="bpMorning">Keskmine BP hommikul (mmHg)</label>
-                                <input type="text" id="bpMorning" name="bpMorning" placeholder="120/80">
-                            </div>
-                            <div class="form-group">
-                                <label for="bpEvening">Keskmine BP õhtul (mmHg)</label>
-                                <input type="text" id="bpEvening" name="bpEvening" placeholder="120/80">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="restingHR">Pulss rahus (lpm)</label>
-                            <input type="number" id="restingHR" name="restingHR" min="30" max="200">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Sammulugeja/telefon</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="stepCounter" value="yes" onchange="toggleToolParams('stepCounter', 'stepParams')"> Jah</label>
-                            <label><input type="radio" name="stepCounter" value="no" onchange="toggleToolParams('stepCounter', 'stepParams')"> Ei</label>
-                        </div>
-                    </div>
-
-                    <div id="stepParams" class="tool-params" style="display: none;">
-                        <div class="form-group">
-                            <label for="dailySteps">Päevane sammude tase</label>
-                            <input type="number" id="dailySteps" name="dailySteps" min="0">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Kaal igal hommikul</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="dailyWeight" value="yes" onchange="toggleToolParams('dailyWeight', 'weightParams')"> Jah</label>
-                            <label><input type="radio" name="dailyWeight" value="no" onchange="toggleToolParams('dailyWeight', 'weightParams')"> Ei</label>
-                        </div>
-                    </div>
-
-                    <div id="weightParams" class="tool-params" style="display: none;">
-                        <div class="form-group">
-                            <label>Viimase 7 päeva kaalutrend</label>
-                            <div class="radio-group">
-                                <label><input type="radio" name="weightTrend" value="up"> Tõuseb</label>
-                                <label><input type="radio" name="weightTrend" value="stable"> Stabiilne</label>
-                                <label><input type="radio" name="weightTrend" value="down"> Langeb</label>
+                        <div class="quick-add-section" style="background: #dbeafe; border-color: #3b82f6;">
+                            <h4 style="display: flex; align-items: center; gap: 8px;">
+                                Kodused mõõtmised
+                                <span class="info-icon" style="cursor: help;" title="Kui kasutad koduseid mõõtmis-/jälgimisseadmeid, märgi siia. Vajuta siia et näha rohkem infot.">i</span>
+                            </h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddHomeMeasurement('vererohk', 'Vererõhumõõtja')">Vererõhumõõtja</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddHomeMeasurement('sammulugeja', 'Sammulugeja/telefon')">Sammulugeja</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddHomeMeasurement('kaal', 'Kaal igal hommikul')">Kaal igal hommikul</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddHomeMeasurement('suhkur', 'Veresuhkru mõõtja')">Veresuhkru mõõtja</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddHomeMeasurement('temp', 'Termomeeter')">Termomeeter</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddHomeMeasurement('oksumeter', 'Oksümeet er')">Oksümeeter</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddHomeMeasurement('muu', 'Muu seade')">Muu</button>
                             </div>
                         </div>
+
+                        <!-- LISATUD MÕÕTMISED (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedHomeMeasurements"></div>
                     </div>
 
                     <!-- PAKETT 8: ALTERNATIIVSED/SPIRITUAALSED TÖÖRIISTAD -->
@@ -1365,32 +1334,38 @@
                         <button type="button" class="add-row-btn" onclick="addMedicationRow()">+ Lisa ravim</button>
                     </div>
 
+                    <!-- VEREVEDELDAJAD (PLUS-SÜSTEEM) -->
                     <div class="form-group" style="margin-top: 20px;">
-                        <label>Antikoagulant?</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="anticoagulant" value="yes"> Jah</label>
-                            <label><input type="radio" name="anticoagulant" value="no"> Ei</label>
+                        <div class="quick-add-section" style="background: #fef2f2; border-color: #ef4444;">
+                            <h4 style="display: flex; align-items: center; gap: 8px;">
+                                Verevedeldajad (antikoagulandid ja trombotsüütide agregatsiooni inhibiitorid)
+                                <span class="info-icon" style="cursor: help;" title="Ravimid, mis vähendavad verehüübimist. OLULINE: paljud taimed (ginkgo, küüslauk, naistepuna) võivad suurendada verejooksu riski! Vajuta siia et näha rohkem infot.">i</span>
+                            </h4>
+                            <p style="font-size: 0.9rem; color: #991b1b; margin-bottom: 15px;">
+                                Kui kasutad verevedeldajaid, on VÄGA oluline vältida teatud taimi (ginkgo, naistepuna, küüslauk, ingver, kurkum), mis suurendavad verejooksu riski.
+                            </p>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAnticoagulant('varfariin', 'Varfariin (Warfarin)')">Varfariin</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAnticoagulant('apiksabaan', 'Apiksabaan (Eliquis)')">Apiksabaan</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAnticoagulant('rivaroksabaan', 'Rivaroksabaan (Xarelto)')">Rivaroksabaan</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAnticoagulant('dabigatraan', 'Dabigatraan (Pradaxa)')">Dabigatraan</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAnticoagulant('edoksabaan', 'Edoksabaan (Lixiana)')">Edoksabaan</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f97316; color: #9a3412;"
+                                        onclick="quickAddAnticoagulant('aspiriin', 'Aspiriin')">Aspiriin</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f97316; color: #9a3412;"
+                                        onclick="quickAddAnticoagulant('klopidogreel', 'Klopidogreel (Plavix)')">Klopidogreel</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAnticoagulant('muu', 'Muu verevedeldaja')">Muu</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <div id="anticoagulantDetails" class="hidden">
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="anticoagulantName">Mis ravim</label>
-                                <input type="text" id="anticoagulantName" name="anticoagulantName" placeholder="Warfarin, Eliquis...">
-                            </div>
-                            <div class="form-group">
-                                <label for="anticoagulantDose">Annus</label>
-                                <input type="text" id="anticoagulantDose" name="anticoagulantDose">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>Neerufunktsioon teada</label>
-                            <div class="radio-group">
-                                <label><input type="radio" name="kidneyFunction" value="yes"> Jah</label>
-                                <label><input type="radio" name="kidneyFunction" value="no"> Ei</label>
-                            </div>
-                        </div>
+                        <!-- LISATUD VEREVEDELDAJAD (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedAnticoagulants"></div>
                     </div>
 
                     <div class="form-group">

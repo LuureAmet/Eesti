@@ -2920,3 +2920,192 @@ function quickAddHomeSupport(key, name) {
     container.appendChild(itemDiv);
     showToast(`${name} lisatud!`);
 }
+
+
+// Quick add anticoagulants (blood thinners)
+function quickAddAnticoagulant(key, name) {
+    if (!quickAddCounters.anticoagulant) quickAddCounters.anticoagulant = 0;
+    quickAddCounters.anticoagulant++;
+
+    const containerId = 'quickAddedAnticoagulants';
+    const container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`Container ${containerId} not found`);
+        return;
+    }
+
+    const itemId = `anticoagulant_quick_${quickAddCounters.anticoagulant}`;
+    const fieldName = `anticoagulant_${key}_${quickAddCounters.anticoagulant}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #fef2f2; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #ef4444;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #991b1b; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <div style="margin-left: 24px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Annus</label>
+            <input type="text" name="${fieldName}_dose" placeholder="Nt: 5 mg"
+                   style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+        </div>
+        <div style="margin-left: 24px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Sagedus</label>
+            <select name="${fieldName}_frequency" style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+                <option value="">Vali...</option>
+                <option value="1x_day">1× päevas</option>
+                <option value="2x_day">2× päevas</option>
+                <option value="vajadusel">Vajadusel</option>
+                <option value="muu">Muu</option>
+            </select>
+        </div>
+        ${key === 'muu' ? `
+        <div style="margin-left: 24px; margin-bottom: 8px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Täpsusta ravimi nimi</label>
+            <input type="text" name="${fieldName}_custom_name" placeholder="Ravimi nimi..."
+                   style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+        </div>
+        ` : ''}
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: alates 2023, neerud kontrollitud, INR eesmärk 2-3..."></textarea>
+            </div>
+        </div>
+        <div style="margin-left: 24px; margin-top: 10px; padding: 10px; background: #fef9c3; border-left: 3px solid #f59e0b; border-radius: 4px;">
+            <p style="margin: 0; font-size: 0.85rem; color: #92400e;">
+                <strong>⚠ HOIATUS:</strong> Vältida taimi: ginkgo, naistepuna, küüslauk, ingver, kurkum (suurendavad verejooksu riski).
+                Soovitatavad: hibiskus, viirpuu, arjuna.
+            </p>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}
+
+
+// Quick add home measurements
+function quickAddHomeMeasurement(key, name) {
+    if (!quickAddCounters.homeMeasurement) quickAddCounters.homeMeasurement = 0;
+    quickAddCounters.homeMeasurement++;
+
+    const containerId = 'quickAddedHomeMeasurements';
+    const container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`Container ${containerId} not found`);
+        return;
+    }
+
+    const itemId = `homeMeasurement_quick_${quickAddCounters.homeMeasurement}`;
+    const fieldName = `homeMeasurement_${key}_${quickAddCounters.homeMeasurement}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #dbeafe; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #3b82f6;';
+    itemDiv.id = itemId;
+
+    let specificFields = '';
+    
+    if (key === 'vererohk') {
+        specificFields = `
+            <div style="margin-left: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px;">
+                <div>
+                    <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">BP hommikul (mmHg)</label>
+                    <input type="text" name="${fieldName}_morning" placeholder="120/80"
+                           style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                </div>
+                <div>
+                    <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">BP õhtul (mmHg)</label>
+                    <input type="text" name="${fieldName}_evening" placeholder="120/80"
+                           style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                </div>
+            </div>
+            <div style="margin-left: 24px;">
+                <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Pulss rahus (lpm)</label>
+                <input type="number" name="${fieldName}_pulse" min="30" max="200" placeholder="Nt: 70"
+                       style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+            </div>
+        `;
+    } else if (key === 'sammulugeja') {
+        specificFields = `
+            <div style="margin-left: 24px;">
+                <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Päevane sammude keskmine</label>
+                <input type="number" name="${fieldName}_daily_steps" min="0" placeholder="Nt: 8000"
+                       style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+            </div>
+        `;
+    } else if (key === 'kaal') {
+        specificFields = `
+            <div style="margin-left: 24px;">
+                <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Viimase 7 päeva trend</label>
+                <select name="${fieldName}_trend" style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+                    <option value="">Vali...</option>
+                    <option value="up">Tõuseb</option>
+                    <option value="stable">Stabiilne</option>
+                    <option value="down">Langeb</option>
+                </select>
+            </div>
+        `;
+    } else if (key === 'suhkur') {
+        specificFields = `
+            <div style="margin-left: 24px;">
+                <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Tühja kõhuga keskmine (mmol/L)</label>
+                <input type="number" name="${fieldName}_fasting" step="0.1" min="0" max="30" placeholder="Nt: 5.5"
+                       style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+            </div>
+        `;
+    } else if (key === 'oksumeter') {
+        specificFields = `
+            <div style="margin-left: 24px;">
+                <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Tavaline SpO2 (%)</label>
+                <input type="number" name="${fieldName}_spo2" min="0" max="100" placeholder="Nt: 96"
+                       style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+            </div>
+        `;
+    } else if (key === 'muu') {
+        specificFields = `
+            <div style="margin-left: 24px; margin-bottom: 8px;">
+                <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Seadme nimetus</label>
+                <input type="text" name="${fieldName}_device_name" placeholder="Nt: EKG seade, glükomeeter..."
+                       style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+            </div>
+        `;
+    }
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #1e3a8a; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #3b82f6; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        ${specificFields}
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: seadme mark, mõõtmise aeg, regulaarsus..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}
