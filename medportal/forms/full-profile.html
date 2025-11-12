@@ -1415,22 +1415,37 @@
                 <section class="form-section">
                     <h2>7. Toitumisprofiil, eelistused ja menüü</h2>
 
+                    <!-- SÖÖGIRÜTM JA PAAST (PLUS-SÜSTEEM) -->
                     <div class="form-group">
-                        <label>Söögirütm akendes</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="mealFrequency" value="2x"> 2× päevas</label>
-                            <label><input type="radio" name="mealFrequency" value="3x"> 3× päevas</label>
-                            <label><input type="radio" name="mealFrequency" value="flexible"> Paindlik</label>
+                        <div class="quick-add-section" style="background: #fef3c7; border-color: #f59e0b;">
+                            <h4 style="display: flex; align-items: center; gap: 8px;">
+                                Söögiajaaknad ja paast
+                                <span class="info-icon" style="cursor: help;" title="Millal ja kui tihti sööd? Kui kasutad paastumist (intermittent fasting), märgi siia. Vajuta siia et näha rohkem infot.">i</span>
+                            </h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                        onclick="quickAddMealPattern('2x_paev', '2× päevas (regulaarne)')">2× päevas</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                        onclick="quickAddMealPattern('3x_paev', '3× päevas (regulaarne)')">3× päevas</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                        onclick="quickAddMealPattern('paindlik', 'Paindlik (söön kui jõuan)')">Paindlik</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                        onclick="quickAddMealPattern('16_8', 'Paast 16:8 (8h aken)')">Paast 16:8</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                        onclick="quickAddMealPattern('12_12', 'Paast 12:12')">Paast 12:12</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                        onclick="quickAddMealPattern('18_6', 'Paast 18:6')">Paast 18:6</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                        onclick="quickAddMealPattern('hobo', 'Hobo (söön kui juhtub)')">Hobo-stiil</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                        onclick="quickAddMealPattern('linnakiirtoit', 'Linnakiirtoit')">Linnakiirtoit</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                        onclick="quickAddMealPattern('muu', 'Muu muster')">Muu</button>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label>Paast</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="fasting" value="no"> Ei</label>
-                            <label><input type="radio" name="fasting" value="12-14h"> 12-14 h</label>
-                            <label><input type="radio" name="fasting" value="other"> Muu</label>
-                        </div>
+                        <!-- LISATUD SÖÖGIMUSTRID (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedMealPatterns"></div>
                     </div>
 
                     <div class="form-group">

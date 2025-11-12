@@ -3109,3 +3109,86 @@ function quickAddHomeMeasurement(key, name) {
     container.appendChild(itemDiv);
     showToast(`${name} lisatud!`);
 }
+
+
+// Quick add meal patterns
+function quickAddMealPattern(key, name) {
+    if (!quickAddCounters.mealPattern) quickAddCounters.mealPattern = 0;
+    quickAddCounters.mealPattern++;
+
+    const containerId = 'quickAddedMealPatterns';
+    const container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`Container ${containerId} not found`);
+        return;
+    }
+
+    const itemId = `mealPattern_quick_${quickAddCounters.mealPattern}`;
+    const fieldName = `mealPattern_${key}_${quickAddCounters.mealPattern}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #fef3c7; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #f59e0b;';
+    itemDiv.id = itemId;
+
+    let specificFields = '';
+    
+    if (key.includes('paast') || key.includes('16_8') || key.includes('12_12') || key.includes('18_6')) {
+        specificFields = `
+            <div style="margin-left: 24px;">
+                <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Söögiajaaken (nt 12:00-20:00)</label>
+                <input type="text" name="${fieldName}_window" placeholder="Nt: 12:00-20:00"
+                       style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+            </div>
+        `;
+    } else if (key === 'hobo') {
+        specificFields = `
+            <div style="margin-left: 24px; padding: 10px; background: #fef9c3; border-radius: 4px; margin-bottom: 8px;">
+                <p style="margin: 0; font-size: 0.85rem; color: #92400e;">
+                    "Hobo-stiil": söön kui võimalus juhtub, ebaregulaarne, kohati vahele jäetud toidukorrad
+                </p>
+            </div>
+        `;
+    } else if (key === 'linnakiirtoit') {
+        specificFields = `
+            <div style="margin-left: 24px; padding: 10px; background: #fef9c3; border-radius: 4px; margin-bottom: 8px;">
+                <p style="margin: 0; font-size: 0.85rem; color: #92400e;">
+                    Linnakiirtoit: kiire söök töö vahel, take-away, kohvikutes
+                </p>
+            </div>
+        `;
+    } else if (key === 'muu') {
+        specificFields = `
+            <div style="margin-left: 24px; margin-bottom: 8px;">
+                <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Kirjelda oma söögimustrit</label>
+                <input type="text" name="${fieldName}_custom" placeholder="Nt: 5× väikseid portsjoneid, grazing..."
+                       style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+            </div>
+        `;
+    }
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #92400e; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #f59e0b; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        ${specificFields}
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus (valikuline)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: nädalavahetustel erinev, sõltub töögraafikust..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}
