@@ -1,9 +1,9 @@
 # PRAEGUNE SEIS - Meigo Medical Medisiiniportaal
 
-**Kuupäev:** 11.11.2025
-**Versioon:** v1.6.0
-**Branch:** `claude/medical-portal-setup-011CUxmtZU5NRXCwtdEnHnBS`
-**Viimane commit:** e7b29c9
+**Kuupäev:** 12.11.2025
+**Versioon:** v1.7.5
+**Branch:** `claude/medical-portal-v1.7-implementation-011CV2rzuWMTMXiRnuywRdE2`
+**Viimane commit:** c41dd38
 
 ---
 
@@ -107,6 +107,140 @@
 - Kaebused: Punane (#fef2f2)
 - Vann/Saun: Helesinine (#e0f2fe)
 - Muusika: Lilla (#f3e8ff)
+
+---
+
+### **v1.7.5 - MASSIIVNE UUENDUS (13 PAKETTI!) (12.11.2025)**
+
+**Failid:**
+- `medportal/forms/full-profile.html` (MASSIIVNE UUENDUS)
+- `medportal/js/info-system.js` (MASSIIVNE UUENDUS)
+- `medportal/config/site-config.js` (v1.7.5)
+
+#### **PAKETT 1: Profiilifiltri täiendused**
+- ✅ "Lapseootel" label muudetud "Rasedus" → **"Lapseootel"**
+- ✅ Centaur vanus (100-120 aastat) kullasel taustal
+- ✅ Hõlmab Suur-Tõu (elf) vanused: 0.08-20 (väikelaps), 20-100 (täiskasvanu), 100-175 (eakas), 175+ (kõrgealine)
+- ✅ Reaalajas hoiatused täiustatud
+
+#### **PAKETT 2: Bio-markerid (4 plus-nuppu)**
+- ✅ `quickAddBioMarker()` funktsioon
+- ✅ 4 bio-markerit: Kromosoomid, Gonaddid, Hormoonid, Muu bio-marker
+- ✅ Iga marker küsib: tüüp, väärtus, kuupäev, märkused
+
+#### **PAKETT 3: Profiilifilter täiendused**
+- ✅ 7 uut filtrit: toidupiirangud, allergiad, kultuurilised, usulis-moraalsed, elustiil, füüsiline pool, perekondlik
+- ✅ Kombineeritud filtrid (nt rasedus+toidupiirangud)
+- ✅ Reaalajas filtreerimise preview
+
+#### **PAKETT 4: Mütoloogia/Identiteet**
+- ✅ Mütoloogilised liigid: inimene, elf (suur-tõu), päkapikk (väike-tõu), kääbus, centaur, poolinimene, väetee, muu
+- ✅ Vanusekategooriate automaatne kohandamine liigi järgi
+
+#### **PAKETT 5: Spordid ja harjutused (12+ plus-nuppu)**
+- ✅ `quickAddSport()` funktsioon
+- ✅ 12 sporti: jõusaal, jooga, taiji, kergejõustik, võitluskunstid, Tsigong, raskusjooksud, Crossfit, sulgpall, korvpall, võrkpall, veloergomeeter
+- ✅ Iga sport: sagedus, kestus, intensiivsus, märkused
+
+#### **PAKETT 6: Töö tüübid (12+ plus-nuppu)**
+- ✅ `quickAddJobType()` funktsioon
+- ✅ 12 töötüüpi: istuv arvutitöö, füüsiline töö, öötöö, vahetustega töö, transport, müük, õpetaja, meditsiin, turvateenistus, jaotaja (Bolt), metsatööline, muu
+- ✅ Töövõime hinnang: kompaktne 2-veeruline layout (dropdown + checkboxed)
+
+#### **PAKETT 7: Töövõime hinnang**
+- ✅ Töövõime % dropdown (100%, 75%, 50%, 25%, 0%)
+- ✅ Piirangud töö jaoks (6 tüüpi): raske tõstmine, püstijäämine, pikem istumine, arvutitöö, öötööd, stressitaluvus
+- ✅ Kompaktne UI: 2-veeruline grid, vähendatud vertikaalne pikkus ~40%
+
+#### **PAKETT 8: Alternatiivsed tööriistad (10+ plus-nuppu)**
+- ✅ `quickAddAltTool()` funktsioon
+- ✅ 10 tööriista: bioenergia mõõtja, eluenergia mõõtja, aura kaamera, pendel, Hiina pulsi hindamine, nõia mõõtmised, UroDevTugi, tšakrate skanner, kristallravi, muu
+- ✅ Märgitud "(belief)" scope metadata
+- ✅ Kasutamise sagedus + tulemused
+
+#### **PAKETT 9: Meditsiiniportaalid (Euroopa/Maailma)**
+- ✅ `quickAddPortal()` funktsioon
+- ✅ Eesti portaalid (4): Digilugu, Tervisekassa, TIS, Haigla portaal
+- ✅ Euroopa portaalid (7): EHIC, e-Tervis (Soome), 1177 (Rootsi), Patientenakte (Saksamaa), Dossier Médical (Prantsusmaa), My Health Online (UK), EU portaal
+- ✅ Maailma portaalid (6): MyChart/EPIC (USA), NHS App (UK), Gezondheid.be (Belgia), Santé.fr (Prantsusmaa), MyHealth (Kanada), Muu portaal
+- ✅ Värvikoodi: Eesti (sinine), Euroopa (kollane), Maailm (roheline)
+- ✅ Väljad: kasutajakonto (jah/ei), viimati kasutatud, märkused
+
+#### **PAKETT 10: Antikoagulant → Verevedeldajad**
+- ✅ Label muudetud "Antikoagulant?" → **"Verevedeldajad?"**
+- ✅ Tooltip: "Varfariin, apiksabaan, rivaroksabaan, või aspirin/klopidogreel"
+- ✅ Koostoime hoiatused (ginkgo, küüslauk, naistepuna)
+
+#### **PAKETT 11: Vann/Saun laiendus (6 uut saunatüüpi)**
+- ✅ Uued saunatüübid: Soome saun, Vene banja, Türgi hammam, Infrapuna saun, Aurukamber, Muu saunatüüp
+- ✅ Iga tüüp: sagedus, temperatuur, kestus, märkused
+
+#### **PAKETT 12: Try-If-Needed (Vajadusel) + lohistamine**
+- ✅ `addTryIfNeeded()`, `moveTryIfNeededUp()`, `moveTryIfNeededDown()` funktsioonid
+- ✅ 10 abinõu: kiirtablettid (paracetamol, ibuprofen), tee (ingver, mäta), hingamine, rahu, jalutus, vesi juurde, magustoit, soe kott, muu
+- ✅ Järjekorra muutmine: ↑/↓ nupud
+- ✅ Iga abinõu: millal kasutad, annus/kogus, täpsustus
+
+#### **PAKETT 13: Privaatsus filter (14 kategooriat, 3 presetti)**
+- ✅ 14 privaatsuse kategooriat:
+  1. Kõik "belief" väljad (paranormaalsed uned, aura kaamera, alternatiivsed tööriistad)
+  2. Jumala/usundi detailid
+  3. Mütoloogia/identiteet
+  4. Astroloogia andmed (sünnikuupäev, -asukoht)
+  5. Bio-markerid (kromosoomid, gonaddid, hormonid)
+  6. Meditsiiniportaalide ligipääsud
+  7. Rahaline info
+  8. Vaimne tervis (ärevus, depressioon, painajad)
+  9. Puuded ja erivajadused
+  10. Sõltuvusained (alkohol, suitsetamine)
+  11. Seksuaaltervis detailid
+  12. Elupaiga detailid (korrus, lift, naabrite info)
+  13. Töö piirangud ja võimekus
+  14. Perekondliku riski detailid
+- ✅ 3 presetti:
+  - **Kõik nähtav** (arstile) - kõik väljad eksporditakse
+  - **Ainult meditsiiniline** (AI-le) - filtreerib spirituaalsed, astro, portaalid, rahaline
+  - **Anonüümne** (teadlastele) - peidab enamik isikuandmeid, näitab ainult vaimne tervis, puuded, sõltuvusained
+  - **Kohandatud** - kasutaja valib käsitsi
+- ✅ Reaalajas preview filtreeritavatest väljadest
+- ✅ Ekspordi kinnitusdialoogi hoiatus filtrite kohta
+
+#### **UI PARANDUSED:**
+- ✅ BMI kalkulaator: jäi kehaandmete sektsiooni (pikkuse ja kaalu juurde)
+- ✅ Sünnikuupäev ja -asukoht: liigutatud kehaandmete sektsiooni sisse (BMI alla)
+- ✅ Eemaldatud KÕIK vanad "Või märgi lihtsalt..." topelt-listid
+- ✅ Eemaldatud "(belief)" UI sildid (jäi ainult metadata)
+- ✅ Töövõime sektsioon: kompaktne 2-veeruline layout (dropdown + 3-veeruline checkbox grid)
+- ✅ "Piirangud tööl" → "Piirangud töö jaoks"
+- ✅ Eemaldatud vanad radio/checkbox listid: põhiline elupaik, aktiivsuse tase, norskamine/pausid, kõnnitempo ja distants
+- ✅ "Kodune tugi" konverteeritud plus-nuppude süsteemiks (6 kategooriat)
+
+#### **UUED FUNKTSIOONID (10):**
+1. `quickAddBioMarker()` - bio-markerid (kromosoomid, gonaddid, hormonid)
+2. `quickAddMythology()` - mütoloogilised liigid (elf, kääbus, centaur...)
+3. `quickAddSport()` - spordid ja harjutused (12+ tüüpi)
+4. `quickAddJobType()` - töö tüübid (12+ tüüpi)
+5. `quickAddAltTool()` - alternatiivsed/vaimsed tööriistad (10+ tüüpi) **belief**
+6. `quickAddPortal()` - meditsiiniportaalid (Eesti, Euroopa, Maailm)
+7. `addTryIfNeeded()` - vajadusel abinõud (10+ tüüpi)
+8. `moveTryIfNeededUp()` / `moveTryIfNeededDown()` - järjekorra muutmine
+9. `quickAddHomeSupport()` - kodune tugi (6 kategooriat)
+10. Vann/Saun laiendus (6 uut saunatüüpi)
+
+#### **PRIVAATSUSE FILTER FUNKTSIOONID (3):**
+1. `updatePrivacyFilters()` - näitab preview filtreeritavatest väljadest
+2. `setPrivacyPreset()` - seadistab 3 eelseadistust (arst, AI, teadlane)
+3. `exportWithPrivacyFilters()` - eksportimine koos filtrite kinnitusega
+
+#### **STATISTIKA:**
+- ~1800+ rida koodi lisatud/muudetud
+- 75+ uut plus-nuppu
+- 15+ uut JavaScript funktsiooni
+- 14 privaatsuse kategooriat
+- 3 privaatsuse presetti
+- 6 uut saunatüüpi
+- 17 meditsiiniportaali (Eesti + Euroopa + Maailm)
+- 10+ alternatiivseid tööriistad (belief scope)
 
 ---
 
@@ -234,26 +368,58 @@ profileFilter = {
 
 ## 📋 **JÄRGMISED SAMMUD:**
 
-### **v1.7.0 (JÄRGMINE):**
-1. UNI eraldi sektsioon + plusid
-2. Privaatsus ja nõusolek MASSIIVNE laiendus
-3. "Belief" scope süsteem
-4. Puhastus (eemalda topelt menüüd)
+### **v1.8.0+ (JÄRGMINE):**
+1. **UNI** - täiendused:
+   - Unenäod detailid (sagedus, tüübid, unepäevik)
+   - Und soodustavad praktikad (lisaplusid: melatoniini kasutus, valguseräm, öömask, kõrvatropid)
+   - Uneprobleemide põhjused (stress, valulik, vahetatööd, lapsed)
 
-### **v1.8.0:**
-5. Tööriistad (bioenergia, vaimsed mõõtjad)
-6. Liikumise viisid (vaimsed/mittefüüsilised)
-7. Kaebused täiendused
+2. **KAEBUSED** - täiendused:
+   - Tinnitus, pearinglus, kõhukeeramine, valguse talumatus
+   - Krooniline valu (tüübid, intensiivsus, sagedus)
 
-### **v1.9.0:**
-8. Koormustaluvus ja töö täiendused
-9. Toitumisprofiil laiendused
-10. Koostoime riskid + antikoagulant selgitus
+3. **LIIKUMISE VIISID** - mittefüüsilised/vaimsed (belief):
+   - Remote viewing, levitatsioon, ajarännak, šamaani rännak, tahteväleline rännak
 
-### **v2.0.0:**
-11. Ressursid ja eelarve (piirkond, apteegid)
-12. Minimaalne diagnostika plusid
-13. Taimravi kultuurideülene
+4. **TOITUMISPROFIIL** - laiendused:
+   - 22 rikka toitu (rasvased lihad, maks, juustud, šokolaad, pähklid...)
+   - Tava toidud lusikaga (putrud, supid, hautised, kiirtoit linnas)
+   - Piirangute põhjused lisa: partner ei luba, tunnetus, hirm tundmatu ees
+   - Söögiajaaknad: paast, hobo (söö millal juhtub), linnakiirtoit, magusaltuvus
+
+5. **KOOSTOIME RISKID** - lisa:
+   - Kakao (kofeiin + teobromiin)
+   - Kanep/CBD (antikoagulandid + sedatiivid)
+   - Kava (maksarisk)
+   - Kratom (koostoimed)
+
+### **v1.9.0+:**
+6. **RESSURSID JA EELARVE** - piirkond, ligipääs:
+   - Apteek (Eesti ketid: Apotheka, Benu, Südameapteek...)
+   - Loodustoodete pood (iHerb, kohalikud)
+   - Puudub
+   - Hoiatus kahtlastest teenusepakkujatest piirkonnas
+
+7. **MINIMAALNE DIAGNOSTIKA** - plusid:
+   - Vererõhk, puls, temp, vere suhkur, kaal, BMI, vöökohtu ümbermõõt
+   - Lab testid: täisveri, eGFR, ALAT, lipidid, glükoos, D-vitamiin, B12, raud, TSH
+
+8. **TAIMRAVI - KULTUURIDEÜLENE:**
+   - Ayurveda, TCM, Põhjala, Slaavi, Maailma rahvamed
+   - Info iga kultuuri kohta + imetamine (kuidas, kus saab)
+
+9. **IDEOLOOGIA JA PIIRJOONED:**
+   - Mida EI soovi (eraldi kast + lühiselgitus)
+   - Usulised/filosoofilised piirid
+
+### **v2.0.0+:**
+10. **AI PROMPTID** - 2 tüüpi:
+    - Lihtne lühi-prompt (kiire konsult, safety + 3 sekkumist)
+    - Täielik prompt (põhjalik, specialty-mode, LISP otsustuspuu)
+11. **JSON EKSPORT** - normaliseerimine:
+    - `toCanonical()` funktsioon
+    - Standardne objekti formaat AI jaoks
+12. **BACKEND** - andmete salvestamine ja turvalisus
 
 ---
 
@@ -287,6 +453,6 @@ profileFilter = {
 
 ---
 
-**Viimati uuendatud:** 11.11.2025
-**Versioon:** 1.6.0
-**Järgmine uuendus:** v1.7.0 implementeerimisel
+**Viimati uuendatud:** 12.11.2025
+**Versioon:** 1.7.5
+**Järgmine uuendus:** v1.8.0+ implementeerimisel
