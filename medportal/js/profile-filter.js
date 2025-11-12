@@ -6,12 +6,13 @@
 
 // Profiili filtri olek
 const profileFilter = {
-    pregnancy: null,        // 'pregnant', 'breastfeeding', 'no'
+    pregnancy: null,        // 'pregnant', 'breastfeeding', 'planning', 'no'
     pregnancyWeeks: null,
-    ageCategory: null,      // '18-39', '65-74', etc
+    planningHorizon: null,  // '<3months', '3-6months', '6-12months', '>12months'
+    ageCategory: null,      // '18-39', '65-74', '100-120', etc
     ageCategoryLabel: null, // 'Noor täiskasvanu (18-39 a)'
     exactAge: null,
-    gender: null,           // 'male', 'female'
+    gender: null,           // 'male', 'female', 'other'
     afAnticoagulant: false,
     egfr: null,
     childPugh: null
@@ -62,15 +63,29 @@ function updateProfileFilter() {
     profileFilter.egfr = egfr;
     profileFilter.childPugh = childPugh;
 
+    // Loe planningHorizon kui kasutaja valis "Soovin last"
+    const planningHorizon = document.querySelector('input[name="planningHorizon"]:checked')?.value || null;
+    profileFilter.planningHorizon = planningHorizon;
+
     // Näita/peida raseduse nädalate väli
     const pregnancyWeeksDiv = document.getElementById('pregnancyWeeks');
+    const planningHorizonDiv = document.getElementById('planningHorizon');
+
     if (pregnancyStatus === 'pregnant') {
         pregnancyWeeksDiv.style.display = 'block';
+        planningHorizonDiv.style.display = 'none';
+        // Aktiveeri automaatselt "naine"
+        document.getElementById('genderFemale').checked = true;
+        profileFilter.gender = 'female';
+    } else if (pregnancyStatus === 'planning') {
+        pregnancyWeeksDiv.style.display = 'none';
+        planningHorizonDiv.style.display = 'block';
         // Aktiveeri automaatselt "naine"
         document.getElementById('genderFemale').checked = true;
         profileFilter.gender = 'female';
     } else {
         pregnancyWeeksDiv.style.display = 'none';
+        planningHorizonDiv.style.display = 'none';
     }
 
     // Kui valiti imetamine, aktiveeri ka "naine"
@@ -93,11 +108,20 @@ function updateProfileSummary() {
 
     let summary = [];
 
-    // Rasedus/imetamine
+    // Rasedus/imetamine/lapse soov
     if (profileFilter.pregnancy === 'pregnant') {
-        summary.push(`<strong>Rase</strong>${profileFilter.pregnancyWeeks ? ` (${profileFilter.pregnancyWeeks} nädalat)` : ''}`);
+        summary.push(`<strong>Lapseootel</strong>${profileFilter.pregnancyWeeks ? ` (${profileFilter.pregnancyWeeks} nädalat)` : ''}`);
     } else if (profileFilter.pregnancy === 'breastfeeding') {
         summary.push('<strong>Imetan</strong>');
+    } else if (profileFilter.pregnancy === 'planning') {
+        const horizonText = {
+            '<3months': '≤3 kuud',
+            '3-6months': '3-6 kuud',
+            '6-12months': '6-12 kuud',
+            '>12months': '>12 kuud'
+        };
+        const horizonLabel = horizonText[profileFilter.planningHorizon] || '';
+        summary.push(`<strong>Soovin last</strong>${horizonLabel ? ` (${horizonLabel})` : ''}`);
     }
 
     // Vanus
@@ -292,3 +316,117 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('Profiilifiltri süsteem aktiveeritud!');
 });
+
+// ═══════════════════════════════════════════════════════════
+// v1.7.5 LAIENDUSED - SOO JA JUMALUSE VALIKUD
+// ═══════════════════════════════════════════════════════════
+
+// Toggle soo laiendatud valikud
+function toggleGenderDetails(show) {
+    const detailsDiv = document.getElementById('genderDetails');
+    if (detailsDiv) {
+        detailsDiv.style.display = show ? 'block' : 'none';
+    }
+}
+
+// Mütoloogia tüübi lisamine (belief)
+let mythologyCounter = 0;
+function addMythologyType() {
+    mythologyCounter++;
+    const container = document.getElementById('mythologyTypes');
+
+    const itemDiv = document.createElement('div');
+    itemDiv.id = `mythology_${mythologyCounter}`;
+    itemDiv.style.cssText = 'background: #f9fafb; padding: 10px; border-radius: 6px; margin-top: 10px; border: 1px solid #e5e7eb;';
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <input type="text" name="mythologyType_${mythologyCounter}" placeholder="Nt: kaksikhing, two-spirit..."
+                   style="flex: 1; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+            <button type="button" class="quick-add-btn" style="padding: 6px 12px; background: #ef4444; color: white;"
+                    onclick="document.getElementById('mythology_${mythologyCounter}').remove()">Eemalda</button>
+        </div>
+    `;
+
+    container.insertBefore(itemDiv, container.querySelector('button'));
+}
+
+// Toggle jumaluse laiendatud valikud
+function toggleDeityDetails() {
+    const detailsDiv = document.getElementById('deityDetails');
+    if (detailsDiv) {
+        detailsDiv.style.display = detailsDiv.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// Jumala/jumaluste lisamine
+let deityCounter = 0;
+const addedDeitiesSet = new Set(); // Vältida duplikaate
+
+function addDeity(key, name) {
+    // Kontrolli duplikaate
+    if (addedDeitiesSet.has(key)) {
+        showToast(`${name} on juba lisatud!`, 'warning');
+        return;
+    }
+
+    deityCounter++;
+    addedDeitiesSet.add(key);
+
+    const container = document.getElementById('addedDeities');
+
+    const itemDiv = document.createElement('div');
+    itemDiv.id = `deity_${deityCounter}`;
+    itemDiv.style.cssText = 'background: #fef3c7; padding: 10px; border-radius: 6px; margin-top: 8px; border-left: 4px solid #f59e0b;';
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="flex: 1;">
+                <strong style="color: #92400e;">${name}</strong>
+                <input type="hidden" name="deity_${deityCounter}" value="${key}">
+                <textarea name="deity_${deityCounter}_notes" rows="2" placeholder="Lisa täpsustusi (nt mantra, palve, pakt)..."
+                          style="width: 100%; margin-top: 5px; padding: 6px; border: 1px solid #f59e0b; border-radius: 4px; font-size: 0.9rem;"></textarea>
+            </div>
+            <button type="button" class="quick-add-btn" style="padding: 6px 12px; background: #ef4444; color: white; margin-left: 10px;"
+                    onclick="removeDeity('${key}', 'deity_${deityCounter}')">Eemalda</button>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}
+
+// Eemalda jumalus
+function removeDeity(key, itemId) {
+    addedDeitiesSet.delete(key);
+    document.getElementById(itemId)?.remove();
+}
+
+// Oma jumala lisamise funktsioon
+function addCustomDeity() {
+    const input = document.getElementById('customDeityName');
+    const customName = input.value.trim();
+
+    if (!customName) {
+        showToast('Palun sisesta jumala nimi!', 'warning');
+        return;
+    }
+
+    const key = `custom_${customName.toLowerCase().replace(/[^a-z0-9]/g, '_')}`;
+    addDeity(key, customName);
+
+    // Tühjenda input
+    input.value = '';
+}
+
+// Toast notification helper
+function showToast(message, type = 'success') {
+    // Kontrolli kas showToast funktsioon on juba olemas (info-system.js-s)
+    if (typeof window.showToast === 'function') {
+        window.showToast(message);
+    } else {
+        // Lihtne fallback
+        console.log(`[Toast ${type}]: ${message}`);
+        alert(message);
+    }
+}
