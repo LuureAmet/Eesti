@@ -2376,6 +2376,67 @@ function quickAddResidence(key, name) {
     itemDiv.style.cssText = 'background: #fef9c3; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #eab308;';
     itemDiv.id = itemId;
 
+    // PAKETT 5: Kortermaja-spetsiifilised väljad
+    let apartmentDetailsHTML = '';
+    if (key === 'kortermajas') {
+        apartmentDetailsHTML = `
+        <div style="margin-left: 24px; margin-top: 10px; background: white; padding: 12px; border-radius: 6px; border: 1px solid #e5e7eb;">
+            <div style="margin-bottom: 12px;">
+                <label style="display: block; font-weight: 600; color: #475569; margin-bottom: 6px;">Lift</label>
+                <div style="display: flex; gap: 15px;">
+                    <label style="font-weight: normal;">
+                        <input type="radio" name="${fieldName}_lift" value="yes"> Jah, lift olemas
+                    </label>
+                    <label style="font-weight: normal;">
+                        <input type="radio" name="${fieldName}_lift" value="no"> Ei, lifti pole
+                    </label>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+                <label style="display: block; font-weight: 600; color: #475569; margin-bottom: 6px;">
+                    Korrus <span style="font-weight: normal; font-size: 0.85rem; color: #64748b;">(nt: "5" või "5/9")</span>
+                </label>
+                <input type="text" name="${fieldName}_floor" placeholder="Nt: 5 või 5/9 või 12/15"
+                       style="width: 150px; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+            </div>
+
+            <div style="margin-bottom: 12px;">
+                <label style="font-weight: normal; display: flex; align-items: center; gap: 6px;">
+                    <input type="checkbox" name="${fieldName}_topFloor" value="yes">
+                    Olen ülemise korrusel (katus otse peal)
+                </label>
+            </div>
+
+            <div style="margin-bottom: 12px;">
+                <label style="font-weight: normal; display: flex; align-items: center; gap: 6px;">
+                    <input type="checkbox" name="${fieldName}_preferStairs" value="yes">
+                    Eelistan treppu (ka kui lift olemas)
+                </label>
+            </div>
+
+            <div>
+                <label style="display: block; font-weight: 600; color: #475569; margin-bottom: 6px;">
+                    Täpsustus <span style="font-weight: normal; font-size: 0.85rem;">(rahulikkus, naabrid, muu)</span>
+                </label>
+                <textarea name="${fieldName}_notes" rows="2"
+                          placeholder="Nt: rahulik piirkond, müratsevad naabrid, hea isolatsioon..."
+                          style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;"></textarea>
+            </div>
+        </div>
+        `;
+    } else {
+        apartmentDetailsHTML = `
+        <div style="margin-left: 24px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
+            <div id="${itemId}_info" class="inline-info-field">
+                <label>Täpsustus</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Lisa täpsustusi..."></textarea>
+            </div>
+        </div>
+        `;
+    }
+
     itemDiv.innerHTML = `
         <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
             <label style="margin: 0; font-weight: 600; color: #713f12; display: flex; align-items: center; gap: 8px;">
@@ -2388,13 +2449,7 @@ function quickAddResidence(key, name) {
                 Eemalda
             </button>
         </div>
-        <div style="margin-left: 24px;">
-            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_info')">+ Lisa täpsustus</span>
-            <div id="${itemId}_info" class="inline-info-field">
-                <label>Täpsustus (korrus, lift, rahulikkus, naabrid)</label>
-                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: 5. korrus, lift olemas, rahulik piirkond..."></textarea>
-            </div>
-        </div>
+        ${apartmentDetailsHTML}
     `;
 
     container.appendChild(itemDiv);
