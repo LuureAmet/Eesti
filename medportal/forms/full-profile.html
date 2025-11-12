@@ -1946,6 +1946,45 @@
                     </div>
                 </section>
 
+                <!-- PAKETT 12: SEKTSIOON 15A: VAJADUSEL KASUTATAVAD ABINÕUD -->
+                <section class="form-section" style="background: #fffbeb; border-left: 4px solid #f59e0b;">
+                    <h2>15A. Vajadusel kasutatavad abinõud (järjestatud prioriteedi järgi)</h2>
+                    <p class="help-text">Lisa abinõud, mida kasutad sümptomite ilmnemisel. Kasuta ↑/↓ nuppe järjestuse muutmiseks.</p>
+
+                    <!-- KIIRVALIKU PLUS-NUPUD -->
+                    <div class="quick-add-section" style="background: #fef3c7; border-color: #f59e0b; margin-bottom: 15px;">
+                        <h4>Kiirvalik - Levinumad vajadusel kasutatavad</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                    onclick="addTryIfNeeded('Paracetamol (valu/palavik)')">Paracetamol</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                    onclick="addTryIfNeeded('Ibuprofen (valu/põletik)')">Ibuprofen</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                    onclick="addTryIfNeeded('Hingamistehnika (ärevus/stress)')">Hingamistehnika</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                    onclick="addTryIfNeeded('Ingveri tee (iiveldus)')">Ingveri tee</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                    onclick="addTryIfNeeded('Magneesium (krambid)')">Magneesium</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                    onclick="addTryIfNeeded('Külm kompress (peavalu)')">Külm kompress</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                    onclick="addTryIfNeeded('Mentooli salv (lihaspinge)')">Mentooli salv</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e;"
+                                    onclick="addTryIfNeeded('Muu')">Muu</button>
+                        </div>
+                    </div>
+
+                    <!-- JÄRJESTATUD NIMEKIRI -->
+                    <div id="tryIfNeededList" style="margin-top: 15px;">
+                        <!-- Dünaamiliselt lisatud elemendid siia -->
+                    </div>
+
+                    <div style="margin-top: 15px; padding: 10px; background: #f0f9ff; border-radius: 6px; font-size: 0.9rem; color: #1e40af;">
+                        💡 <strong>Näpunäide:</strong> Järjesta abinõud prioriteedi järgi (kõige esimesena proovitav üleval).
+                        Näiteks: 1) Hingamine, 2) Ingveri tee, 3) Paracetamol.
+                    </div>
+                </section>
+
                 <!-- SEKTSIOON 16: PAKETID -->
                 <section class="form-section">
                     <h2>16. Paketivalikud (märgi, mida kaalud)</h2>

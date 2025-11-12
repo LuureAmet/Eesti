@@ -683,3 +683,134 @@ function quickAddPortal(key, name) {
     container.appendChild(itemDiv);
     showToast(`${name} lisatud!`);
 }
+
+// PAKETT 12: Try-If-Needed with Ordering (↑/↓)
+let tryIfNeededCounter = 0;
+let tryIfNeededItems = []; // Array to maintain order
+
+function addTryIfNeeded(defaultName = '') {
+    tryIfNeededCounter++;
+    const itemId = `tryIfNeeded_${tryIfNeededCounter}`;
+
+    const item = {
+        id: itemId,
+        counter: tryIfNeededCounter,
+        name: defaultName
+    };
+
+    tryIfNeededItems.push(item);
+    renderTryIfNeededList();
+    showToast(`${defaultName || 'Abinõu'} lisatud!`);
+}
+
+function renderTryIfNeededList() {
+    const container = document.getElementById('tryIfNeededList');
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    if (tryIfNeededItems.length === 0) {
+        container.innerHTML = '<p style="color: #6b7280; font-style: italic;">Abinõud puuduvad. Lisa neid ülal olevate nuppude abil.</p>';
+        return;
+    }
+
+    tryIfNeededItems.forEach((item, index) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.id = item.id;
+        itemDiv.style.cssText = 'background: white; padding: 12px; border-radius: 6px; margin-bottom: 10px; border-left: 4px solid #f59e0b; display: flex; align-items: start; gap: 10px;';
+
+        itemDiv.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: 4px; margin-top: 4px;">
+                <button type="button" onclick="moveTryIfNeededUp(${index})"
+                        ${index === 0 ? 'disabled' : ''}
+                        style="padding: 2px 8px; border: 1px solid #cbd5e1; background: white; border-radius: 4px; cursor: pointer; font-size: 0.9rem;"
+                        ${index === 0 ? 'style="opacity: 0.3; cursor: not-allowed;"' : ''}>
+                    ↑
+                </button>
+                <button type="button" onclick="moveTryIfNeededDown(${index})"
+                        ${index === tryIfNeededItems.length - 1 ? 'disabled' : ''}
+                        style="padding: 2px 8px; border: 1px solid #cbd5e1; background: white; border-radius: 4px; cursor: pointer; font-size: 0.9rem;"
+                        ${index === tryIfNeededItems.length - 1 ? 'style="opacity: 0.3; cursor: not-allowed;"' : ''}>
+                    ↓
+                </button>
+            </div>
+
+            <div style="flex: 1;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <span style="display: inline-block; min-width: 24px; height: 24px; background: #f59e0b; color: white; border-radius: 50%; text-align: center; line-height: 24px; font-weight: 600; font-size: 0.85rem;">
+                        ${index + 1}
+                    </span>
+                    <strong style="color: #92400e;">${item.name}</strong>
+                </div>
+
+                <input type="hidden" name="tryIfNeeded_${item.counter}_order" value="${index + 1}">
+                <input type="hidden" name="tryIfNeeded_${item.counter}_name" value="${item.name}">
+
+                <div style="margin-bottom: 8px;">
+                    <label style="display: block; font-size: 0.9rem; color: #64748b; margin-bottom: 4px;">Millal kasutad?</label>
+                    <input type="text" name="tryIfNeeded_${item.counter}_when"
+                           placeholder="Nt: kui peavalu, kui iiveldus, kui ärevus..."
+                           style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                </div>
+
+                <div style="margin-bottom: 8px;">
+                    <label style="display: block; font-size: 0.9rem; color: #64748b; margin-bottom: 4px;">Annus/kogus</label>
+                    <input type="text" name="tryIfNeeded_${item.counter}_dose"
+                           placeholder="Nt: 500mg, 1 tassike, 5 min..."
+                           style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                </div>
+
+                <div>
+                    <label style="display: block; font-size: 0.9rem; color: #64748b; margin-bottom: 4px;">Täpsustus</label>
+                    <textarea name="tryIfNeeded_${item.counter}_notes" rows="2"
+                              placeholder="Lisa märkusi..."
+                              style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;"></textarea>
+                </div>
+
+                ${item.name === 'Muu' ? `
+                    <div style="margin-top: 8px;">
+                        <input type="text" name="tryIfNeeded_${item.counter}_custom_name"
+                               placeholder="Täpsusta abinõu nimi..."
+                               style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    </div>
+                ` : ''}
+            </div>
+
+            <button type="button" onclick="removeTryIfNeeded(${index})"
+                    style="padding: 6px 12px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; white-space: nowrap;">
+                Eemalda
+            </button>
+        `;
+
+        container.appendChild(itemDiv);
+    });
+}
+
+function moveTryIfNeededUp(index) {
+    if (index === 0) return;
+
+    // Swap with previous item
+    [tryIfNeededItems[index - 1], tryIfNeededItems[index]] =
+    [tryIfNeededItems[index], tryIfNeededItems[index - 1]];
+
+    renderTryIfNeededList();
+    showToast('Üles liigutatud');
+}
+
+function moveTryIfNeededDown(index) {
+    if (index === tryIfNeededItems.length - 1) return;
+
+    // Swap with next item
+    [tryIfNeededItems[index], tryIfNeededItems[index + 1]] =
+    [tryIfNeededItems[index + 1], tryIfNeededItems[index]];
+
+    renderTryIfNeededList();
+    showToast('Alla liigutatud');
+}
+
+function removeTryIfNeeded(index) {
+    const itemName = tryIfNeededItems[index].name;
+    tryIfNeededItems.splice(index, 1);
+    renderTryIfNeededList();
+    showToast(`${itemName} eemaldatud`);
+}
