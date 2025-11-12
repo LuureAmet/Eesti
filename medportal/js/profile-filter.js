@@ -430,3 +430,129 @@ function showToast(message, type = 'success') {
         alert(message);
     }
 }
+
+// ═══════════════════════════════════════════════════════════
+// PAKETT 4: BMI KALKULAATOR + AKNAD + PUUDED
+// ═══════════════════════════════════════════════════════════
+
+// BMI kalkulaator
+function calculateBMI() {
+    const height = parseFloat(document.getElementById('height1')?.value);
+    const weight = parseFloat(document.getElementById('weight1')?.value);
+    const bmiValueSpan = document.getElementById('bmiValue');
+
+    if (height && weight && height > 0) {
+        const heightM = height / 100; // cm → m
+        const bmi = weight / (heightM * heightM);
+        const bmiRounded = bmi.toFixed(1);
+
+        // Värv vastavalt BMI-le
+        let color = '#334155'; // default
+        let category = '';
+
+        if (bmi < 18.5) {
+            color = '#0284c7'; // sinine - alakaal
+            category = '(alakaal)';
+        } else if (bmi >= 18.5 && bmi < 25) {
+            color = '#10b981'; // roheline - normaalne
+            category = '(normaalne)';
+        } else if (bmi >= 25 && bmi < 30) {
+            color = '#f59e0b'; // kollane - ülekaal
+            category = '(ülekaal)';
+        } else {
+            color = '#ef4444'; // punane - rasvumine
+            category = '(rasvumine)';
+        }
+
+        bmiValueSpan.innerHTML = `<span style="color: ${color}; font-weight: 700;">${bmiRounded}</span> <span style="color: #6b7280; font-size: 0.85rem;">${category}</span>`;
+    } else {
+        bmiValueSpan.textContent = '—';
+    }
+}
+
+// Siht-BMI kalkulaator
+function calculateTargetBMI() {
+    const height = parseFloat(document.getElementById('height1')?.value);
+    const targetWeight = parseFloat(document.getElementById('targetWeight')?.value);
+    const targetBMIValueSpan = document.getElementById('targetBMIValue');
+
+    if (height && targetWeight && height > 0) {
+        const heightM = height / 100;
+        const targetBMI = targetWeight / (heightM * heightM);
+        const targetBMIRounded = targetBMI.toFixed(1);
+
+        targetBMIValueSpan.innerHTML = `BMI siht: <strong>${targetBMIRounded}</strong>`;
+    } else {
+        targetBMIValueSpan.textContent = '—';
+    }
+}
+
+// Akende (optimaalsed ajad) lisamine
+let windowCounter = 0;
+
+function quickAddWindow(key, name) {
+    windowCounter++;
+    const container = document.getElementById('addedWindows');
+
+    const itemDiv = document.createElement('div');
+    itemDiv.id = `window_${windowCounter}`;
+    itemDiv.style.cssText = 'background: #f0fdf4; padding: 12px; border-radius: 6px; margin-top: 10px; border-left: 4px solid #10b981;';
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 15px;">
+            <div style="flex: 1;">
+                <strong style="color: #047857;">${name}</strong>
+                <input type="hidden" name="window_${windowCounter}_activity" value="${key}">
+                <div style="display: flex; gap: 10px; margin-top: 8px; align-items: center;">
+                    <label style="font-size: 0.9rem; color: #6b7280;">Algus:</label>
+                    <input type="time" name="window_${windowCounter}_start" required
+                           style="padding: 6px; border: 1px solid #10b981; border-radius: 4px;">
+                    <label style="font-size: 0.9rem; color: #6b7280;">Lõpp:</label>
+                    <input type="time" name="window_${windowCounter}_end" required
+                           style="padding: 6px; border: 1px solid #10b981; border-radius: 4px;">
+                </div>
+                ${key === 'muu' ? `
+                    <input type="text" name="window_${windowCounter}_custom_name" placeholder="Täpsusta tegevus..."
+                           style="width: 100%; margin-top: 8px; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.9rem;">
+                ` : ''}
+            </div>
+            <button type="button" class="quick-add-btn" style="padding: 6px 12px; background: #ef4444; color: white;"
+                    onclick="document.getElementById('window_${windowCounter}').remove()">Eemalda</button>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} aken lisatud!`);
+}
+
+// Puuete/erivajaduste lisamine
+let abilityCounter = 0;
+
+function quickAddAbility(key, name) {
+    abilityCounter++;
+    const container = document.getElementById('addedAbilities');
+
+    const itemDiv = document.createElement('div');
+    itemDiv.id = `ability_${abilityCounter}`;
+    itemDiv.style.cssText = 'background: #fef2f2; padding: 12px; border-radius: 6px; margin-top: 10px; border-left: 4px solid #ef4444;';
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 15px;">
+            <div style="flex: 1;">
+                <strong style="color: #991b1b;">${name}</strong>
+                <input type="hidden" name="ability_${abilityCounter}" value="${key}">
+                <textarea name="ability_${abilityCounter}_notes" rows="2" placeholder="Lisa täpsustusi (nt raskusaste, abivahendid)..."
+                          style="width: 100%; margin-top: 8px; padding: 6px; border: 1px solid #ef4444; border-radius: 4px; font-size: 0.9rem;"></textarea>
+                ${key === 'muu' ? `
+                    <input type="text" name="ability_${abilityCounter}_custom_name" placeholder="Täpsusta erivajadus..."
+                           style="width: 100%; margin-top: 8px; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 0.9rem;">
+                ` : ''}
+            </div>
+            <button type="button" class="quick-add-btn" style="padding: 6px 12px; background: #ef4444; color: white;"
+                    onclick="document.getElementById('ability_${abilityCounter}').remove()">Eemalda</button>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}

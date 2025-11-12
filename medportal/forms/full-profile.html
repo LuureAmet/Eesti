@@ -548,32 +548,125 @@
                 <section class="form-section">
                     <h2>1. Profiil ja elurütm (ankrud + aknad)</h2>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="age1">Vanus</label>
-                            <input type="number" id="age1" name="age" min="0" max="120">
+                    <!-- META-SILT: Vanus ja Sugu määratud profiilifiltris -->
+                    <div style="background: #f0f9ff; border-left: 4px solid #0284c7; padding: 12px; margin-bottom: 20px; border-radius: 6px;">
+                        <p style="margin: 0; color: #075985; font-size: 0.95rem;">
+                            ℹ️ <strong>Vanus ja Sugu</strong> määratud profiilifiltris.
+                            <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" style="color: #0284c7; text-decoration: underline; margin-left: 10px;">Muuda</a>
+                        </p>
+                    </div>
+
+                    <!-- KEHAANDMED + BMI AUTO-KALKULAATOR -->
+                    <div style="background: white; padding: 15px; border-radius: 8px; border: 2px solid #e5e7eb; margin-bottom: 20px;">
+                        <h4 style="margin-top: 0; color: #334155;">Kehaandmed</h4>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="height1">Pikkus (cm)</label>
+                                <input type="number" id="height1" name="height" min="50" max="250" oninput="calculateBMI()">
+                            </div>
+                            <div class="form-group">
+                                <label for="weight1">Kaal (kg)</label>
+                                <input type="number" id="weight1" name="weight" min="20" max="300" step="0.1" oninput="calculateBMI()">
+                            </div>
+                            <div class="form-group">
+                                <label>BMI (auto)</label>
+                                <div style="padding: 8px; background: #f3f4f6; border-radius: 6px; font-weight: 600; color: #334155; min-height: 38px; display: flex; align-items: center;">
+                                    <span id="bmiValue">—</span>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="gender1">Sugu</label>
-                            <select id="gender1" name="gender">
-                                <option value="">Vali...</option>
-                                <option value="mees">Mees</option>
-                                <option value="naine">Naine</option>
-                                <option value="muu">Muu</option>
-                            </select>
+                            <label for="targetWeight">Sihtkaal (vabatahtlik, kg)</label>
+                            <div style="display: flex; gap: 10px; align-items: center;">
+                                <input type="number" id="targetWeight" name="targetWeight" min="20" max="300" step="0.1" oninput="calculateTargetBMI()" style="flex: 1;">
+                                <div style="padding: 8px; background: #f9fafb; border-radius: 6px; color: #6b7280; min-width: 100px; text-align: center;">
+                                    <span id="targetBMIValue" style="font-size: 0.9rem;">—</span>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="height1">Pikkus (cm)</label>
-                            <input type="number" id="height1" name="height" min="50" max="250">
+                        <p style="font-size: 0.85rem; color: #6b7280; margin-top: 8px; margin-bottom: 0;">
+                            💡 BMI arvutus: kaal (kg) ÷ (pikkus (m))². Normaalne vahemik: 18.5-24.9
+                        </p>
+                    </div>
+
+                    <!-- AKNAD (OPTIMAALSED AJAD) - UUS PLUS-SÜSTEEM -->
+                    <div style="background: white; padding: 15px; border-radius: 8px; border: 2px solid #e5e7eb; margin-bottom: 20px;">
+                        <h4 style="margin-top: 0; color: #334155; display: flex; align-items: center; gap: 8px;">
+                            Aknad (optimaalsed ajad tegevusteks)
+                            <span class="info-icon" style="cursor: help;" title="Millal on sul parim aeg treenida, mediteerida või ravimeid võtta?">i</span>
+                        </h4>
+                        <p style="font-size: 0.9rem; color: #6b7280; margin-bottom: 15px;">
+                            Lisa tegevused ja nende optimaalsed ajad (nt treening 07:00-08:00, meditatsioon 20:00-20:30)
+                        </p>
+
+                        <!-- Kiirvalik tegevused -->
+                        <div class="quick-add-section" style="background: #f0fdf4; border-color: #10b981; margin-bottom: 15px;">
+                            <h4>Kiirvalik tegevused</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                        onclick="quickAddWindow('treening', 'Treening')">Treening</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                        onclick="quickAddWindow('meditatsioon', 'Meditatsioon')">Meditatsioon</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                        onclick="quickAddWindow('jalutuskäik', 'Jalutuskäik')">Jalutuskäik</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                        onclick="quickAddWindow('ravimid', 'Ravimid')">Ravimid</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                        onclick="quickAddWindow('taimravim', 'Taimravim')">Taimravim</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #047857;"
+                                        onclick="quickAddWindow('muu', 'Muu tegevus')">Muu tegevus</button>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="weight1">Kaal (kg)</label>
-                            <input type="number" id="weight1" name="weight" min="20" max="300" step="0.1">
+
+                        <!-- Lisatud aknad (dünaamiliselt) -->
+                        <div id="addedWindows"></div>
+                    </div>
+
+                    <!-- SÜNNIKUUPÄEV + ASUKOHT (privaatne, astroloogia jaoks) -->
+                    <details style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b; margin-bottom: 20px;">
+                        <summary style="cursor: pointer; font-weight: 600; color: #92400e;">
+                            🌙 Sünnikuupäev ja -asukoht (vabatahtlik, kalendri/usundite/astroloogia jaoks)
+                        </summary>
+                        <p style="font-size: 0.85rem; color: #92400e; margin-top: 10px;">
+                            Need andmed kasutatakse usupõhiste paastude, kalendrite ja astroloogia jaoks. Need ei kajastata avalikus ekspordis ilma eraldi nõusolekuta.
+                        </p>
+                        <div style="margin-top: 15px; display: grid; gap: 15px;">
+                            <div class="form-group">
+                                <label for="birthDate">Sünnikuupäev:</label>
+                                <input type="date" id="birthDate" name="birthDate" style="width: 200px; padding: 8px; border: 1px solid #f59e0b; border-radius: 6px;">
+                            </div>
+                            <div class="form-group">
+                                <label for="birthLocation">Sünnikoht (linn, riik):</label>
+                                <input type="text" id="birthLocation" name="birthLocation" placeholder="Nt: Tallinn, Eesti" style="width: 100%; max-width: 400px; padding: 8px; border: 1px solid #f59e0b; border-radius: 6px;">
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="targetWeight">Soovkaal (kg)</label>
-                            <input type="number" id="targetWeight" name="targetWeight" min="20" max="300" step="0.1">
+                    </details>
+
+                    <!-- PUUDED / ERIVAJADUSED -->
+                    <div style="background: white; padding: 15px; border-radius: 8px; border: 2px solid #e5e7eb; margin-bottom: 20px;">
+                        <h4 style="margin-top: 0; color: #334155;">Puuded / Erivajadused</h4>
+                        <div class="quick-add-section" style="background: #fef2f2; border-color: #ef4444;">
+                            <h4>Märgi erivajadused (kui on)</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAbility('düsgraafia', 'Düsgraafia')">Düsgraafia</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAbility('düsleksia', 'Düsleksia')">Düsleksia</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAbility('düsfaasia', 'Düsfaasia')">Düsfaasia</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAbility('nägemislangus', 'Nägemislangus')">Nägemislangus</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAbility('kuulmislangus', 'Kuulmislangus')">Kuulmislangus</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAbility('liikumispiirang', 'Liikumispiirang')">Liikumispiirang</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAbility('invaliidsus', 'Invaliidsus')">Invaliidsus</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAbility('muu', 'Muu')">Muu</button>
+                            </div>
                         </div>
+                        <div id="addedAbilities" style="margin-top: 15px;"></div>
                     </div>
 
                     <div class="form-group">
