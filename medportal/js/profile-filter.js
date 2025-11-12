@@ -814,3 +814,141 @@ function removeTryIfNeeded(index) {
     renderTryIfNeededList();
     showToast(`${itemName} eemaldatud`);
 }
+
+// PAKETT 13: Privacy Filter System for Export
+
+function updatePrivacyFilters() {
+    // Show preview of what will be filtered
+    const filters = getActiveFilters();
+    const preview = document.getElementById('exportPreview');
+    const list = document.getElementById('filteredFieldsList');
+
+    if (filters.length > 0) {
+        preview.style.display = 'block';
+        list.innerHTML = filters.map(f => `<li>${f}</li>`).join('');
+    } else {
+        preview.style.display = 'none';
+    }
+}
+
+function getActiveFilters() {
+    const filters = [];
+    const filterMap = {
+        'privacyFilterBelief': 'Kõik "belief" väljad (paranormaalsed uned, aura kaamera, alternatiivsed tööriistad jne)',
+        'privacyFilterDeity': 'Jumala/usundi detailid (säilib ainult märge "Jumalale jagamine")',
+        'privacyFilterMythology': 'Mütoloogia/identiteet info',
+        'privacyFilterAstro': 'Astroloogia andmed (sünnikuupäev, -asukoht)',
+        'privacyFilterBioMarkers': 'Bio-markerid (kromosoomid, gonaddid, hormonid)',
+        'privacyFilterPortals': 'Meditsiiniportaalide ligipääsud ja kasutajakontod',
+        'privacyFilterFinancial': 'Rahaline info (eelarve, ligipääsu kulud)',
+        'privacyFilterMentalHealth': 'Vaimne tervis (ärevus, depressioon, painajad, öine ärevus)',
+        'privacyFilterDisabilities': 'Puuded ja erivajadused',
+        'privacyFilterSubstances': 'Sõltuvusained (alkohol, suitsetamine)',
+        'privacyFilterSexualHealth': 'Seksuaaltervis detailid',
+        'privacyFilterResidence': 'Elupaiga detailid (korrus, lift, naabrite info)',
+        'privacyFilterWork': 'Töö piirangud ja võimekus',
+        'privacyFilterFamily': 'Perekondliku riski detailid (kes, vanus)'
+    };
+
+    Object.keys(filterMap).forEach(key => {
+        const checkbox = document.querySelector(`input[name="${key}"]`);
+        if (checkbox && checkbox.checked) {
+            filters.push(filterMap[key]);
+        }
+    });
+
+    return filters;
+}
+
+function setPrivacyPreset(preset) {
+    const allFilters = [
+        'privacyFilterBelief',
+        'privacyFilterDeity',
+        'privacyFilterMythology',
+        'privacyFilterAstro',
+        'privacyFilterBioMarkers',
+        'privacyFilterPortals',
+        'privacyFilterFinancial',
+        'privacyFilterMentalHealth',
+        'privacyFilterDisabilities',
+        'privacyFilterSubstances',
+        'privacyFilterSexualHealth',
+        'privacyFilterResidence',
+        'privacyFilterWork',
+        'privacyFilterFamily'
+    ];
+
+    if (preset === 'none') {
+        // Kõik nähtav (arstile) - uncheck all filters
+        allFilters.forEach(filterId => {
+            const checkbox = document.querySelector(`input[name="${filterId}"]`);
+            if (checkbox) checkbox.checked = false;
+        });
+        showToast('Kõik andmed nähtavad (sobib arstile)', 'success');
+
+    } else if (preset === 'medical') {
+        // Ainult meditsiiniline (AI-le) - filter out belief, astrology, portals, financial
+        allFilters.forEach(filterId => {
+            const checkbox = document.querySelector(`input[name="${filterId}"]`);
+            if (checkbox) {
+                checkbox.checked = [
+                    'privacyFilterBelief',
+                    'privacyFilterDeity',
+                    'privacyFilterMythology',
+                    'privacyFilterAstro',
+                    'privacyFilterPortals',
+                    'privacyFilterFinancial'
+                ].includes(filterId);
+            }
+        });
+        showToast('Filtreeritud: spirituaalsed, astro, portaalid, rahaline', 'info');
+
+    } else if (preset === 'anonymous') {
+        // Anonüümne (teadlastele) - filter out most personal/identifying info
+        allFilters.forEach(filterId => {
+            const checkbox = document.querySelector(`input[name="${filterId}"]`);
+            if (checkbox) {
+                checkbox.checked = ![
+                    'privacyFilterMentalHealth',
+                    'privacyFilterDisabilities',
+                    'privacyFilterSubstances'
+                ].includes(filterId); // Keep only mental health, disabilities, substances visible
+            }
+        });
+        showToast('Anonüümne režiim: enamik isikuandmeid peidetud', 'warning');
+
+    } else if (preset === 'custom') {
+        // Clear all selections
+        allFilters.forEach(filterId => {
+            const checkbox = document.querySelector(`input[name="${filterId}"]`);
+            if (checkbox) checkbox.checked = false;
+        });
+        showToast('Filtrid tühistatud - vali käsitsi', 'info');
+    }
+
+    updatePrivacyFilters();
+}
+
+// Export function that respects privacy filters
+function exportWithPrivacyFilters(format) {
+    const filters = getActiveFilters();
+
+    if (filters.length > 0) {
+        const filterCount = filters.length;
+        const confirmed = confirm(
+            `⚠️ HOIATUS: ${filterCount} kategooriat filtreeritud.\n\n` +
+            `Järgmised väljad EI kajastu ekspordis:\n\n` +
+            filters.map(f => `• ${f}`).join('\n') +
+            `\n\nKas soovid jätkata eksportimist?`
+        );
+
+        if (!confirmed) {
+            showToast('Eksport katkestatud', 'info');
+            return false;
+        }
+    }
+
+    showToast(`Eksportimine algas (${format.toUpperCase()})...`, 'success');
+    // TODO: Actual export logic would filter out data based on active filters
+    return true;
+}

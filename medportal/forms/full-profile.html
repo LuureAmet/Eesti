@@ -2005,14 +2005,139 @@
                     </p>
                 </section>
 
-                <!-- EXPORT VALIKUD -->
-                <section class="form-section export-options">
-                    <h2>Väljundi valikud</h2>
-                    <div class="checkbox-group">
-                        <label><input type="checkbox" name="exportTxt" checked> TXT fail</label>
-                        <label><input type="checkbox" name="exportPdf"> PDF fail</label>
-                        <label><input type="checkbox" name="exportJson" checked> JSON fail</label>
-                        <label><input type="checkbox" name="exportAiPrompt" checked> AI prompt</label>
+                <!-- PAKETT 13: EXPORT VALIKUD JA PRIVAATSUS FILTER -->
+                <section class="form-section export-options" style="background: #f0f9ff; border-left: 4px solid #0284c7;">
+                    <h2>Ekspordi valikud ja privaatsusfiltrid</h2>
+
+                    <!-- FAIL FORMAAT -->
+                    <div style="margin-bottom: 20px;">
+                        <h3 style="font-size: 1.1rem; color: #1e40af; margin-bottom: 10px;">Faili formaat</h3>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="exportTxt" checked> TXT fail</label>
+                            <label><input type="checkbox" name="exportPdf"> PDF fail</label>
+                            <label><input type="checkbox" name="exportJson" checked> JSON fail</label>
+                            <label><input type="checkbox" name="exportAiPrompt" checked> AI prompt</label>
+                        </div>
+                    </div>
+
+                    <!-- PRIVAATSUSFILTRID -->
+                    <div style="background: white; padding: 15px; border-radius: 8px; border: 2px solid #e5e7eb;">
+                        <h3 style="font-size: 1.1rem; color: #7f1d1d; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                            🔒 Privaatsusfiltrid (mis EI kajastata ekspordis)
+                        </h3>
+                        <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 15px;">
+                            Märgi ära, mida soovid välja jätta kui jagad profiili arstile, AI-le või teadlastele.
+                        </p>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                            <!-- VASAK VEERG -->
+                            <div>
+                                <h4 style="font-size: 0.95rem; font-weight: 600; color: #6b7280; margin-bottom: 8px; text-transform: uppercase;">
+                                    Spirituaalsed/Uskumused
+                                </h4>
+                                <div style="display: flex; flex-direction: column; gap: 6px;">
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterBelief" id="filterBelief" onchange="updatePrivacyFilters()">
+                                        Kõik "belief" väljad (paranormaalsed uned, jumalale, aura kaamera jne)
+                                    </label>
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterDeity" onchange="updatePrivacyFilters()">
+                                        Jumala/usundi info (säilita ainult "Jumalale jagamine" märge)
+                                    </label>
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterMythology" onchange="updatePrivacyFilters()">
+                                        Mütoloogia/identiteet (sooidentiteet, two-spirit jne)
+                                    </label>
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterAstro" onchange="updatePrivacyFilters()">
+                                        Astroloogia andmed (sünnikuupäev/asukoht)
+                                    </label>
+                                </div>
+
+                                <h4 style="font-size: 0.95rem; font-weight: 600; color: #6b7280; margin-top: 15px; margin-bottom: 8px; text-transform: uppercase;">
+                                    Isikuandmed
+                                </h4>
+                                <div style="display: flex; flex-direction: column; gap: 6px;">
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterBioMarkers" onchange="updatePrivacyFilters()">
+                                        Bio-markerid (kromosoomid, hormonid)
+                                    </label>
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterPortals" onchange="updatePrivacyFilters()">
+                                        Meditsiiniportaalide ligipääsud
+                                    </label>
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterFinancial" onchange="updatePrivacyFilters()">
+                                        Rahaline info (eelarve, ligipääs)
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- PAREM VEERG -->
+                            <div>
+                                <h4 style="font-size: 0.95rem; font-weight: 600; color: #6b7280; margin-bottom: 8px; text-transform: uppercase;">
+                                    Tundlikud tervisandmed
+                                </h4>
+                                <div style="display: flex; flex-direction: column; gap: 6px;">
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterMentalHealth" onchange="updatePrivacyFilters()">
+                                        Vaimne tervis (ärevus, depressioon, painajad)
+                                    </label>
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterDisabilities" onchange="updatePrivacyFilters()">
+                                        Puuded/erivajadused
+                                    </label>
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterSubstances" onchange="updatePrivacyFilters()">
+                                        Sõltuvusained (alkohol, suitsetamine)
+                                    </label>
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterSexualHealth" onchange="updatePrivacyFilters()">
+                                        Seksuaaltervis (rasedus, imetamine details)
+                                    </label>
+                                </div>
+
+                                <h4 style="font-size: 0.95rem; font-weight: 600; color: #6b7280; margin-top: 15px; margin-bottom: 8px; text-transform: uppercase;">
+                                    Eluolu
+                                </h4>
+                                <div style="display: flex; flex-direction: column; gap: 6px;">
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterResidence" onchange="updatePrivacyFilters()">
+                                        Elupaiga detailid (korrus, lift, naabrid)
+                                    </label>
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterWork" onchange="updatePrivacyFilters()">
+                                        Töö detailid (töövõime piirangud)
+                                    </label>
+                                    <label style="font-weight: normal;">
+                                        <input type="checkbox" name="privacyFilterFamily" onchange="updatePrivacyFilters()">
+                                        Perekondlik risk (kes, vanus)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- KIIRVALIKUD -->
+                        <div style="margin-top: 20px; padding: 12px; background: #fef3c7; border-radius: 6px;">
+                            <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 10px;">Kiirvalikud</h4>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #065f46; background: white;"
+                                        onclick="setPrivacyPreset('none')">Kõik nähtav (arstile)</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #92400e; background: white;"
+                                        onclick="setPrivacyPreset('medical')">Ainult meditsiiniline (AI-le)</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b; background: white;"
+                                        onclick="setPrivacyPreset('anonymous')">Anonüümne (teadlastele)</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #6b7280; color: #374151; background: white;"
+                                        onclick="setPrivacyPreset('custom')">Tühista valik</button>
+                            </div>
+                        </div>
+
+                        <!-- EXPORT EELVAADE -->
+                        <div id="exportPreview" style="margin-top: 15px; padding: 12px; background: #f9fafb; border-radius: 6px; display: none;">
+                            <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 8px;">Eelvaade (filtreeritud väljad)</h4>
+                            <ul id="filteredFieldsList" style="font-size: 0.85rem; color: #6b7280; margin: 0; padding-left: 20px;">
+                            </ul>
+                        </div>
                     </div>
                 </section>
 
