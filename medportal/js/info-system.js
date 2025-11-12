@@ -2857,3 +2857,66 @@ function quickAddPrivacy(key, name) {
     container.appendChild(itemDiv);
     showToast(`${name} lisatud (${categoryLabel})!`);
 }
+
+// Quick add home support
+function quickAddHomeSupport(key, name) {
+    if (!quickAddCounters.homeSupport) quickAddCounters.homeSupport = 0;
+    quickAddCounters.homeSupport++;
+
+    const containerId = 'quickAddedHomeSupport';
+    const container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`Container ${containerId} not found`);
+        return;
+    }
+
+    const itemId = `homeSupport_quick_${quickAddCounters.homeSupport}`;
+    const fieldName = `homeSupport_${key}_${quickAddCounters.homeSupport}`;
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #fef3c7; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #f59e0b;';
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+            <label style="margin: 0; font-weight: 600; color: #92400e; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #f59e0b; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        ${key !== 'üksi' ? `
+        <div style="margin-left: 24px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Kes (nimi või suhe)?</label>
+            <input type="text" name="${fieldName}_who" placeholder="Nt: abikaasa, täiskasvanu tütar, naaber..."
+                   style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-bottom: 8px;">
+        </div>
+        <div style="margin-left: 24px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Millega aitab?</label>
+            <textarea name="${fieldName}_help" rows="2" placeholder="Nt: ravimite meenutamine, arsti juurde sõit, toidu valmistamine..."
+                      style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;"></textarea>
+        </div>
+        ` : `
+        <div style="margin-left: 24px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Täpsustus</label>
+            <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: elab üksi, haldab ise kõiki ülesandeid..."
+                      style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;"></textarea>
+        </div>
+        `}
+        ${key === 'muu_tugi' ? `
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 4px;">Täpsusta tugi tüüp</label>
+            <input type="text" name="${fieldName}_custom" placeholder="Nt: koduabi teenus, vabatahtlik, jne..."
+                   style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+        </div>
+        ` : ''}
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}
