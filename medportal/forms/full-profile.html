@@ -697,13 +697,6 @@
                         <!-- LISATUD ELUVIISI FAKTORID (dünaamiliselt genereeritud) -->
                         <div id="quickAddedLifestyle"></div>
 
-                        <label style="margin-top: 15px;">Põhiline elupaik</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="rural" value="yes"> Maaelu</label>
-                            <label><input type="checkbox" name="urban" value="yes"> Linn</label>
-                            <label><input type="checkbox" name="nightShift" value="yes"> Öötöö</label>
-                        </div>
-
                         <!-- KIIRVALIKU NUPUD ELUPAIGA JAOKS -->
                         <div class="quick-add-section" style="background: #fef9c3; border-color: #eab308; margin-top: 15px;">
                             <h4>Kiirvalik - Elupaik</h4>
@@ -810,14 +803,6 @@
                                 Sportlik tegevus võib mõjutada toitumisvajadusi, vigastusriski ja ravimite imenduv
                             </p>
                         </div>
-
-                        <label style="margin-top: 15px;">Üldine aktiivsuse tase</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="activity" value="walking"> Kõnd</label>
-                            <label><input type="radio" name="activity" value="physical"> Füüsiline töö</label>
-                            <label><input type="radio" name="activity" value="sedentary"> Istuv</label>
-                            <label><input type="radio" name="activity" value="mixed"> Segarežiim</label>
-                        </div>
                     </div>
 
                     <div class="form-row">
@@ -828,34 +813,6 @@
                         <div class="form-group">
                             <label for="sleepQuality">Kvaliteet (0-3)</label>
                             <input type="number" id="sleepQuality" name="sleepQuality" min="0" max="3">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Norskamine/pausid (uneapnoe)</label>
-                        <div class="radio-group" style="display: flex; gap: 20px;">
-                            <label><input type="radio" name="snoring" value="yes" onchange="toggleToolParams('snoring', 'snoringParams')"> Jah</label>
-                            <label><input type="radio" name="snoring" value="no" onchange="toggleToolParams('snoring', 'snoringParams')"> Ei</label>
-                        </div>
-                    </div>
-
-                    <div id="snoringParams" class="tool-params" style="display: none; margin-left: 20px; padding: 10px; background: #f3f4f6; border-radius: 6px;">
-                        <div class="form-group">
-                            <label>Raskusaste</label>
-                            <div class="radio-group">
-                                <label><input type="radio" name="snoringLevel" value="kerge"> Kerge</label>
-                                <label><input type="radio" name="snoringLevel" value="mõõdukas"> Mõõdukas</label>
-                                <label><input type="radio" name="snoringLevel" value="raske"> Raske</label>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>
-                                <input type="checkbox" name="usingCPAP" value="yes"> Kasutan CPAP seadet
-                            </label>
-                        </div>
-                        <div class="form-group">
-                            <label for="snoringNotes">Täpsustused</label>
-                            <textarea id="snoringNotes" name="snoringNotes" rows="2" placeholder="Nt: uuringud tehtud, ravi alustatud..."></textarea>
                         </div>
                     </div>
 
