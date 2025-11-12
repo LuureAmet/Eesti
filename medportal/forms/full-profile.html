@@ -944,6 +944,28 @@
                         </div>
                     </div>
 
+                    <!-- PAKETT 6: MAGAMINE PROBLEEMID -->
+                    <div class="quick-add-section" style="background: #eff6ff; border-color: #3b82f6; margin-top: 15px;">
+                        <h4>Magamise probleemid</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('insomnia_magama_raskus', 'Raskus magama jääda')">Raskus magama jääda</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('insomnia_püsima_raskus', 'Raskus und püsida')">Raskus und püsida</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('varane_ärkamine', 'Varajane ärkamine')">Varajane ärkamine</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('rahutu_uni', 'Rahutu uni')">Rahutu uni</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('unejutustamine', 'Unejutustamine')">Unejutustamine</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('unekõndimine', 'Unekõndimine')">Unekõndimine</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                            Une probleemid võivad viidata ärevusele, stressile või meditsiinilistele seisunditele
+                        </p>
+                    </div>
+
                     <!-- KIIRVALIKU PLUS-NUPUD - NORSKAMINE -->
                     <div class="quick-add-section" style="background: #eff6ff; border-color: #3b82f6; margin-top: 15px;">
                         <h4>Norskamine</h4>
@@ -965,7 +987,7 @@
                     <!-- LISATUD NORSKAMINE (dünaamiliselt genereeritud) -->
                     <div id="quickAddedSleep"></div>
 
-                    <!-- KIIRVALIKU PLUS-NUPUD - UNENÄGEMINE -->
+                    <!-- KIIRVALIKU PLUS-NUPUD - UNENÄGEMINE (LAIENDATUD) -->
                     <div class="quick-add-section" style="background: #eff6ff; border-color: #3b82f6; margin-top: 15px;">
                         <h4>Unenägemine ja painajad</h4>
                         <div class="quick-add-buttons">
@@ -973,13 +995,21 @@
                                     onclick="quickAddSleep('unenaod_puuduvad', 'Unenäod puuduvad')">Ei näe unenägusid</button>
                             <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
                                     onclick="quickAddSleep('unenaod_tavalised', 'Tavalised unenäod')">Tavalised unenäod</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('unenaod_eredad', 'Eredad unenäod')">Eredad unenäod</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('unenaod_korduvad', 'Korduvad unenäod')">Korduvad unenäod</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('lucid_dreaming', 'Teadvustatud unenäod')">Teadvustatud unenäod</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('unenaod_hea_mälestus', 'Hea unenägude mälestamine')">Hea unenägude mälestamine</button>
                             <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
                                     onclick="quickAddSleep('painajad_harv', 'Painajad (harv)')">Painajad (harv)</button>
                             <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
                                     onclick="quickAddSleep('painajad_sage', 'Painajad (sage)')">Painajad (sage)</button>
                         </div>
                         <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
-                            Sagedased painajad võivad viidata ärevusele, PTSD-le või ravimite kõrvalmõjule
+                            Sagedased painajad võivad viidata ärevusele, PTSD-le või ravimite kõrvalmõjule. Eredad unenäod võivad olla seotud REM-une häirega.
                         </p>
                     </div>
 
@@ -998,6 +1028,32 @@
                         </div>
                         <p style="font-size: 0.85rem; color: #6b7280; margin-top: 8px; margin-bottom: 0;">
                             Belief-väljad on valikulised ja ei kajastata meditsiinipersonalile vaikimisi
+                        </p>
+                    </div>
+
+                    <!-- PAKETT 6: ÖÖHÄIRED (NIGHT DISTURBANCES) -->
+                    <div class="quick-add-section" style="background: #eff6ff; border-color: #3b82f6; margin-top: 15px;">
+                        <h4>Ööhäired ja öised sümptomid</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('öine_higistamine', 'Öine higistamine')">Öine higistamine</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('sage_ärkamine', 'Sage ärkamine')">Sage ärkamine</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('nocturia', 'Öine urineerimine (nocturia)')">Öine urineerimine</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('restless_legs', 'Rahutu jalgade sündroom')">Rahutu jalgade sündroom</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddSleep('öine_ärevus', 'Öine ärevus/paanikahood')">Öine ärevus/paanikahood</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('bruxism', 'Hambad krigistamine (bruxism)')">Hambad krigistamine</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('öised_krambid', 'Öised jalakrimbid')">Öised jalakrimbid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                    onclick="quickAddSleep('une_halvatus', 'Une halvatus (sleep paralysis)')">Une halvatus</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                            Ööhäired võivad viidata meditsiinilistele probleemidele (nt diabeet, südameprobleemid, ärevushäired)
                         </p>
                     </div>
 
