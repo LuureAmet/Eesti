@@ -1,7 +1,7 @@
 # STRATEEGIA JA PLAAN - Versioonid 1.8.0+
 
 **Kuupäev:** 12.11.2025
-**Praegune versioon:** v1.7.5 ✅ (13 PAKETTI VALMIS!)
+**Praegune versioon:** v1.7.5 ✅ (PARANDUSED VALMIS)
 **Järgmised versioonid:** v1.8.0 → v1.9.0 → v2.0.0
 
 ---
@@ -24,22 +24,15 @@
 - ✅ 3 uut funktsiooni: quickAddComplaint(), quickAddBath(), quickAddMusic()
 - ✅ MED_INFO_DB laiendatud 17 kirjega
 
-### v1.7.5 - MASSIIVNE UUENDUS (13 PAKETTI!) ✅
-- ✅ **PAKETT 1:** Profiilifiltri täiendused (Centaur vanus, Suur-Tõu/Elf vanused, "Lapseootel" label)
-- ✅ **PAKETT 2:** Bio-markerid (4 plus-nuppu: kromosoomid, gonaddid, hormoonid, muu)
-- ✅ **PAKETT 3:** Profiilifilter täiendused (7 uut filtrit: toidupiirangud, allergiad, kultuurilised...)
-- ✅ **PAKETT 4:** Mütoloogia/Identiteet (8 liiki: inimene, elf, päkapikk, kääbus, centaur, poolinimene, väetee, muu)
-- ✅ **PAKETT 5:** Spordid ja harjutused (12+ plus-nuppu: jõusaal, jooga, taiji, võitluskunstid, Tsigong...)
-- ✅ **PAKETT 6:** Töö tüübid (12+ plus-nuppu: istuv arvutitöö, füüsiline töö, öötöö, transport, meditsiin...)
-- ✅ **PAKETT 7:** Töövõime hinnang (kompaktne UI, dropdown, "Piirangud töö jaoks")
-- ✅ **PAKETT 8:** Alternatiivsed tööriistad (10+ plus-nuppu: bioenergia, aura kaamera, pendel...) **belief**
-- ✅ **PAKETT 9:** Meditsiiniportaalid (17 portaali: Eesti 4, Euroopa 7, Maailm 6) värvikoodi
-- ✅ **PAKETT 10:** Antikoagulant → **Verevedeldajad** (tooltip, koostoime hoiatused)
-- ✅ **PAKETT 11:** Vann/Saun laiendus (6 uut saunatüüpi: Soome, Vene banja, Türgi hammam, infrapuna, aurukamber, muu)
-- ✅ **PAKETT 12:** Try-If-Needed (10 abinõu + ↑/↓ järjekorra muutmine)
-- ✅ **PAKETT 13:** Privaatsus filter (14 kategooriat, 3 presetti: arst, AI, teadlane)
-- ✅ **UI PARANDUSED:** BMI/sünnikuupäev ümberpaigutamine, vanade listide eemaldamine, "(belief)" siltide peitmine, töövõime kompaktne layout, "Kodune tugi" plus-süsteem
-- ✅ **STATISTIKA:** ~1800+ rida koodi, 75+ uut plus-nuppu, 15+ uut JS funktsiooni
+### v1.7.5 - PARANDUSED JA PUHASTUS ✅
+- ✅ Versioon 1.7.0 → 1.7.5 (site-config.js)
+- ✅ Eemaldatud KÕIK "Või märgi lihtsalt..." duplikaadid (9 kohta)
+- ✅ Eemaldatud vanad radio/checkbox listid (põhiline elupaik, aktiivsus, norskamine, kõnnitempo, vann/epsom)
+- ✅ "(belief)" sildid peidetud UI-st (3 kohta) - jäi metadata
+- ✅ Sünnikuupäev liigutatud BMI alla (kehaandmete sektsiooni)
+- ✅ Töövõime kompaktne: dropdown + 2-veeruline grid (~40% lühem)
+- ✅ "Piirangud tööl" → "Piirangud töö jaoks"
+- ✅ Kodune tugi plus-süsteem (6 kategooriat, quickAddHomeSupport funktsioon)
 
 ---
 

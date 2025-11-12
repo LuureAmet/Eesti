@@ -110,137 +110,47 @@
 
 ---
 
-### **v1.7.5 - MASSIIVNE UUENDUS (13 PAKETTI!) (12.11.2025)**
+### **v1.7.5 - PARANDUSED JA PUHASTUS (12.11.2025)**
 
 **Failid:**
-- `medportal/forms/full-profile.html` (MASSIIVNE UUENDUS)
-- `medportal/js/info-system.js` (MASSIIVNE UUENDUS)
+- `medportal/forms/full-profile.html` (PARANDUSED)
+- `medportal/js/info-system.js` (lisa quickAddHomeSupport)
 - `medportal/config/site-config.js` (v1.7.5)
 
-#### **PAKETT 1: Profiilifiltri täiendused**
-- ✅ "Lapseootel" label muudetud "Rasedus" → **"Lapseootel"**
-- ✅ Centaur vanus (100-120 aastat) kullasel taustal
-- ✅ Hõlmab Suur-Tõu (elf) vanused: 0.08-20 (väikelaps), 20-100 (täiskasvanu), 100-175 (eakas), 175+ (kõrgealine)
-- ✅ Reaalajas hoiatused täiustatud
+#### **TEHTUD PARANDUSED:**
 
-#### **PAKETT 2: Bio-markerid (4 plus-nuppu)**
-- ✅ `quickAddBioMarker()` funktsioon
-- ✅ 4 bio-markerit: Kromosoomid, Gonaddid, Hormoonid, Muu bio-marker
-- ✅ Iga marker küsib: tüüp, väärtus, kuupäev, märkused
+**1. Versiooni uuendus:**
+- Versioon 1.7.0 → 1.7.5 (site-config.js)
+- Changelog uuendatud
 
-#### **PAKETT 3: Profiilifilter täiendused**
-- ✅ 7 uut filtrit: toidupiirangud, allergiad, kultuurilised, usulis-moraalsed, elustiil, füüsiline pool, perekondlik
-- ✅ Kombineeritud filtrid (nt rasedus+toidupiirangud)
-- ✅ Reaalajas filtreerimise preview
+**2. Duplikaadide eemaldamine:**
+- Eemaldatud "Või märgi lihtsalt perekondlik risk" (radio grupp)
+- Eemaldatud "Või märgi lihtsalt piirangud" (5 checkboxi: gluteen, piim, liha, suhkur, sool)
+- Eemaldatud "Või märgi lihtsalt tee kasutamine" (4 checkboxi: roheline, hibiskus, must, ravimtaimed)
+- Eemaldatud "Või märgi lihtsalt ligipääs" (4 checkboxi: loodustoodete pood, iHerb, TCM/Ayurveda, puudub)
+- Eemaldatud "Põhiline elupaik" vanad checkboxid (maaelu, linn, öötöö - on juba plusid)
+- Eemaldatud "Üldine aktiivsuse tase" vanad radio nupud (kõnd, füüsiline, istuv, segarežiim)
+- Eemaldatud "Norskamine/pausid" kogu vana sektsioon (26 rida)
+- Eemaldatud "Kõnnitempo ja distants" vana radio grupp (8 rida)
+- Eemaldatud "Vann/leotus (Epsom)" vana radio grupp (7 rida)
 
-#### **PAKETT 4: Mütoloogia/Identiteet**
-- ✅ Mütoloogilised liigid: inimene, elf (suur-tõu), päkapikk (väike-tõu), kääbus, centaur, poolinimene, väetee, muu
-- ✅ Vanusekategooriate automaatne kohandamine liigi järgi
+**3. UI parandused:**
+- "(belief)" sildid peidetud UI-st (3 kohast) - jäi ainult metadata
+- Sünnikuupäev ja -asukoht liigutatud kehaandmete sektsiooni sisse (BMI alla)
+- Töövõime sektsioon kompaktne: dropdown + 2-veeruline grid layout (vähendatud ~40% vertikaali)
+- "Piirangud tööl" → "Piirangud töö jaoks"
+- BMI kalkulaator jäi kehaandmete juurde (pikkuse ja kaalu juures)
 
-#### **PAKETT 5: Spordid ja harjutused (12+ plus-nuppu)**
-- ✅ `quickAddSport()` funktsioon
-- ✅ 12 sporti: jõusaal, jooga, taiji, kergejõustik, võitluskunstid, Tsigong, raskusjooksud, Crossfit, sulgpall, korvpall, võrkpall, veloergomeeter
-- ✅ Iga sport: sagedus, kestus, intensiivsus, märkused
-
-#### **PAKETT 6: Töö tüübid (12+ plus-nuppu)**
-- ✅ `quickAddJobType()` funktsioon
-- ✅ 12 töötüüpi: istuv arvutitöö, füüsiline töö, öötöö, vahetustega töö, transport, müük, õpetaja, meditsiin, turvateenistus, jaotaja (Bolt), metsatööline, muu
-- ✅ Töövõime hinnang: kompaktne 2-veeruline layout (dropdown + checkboxed)
-
-#### **PAKETT 7: Töövõime hinnang**
-- ✅ Töövõime % dropdown (100%, 75%, 50%, 25%, 0%)
-- ✅ Piirangud töö jaoks (6 tüüpi): raske tõstmine, püstijäämine, pikem istumine, arvutitöö, öötööd, stressitaluvus
-- ✅ Kompaktne UI: 2-veeruline grid, vähendatud vertikaalne pikkus ~40%
-
-#### **PAKETT 8: Alternatiivsed tööriistad (10+ plus-nuppu)**
-- ✅ `quickAddAltTool()` funktsioon
-- ✅ 10 tööriista: bioenergia mõõtja, eluenergia mõõtja, aura kaamera, pendel, Hiina pulsi hindamine, nõia mõõtmised, UroDevTugi, tšakrate skanner, kristallravi, muu
-- ✅ Märgitud "(belief)" scope metadata
-- ✅ Kasutamise sagedus + tulemused
-
-#### **PAKETT 9: Meditsiiniportaalid (Euroopa/Maailma)**
-- ✅ `quickAddPortal()` funktsioon
-- ✅ Eesti portaalid (4): Digilugu, Tervisekassa, TIS, Haigla portaal
-- ✅ Euroopa portaalid (7): EHIC, e-Tervis (Soome), 1177 (Rootsi), Patientenakte (Saksamaa), Dossier Médical (Prantsusmaa), My Health Online (UK), EU portaal
-- ✅ Maailma portaalid (6): MyChart/EPIC (USA), NHS App (UK), Gezondheid.be (Belgia), Santé.fr (Prantsusmaa), MyHealth (Kanada), Muu portaal
-- ✅ Värvikoodi: Eesti (sinine), Euroopa (kollane), Maailm (roheline)
-- ✅ Väljad: kasutajakonto (jah/ei), viimati kasutatud, märkused
-
-#### **PAKETT 10: Antikoagulant → Verevedeldajad**
-- ✅ Label muudetud "Antikoagulant?" → **"Verevedeldajad?"**
-- ✅ Tooltip: "Varfariin, apiksabaan, rivaroksabaan, või aspirin/klopidogreel"
-- ✅ Koostoime hoiatused (ginkgo, küüslauk, naistepuna)
-
-#### **PAKETT 11: Vann/Saun laiendus (6 uut saunatüüpi)**
-- ✅ Uued saunatüübid: Soome saun, Vene banja, Türgi hammam, Infrapuna saun, Aurukamber, Muu saunatüüp
-- ✅ Iga tüüp: sagedus, temperatuur, kestus, märkused
-
-#### **PAKETT 12: Try-If-Needed (Vajadusel) + lohistamine**
-- ✅ `addTryIfNeeded()`, `moveTryIfNeededUp()`, `moveTryIfNeededDown()` funktsioonid
-- ✅ 10 abinõu: kiirtablettid (paracetamol, ibuprofen), tee (ingver, mäta), hingamine, rahu, jalutus, vesi juurde, magustoit, soe kott, muu
-- ✅ Järjekorra muutmine: ↑/↓ nupud
-- ✅ Iga abinõu: millal kasutad, annus/kogus, täpsustus
-
-#### **PAKETT 13: Privaatsus filter (14 kategooriat, 3 presetti)**
-- ✅ 14 privaatsuse kategooriat:
-  1. Kõik "belief" väljad (paranormaalsed uned, aura kaamera, alternatiivsed tööriistad)
-  2. Jumala/usundi detailid
-  3. Mütoloogia/identiteet
-  4. Astroloogia andmed (sünnikuupäev, -asukoht)
-  5. Bio-markerid (kromosoomid, gonaddid, hormonid)
-  6. Meditsiiniportaalide ligipääsud
-  7. Rahaline info
-  8. Vaimne tervis (ärevus, depressioon, painajad)
-  9. Puuded ja erivajadused
-  10. Sõltuvusained (alkohol, suitsetamine)
-  11. Seksuaaltervis detailid
-  12. Elupaiga detailid (korrus, lift, naabrite info)
-  13. Töö piirangud ja võimekus
-  14. Perekondliku riski detailid
-- ✅ 3 presetti:
-  - **Kõik nähtav** (arstile) - kõik väljad eksporditakse
-  - **Ainult meditsiiniline** (AI-le) - filtreerib spirituaalsed, astro, portaalid, rahaline
-  - **Anonüümne** (teadlastele) - peidab enamik isikuandmeid, näitab ainult vaimne tervis, puuded, sõltuvusained
-  - **Kohandatud** - kasutaja valib käsitsi
-- ✅ Reaalajas preview filtreeritavatest väljadest
-- ✅ Ekspordi kinnitusdialoogi hoiatus filtrite kohta
-
-#### **UI PARANDUSED:**
-- ✅ BMI kalkulaator: jäi kehaandmete sektsiooni (pikkuse ja kaalu juurde)
-- ✅ Sünnikuupäev ja -asukoht: liigutatud kehaandmete sektsiooni sisse (BMI alla)
-- ✅ Eemaldatud KÕIK vanad "Või märgi lihtsalt..." topelt-listid
-- ✅ Eemaldatud "(belief)" UI sildid (jäi ainult metadata)
-- ✅ Töövõime sektsioon: kompaktne 2-veeruline layout (dropdown + 3-veeruline checkbox grid)
-- ✅ "Piirangud tööl" → "Piirangud töö jaoks"
-- ✅ Eemaldatud vanad radio/checkbox listid: põhiline elupaik, aktiivsuse tase, norskamine/pausid, kõnnitempo ja distants
-- ✅ "Kodune tugi" konverteeritud plus-nuppude süsteemiks (6 kategooriat)
-
-#### **UUED FUNKTSIOONID (10):**
-1. `quickAddBioMarker()` - bio-markerid (kromosoomid, gonaddid, hormonid)
-2. `quickAddMythology()` - mütoloogilised liigid (elf, kääbus, centaur...)
-3. `quickAddSport()` - spordid ja harjutused (12+ tüüpi)
-4. `quickAddJobType()` - töö tüübid (12+ tüüpi)
-5. `quickAddAltTool()` - alternatiivsed/vaimsed tööriistad (10+ tüüpi) **belief**
-6. `quickAddPortal()` - meditsiiniportaalid (Eesti, Euroopa, Maailm)
-7. `addTryIfNeeded()` - vajadusel abinõud (10+ tüüpi)
-8. `moveTryIfNeededUp()` / `moveTryIfNeededDown()` - järjekorra muutmine
-9. `quickAddHomeSupport()` - kodune tugi (6 kategooriat)
-10. Vann/Saun laiendus (6 uut saunatüüpi)
-
-#### **PRIVAATSUSE FILTER FUNKTSIOONID (3):**
-1. `updatePrivacyFilters()` - näitab preview filtreeritavatest väljadest
-2. `setPrivacyPreset()` - seadistab 3 eelseadistust (arst, AI, teadlane)
-3. `exportWithPrivacyFilters()` - eksportimine koos filtrite kinnitusega
+**4. Kodune tugi plus-süsteem:**
+- Konverteeritud vanad radio nupud plus-nuppude süsteemiks
+- 6 kategooriat: Perekonnaliige, Partner, Hooldaja, Sõber/Naaber, Üksi, Muu
+- Lisatud `quickAddHomeSupport()` funktsioon (info-system.js:2862)
 
 #### **STATISTIKA:**
-- ~1800+ rida koodi lisatud/muudetud
-- 75+ uut plus-nuppu
-- 15+ uut JavaScript funktsiooni
-- 14 privaatsuse kategooriat
-- 3 privaatsuse presetti
-- 6 uut saunatüüpi
-- 17 meditsiiniportaali (Eesti + Euroopa + Maailm)
-- 10+ alternatiivseid tööriistad (belief scope)
+- 4 commit'i
+- ~200 rida koodi eemaldatud (duplikaadid)
+- ~100 rida koodi lisatud/muudetud (parandused)
+- 1 uus funktsioon (quickAddHomeSupport)
 
 ---
 
