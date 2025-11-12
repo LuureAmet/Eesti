@@ -556,3 +556,59 @@ function quickAddAbility(key, name) {
     container.appendChild(itemDiv);
     showToast(`${name} lisatud!`);
 }
+
+// PAKETT 8: Alternative/Spiritual Tools
+let altToolCounter = 0;
+
+function quickAddAltTool(key, name) {
+    altToolCounter++;
+    const container = document.getElementById('quickAddedAltTools');
+
+    const itemDiv = document.createElement('div');
+    itemDiv.id = `altTool_${altToolCounter}`;
+    itemDiv.style.cssText = 'background: #f3f4f6; padding: 12px; border-radius: 6px; border-left: 4px solid #9ca3af; margin-bottom: 10px;';
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: start; gap: 15px;">
+            <div style="flex: 1;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                    <strong style="color: #4b5563;">${name}</strong>
+                    <span style="background: #e5e7eb; color: #6b7280; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem;">belief</span>
+                </div>
+                <input type="hidden" name="altTool_${altToolCounter}" value="${key}">
+
+                <div style="margin-bottom: 8px;">
+                    <label style="display: block; font-size: 0.9rem; color: #64748b; margin-bottom: 4px;">Kasutamise sagedus</label>
+                    <select name="altTool_${altToolCounter}_frequency"
+                            style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                        <option value="">Vali...</option>
+                        <option value="daily">Igapäevaselt</option>
+                        <option value="weekly">Iganädalaselt</option>
+                        <option value="monthly">Igakuiselt</option>
+                        <option value="rarely">Harva</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label style="display: block; font-size: 0.9rem; color: #64748b; margin-bottom: 4px;">Tulemused/tähelepanekud</label>
+                    <textarea name="altTool_${altToolCounter}_results" rows="2"
+                              placeholder="Nt: aura värv, tšakra blokaadid, pendli vastused..."
+                              style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;"></textarea>
+                </div>
+
+                ${key === 'muu_alt' ? `
+                    <div style="margin-top: 8px;">
+                        <input type="text" name="altTool_${altToolCounter}_custom_name"
+                               placeholder="Täpsusta tööriista nimi..."
+                               style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    </div>
+                ` : ''}
+            </div>
+            <button type="button" class="quick-add-btn" style="padding: 6px 12px; background: #9ca3af; color: white;"
+                    onclick="document.getElementById('altTool_${altToolCounter}').remove()">Eemalda</button>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}
