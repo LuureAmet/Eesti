@@ -612,3 +612,74 @@ function quickAddAltTool(key, name) {
     container.appendChild(itemDiv);
     showToast(`${name} lisatud!`);
 }
+
+// PAKETT 9: Medical Portals (Europe/World)
+let portalCounter = 0;
+
+function quickAddPortal(key, name) {
+    portalCounter++;
+    const container = document.getElementById('quickAddedPortals');
+
+    const itemDiv = document.createElement('div');
+    itemDiv.id = `portal_${portalCounter}`;
+
+    // Color coding by region
+    let bgColor = '#dbeafe'; // Estonia - blue
+    let borderColor = '#3b82f6';
+    if (key.includes('ehic') || key.includes('eu_') || key.includes('soome') || key.includes('rootsi') || key.includes('saksamaa')) {
+        bgColor = '#fef3c7'; // EU - yellow
+        borderColor = '#f59e0b';
+    } else if (key.includes('who') || key.includes('usa') || key.includes('uk') || key.includes('kanada') || key === 'muu_portaal') {
+        bgColor = '#f0fdf4'; // World - green
+        borderColor = '#10b981';
+    }
+
+    itemDiv.style.cssText = `background: ${bgColor}; padding: 12px; border-radius: 6px; border-left: 4px solid ${borderColor}; margin-bottom: 10px;`;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: start; gap: 15px;">
+            <div style="flex: 1;">
+                <strong style="color: #1f2937;">${name}</strong>
+                <input type="hidden" name="portal_${portalCounter}" value="${key}">
+
+                <div style="margin-top: 8px;">
+                    <label style="display: block; font-size: 0.9rem; color: #64748b; margin-bottom: 4px;">Kasutajakonto olemas?</label>
+                    <div style="display: flex; gap: 10px;">
+                        <label style="font-weight: normal;">
+                            <input type="radio" name="portal_${portalCounter}_account" value="yes"> Jah
+                        </label>
+                        <label style="font-weight: normal;">
+                            <input type="radio" name="portal_${portalCounter}_account" value="no"> Ei
+                        </label>
+                    </div>
+                </div>
+
+                <div style="margin-top: 8px;">
+                    <label style="display: block; font-size: 0.9rem; color: #64748b; margin-bottom: 4px;">Viimati kasutatud</label>
+                    <input type="date" name="portal_${portalCounter}_lastUsed"
+                           style="padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                </div>
+
+                <div style="margin-top: 8px;">
+                    <label style="display: block; font-size: 0.9rem; color: #64748b; margin-bottom: 4px;">Täpsustus (vabatahtlik)</label>
+                    <textarea name="portal_${portalCounter}_notes" rows="2"
+                              placeholder="Nt: kasutajanimi, ligipääsu piirangud, andmete uuendamise sagedus..."
+                              style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; font-family: inherit;"></textarea>
+                </div>
+
+                ${key === 'muu_portaal' ? `
+                    <div style="margin-top: 8px;">
+                        <input type="text" name="portal_${portalCounter}_custom_name"
+                               placeholder="Portaali nimi (nt riik ja süsteem)..."
+                               style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                    </div>
+                ` : ''}
+            </div>
+            <button type="button" class="quick-add-btn" style="padding: 6px 12px; background: #64748b; color: white;"
+                    onclick="document.getElementById('portal_${portalCounter}').remove()">Eemalda</button>
+        </div>
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}
