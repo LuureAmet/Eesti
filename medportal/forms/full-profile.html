@@ -587,6 +587,26 @@
                         <p style="font-size: 0.85rem; color: #6b7280; margin-top: 8px; margin-bottom: 0;">
                             💡 BMI arvutus: kaal (kg) ÷ (pikkus (m))². Normaalne vahemik: 18.5-24.9
                         </p>
+
+                        <!-- SÜNNIKUUPÄEV + ASUKOHT (vabatahtlik) -->
+                        <details style="background: #fef3c7; padding: 12px; border-radius: 6px; border-left: 3px solid #f59e0b; margin-top: 15px;">
+                            <summary style="cursor: pointer; font-weight: 600; color: #92400e; font-size: 0.95rem;">
+                                🌙 Sünnikuupäev ja -asukoht (vabatahtlik, astroloogia jaoks)
+                            </summary>
+                            <p style="font-size: 0.85rem; color: #92400e; margin-top: 10px;">
+                                Need andmed kasutatakse usupõhiste paastude, kalendrite ja astroloogia jaoks. Need ei kajastata avalikus ekspordis ilma eraldi nõusolekuta.
+                            </p>
+                            <div style="margin-top: 15px; display: grid; gap: 15px;">
+                                <div class="form-group">
+                                    <label for="birthDate">Sünnikuupäev:</label>
+                                    <input type="date" id="birthDate" name="birthDate" style="width: 200px; padding: 8px; border: 1px solid #f59e0b; border-radius: 6px;">
+                                </div>
+                                <div class="form-group">
+                                    <label for="birthLocation">Sünnikoht (linn, riik):</label>
+                                    <input type="text" id="birthLocation" name="birthLocation" placeholder="Nt: Tallinn, Eesti" style="width: 100%; max-width: 400px; padding: 8px; border: 1px solid #f59e0b; border-radius: 6px;">
+                                </div>
+                            </div>
+                        </details>
                     </div>
 
                     <!-- AKNAD (OPTIMAALSED AJAD) - UUS PLUS-SÜSTEEM -->
@@ -621,26 +641,6 @@
                         <!-- Lisatud aknad (dünaamiliselt) -->
                         <div id="addedWindows"></div>
                     </div>
-
-                    <!-- SÜNNIKUUPÄEV + ASUKOHT (privaatne, astroloogia jaoks) -->
-                    <details style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b; margin-bottom: 20px;">
-                        <summary style="cursor: pointer; font-weight: 600; color: #92400e;">
-                            🌙 Sünnikuupäev ja -asukoht (vabatahtlik, kalendri/usundite/astroloogia jaoks)
-                        </summary>
-                        <p style="font-size: 0.85rem; color: #92400e; margin-top: 10px;">
-                            Need andmed kasutatakse usupõhiste paastude, kalendrite ja astroloogia jaoks. Need ei kajastata avalikus ekspordis ilma eraldi nõusolekuta.
-                        </p>
-                        <div style="margin-top: 15px; display: grid; gap: 15px;">
-                            <div class="form-group">
-                                <label for="birthDate">Sünnikuupäev:</label>
-                                <input type="date" id="birthDate" name="birthDate" style="width: 200px; padding: 8px; border: 1px solid #f59e0b; border-radius: 6px;">
-                            </div>
-                            <div class="form-group">
-                                <label for="birthLocation">Sünnikoht (linn, riik):</label>
-                                <input type="text" id="birthLocation" name="birthLocation" placeholder="Nt: Tallinn, Eesti" style="width: 100%; max-width: 400px; padding: 8px; border: 1px solid #f59e0b; border-radius: 6px;">
-                            </div>
-                        </div>
-                    </details>
 
                     <!-- PUUDED / ERIVAJADUSED -->
                     <div style="background: white; padding: 15px; border-radius: 8px; border: 2px solid #e5e7eb; margin-bottom: 20px;">
@@ -1076,32 +1076,36 @@
                         <!-- LISATUD TÖÖD (dünaamiliselt genereeritud) -->
                         <div id="quickAddedJobTypes"></div>
 
-                        <!-- PAKETT 7: TÖÖVÕIME HINNANG -->
+                        <!-- PAKETT 7: TÖÖVÕIME HINNANG (kompaktne) -->
                         <div class="quick-add-section" style="background: #fef3c7; border-color: #f59e0b; margin-top: 20px; margin-bottom: 15px;">
                             <h4>Töövõime hinnang</h4>
-                            <div style="margin-bottom: 12px;">
-                                <label style="display: block; font-weight: 600; color: #92400e; margin-bottom: 8px;">Praegune töövõime (%)</label>
-                                <div class="radio-group" style="display: flex; gap: 15px; flex-wrap: wrap;">
-                                    <label><input type="radio" name="workCapacity" value="100"> 100% (täistöövõime)</label>
-                                    <label><input type="radio" name="workCapacity" value="75"> 75%</label>
-                                    <label><input type="radio" name="workCapacity" value="50"> 50%</label>
-                                    <label><input type="radio" name="workCapacity" value="25"> 25%</label>
-                                    <label><input type="radio" name="workCapacity" value="0"> 0% (puue/töövõimetus)</label>
+                            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 15px; margin-bottom: 12px;">
+                                <div>
+                                    <label style="display: block; font-weight: 600; color: #92400e; margin-bottom: 6px; font-size: 0.95rem;">Praegune töövõime</label>
+                                    <select name="workCapacity" style="width: 100%; padding: 8px; border: 1px solid #f59e0b; border-radius: 6px; font-size: 0.95rem;">
+                                        <option value="">Vali...</option>
+                                        <option value="100">100% (täistöövõime)</option>
+                                        <option value="75">75%</option>
+                                        <option value="50">50%</option>
+                                        <option value="25">25%</option>
+                                        <option value="0">0% (puue/töövõimetus)</option>
+                                    </select>
                                 </div>
-                            </div>
-                            <div style="margin-bottom: 12px;">
-                                <label style="display: block; font-weight: 600; color: #92400e; margin-bottom: 8px;">Piirangud tööl</label>
-                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="heavy_lifting"> Raske tõstmine</label>
-                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="standing"> Püstijäämine</label>
-                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="sitting"> Pikem istumine</label>
-                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="computer"> Arvutitöö</label>
-                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="night_shifts"> Öötööd</label>
-                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="stress"> Stressitaluvus</label>
+                                <div>
+                                    <label style="display: block; font-weight: 600; color: #92400e; margin-bottom: 6px; font-size: 0.95rem;">Piirangud töö jaoks</label>
+                                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; font-size: 0.9rem;">
+                                        <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="heavy_lifting"> Raske tõstmine</label>
+                                        <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="standing"> Püstijäämine</label>
+                                        <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="sitting"> Pikem istumine</label>
+                                        <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="computer"> Arvutitöö</label>
+                                        <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="night_shifts"> Öötööd</label>
+                                        <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="stress"> Stressitaluvus</label>
+                                    </div>
                                 </div>
                             </div>
                             <textarea name="workCapacityNotes" rows="2"
-                                      placeholder="Täpsusta töövõime piiranguid (nt palavus, külm, müra, allergeenid...)"></textarea>
+                                      placeholder="Täpsusta töövõime piiranguid (nt palavus, külm, müra, allergeenid...)"
+                                      style="font-size: 0.9rem;"></textarea>
                         </div>
 
                         <!-- KIIRVALIKU NUPUD LIIKUMISE JAOKS -->
