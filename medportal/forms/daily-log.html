@@ -1,0 +1,146 @@
+<!-- VERSION: 1.2.0 - 2025-01-09 -->
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Päevalogi - Meditsiiniportaal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/forms.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Päevalogi</h1>
+            <p class="subtitle">Päevane jälgimine | 2 minutit</p>
+        </header>
+
+        <main>
+            <div class="alert-info" style="margin-bottom: 30px;">
+                <p><strong>Juhend:</strong> Täida see vorm iga päev (soovitavalt hommikul). Andmed salvestatakse ja saad neid hiljem CSV-na eksportida arstile.</p>
+            </div>
+
+            <form id="dailyLogForm">
+
+                <!-- KUUPÄEV -->
+                <section class="form-section">
+                    <h2>Kuupäev ja kellaaeg</h2>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="logDate">Kuupäev</label>
+                            <input type="date" id="logDate" name="logDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="logTime">Kellaaeg</label>
+                            <input type="time" id="logTime" name="logTime" required>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MÕÕTMISED -->
+                <section class="form-section">
+                    <h2>Mõõtmised</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="weight">Kaal hommikul (kg)</label>
+                            <input type="number" id="weight" name="weight" min="20" max="300" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="bpMorning">BP hommikul (mmHg)</label>
+                            <input type="text" id="bpMorning" name="bpMorning" placeholder="120/80">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bpEvening">BP õhtul (mmHg)</label>
+                            <input type="text" id="bpEvening" name="bpEvening" placeholder="120/80">
+                        </div>
+                        <div class="form-group">
+                            <label for="heartRate">Pulss rahus (lpm)</label>
+                            <input type="number" id="heartRate" name="heartRate" min="30" max="200">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SÜMPTOMID -->
+                <section class="form-section">
+                    <h2>Sümptomid (0-3)</h2>
+                    <p class="help-text">0=puudub, 1=kerge, 2=mõõdukas, 3=raske</p>
+
+                    <div class="symptom-grid">
+                        <div>
+                            <label>Õhupuudus</label>
+                            <input type="number" name="breathlessness" min="0" max="3" value="0" required>
+                        </div>
+                        <div>
+                            <label>Väsimus</label>
+                            <input type="number" name="fatigue" min="0" max="3" value="0" required>
+                        </div>
+                        <div>
+                            <label>Turse</label>
+                            <input type="number" name="swelling" min="0" max="3" value="0" required>
+                        </div>
+                        <div>
+                            <label>Rindkerevalu</label>
+                            <input type="number" name="chestPain" min="0" max="3" value="0" required>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- RUTIINID -->
+                <section class="form-section">
+                    <h2>Rutiinid tehtud</h2>
+
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="routineBreathing" value="yes"> Hingamine</label>
+                        <label><input type="checkbox" name="routineWalking" value="yes"> Jalutus</label>
+                        <label><input type="checkbox" name="routineMeds" value="yes"> Ravimid võetud</label>
+                        <label><input type="checkbox" name="routineMeditation" value="yes"> Meditatsioon</label>
+                    </div>
+                </section>
+
+                <!-- MÄRKUSED -->
+                <section class="form-section">
+                    <h2>Märkused</h2>
+
+                    <div class="form-group">
+                        <label for="notes">Vaba tekst (tähelepa nekud, erandid, tunded)</label>
+                        <textarea id="notes" name="notes" rows="4" placeholder="Näiteks: Täna rohkem turset kui tavaliselt. Magasin halvasti."></textarea>
+                    </div>
+                </section>
+
+                <!-- NUPUD -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='../index.html'">Tagasi</button>
+                    <button type="submit" class="btn btn-primary">Salvesta päevalogi</button>
+                    <button type="button" class="btn btn-secondary" onclick="exportAllLogs()">Ekspordi kõik (CSV)</button>
+                    <button type="button" class="btn btn-secondary" onclick="viewLogs()">Vaata ajalugu</button>
+                </div>
+
+            </form>
+
+            <!-- Ajalugu -->
+            <div id="logsHistory" class="hidden" style="margin-top: 40px;">
+                <section class="form-section">
+                    <h2>Salvestatud logid</h2>
+                    <div id="logsTable"></div>
+                </section>
+            </div>
+
+        </main>
+
+        <footer>
+            <p>© 2025 Meditsiiniportaal | Päevalogi</p>
+        </footer>
+    </div>
+
+    <script src="../js/form-handler.js"></script>
+    <script src="../js/daily-log.js"></script>
+
+    <!-- Config ja dokumendid/lingid -->
+    <script src="../config/site-config.js"></script>
+    <script src="../js/docs-and-links.js"></script>
+</body>
+</html>

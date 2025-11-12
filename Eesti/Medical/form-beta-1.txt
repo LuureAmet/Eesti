@@ -1,0 +1,356 @@
+ form-beta-1.txt
+
+
+
+ claude .mikxed
+ 
+
+holsitisussuse all motleme iniemse vabadust nii t2is medisiini, kui ti2s ravimi eri kultuuri ja sadvuse proifilide loomise ja kobinerimise oas koos koige muug,a sh vajaliku self anayysi iniemsele tema enda elu ja vlaikute osas, 
+
+samas pekas vorm hjaama voimalikult vabadustp kuv
+vaja luua ja saab lua lsiasi kus vaja , poel kininie igas mastabis, nteks isegi ku ime ise ei osak moelda mida lisaks ,siis peab oelma 
+"plus lsia.." ja inimeen saab lsiada kuskle teutd seksiioni asju pudutavad asjad..
+
+ja veel muud infot koigelpus...
+
+siin n2iteks toodud algses plaanis 4 promti, 
+midapenisime aile saata aga seda asja velefktisemaks ja parmien isalvestavaks kogutavaks teeme niemsele
+
+
+et saab koguda eri ai vastused, ja hiljem vajadusel neid kobineerida ja neist pairma ai de ga leida, 
+
+kos arisidega vdetes jne , online ja ofline jne 
+
+peaks omea valikud et , nii ontoga lku iilma kontota, slvesuseja salvesuseta, oma priti vasted jne 
+
+aga lihtsuse mots kui on vaja siis alsutame just lihtsaltgeremiseks ja minigt pasiedi infot mite slvestades (hilejm jallevaja prktilisuse mots, aa seni kuni hea niemega expordid on saab iniemen alguses ka ise manageridanied arvutis)
+
+ -------------
+
+## PROMPT KOMPLEKT (kopeeritavad koodiblokkides)
+
+---
+
+### **PROMPT #1: Holistiline Päevaplaan (Südame Taastamine)**
+
+```
+KONTEKST:
+- 70a+, füüsiliselt aktiivne (maaelu, autojuht, füüsiline töö)
+- Südamepuudulikkus + rütmihäired (AF kahtlus)
+- NT-proBNP ~1300 (900 koos verevedeldaja/ravimi-tega)
+- Ravimid ainult vajalik, Eelistab looduslik-holistiline lähenemine
+- Ei joo, ei suitseta, keskmine+ haridus, suuteline võimlema-hingamis instruktsioone järgima, tähelepanelik
+
+EESMÄRK:
+Koosta vajadusel KONKREETNE PÄEVAPLAAN (hommikust õhtuni), mis:
+1. Taastab südame rütmi ja energia voo (qi/prana)
+2. Loob kaks profiili kus yks Kasutab AINULT looduslikke meetodeid (hingamine, liikumine, toit, taimed, ravimtaimed nii Eestist Aasiast kui Ladinaameerikast)
+3. On PRAKTILINE (tehtav iga päev, mitte idealistlik)
+4. Sisaldab KONKREETSEID aegu, annuseid, kestusi, menüüga
+
+REEGLID / VÄLJUND: (valikud ka et kes ajaj2rgia, kes pole,hilej m2rked inimsele mis asja osas aeg oluline mis not ni iolulne, kelapealt)
+
+(06:30, 08:00 ...)
+- Kasuta doose (mg, kapslid, tassid)
+- Lisa “Autosõidu >60 min paus” protokoll
+- Lisa “Jälgimine” (kaal, pulss, BP, turse, õhupuudus)
+- Lisa “TOP 3 prioriteeti” lõppu
+- VÄLDI: üldsõnalisust
+
+PIIRANGUD / TURVAREEGLID
+- Kui AF diagnoositud VÕI DOAC/varfariin: ära paku ginkgo, naistepuna, lagritsa, suuri annuseid küüslauku/ingverit/kurkumit; ginseng ainult “ärakeelatud” või “arsti järelvalvel”
+- Enne merevetikaid: vaja TSH±FT4; kelp-kapsleid mitte pakkuda
+- Sool ≤2 g/naatriumipäev; alko
+
+
+A) HOMMIK (6:00-9:00)
+- Äratusrituaal
+- Hingamisharjutus (täpne tehnika, kestus)
+- Liikumine (qigong/taiji - konkreetne kompleks, video link)
+- Hommikusöök (konkreetne menüü)
+- Lisandid (milline, kui palju, millal)
+
+B) PÄEV (9:00-18:00)
+- Töö ajal: puhkused, hingamine, vedelik
+- Lõuna (konkreetne menüü)
+- Päeva-lisandid
+- Autosõit >1h: pausid, harjutused
+
+C) ÕHTU (18:00-21:00)
+- Õhtusöök (kerge, konkreetne)
+- Õhtune liikumine (jalutus/jooga)
+- Õhtune rituaal (vann, hingamine, meditatsioon)
+- Õhtu-lisandid
+
+D) JÄLGIMINE (mis märkida üles)
+- Hommikul: kaal, pulss, vererõhk (kui mõõta)
+- Päeva jooksul: energia, turse, õhupuudus
+- Õhtul: kokkuvõte
+
+E) PRIORITEEDID (TOP 3 - mis KÕIGE TÄHTSAM)
+1. ?
+2. ?
+3. ?
+
+OLULINE:
+- Ära anna geneerilisi soovitusi ("tervislik toitumine")
+- Anna KONKREETSED: "1 tass hibiscus teed kell 8:00"
+- Ei vaja tagajärgede analüüsi - AINULT tegevused
+- Holistiline = keha-vaim-energia koos, mitte eraldi
+```
+
+---
+
+### **PROMPT #2: Taimede & Lisandite Ohutusnimekiri**
+
+```
+KONTEKST:
+- 70a, südamepuudulikkus, AF (kodade virvendus kahtlus)
+- Võtab VÕI võib võtta antikoagulanti (Xarelto/Eliquis)
+- Eelistab looduslikke lahendusi 
+vajab selgeid piire / vs kuus poele vaja piire
+
+EESMÄRK:
+Koosta SELGE TABEL taimedest ja lisanditest:
+
+FORMAAT (tabel):
+| TAIM/LISAND | ANNUS | KASU | OHUMÄRKUS | STAATUS |
+
+Koosta tabel järgmiste veergudega:
+| TAIM/LISAND | ANNUS (päev) | KASU (1 lause) | OHUMÄRKUS (konkreetne koostoime/numbrid) | STAATUS | KUST OSTA (EE/online) |
+
+
+STAATUS:
+✅ VÕTA - ohutu ja kasulik
+⚠️ ETTEVAATLIK - võimalik koosmõju, väike annus
+❌ VÄLDI - ohtlik koostoimete tõttu
+
+NÕUDED:
+1. Keskendu SÜDAME taimedele (Hiina, India, Ladina-Ameerika)
+2. Arvesta ANTIKOAGULANDI koostoimeid
+3. Anna KONKREETSED annused (mg/päev)
+4. Lisa KUST OSTA (Eesti või online)
+5. Ära anna üldiseid hoiatusi - KONKREETSED ohud
+
+TAIMED/LISANDID, mis PEAB olema tabelis:
+- Viirpuu (Crataegus)
+- Arjuna (Terminalia arjuna)
+- Hibiscus
+- Dan Shen (Salvia miltiorrhiza)
+- Ginseng (Panax)
+- Astragalus
+- Reishi seen
+- Ginkgo
+- Naistepuna (St John's Wort)
+- Küüslauk
+- Ingver
+- Kurkum
+- CoQ10 (ubiquinol)
+- Magneesium (tauraat/orotaat)
+- Omega-3
+- Merevetikas (kelp)
+- Lagrits
+
+VÄLJUND:
+Tabel + Lühike kokkuvõte (5 lauset):
+- 3 PARIMAT (mis kindlasti võtta)
+- 3 KÕIGE OHTULIKUMAT (mis kindlasti vältida)
+```
+
+SPETSID
+- DOAC/varfariiniga: märgi punane hoiatus ginkgo, naistepuna, lagrits, viirpuu, >2 g EPA+DHA, suur küüslauk/ingver/kurkum
+- Merevetikas: lisa “vajalik TSH±FT4 enne”
+- Ginseng: DOAC/varfariin → ❌ või arstijärelvalve
+---
+
+### **PROMPT #3: Minimaalne Diagnostika & Otsustuspuu**
+
+```
+KONTEKST:
+- 70a, südamepuudulikkus + AF kahtlus
+- NT-proBNP ~1300
+- Eelistab minimaalset meditsiini sekkumist
+- Tahab teada: MILLAL on ravimid ABSOLUUTSELT vajalikud vs millal saab looduslikult?
+- Soov: minimaalsed uuringud; otsus looduslik vs hübriid vs miinimum-meds
+
+
+EESMÄRK:
+Koosta OTSUSTUSPUU:
+
+A) MINIMAALSED UURINGUD (NEED PEAB TEGEMA):
+1. Echo - eesmärk: EF% (millal teha, mida küsida), klapid (väljastada numbrid)
+2. Holter 24h - eesmärk: AF koormus % (millal teha, mida küsida)
+3. Vereanalüüs - eesmärk: ? (millised testid, miks)
+- Vere: K, Mg, kreatiniin/eGFR, ferritiin+TSAT, TSH±FT4, hs-CRP, Hb, NT-proBNP
+
+
+B) OTSUSTUSPUU (IF-THEN):
+
+IF EF% > 40% JA AF koormus < 10% JA turse puudub
+→ THEN: Looduslik ravi 6 kuud (täpne protokoll)
+
+IF EF% 30-40% JA AF koormus 10-30% JA kerge turse
+→ THEN: Hübriid (looduslik + minimaalne meditsiin - milline?)
+
+IF EF% < 30% VÕI AF koormus > 30% VÕI tugev turse/õhupuudus
+→ THEN: Meditsiin vajalik (milline MIINIMUM - diureetik? antikoagulant?)
+
+voi
+
+- IF EF 30–40% VÕI AF% 10–30% VÕI kerge turse → hübriid (nimeta miinimum: nt madal diureetik, antikoagulandi kaalumine CHA₂DS₂-VASc alusel)
+- IF EF <30% VÕI AF% >30% VÕI tugev turse/õhupuudus → meditsiini miinimumpakett (nimeta konkreetselt: antikoagulant kui CHA₂DS₂-VASc ≥2; diureetik sümptomile; ülejäänu arsti otsu
+
+
+C) INSULDIRISK (CHA₂DS₂-VASc):
+- Kalkulaator (täida väljad)
+- IF skoor ≥2 → Antikoagulant VAJALIK (selgita MIKS looduslik ei asenda)
+- IF skoor <2 → Looduslik võimalik (millised taimed toetavad?)
+
+- IF skoor ≥2 (mees) / ≥3 (naine) → trombopreventsioon on vajalik; looduslik ei asenda
+
+
+D) MILLAL KIIRESTI ARSTI JUURDE:
+- Konkreetsed sümptomid (TOP 5)
+- Numbrid (pulss, vererõhk, kaal - millised piirid?)
+
+VÄLJUND:
+- Otsustuspuu diagramm (tekst-formaat)
+- 3 stsenaariumit (parim/keskmine/halvim juhtum)
+- Selge sõnum: millal looduslik piisab, millal MITTE
+```
+
+---
+
+### **PROMPT #4: Kardioloogi Visiidi Juhtimise Checklist**
+
+```
+KONTEKST:
+- 70a, südamepuudulikkus + AF
+- Eelistab minimaalset sekkumist
+- Kardioloog soovitab: kardioversioon, ablatsioon, ravimid
+- Vajab: küsimuste nimekirja, et ise otsuseid teha
+
+EESMÄRK:
+Koosta CHECKLIST kardioloogi külastuseks:
+
+A) ENNE VISIITI (ettevalmistus):
+☐ Mis dokumendid kaasa (eelnevad uuringud?)
+☐ Mis numbrid kirja panna (kaal, pulss, vererõhk viimased 2 nädalat)
+☐ Sümptomite päevik (mis info kirjeldada?)
+- Ravimite/taimede loetelu annustega
+
+
+B) VISIIDI AJAL (KÜSIMUSED - TOP 10):
+
+DIAGNOSTIKA:
+1. "Milline on minu täpne EF%?"
+2. "Milline on minu AF koormus Holteril (%)?"
+3. "Kas mu südamepuudulikkus on HFrEF, HFpEF või HFmrEF?"
+
+voi
+
+1) Minu EF%? 2) AF koormus %? 3) HF tüüp (HFrEF/HFmrEF/HFpEF)?
+4) CHA₂DS₂-VASc skoor ja sellest tulenev vajadus?
+
+
+
+RAVI:
+4. "Kas saan proovida 3-6 kuud looduslikku ravi ENNE ravimeid?"
+5. "Milline on minu insuldirisk (CHA₂DS₂-VASc skoor)?"
+6. "Kas antikoagulant on ABSOLUUTSELT vajalik või valikuline?"
+7. "Kui ma ei võta ARNI/beetablokaator/MRA/SGLT2 - milline on risk?"
+
+PROTSEDUURID:
+8. "Kas kardioversioon/ablatsioon on KIIRE (nädalad) või võib oodata?"
+9. "Kui ma keeldun kardioversioonist - mis on alternatiiv?"
+10. "Millised on miinimum-uuringud, mida teha iga 3-6 kuud?"
+
+C) PÄRAST VISIITI (otsustamine):
+- Mida arst SOOVITAS vs mida ma PEAN tegema (erinevus!)
+- Kui arst ütles "kohustuslik" - KONTROLLI: kas tõesti või "soovitatav"?
+- Järgmised sammud (konkreetsed tegevused 48h jooksul)
+
+D) PIIRJOONED (MIDA MITTE NÕUSTUDA):
+❌ "Teid hospitaliseeritakse kohe" (kui ei ole äge)
+❌ "Peate võtma 5 ravimit korraga" (alusta minimaalselt)
+❌ "Looduslik ravi ei aita" (küsi tõendeid!)
+
+VÄLJUND:
+- Printitav checklist (1 leht, A4)
+- Arsti vastuste tabel (täita kohapeal)
+- Otsustusplaan (mida tegema hakkan, mida mitte)
+```
+
+---
+
+## KOONDAV PROFIIL UUEKS VESTLUSEKS
+
+```
+═══ KASUTAJA PROFIIL ═══
+
+DEMOGRAAFIA:
+- Vanus: 70 aastat
+- Tegevus: füüsiliselt aktiivne (maaelu, füüsiline töö, pikad autosõidud üle Eesti)
+- Haridus: keskmine+, keemia ja bioloogia tausta, oskab ise uurida
+- Eluviis: ei joo, ei suitseta
+
+MEDITSIINILINE OLUKORD:
+- Diagnoosid: südamepuudulikkus (kahtlus), rütmihäired (AF kahtlus)
+- Sümptomid: õhupuudus koormusel, koormustaluvuse langus
+- Biomarkerid: NT-proBNP ~1300 pg/mL (kõrgenenud)
+- Pakutud ravi: kardioversioon/ablatsioon, antikoagulant
+
+EELISTUSED & VÄÄRTUSED:
+✓ Looduslik-holistiline lähenemine (hingamine, energia, taimed)
+✓ Minimaalse sekkumine (ravimid ainult kui ABSOLUUTSELT vajalik)
+✓ Eneseabistamine (ise uurib, ise teeb otsuseid)
+✓ Tõenduspõhine + traditsioonid (TCM, Ayurveda, Ladina-Ameerika)
+✓ Praktiline (tehtav iga päev, mitte idealistlik)
+
+✗ Ei taha: "tabletite putru", lõputuid kontrolle, vaktsiinide survet
+✗ Ei usu: "ravimid parandavad", üle-medikaliseeritud lähenemine
+✗ Ei aktsepteeri: geneerilisi nõuandeid, pistelisi hoiatusi, lõputut analüüsi
+
+KOMMUNIKATSIOONI STIIL:
+- Konkreetne: "1 tass hibiscus teed kell 8:00", MITTE "joo piisavalt teed"
+- Praktiline: päevaplaan, mitte teooria
+- Holistilik: keha-vaim-energia koos
+- Otsekohene: ära varja tõde, ära ole liiga ettevaatlik
+- Eesti keel: selgita termineid, aga ära lihtsusta
+
+OOTUSED VASTUSTELE:
+1. PRIORITEEDID: top 3-5, mis KÕIGE TÄHTSAM
+2. KONKREETSED SAMMUD: mida teha täna, homme, sel nädalal
+3. NUMBRID: annused, kellaajad, kestused, hinnad
+4. TABELID: võrdlused, riskid, alternatiivid
+5. LÜHIDUS: vähem kui 2000 sõna vastus, rohkem kui 1 tabeli korral
+6. LOODUSLIK ENNE: alusta holistilisest, meditsiin ainult kui vajalik
+
+* Selged “turvareeglid” enne soovitusi.
+* AF/DOAC konfliktid on sisseehitatud, mitte järelmärkused.
+* Kilpnääre–jood lukustab vetikad ohutusraami.
+* Väljundiformaadid on ühesugused, AI suudab neid kohe täita.
+* Punalipud lisavad piirid “millal looduslikust ei piisa”.
+
+═══ LÕPP ═══
+```
+
+---
+
+## KUIDAS KASUTADA
+
+**1. Kopeeri "KASUTAJA PROFIIL" → kleebi uue vestluse ESIMESEKS sõnumiks**
+
+**2. Seejärel kasuta ühte neist promptidest:**
+- PROMPT #1 → kui tahad päevaplaani
+- PROMPT #2 → kui tahad taimede nimekirja
+- PROMPT #3 → kui tahad otsustuspuud (millal ravimid vajalikud)
+- PROMPT #4 → kui läheb kardioloogi juurde
+
+**3. AI annab konkreetse vastuse ilma üleliigse analüüsita**
+
+---
+
+**Kas need 4 prompti + profiil on nüüd ÕIGED?** 
+
+Võid neid veel täpsustada, siis panen viimased parandused sisse ja sul on valmis komplekt uueks vestluseks.

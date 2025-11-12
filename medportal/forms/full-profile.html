@@ -1,0 +1,1366 @@
+<!-- VERSION: 1.3.0 - 2025-01-10 -->
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Täisprofiil - Meditsiiniportaal</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/forms.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Holistiline Terviseprofiil</h1>
+            <p class="subtitle">Täisprofiil | ~30 minutit | 18 sektsiooni</p>
+        </header>
+
+        <main>
+            <div class="form-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-top: 10px;">
+                    <p class="progress-text" style="margin: 0;">Täidetud: <span id="progressText">0%</span></p>
+                    <button type="button" onclick="toggleCompactView()" class="btn-secondary" id="viewToggleBtn"
+                            style="font-size: 0.85rem; padding: 6px 12px; background: #6b7280; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                        Kompaktne vaade
+                    </button>
+                </div>
+                <p class="save-timestamp" id="saveTimestamp" style="font-size: 0.85rem; color: #6b7280; margin-top: 5px; text-align: center;">
+                    <!-- Timestamp kuvatakse siin pärast salvestamist -->
+                </p>
+            </div>
+
+            <form id="fullProfileForm">
+
+                <!-- ═══════════════════════════════════════════════════════════ -->
+                <!-- PROFIILIFILTRI SEKTSIOON - ESIMENE ASI! -->
+                <!-- ═══════════════════════════════════════════════════════════ -->
+                <section class="form-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: 3px solid #5a67d8; position: sticky; top: 0; z-index: 100;">
+                    <h2 style="color: white; margin-bottom: 15px; text-align: center;">⚕️ Profiili Filter - Alusta siit!</h2>
+
+                    <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+
+                        <!-- PROFIILIFILTRI OLEK (näitab mida on valitud) -->
+                        <div id="profileFilterStatus" style="background: #f0f9ff; border-left: 4px solid #3b82f6; padding: 12px; margin-bottom: 20px; border-radius: 6px; display: none;">
+                            <h4 style="margin: 0 0 8px 0; color: #1e40af;">📋 Valitud profiil:</h4>
+                            <div id="profileFilterSummary" style="color: #334155; font-size: 0.95rem;"></div>
+                        </div>
+
+                        <!-- 1. RASEDUS/IMETAMINE - ESIMENE KÜSIMUS! -->
+                        <div class="form-group" style="background: #fef3c7; padding: 15px; border-radius: 8px; border-left: 4px solid #f59e0b; margin-bottom: 20px;">
+                            <label style="font-weight: 700; color: #92400e; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+                                🤰 1. Kas oled praegu rase või imetad?
+                                <span class="info-icon" style="cursor: help;" title="See on KÕIGE OLULISEM küsimus - muudab kogu profiili ohutust!">i
+                                    <div class="info-popup">Rasedus/imetamine määrab kindlad ohutusreeglid taimedele ja ravimitele!</div>
+                                </span>
+                            </label>
+                            <div class="radio-group" style="display: flex; gap: 20px; margin-top: 10px;">
+                                <label style="font-size: 1.05rem;">
+                                    <input type="radio" name="pregnancyStatus" value="pregnant" onchange="updateProfileFilter()">
+                                    Rase
+                                </label>
+                                <label style="font-size: 1.05rem;">
+                                    <input type="radio" name="pregnancyStatus" value="breastfeeding" onchange="updateProfileFilter()">
+                                    Imetan
+                                </label>
+                                <label style="font-size: 1.05rem;">
+                                    <input type="radio" name="pregnancyStatus" value="no" onchange="updateProfileFilter()" checked>
+                                    Ei
+                                </label>
+                            </div>
+                            <div id="pregnancyWeeks" style="display: none; margin-top: 15px; padding: 10px; background: white; border-radius: 6px;">
+                                <label>Kui kaua rase (nädalat)?</label>
+                                <input type="number" name="pregnancyWeeksCount" min="1" max="42" placeholder="Nt: 12" style="width: 100px; padding: 6px;">
+                            </div>
+                        </div>
+
+                        <!-- 2. VANUS - TEINE KÜSIMUS -->
+                        <div class="form-group" style="background: #e0f2fe; padding: 15px; border-radius: 8px; border-left: 4px solid #0284c7; margin-bottom: 20px;">
+                            <label style="font-weight: 700; color: #075985; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+                                📅 2. Vanus
+                                <span class="info-icon" style="cursor: help;" title="Vanus mõjutab annuseid, koormust ja ohutust">i
+                                    <div class="info-popup">Vali vanusekategooria või sisesta täpne vanus</div>
+                                </span>
+                            </label>
+
+                            <!-- Kiirvalik kategooriad -->
+                            <div style="margin: 15px 0;">
+                                <h4 style="color: #64748b; font-size: 0.9rem; margin-bottom: 8px;">Kiirvalik (meditsiinilised kategooriad):</h4>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px;">
+                                    <button type="button" class="age-category-btn" data-age-range="0-0.08" onclick="selectAgeCategory(this, '0-0.08', 'Vastsündinu (0-28 päeva)')">Vastsündinu (0-28 p)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="0.08-1" onclick="selectAgeCategory(this, '0.08-1', 'Imik (1-12 kuud)')">Imik (1-12 kuud)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="1-3" onclick="selectAgeCategory(this, '1-3', 'Väikelaps (1-3 a)')">Väikelaps (1-3 a)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="3-5" onclick="selectAgeCategory(this, '3-5', 'Eelkooliealine (3-5 a)')">Eelkooliealine (3-5)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="6-11" onclick="selectAgeCategory(this, '6-11', 'Kooliealine (6-11 a)')">Kooliealine (6-11)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="12-17" onclick="selectAgeCategory(this, '12-17', 'Nooruk (12-17 a)')">Nooruk (12-17)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="18-39" onclick="selectAgeCategory(this, '18-39', 'Noor täiskasvanu (18-39 a)')">Noor täisk. (18-39)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="40-64" onclick="selectAgeCategory(this, '40-64', 'Keskealine (40-64 a)')">Keskealine (40-64)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="65-74" onclick="selectAgeCategory(this, '65-74', 'Young-old (65-74 a)')">Young-old (65-74)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="75-84" onclick="selectAgeCategory(this, '75-84', 'Middle-old (75-84 a)')">Middle-old (75-84)</button>
+                                    <button type="button" class="age-category-btn" data-age-range="85-120" onclick="selectAgeCategory(this, '85-120', 'Oldest-old (≥85 a)')">Oldest-old (≥85)</button>
+                                </div>
+                            </div>
+
+                            <!-- Täpne vanus -->
+                            <div style="margin-top: 15px;">
+                                <label style="color: #64748b; font-size: 0.9rem;">Või sisesta täpne vanus:</label>
+                                <input type="number" id="exactAge" name="exactAge" min="0" max="120" placeholder="Nt: 42"
+                                       onchange="updateProfileFilter()"
+                                       style="width: 100px; padding: 8px; margin-left: 10px; border: 2px solid #cbd5e1; border-radius: 6px;">
+                                <span style="color: #64748b; margin-left: 8px;">aastat</span>
+                            </div>
+
+                            <input type="hidden" id="ageCategory" name="ageCategory">
+                            <input type="hidden" id="ageCategoryLabel" name="ageCategoryLabel">
+                        </div>
+
+                        <!-- 3. SUGU -->
+                        <div class="form-group" style="background: #fce7f3; padding: 15px; border-radius: 8px; border-left: 4px solid #ec4899; margin-bottom: 20px;">
+                            <label style="font-weight: 700; color: #9f1239; font-size: 1.1rem;">
+                                ⚧️ 3. Sugu
+                            </label>
+                            <div class="radio-group" style="display: flex; gap: 20px; margin-top: 10px;">
+                                <label style="font-size: 1.05rem;">
+                                    <input type="radio" id="genderMale" name="gender" value="male" onchange="updateProfileFilter()">
+                                    Mees
+                                </label>
+                                <label style="font-size: 1.05rem;">
+                                    <input type="radio" id="genderFemale" name="gender" value="female" onchange="updateProfileFilter()">
+                                    Naine
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 4. MEDITSIINILISED RISKIFAKTORID (Valikuline, kuid oluline) -->
+                        <details style="margin-top: 20px; background: #f1f5f9; padding: 15px; border-radius: 8px;">
+                            <summary style="cursor: pointer; font-weight: 700; color: #475569; font-size: 1.05rem;">
+                                🏥 Täpsemad meditsiinilised riskid (valikuline, kuid oluline AI arstile)
+                            </summary>
+
+                            <div style="margin-top: 15px; display: grid; gap: 15px;">
+                                <!-- AF + Antikoagulant -->
+                                <div style="background: white; padding: 12px; border-radius: 6px; border-left: 3px solid #ef4444;">
+                                    <label style="display: flex; align-items: center; gap: 8px; font-weight: 600; color: #7f1d1d;">
+                                        <input type="checkbox" name="afAnticoagulant" value="yes" onchange="updateProfileFilter()">
+                                        AF + Antikoagulant (DOAC/Varfariin)
+                                        <span class="info-icon" style="cursor: help;">i
+                                            <div class="info-popup">Kodade virvendus + verehüübimist vältiv ravim - KÕRGE KOOSTOIME RISK!</div>
+                                        </span>
+                                    </label>
+                                </div>
+
+                                <!-- eGFR -->
+                                <div style="background: white; padding: 12px; border-radius: 6px; border-left: 3px solid #f59e0b;">
+                                    <label style="font-weight: 600; color: #78350f;">Neerufunktsioon (eGFR):</label>
+                                    <select name="egfr" onchange="updateProfileFilter()" style="width: 100%; padding: 8px; margin-top: 8px; border: 2px solid #cbd5e1; border-radius: 6px;">
+                                        <option value="">Ei tea / normaalne</option>
+                                        <option value="90+">≥90 (Normaalne)</option>
+                                        <option value="60-89">60-89 (Kerge langus)</option>
+                                        <option value="45-59">45-59 (Mõõdukas langus)</option>
+                                        <option value="30-44">30-44 (Mõõdukas-raske)</option>
+                                        <option value="15-29">15-29 (Raske)</option>
+                                        <option value="<15">&lt;15 / Dialüüs</option>
+                                    </select>
+                                </div>
+
+                                <!-- Child-Pugh -->
+                                <div style="background: white; padding: 12px; border-radius: 6px; border-left: 3px solid #f59e0b;">
+                                    <label style="font-weight: 600; color: #78350f;">Maksafunktsioon (Child-Pugh):</label>
+                                    <select name="childPugh" onchange="updateProfileFilter()" style="width: 100%; padding: 8px; margin-top: 8px; border: 2px solid #cbd5e1; border-radius: 6px;">
+                                        <option value="">Ei tea / normaalne</option>
+                                        <option value="A">A (Kerge)</option>
+                                        <option value="B">B (Mõõdukas)</option>
+                                        <option value="C">C (Raske)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </details>
+
+                        <!-- HOIATUSED JA NÕUANDED (ilmuvad vastavalt valikutele) -->
+                        <div id="profileWarnings" style="margin-top: 20px;"></div>
+
+                    </div>
+                </section>
+
+                <!-- EI SOOVI KIIRKAST -->
+                <section class="form-section" id="no-consent-section" style="background: #fff3cd; border-left: 4px solid #ff6b6b;">
+                    <h2 style="color: #d63031;">Ei soovi / Kategooriline keeld</h2>
+                    <p style="font-size: 0.9rem; color: #6b7280; margin-bottom: 15px;">
+                        Märgi ära protseduurid, ravimid või meetodid, mida sa kindlasti EI soovi või mille suhtes sul on kategooriline keeld.
+                    </p>
+
+                    <!-- KIIRVALIKU PLUS-NUPUD -->
+                    <div class="quick-add-section" style="background: #fee2e2; border-color: #ef4444;">
+                        <h4>Levinumad keelud</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('rontgen', 'Röntgen')">Röntgen</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('ct', 'CT / MRI')">CT / MRI</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('vaktsiinid', 'Vaktsiinid')">Vaktsiinid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('opioidid', 'Opioidid')">Opioidid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('steroidid', 'Kortikosteroidid')">Steroidid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('antibiootikumid', 'Antibiootikumid')">Antibiootikumid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('operatsioonid', 'Operatsioonid')">Operatsioonid</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #dc2626; color: #dc2626;" onclick="quickAddNoConsent('vereylekanne', 'Vereülekanne')">Vereülekanne</button>
+                        </div>
+                    </div>
+
+                    <!-- LISATUD KEELUD (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedNoConsents"></div>
+
+                    <div id="custom-no-consent-items" style="margin-top: 10px;"></div>
+                </section>
+
+                <!-- SEKTSIOON 0: PRIVAATSUS -->
+                <section class="form-section">
+                    <h2>0. Privaatsus ja nõusolek</h2>
+
+                    <div class="form-group">
+                        <label>Jagamise tase</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="shareDoctor" value="yes"> Ainult arstile</label>
+                            <label><input type="checkbox" name="shareFamily" value="yes"> Pereliikmega</label>
+                            <label><input type="checkbox" name="shareAnonymous" value="yes"> Anonüümselt uurijale</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="noShare">Millist andmestikku EI jagata</label>
+                        <input type="text" id="noShare" name="noShare" placeholder="Näiteks: psühholoogilised andmed">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nõusolek</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="consentMeasurements" value="yes"> Kodused mõõtmised</label>
+                            <label><input type="checkbox" name="consentHerbs" value="yes"> Teetaust (taimed)</label>
+                            <label><input type="checkbox" name="consentBreathing" value="yes"> Hingamis-/meditatsioonirutiin</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="emergencyContact">Kontakt hädaolukorraks</label>
+                            <input type="text" id="emergencyContact" name="emergencyContact">
+                        </div>
+                        <div class="form-group">
+                            <label for="emergencyPhone">Telefon</label>
+                            <input type="tel" id="emergencyPhone" name="emergencyPhone">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 1: PROFIIL JA ELURÜTM -->
+                <section class="form-section">
+                    <h2>1. Profiil ja elurütm (ankrud + aknad)</h2>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="age1">Vanus</label>
+                            <input type="number" id="age1" name="age" min="0" max="120">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender1">Sugu</label>
+                            <select id="gender1" name="gender">
+                                <option value="">Vali...</option>
+                                <option value="mees">Mees</option>
+                                <option value="naine">Naine</option>
+                                <option value="muu">Muu</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="height1">Pikkus (cm)</label>
+                            <input type="number" id="height1" name="height" min="50" max="250">
+                        </div>
+                        <div class="form-group">
+                            <label for="weight1">Kaal (kg)</label>
+                            <input type="number" id="weight1" name="weight" min="20" max="300" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="targetWeight">Soovkaal (kg)</label>
+                            <input type="number" id="targetWeight" name="targetWeight" min="20" max="300" step="0.1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Eluviis ja transport</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD ELUVIISILE -->
+                        <div class="quick-add-section" style="background: #fef3c7; border-color: #f59e0b; margin-bottom: 15px;">
+                            <h4>Transport ja reisimine</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('auto_kasutamine', 'Auto kasutamine')">Auto</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('ühistransport', 'Ühistransport')">Ühistransport</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('rattaga_tööle', 'Rattaga tööle')">Rattaga tööle</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('jalutades_tööle', 'Jalutades tööle')">Jalutades tööle</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('tööreisid', 'Tööreisid')">Tööreisid</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddLifestyle('rahvusvaheline_reis', 'Rahvusvaheline reis')">Rahvusvaheline reis</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali transpordi- ja reisimisviisid, mis mõjutavad eluviisi
+                            </p>
+                        </div>
+
+                        <!-- LISATUD ELUVIISI FAKTORID (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedLifestyle"></div>
+
+                        <label style="margin-top: 15px;">Põhiline elupaik</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="rural" value="yes"> Maaelu</label>
+                            <label><input type="checkbox" name="urban" value="yes"> Linn</label>
+                            <label><input type="checkbox" name="nightShift" value="yes"> Öötöö</label>
+                        </div>
+
+                        <!-- KIIRVALIKU NUPUD ELUPAIGA JAOKS -->
+                        <div class="quick-add-section" style="background: #fef9c3; border-color: #eab308; margin-top: 15px;">
+                            <h4>Kiirvalik - Elupaik</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #eab308; color: #713f12;"
+                                        onclick="quickAddResidence('kortermajas', 'Kortermajas')">Kortermajas</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #eab308; color: #713f12;"
+                                        onclick="quickAddResidence('maaelu', 'Maaelu')">Maaelu</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #eab308; color: #713f12;"
+                                        onclick="quickAddResidence('linn', 'Linn')">Linn</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #eab308; color: #713f12;"
+                                        onclick="quickAddResidence('öötöö', 'Öötöö')">Öötöö</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Lisa elupaik + täpsustused (korrus, lift, jne)
+                            </p>
+                        </div>
+
+                        <!-- LISATUD ELUPAIGAD (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedResidence"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="travelDays">Pikkade sõitude päevad nädalas</label>
+                        <input type="number" id="travelDays" name="travelDays" min="0" max="7">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Aknad (optimaalsed ajad tegevusteks)</label>
+                        <div class="form-row">
+                            <div>
+                                <label class="optional">Hommik (1-3h ärkamisest)</label>
+                                <input type="time" name="morningWindow">
+                            </div>
+                            <div>
+                                <label class="optional">Keskpäev (11-15)</label>
+                                <input type="time" name="noonWindow">
+                            </div>
+                            <div>
+                                <label class="optional">Õhtu (17-21)</label>
+                                <input type="time" name="eveningWindow">
+                            </div>
+                            <div>
+                                <label class="optional">Uneaeg</label>
+                                <input type="time" name="sleepTime">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Füüsiline aktiivsus</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD TEGEVUSTELE -->
+                        <div class="quick-add-section" style="background: #f0f9ff; border-color: #0ea5e9; margin-bottom: 15px;">
+                            <h4>Levinumad tegevused</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('jalutamine', 'Jalutamine')">Jalutamine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('jooksmine', 'Jooksmine')">Jooksmine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('ujumine', 'Ujumine')">Ujumine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('rattasõit', 'Rattasõit')">Rattasõit</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('jõusaal', 'Jõusaal')">Jõusaal</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('jooga', 'Jooga')">Jooga</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('aeroobika', 'Aeroobika')">Aeroobika</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('tants', 'Tants')">Tants</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali tegevused, millega regulaarselt tegeled
+                            </p>
+                        </div>
+
+                        <!-- LISATUD TEGEVUSED (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedActivities"></div>
+
+                        <label style="margin-top: 15px;">Üldine aktiivsuse tase</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="activity" value="walking"> Kõnd</label>
+                            <label><input type="radio" name="activity" value="physical"> Füüsiline töö</label>
+                            <label><input type="radio" name="activity" value="sedentary"> Istuv</label>
+                            <label><input type="radio" name="activity" value="mixed"> Segarežiim</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sleepHours">Uneaeg ööpäevas (h)</label>
+                            <input type="number" id="sleepHours" name="sleepHours" min="0" max="24" step="0.5">
+                        </div>
+                        <div class="form-group">
+                            <label for="sleepQuality">Kvaliteet (0-3)</label>
+                            <input type="number" id="sleepQuality" name="sleepQuality" min="0" max="3">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Norskamine/pausid (uneapnoe)</label>
+                        <div class="radio-group" style="display: flex; gap: 20px;">
+                            <label><input type="radio" name="snoring" value="yes" onchange="toggleToolParams('snoring', 'snoringParams')"> Jah</label>
+                            <label><input type="radio" name="snoring" value="no" onchange="toggleToolParams('snoring', 'snoringParams')"> Ei</label>
+                        </div>
+                    </div>
+
+                    <div id="snoringParams" class="tool-params" style="display: none; margin-left: 20px; padding: 10px; background: #f3f4f6; border-radius: 6px;">
+                        <div class="form-group">
+                            <label>Raskusaste</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="snoringLevel" value="kerge"> Kerge</label>
+                                <label><input type="radio" name="snoringLevel" value="mõõdukas"> Mõõdukas</label>
+                                <label><input type="radio" name="snoringLevel" value="raske"> Raske</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" name="usingCPAP" value="yes"> Kasutan CPAP seadet
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="snoringNotes">Täpsustused</label>
+                            <textarea id="snoringNotes" name="snoringNotes" rows="2" placeholder="Nt: uuringud tehtud, ravi alustatud..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="stressLevel">Stressi tase (0-3)</label>
+                            <input type="number" id="stressLevel" name="stressLevel" min="0" max="3">
+                        </div>
+                        <div class="form-group">
+                            <label for="stressors">Peamised stressorid</label>
+                            <input type="text" id="stressors" name="stressors">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 2: KAEBUSED JA SÜMPTOMID -->
+                <section class="form-section">
+                    <h2>2. Kaebused ja sümptomite skaalad</h2>
+                    <p class="help-text">Skoor: 0=puudub, 1=kerge, 2=mõõdukas, 3=raske</p>
+
+                    <div class="symptom-grid">
+                        <div>
+                            <label>Õhupuudus</label>
+                            <input type="number" name="breathlessness" min="0" max="3" value="0">
+                        </div>
+                        <div>
+                            <label>Turse</label>
+                            <input type="number" name="swelling" min="0" max="3" value="0">
+                        </div>
+                        <div>
+                            <label>Väsimus</label>
+                            <input type="number" name="fatigue" min="0" max="3" value="0">
+                        </div>
+                        <div>
+                            <label>Südamepekslemine</label>
+                            <input type="number" name="palpitations" min="0" max="3" value="0">
+                        </div>
+                        <div>
+                            <label>Rindkerevalu</label>
+                            <input type="number" name="chestPain" min="0" max="3" value="0">
+                        </div>
+                        <div>
+                            <label>Pearinglus/minestus</label>
+                            <input type="number" name="dizziness" min="0" max="3" value="0">
+                        </div>
+                    </div>
+
+                    <!-- KIIRVALIKU NUPUD KAEBUSTE JAOKS -->
+                    <div class="quick-add-section" style="background: #fef2f2; border-color: #ef4444; margin-top: 15px;">
+                        <h4>Kiirvalik - Kaebused</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('peavalu', 'Peavalu')">Peavalu</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('liigesevalu', 'Liigesevalu')">Liigesevalu</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('seljavalu', 'Seljavalu')">Seljavalu</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('iiveldus', 'Iiveldus')">Iiveldus</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('migreen', 'Migreen')">Migreen</button>
+                        </div>
+                        <h4 style="margin-top: 10px; font-size: 0.95rem;">Naiste kaebused</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('menstruaalivalud', 'Menstruaalivalud')">Menstruaalivalud</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('pms', 'PMS')">PMS</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                    onclick="quickAddComplaint('kuumad_hood', 'Kuumad hood')">Kuumad hood</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                            Lisa kaebus + raskusaste (0-3) + täpsustused
+                        </p>
+                    </div>
+
+                    <!-- LISATUD KAEBUSED (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedComplaints"></div>
+
+                    <!-- KAEBUSTE LISAMINE -->
+                    <div class="form-group" style="margin-top: 20px;">
+                        <button type="button" onclick="addComplaint()" class="btn btn-secondary" style="font-size: 0.9rem; padding: 8px 16px;">
+                            + Lisa kaebus
+                        </button>
+                    </div>
+                    <div id="custom-complaints-list" style="margin-top: 10px;"></div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="complaintsNotes">Kaebuste lisam&auml;rkmed</label>
+                        <textarea id="complaintsNotes" name="complaintsNotes" rows="3" placeholder="Lisa täpsustusi kaebuste kohta..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nightWaking">Öine ülesärkamise sagedus (korda/öö)</label>
+                        <input type="number" id="nightWaking" name="nightWaking" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Koormustaluvus ja töö</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD TÖÖTÜÜPIDELE -->
+                        <div class="quick-add-section" style="background: #dbeafe; border-color: #3b82f6; margin-bottom: 15px;">
+                            <h4>Levinumad tööd/tegevused</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('mesatöö', 'Mesatöö')">Mesatöö</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('öövalvur', 'Öövalvur')">Öövalvur</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('istutöö', 'Istutöö')">Istutöö</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('ehitustöö', 'Ehitustöö')">Ehitustöö</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('hooldus', 'Hooldus')">Hooldus</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #3b82f6;"
+                                        onclick="quickAddJobType('transport', 'Transport/juht')">Transport/juht</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali töötüübid, mis mõjutavad füüsilist koormustaluvust
+                            </p>
+                        </div>
+
+                        <!-- LISATUD TÖÖD (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedJobTypes"></div>
+
+                        <label style="margin-top: 15px;">Kõnnitempo ja distants</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="exerciseTolerance" value="<100m"> &lt;100 m</label>
+                            <label><input type="radio" name="exerciseTolerance" value="100-500m"> 100-500 m</label>
+                            <label><input type="radio" name="exerciseTolerance" value=">500m"> &gt;500 m</label>
+                            <label><input type="radio" name="exerciseTolerance" value="work-capable"> Töövõimeline</label>
+                        </div>
+                        <textarea name="exerciseToleranceDesc" rows="2" placeholder="Kirjelda koormustaluvust muudmoodi (valikuline)..." style="margin-top: 10px;"></textarea>
+
+                        <!-- KIIRVALIKU NUPUD LIIKUMISE JAOKS -->
+                        <div class="quick-add-section" style="background: #dbeafe; border-color: #3b82f6; margin-top: 15px;">
+                            <h4>Kiirvalik - Liikumise viisid</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddMobility('kõndimine', 'Kõndimine')">Kõndimine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddMobility('jalgratas', 'Jalgrattasõit')">Jalgrattasõit</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddMobility('ujumine', 'Ujumine')">Ujumine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddMobility('mägimatk', 'Matkamine')">Matkamine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e3a8a;"
+                                        onclick="quickAddMobility('rulluisutamine', 'Rulluisutamine')">Rulluisutamine</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Lisa liikumisviis + distants (km) + sagedus (x/nädal)
+                            </p>
+                        </div>
+
+                        <!-- LISATUD LIIKUMISVIISID (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedMobility"></div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 3: TÖÖRIISTAD JA MÕÕTMISED -->
+                <section class="form-section">
+                    <h2>3. Tööriistad ja kodused mõõtmised</h2>
+
+                    <!-- KIIRVALIKU NUPUD -->
+                    <div class="quick-add-section" style="background: #f0fdf4; border-color: #10b981; margin-bottom: 20px;">
+                        <h4>Kiirvalik</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                    onclick="selectTool('bpMonitor', 'bpParams')">Vererõhumõõtja</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                    onclick="selectTool('stepCounter', 'stepParams')">Sammulugeja</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                    onclick="selectTool('dailyWeight', 'weightParams')">Kaal igal hommikul</button>
+                            <button type="button" class="quick-add-btn" style="border-color: #059669; color: white; background: #10b981; font-weight: 600;"
+                                    onclick="selectAllTools()">Kõik kolm</button>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                            Kiireks valikuks - märgib tööriista "Olemas" ja avab parameetrid
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Vererõhumõõtja</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="bpMonitor" value="yes" onchange="toggleToolParams('bpMonitor', 'bpParams')"> Olemas</label>
+                            <label><input type="radio" name="bpMonitor" value="no" onchange="toggleToolParams('bpMonitor', 'bpParams')"> Puudub</label>
+                        </div>
+                    </div>
+
+                    <div id="bpParams" class="tool-params" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="bpMorning">Keskmine BP hommikul (mmHg)</label>
+                                <input type="text" id="bpMorning" name="bpMorning" placeholder="120/80">
+                            </div>
+                            <div class="form-group">
+                                <label for="bpEvening">Keskmine BP õhtul (mmHg)</label>
+                                <input type="text" id="bpEvening" name="bpEvening" placeholder="120/80">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="restingHR">Pulss rahus (lpm)</label>
+                            <input type="number" id="restingHR" name="restingHR" min="30" max="200">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sammulugeja/telefon</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="stepCounter" value="yes" onchange="toggleToolParams('stepCounter', 'stepParams')"> Jah</label>
+                            <label><input type="radio" name="stepCounter" value="no" onchange="toggleToolParams('stepCounter', 'stepParams')"> Ei</label>
+                        </div>
+                    </div>
+
+                    <div id="stepParams" class="tool-params" style="display: none;">
+                        <div class="form-group">
+                            <label for="dailySteps">Päevane sammude tase</label>
+                            <input type="number" id="dailySteps" name="dailySteps" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kaal igal hommikul</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="dailyWeight" value="yes" onchange="toggleToolParams('dailyWeight', 'weightParams')"> Jah</label>
+                            <label><input type="radio" name="dailyWeight" value="no" onchange="toggleToolParams('dailyWeight', 'weightParams')"> Ei</label>
+                        </div>
+                    </div>
+
+                    <div id="weightParams" class="tool-params" style="display: none;">
+                        <div class="form-group">
+                            <label>Viimase 7 päeva kaalutrend</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="weightTrend" value="up"> Tõuseb</label>
+                                <label><input type="radio" name="weightTrend" value="stable"> Stabiilne</label>
+                                <label><input type="radio" name="weightTrend" value="down"> Langeb</label>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 4: AJALUGU -->
+                <section class="form-section">
+                    <h2>4. Ajalugu (viimased 5 aastat)</h2>
+
+                    <div class="form-group">
+                        <label for="diagnoses">Diagnoosid</label>
+                        <textarea id="diagnoses" name="diagnoses" rows="3" placeholder="Näiteks: Südamepuudulikkus, AF, hüpertensioon..."></textarea>
+                    </div>
+
+                    <!-- SÜNDMUSED -->
+                    <div class="form-group" id="eventSection">
+                        <label style="font-weight: 600; font-size: 1.05rem; margin-bottom: 10px; display: block;">Sündmused</label>
+
+                        <div class="quick-add-section">
+                            <h4>Levinumad sündmused</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" onclick="quickAddEvent('haiglaravi', 'Haiglaravi')">Haiglaravi</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddEvent('emo', 'EMO külastus')">EMO külastus</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddEvent('kardioversioon', 'Kardioversioon')">Kardioversioon</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddEvent('ablatsioon', 'Ablatsioon')">Ablatsioon</button>
+                            </div>
+                        </div>
+
+                        <div id="quickAddedEvents"></div>
+
+                        <div style="margin-top: 10px;">
+                            <label>
+                                <input type="checkbox" name="eventNone" value="yes"> Puudub
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Perekondlik risk (haigused perekonnas &lt;65 a)</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD PEREKONDLIKULE RISKILE -->
+                        <div class="quick-add-section" style="background: #fef3c7; border-color: #f59e0b; margin-bottom: 15px;">
+                            <h4>Levinumad perekondlikud riskid</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddFamilyRisk('süda_perekond', 'Südamehaigused')">Südamehaigused</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddFamilyRisk('insult_perekond', 'Insult')">Insult</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddFamilyRisk('diabeet_perekond', 'Diabeet')">Diabeet</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #f59e0b;"
+                                        onclick="quickAddFamilyRisk('vähk_perekond', 'Vähk')">Vähk</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali haigused, mis esinevad perekonnas alla 65 aasta vanuselt
+                            </p>
+                        </div>
+
+                        <!-- LISATUD PEREKONDLIKUD RISKID (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedFamilyRisks"></div>
+
+                        <label style="margin-top: 15px;">Või märgi lihtsalt perekondlik risk</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="familyRisk" value="yes"> Jah</label>
+                            <label><input type="radio" name="familyRisk" value="no"> Ei</label>
+                        </div>
+                    </div>
+
+                    <!-- ALLERGIAD -->
+                    <div class="form-group" id="allergySection">
+                        <label style="font-weight: 600; font-size: 1.05rem; margin-bottom: 10px; display: block;">Allergiad/ülitundlikkus</label>
+
+                        <div class="quick-add-section">
+                            <h4>Levinumad allergiad</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" onclick="quickAddAllergy('penitsilliin', 'Penitsilliin')">Penitsilliin</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddAllergy('aspirin', 'Aspiriinи')">Aspiriin</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddAllergy('kontrast', 'Kontrastaine')">Kontrastaine</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddAllergy('tolv', 'Tolm')">Tolm</button>
+                                <button type="button" class="quick-add-btn" onclick="quickAddAllergy('toiduallergia', 'Toidud')">Toidud</button>
+                            </div>
+                        </div>
+
+                        <div id="quickAddedAllergies"></div>
+
+                        <div style="margin-top: 10px;">
+                            <label for="allergiesOther">Muud allergiad (ei ole nimekirjas)</label>
+                            <textarea id="allergiesOther" name="allergiesOther" rows="2" placeholder="Kirjelda teisi allergiad..."></textarea>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 5: RAVIMID -->
+                <section class="form-section">
+                    <h2>5. Ravimid ja lisandid (praegu või hiljuti)</h2>
+
+                    <div id="medicationTableContainer">
+                        <table class="medication-table">
+                            <thead>
+                                <tr>
+                                    <th>Nimi</th>
+                                    <th>Annus</th>
+                                    <th>Millal/aknas</th>
+                                    <th>Algus</th>
+                                    <th>Mõju (0-3)</th>
+                                    <th>Kõrvaltoime</th>
+                                    <th>Jätkata?</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="medicationTableBody">
+                                <tr>
+                                    <td><input type="text" name="medName[]" placeholder="Nimi"></td>
+                                    <td><input type="text" name="medDose[]" placeholder="mg"></td>
+                                    <td><input type="text" name="medTiming[]" placeholder="Hommikul"></td>
+                                    <td><input type="text" name="medStart[]" placeholder="2023"></td>
+                                    <td><input type="number" name="medEffect[]" min="0" max="3"></td>
+                                    <td><input type="text" name="medSideEffect[]"></td>
+                                    <td>
+                                        <select name="medContinue[]">
+                                            <option value="yes">Jah</option>
+                                            <option value="no">Ei</option>
+                                        </select>
+                                    </td>
+                                    <td><button type="button" class="remove-row" onclick="removeRow(this)">×</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="add-row-btn" onclick="addMedicationRow()">+ Lisa ravim</button>
+                    </div>
+
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label>Antikoagulant?</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="anticoagulant" value="yes"> Jah</label>
+                            <label><input type="radio" name="anticoagulant" value="no"> Ei</label>
+                        </div>
+                    </div>
+
+                    <div id="anticoagulantDetails" class="hidden">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="anticoagulantName">Mis ravim</label>
+                                <input type="text" id="anticoagulantName" name="anticoagulantName" placeholder="Warfarin, Eliquis...">
+                            </div>
+                            <div class="form-group">
+                                <label for="anticoagulantDose">Annus</label>
+                                <input type="text" id="anticoagulantDose" name="anticoagulantDose">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Neerufunktsioon teada</label>
+                            <div class="radio-group">
+                                <label><input type="radio" name="kidneyFunction" value="yes"> Jah</label>
+                                <label><input type="radio" name="kidneyFunction" value="no"> Ei</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Koostoime riskid (märgi kui tarvitad)</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="interactionGrapefruit" value="yes"> Greip/greibimahl</label>
+                            <label><input type="checkbox" name="interactionJohnsWort" value="yes"> Naistepuna</label>
+                            <label><input type="checkbox" name="interactionGinkgo" value="yes"> Ginkgo</label>
+                            <label><input type="checkbox" name="interactionLicorice" value="yes"> Lagrits</label>
+                            <label><input type="checkbox" name="interactionGarlic" value="yes"> Küüslauk &gt;1 küüs/päev</label>
+                            <label><input type="checkbox" name="interactionGinger" value="yes"> Ingver &gt;2 g/päev</label>
+                            <label><input type="checkbox" name="interactionTurmeric" value="yes"> Kurkum &gt;1 g/päev</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 6: TAIMRAVI -->
+                <section class="form-section" id="herbSection">
+                    <h2>6. Taimravi ja looduslikud meetodid</h2>
+                    <p class="help-text">Vali tavalisemad plus-nuppudega või lisa kohandatud</p>
+
+                    <!-- KIIRVALIKU PLUS-NUPUD -->
+                    <div class="quick-add-section">
+                        <h4>Tavalisemad südamele toetavad taimed</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('viirpuu', 'Viirpuu')">Viirpuu</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('arjuna', 'Arjuna')">Arjuna</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('hibiscus', 'Hibiskus')">Hibiskus</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('ginseng', 'Ginseng')">Ginseng</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('astragalus', 'Astragalus')">Astragalus</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('reishi', 'Reishi')">Reishi</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddHerb('merevetikas', 'Merevetikas/Kelp')">Merevetikas/Kelp</button>
+                        </div>
+                    </div>
+
+                    <!-- LISATUD TAIMED (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedHerbs"></div>
+
+                    <!-- KOHANDATUD TAIMRAVID -->
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="herbsOther">Muud taimravid (ei ole nimekirjas)</label>
+                        <textarea id="herbsOther" name="herbsOther" rows="2" placeholder="Kirjelda teisi taimravimeid..."></textarea>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 7: TOITUMINE JA MENÜÜ -->
+                <section class="form-section">
+                    <h2>7. Toitumisprofiil, eelistused ja menüü</h2>
+
+                    <div class="form-group">
+                        <label>Söögirütm akendes</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="mealFrequency" value="2x"> 2× päevas</label>
+                            <label><input type="radio" name="mealFrequency" value="3x"> 3× päevas</label>
+                            <label><input type="radio" name="mealFrequency" value="flexible"> Paindlik</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Paast</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="fasting" value="no"> Ei</label>
+                            <label><input type="radio" name="fasting" value="12-14h"> 12-14 h</label>
+                            <label><input type="radio" name="fasting" value="other"> Muu</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="favoriteFood">Põhitoidud, mis maitsevad ja sobivad</label>
+                        <input type="text" id="favoriteFood" name="favoriteFood">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="foodLikes">Meeldib</label>
+                            <input type="text" id="foodLikes" name="foodLikes">
+                        </div>
+                        <div class="form-group">
+                            <label for="foodDislikes">Ei meeldi</label>
+                            <input type="text" id="foodDislikes" name="foodDislikes">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="foodIntolerance">Talumatus/reaktsioonid (sh jood/kelp)</label>
+                        <textarea id="foodIntolerance" name="foodIntolerance" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Toitumise piirangud</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD PIIRANGUTELE -->
+                        <div class="quick-add-section" style="background: #fef2f2; border-color: #ef4444; margin-bottom: 15px;">
+                            <h4>Levinumad piirangud</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #ef4444;"
+                                        onclick="quickAddRestriction('gluteenivaba', 'Gluteenivaba')">Gluteenivaba</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #ef4444;"
+                                        onclick="quickAddRestriction('piimatooted_vaba', 'Piimatoodete vältimine')">Ilma piimatoodeteta</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #ef4444;"
+                                        onclick="quickAddRestriction('lihatoidud_vaba', 'Lihatoidud')">Liha vältimine</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #ef4444;"
+                                        onclick="quickAddRestriction('madal_suhkur', 'Madal suhkur')">Madal suhkur</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #ef4444;"
+                                        onclick="quickAddRestriction('madal_sool', 'Madal sool')">Madal sool</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali piirangud koos põhjuse ja täpsustustega
+                            </p>
+                        </div>
+
+                        <!-- LISATUD PIIRANGUD (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedRestrictions"></div>
+
+                        <label style="margin-top: 15px;">Või märgi lihtsalt piirangud</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="restrictGluten" value="yes"> Gluteen</label>
+                            <label><input type="checkbox" name="restrictDairy" value="yes"> Piim</label>
+                            <label><input type="checkbox" name="restrictMeat" value="yes"> Liha</label>
+                            <label><input type="checkbox" name="restrictSugar" value="yes"> Suhkur</label>
+                            <label><input type="checkbox" name="restrictSalt" value="yes"> Sool</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="waterIntake">Vedelik (l/päev)</label>
+                            <input type="number" id="waterIntake" name="waterIntake" min="0" max="10" step="0.1">
+                        </div>
+                        <div class="form-group">
+                            <label for="coffeeCups">Kohv (tassi/päev)</label>
+                            <input type="number" id="coffeeCups" name="coffeeCups" min="0" max="20">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tee tüübid</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD TEE LIIKIDELE (kaheastmeline) -->
+                        <div class="quick-add-section" style="background: #ecfdf5; border-color: #10b981; margin-bottom: 15px;">
+                            <h4>Levinumad tee liigid</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('roheline_tee', 'Roheline tee')">Roheline tee</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('must_tee', 'Must tee')">Must tee</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('hibiskus_tee', 'Hibiskus tee')">Hibiskus tee</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('oolong_tee', 'Oolong tee')">Oolong tee</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('valge_tee', 'Valge tee')">Valge tee</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('matcha', 'Matcha')">Matcha</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #10b981; color: #10b981;"
+                                        onclick="quickAddTeaType('ravimtaimede_tee', 'Ravimtaimede tee')">Ravimtaimede tee</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali tee liigid koos tasside arvu ja ajastusega
+                            </p>
+                        </div>
+
+                        <!-- LISATUD TEE LIIGID (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedTeaTypes"></div>
+
+                        <label style="margin-top: 15px;">Või märgi lihtsalt tee kasutamine</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="teaGreen" value="yes"> Roheline</label>
+                            <label><input type="checkbox" name="teaHibiscus" value="yes"> Hibiskus</label>
+                            <label><input type="checkbox" name="teaBlack" value="yes"> Must</label>
+                            <label><input type="checkbox" name="teaHerbal" value="yes"> Ravimtaimed</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sool</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="saltIntake" value="normal"> Tavapärane</label>
+                            <label><input type="radio" name="saltIntake" value="<2g"> &lt;2 g Na eesmärk</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 8: KEHALISED JA MEELE PRAKTIKAD -->
+                <section class="form-section" id="practiceSection">
+                    <h2>8. Kehalised ja meele praktikad</h2>
+                    <p class="help-text">Vali tavalisemad plus-nuppudega või lisa kohandatud</p>
+
+                    <!-- KIIRVALIKU PLUS-NUPUD -->
+                    <div class="quick-add-section">
+                        <h4>Soovitatud praktikad</h4>
+                        <div class="quick-add-buttons">
+                            <button type="button" class="quick-add-btn" onclick="quickAddPractice('koherentshingamine', 'Koherents 5-5')">Koherents 5-5</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddPractice('vahelduvninahingamine', 'Vahelduvnina')">Vahelduvnina</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddPractice('jalutamine', 'Jalutamine')">Jalutamine</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddPractice('8brokaati', '8 Brokaati')">8 Brokaati</button>
+                            <button type="button" class="quick-add-btn" onclick="quickAddPractice('zazen', 'Zazen')">Zazen</button>
+                        </div>
+                    </div>
+
+                    <!-- LISATUD PRAKTIKAD (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedPractices"></div>
+
+                    <!-- MUUD PRAKTIKAD -->
+                    <div class="form-group" style="margin-top: 20px;">
+                        <label for="practicesOther">Muud praktikad (ei ole nimekirjas)</label>
+                        <textarea id="practicesOther" name="practicesOther" rows="2" placeholder="Kirjelda teisi praktikaid (jooga, taiji, mantra, jne)..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Vann/leotus (Epsom)</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="bathFrequency" value="0"> Ei kasuta</label>
+                            <label><input type="radio" name="bathFrequency" value="1-3"> 1-3× nädalas</label>
+                            <label><input type="radio" name="bathFrequency" value=">3"> &gt;3× nädalas</label>
+                        </div>
+
+                        <!-- KIIRVALIKU NUPUD VANN/SAUN -->
+                        <div class="quick-add-section" style="background: #e0f2fe; border-color: #0284c7; margin-top: 15px;">
+                            <h4>Kiirvalik - Vann/Saun/Vesi</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                        onclick="quickAddBath('epsom_vann', 'Epsom soola vann')">Epsom vann</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                        onclick="quickAddBath('saun', 'Saun')">Saun</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                        onclick="quickAddBath('külm_dušš', 'Külm dušš')">Külm dušš</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                        onclick="quickAddBath('jalavannikud', 'Jalavannikud')">Jalavannikud</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Lisa teraapia + sagedus + täpsustused
+                            </p>
+                        </div>
+
+                        <!-- LISATUD VANN/SAUN (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedBaths"></div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 9: RÜTMIPRAKTIKAD -->
+                <section class="form-section">
+                    <h2>9. Rütmipraktikad ja harjumused</h2>
+
+                    <div class="form-group">
+                        <label for="calmingMusic">Muusikastiilid, mis rahustavad</label>
+                        <input type="text" id="calmingMusic" name="calmingMusic">
+
+                        <!-- KIIRVALIKU NUPUD MUUSIKA -->
+                        <div class="quick-add-section" style="background: #f3e8ff; border-color: #9333ea; margin-top: 15px;">
+                            <h4>Kiirvalik - Muusika/Heliteraapia</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #9333ea; color: #581c87;"
+                                        onclick="quickAddMusic('klassikaline_muusika', 'Klassikaline')">Klassikaline</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #9333ea; color: #581c87;"
+                                        onclick="quickAddMusic('loodus_helid', 'Loodushelid')">Loodushelid</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #9333ea; color: #581c87;"
+                                        onclick="quickAddMusic('meditatsioon_muusika', 'Meditatsioonimuusika')">Meditatsioon</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #9333ea; color: #581c87;"
+                                        onclick="quickAddMusic('binauraalsed_lööid', 'Binauraalsed lööid')">Binauraalsed</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Lisa muusika + sagedus + ajastus
+                            </p>
+                        </div>
+
+                        <!-- LISATUD MUUSIKA (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedMusic"></div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 10: IDEOLOOGIA -->
+                <section class="form-section">
+                    <h2>10. Ideoloogia ja piirjooned</h2>
+
+                    <div class="form-group">
+                        <label>Looduslik enne ravimeid</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="naturalFirst" value="yes"> Jah</label>
+                            <label><input type="radio" name="naturalFirst" value="rather-yes"> Pigem jah</label>
+                            <label><input type="radio" name="naturalFirst" value="rather-no"> Pigem ei</label>
+                            <label><input type="radio" name="naturalFirst" value="no"> Ei</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Otsustusõigus</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="decisionMaker" value="me"> Mina otsustan lõpliku kombo</label>
+                            <label><input type="radio" name="decisionMaker" value="together"> Koos arstiga</label>
+                            <label><input type="radio" name="decisionMaker" value="doctor"> Ainult arst</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="notWilling">Mida kindlasti EI soovi</label>
+                        <textarea id="notWilling" name="notWilling" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mida olen nõus proovima "kui vaja" järjekorras</label>
+                        <input type="text" name="willing1" placeholder="1. prioriteet" style="margin-bottom: 10px;">
+                        <input type="text" name="willing2" placeholder="2. prioriteet" style="margin-bottom: 10px;">
+                        <input type="text" name="willing3" placeholder="3. prioriteet">
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 11: RESSURSID -->
+                <section class="form-section">
+                    <h2>11. Ressursid ja eelarve</h2>
+
+                    <div class="form-group">
+                        <label>Aeg päevas minimaalpaketiks</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="timeDaily" value="12min"> 12 min</label>
+                            <label><input type="radio" name="timeDaily" value="30min"> 30 min</label>
+                            <label><input type="radio" name="timeDaily" value="60min"> 60 min</label>
+                            <label><input type="radio" name="timeDaily" value="other"> Muu</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Eelarve kuus</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="budgetMonthly" value="0-25"> 0-25 €</label>
+                            <label><input type="radio" name="budgetMonthly" value="25-75"> 25-75 €</label>
+                            <label><input type="radio" name="budgetMonthly" value="75-150"> 75-150 €</label>
+                            <label><input type="radio" name="budgetMonthly" value="150+"> 150+ €</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ligipääs terviseallikatele</label>
+
+                        <!-- KIIRVALIKU PLUS-NUPUD LIGIPÄÄSULE -->
+                        <div class="quick-add-section" style="background: #f0fdf4; border-color: #22c55e; margin-bottom: 15px;">
+                            <h4>Saadaolevad ressursid</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
+                                        onclick="quickAddAccess('loodustoodete_pood', 'Loodustoodete pood')">Loodustoodete pood</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
+                                        onclick="quickAddAccess('iherb', 'iHerb')">iHerb</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
+                                        onclick="quickAddAccess('tcm_praktik', 'TCM/Ayurveda praktik')">TCM/Ayurveda</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
+                                        onclick="quickAddAccess('retseptiravimid', 'Retseptiravimid')">Retseptiravimid</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
+                                        onclick="quickAddAccess('internet_tellimus', 'Internetist tellimised')">Internet</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Vali ressursid, millele sul on juurdepääs
+                            </p>
+                        </div>
+
+                        <!-- LISATUD LIGIPÄÄSUD (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedAccess"></div>
+
+                        <label style="margin-top: 15px;">Või märgi lihtsalt ligipääs</label>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" name="accessHealthStore" value="yes"> Loodustoodete pood</label>
+                            <label><input type="checkbox" name="accessIherb" value="yes"> iHerb</label>
+                            <label><input type="checkbox" name="accessTCM" value="yes"> TCM/Ayurveda praktik</label>
+                            <label><input type="checkbox" name="accessNone" value="yes"> Puudub</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kodune tugi</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="homeSupport" value="yes"> Keegi saab meenutada rutiine</label>
+                            <label><input type="radio" name="homeSupport" value="no"> Üksi</label>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 12: RISKID -->
+                <section class="form-section alert-danger">
+                    <h2>12. Riskiliinid ("punased lipud") - kohene tegutsemine</h2>
+                    <p><strong>Kui ilmneb ükski järgmistest, katkesta kava ja pöördu kohe erakorralisse:</strong></p>
+                    <ul>
+                        <li>Rindkerevalu &gt;5 min</li>
+                        <li>Rahus õhupuudus</li>
+                        <li>Minestus</li>
+                        <li>Pulss &gt;140 või &lt;40</li>
+                        <li>Vererõhk &lt;90/60</li>
+                        <li>Roosa vahune röga</li>
+                    </ul>
+                    <div class="form-group">
+                        <label><input type="checkbox" name="redFlagsUnderstood" value="yes" required> Olen tutvunud ja mõistan</label>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 13: DIAGNOSTIKA -->
+                <section class="form-section">
+                    <h2>13. Minimaalne diagnostika (üks kord alguses)</h2>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="diagEcho" value="done"> Ehhokardiograafia (EF%, diastool, klapid)</label>
+                        <label><input type="checkbox" name="diagHolter" value="done"> Holter 24-72 h (AF koormus %, pausid)</label>
+                        <label><input type="checkbox" name="diagBlood" value="done"> Verepaneel (K, Mg, kreatiniin/eGFR, ferritiin, TSH, NT-proBNP)</label>
+                        <label><input type="checkbox" name="diagMassage" value="done"> Massaaži-/manuaalteraapia sobivuse hinnang</label>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 14: OTSUSTUSPUU -->
+                <section class="form-section alert-info">
+                    <h2>14. Otsustuspuu (lühiversioon)</h2>
+                    <p><strong>Teadmiseks:</strong></p>
+                    <ul>
+                        <li>Kui EF &gt;40%, AF-koormus &lt;10%, turset pole → 3-6 kuud holistiline miinimum + jälgimine</li>
+                        <li>Kui EF 30-40% või AF 10-30% või kerge turse → hübriid: holistiline + miinimumravim</li>
+                        <li>Kui EF &lt;30% või AF &gt;30% või tugev turse → meditsiin esmalt, holistiline paralleelselt</li>
+                    </ul>
+                </section>
+
+                <!-- SEKTSIOON 15: PLAAN -->
+                <section class="form-section">
+                    <h2>15. Nädala/kuu plaan (paindlik aknapõhine)</h2>
+                    <div class="alert-info">
+                        <p><strong>Minimaalpakett päevas "Busy-12":</strong> 4 min hingamist + 8 min jalutust</p>
+                        <p><strong>Tavatase:</strong> hingamine 10-20 min, liikumine 15-30 min, soe leotus 1-3× nädalas</p>
+                        <p><strong>Kuu kontroll:</strong> kehakaalutrend, õhupuudus 0-3, väsimus 0-3, üks eesmärk saavutatud?</p>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 16: PAKETID -->
+                <section class="form-section">
+                    <h2>16. Paketivalikud (märgi, mida kaalud)</h2>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="packageNaturalMin" value="yes"> <strong>Looduslik miinimum:</strong> hingamine + jalutus + hibiskus + Mg õhtus</label>
+                        <label><input type="checkbox" name="packageNaturalWide" value="yes"> <strong>Looduslik lai:</strong> + viirpuu/arjuna/astragalus, zazen, Epsom 2-3×/näd</label>
+                        <label><input type="checkbox" name="packageHybrid" value="yes"> <strong>Hübriid miinimum:</strong> looduslik + vajadusel väike diureetik hommikuaknas</label>
+                        <label><input type="checkbox" name="packageRhythm" value="yes"> <strong>Rütmifookus:</strong> koherentshingamine + 8 Brokaati igas päevas aknas</label>
+                        <label><input type="checkbox" name="packageEnergy" value="yes"> <strong>Energiafookus:</strong> astragalus + reishi, stressi vähendamise päevikud</label>
+                    </div>
+                </section>
+
+                <!-- SEKTSIOON 17: KOKKUVÕTE -->
+                <section class="form-section alert-success">
+                    <h2>17. Kokkuvõte ühel real (kasutus arstil/AI-l)</h2>
+                    <p id="oneLinerSummary" style="font-family: monospace; font-size: 0.9rem;">
+                        Täitke vorm ja see genereeritakse automaatselt.
+                    </p>
+                </section>
+
+                <!-- EXPORT VALIKUD -->
+                <section class="form-section export-options">
+                    <h2>Väljundi valikud</h2>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="exportTxt" checked> TXT fail</label>
+                        <label><input type="checkbox" name="exportPdf"> PDF fail</label>
+                        <label><input type="checkbox" name="exportJson" checked> JSON fail</label>
+                        <label><input type="checkbox" name="exportAiPrompt" checked> AI prompt</label>
+                    </div>
+                </section>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="window.location.href='../index.html'">Tagasi</button>
+                    <button type="button" class="btn btn-secondary" onclick="saveForm()">Salvesta draft</button>
+                    <button type="button" class="btn btn-secondary" onclick="clearForm()" style="background: #ef4444; color: white;">Tühjenda vorm</button>
+                    <button type="button" class="btn btn-secondary" onclick="exportProfile()">Ekspordi profiil</button>
+                    <button type="button" class="btn btn-secondary" onclick="importProfile()">Impordi profiil</button>
+                    <button type="button" class="btn btn-primary" onclick="exportFullProfile('txt')">Genereeri TXT</button>
+                    <button type="button" class="btn btn-primary" onclick="exportFullProfile('json')">Genereeri JSON</button>
+                    <button type="button" class="btn btn-primary" onclick="exportFullProfile('ai')">Kopeeri AI prompt</button>
+                </div>
+
+                <!-- Hidden file input for profile import -->
+                <input type="file" id="profileImportInput" accept=".json" style="display: none;">
+
+            </form>
+        </main>
+
+        <footer>
+            <div style="text-align: center; padding: 20px;">
+                <p style="margin: 5px 0;">© 2025 Meditsiiniportaal | Täisprofiil</p>
+                <p style="margin: 5px 0; font-size: 0.9rem; color: #6b7280;">
+                    <strong>Versioon <span id="appVersion">...</span></strong> |
+                    <span id="appDate">...</span> |
+                    <span id="appBuildTime">...</span>
+                </p>
+                <details style="max-width: 800px; margin: 15px auto; text-align: left;">
+                    <summary style="cursor: pointer; font-weight: 600; color: #3b82f6; padding: 8px;">
+                        📋 Versioonimärkmed
+                    </summary>
+                    <div id="changelogContent" style="padding: 15px; background: #f9fafb; border-radius: 8px; margin-top: 10px;">
+                        <p style="color: #6b7280;">Laen...</p>
+                    </div>
+                </details>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="info-modal">
+        <div class="info-modal-content">
+            <div class="info-modal-header">
+                <h3 id="infoModalTitle">Info</h3>
+                <button class="info-modal-close" onclick="closeInfoModal()">&times;</button>
+            </div>
+            <div class="info-modal-tabs">
+                <button class="info-modal-tab active" onclick="switchInfoTab(0)">Meie andmebaas</button>
+                <button class="info-modal-tab" onclick="switchInfoTab(1)">Välised allikad</button>
+            </div>
+            <div class="info-modal-body">
+                <div id="infoTab0" class="info-tab-content active">
+                    <p id="infoContent0">Laen...</p>
+                </div>
+                <div id="infoTab1" class="info-tab-content">
+                    <p id="infoContent1">Laen...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/form-handler.js"></script>
+    <script src="../js/tooltips.js"></script>
+    <script src="../js/custom-fields.js"></script>
+    <script src="../js/info-system.js"></script>
+    <script src="../js/profile-filter.js"></script>
+    <script src="../js/full-profile.js"></script>
+
+    <!-- Config ja dokumendid/lingid -->
+    <script src="../config/site-config.js"></script>
+    <script src="../js/docs-and-links.js"></script>
+</body>
+</html>

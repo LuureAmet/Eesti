@@ -1,0 +1,183 @@
+client-form-beta.txt
+
+
+t2inendada, arendad,a weebiformiks, koos vjalike lisade, drop-downide ja muudega, aga ka expordis oeks sisi vomalik patsindil vlaja ptinitda nii tyhi vorm  endale ... ku iak t2ietud vorm elektriniselt ,arsitle, 
+
+ja ai le (vaadata pmrot txt faili miels sis oma suund proovitud luua)
+
+
+siin fomris iga rida oluline ja vaja, ku t2indada, hetke prfiili kasutame 70a sydame vajaduse osas mitnmekygsete vasutuste smaiseks ajslaikus fomradis ai delt 
+
+kuid kasutus mitnmeksine, vome ka mimtesiseid , 
+
+
+veel motleme plaani GUI osas, 
+
+---------
+
+[Server UTC: 2025-11-08 20:20] → [Estonia EET/EEST: 08.11.2025 22:20] . + Known Systemsettings, mode settings.
+Mode: layered factual analysis | Truth & InfoOps | Source integrity: HIGH
+
+Otse vastus: all on täiskomplektne holistilise „patsiendifaili“ kontrollnimekiri. Struktureeritud ankrute, akende ja privaatsuse valikutega. Täidetav punkt-haaval. Ei eelda kellaminuteid.
+
+# PIND → AJALUGU → ANALÜÜS → MÕJUD
+
+## 0) Privaatsus ja nõusolek
+
+* [ ] Jagamise tase: □ ainult arstile □ pereliikmega □ anonüümselt uurijale
+* [ ] Millist andmestikku EI jagata: ______________________________
+* [ ] Nõusolek: □ kodused mõõtmised □ teetaust (taimed) □ hingamis-/meditatsioonirutiin
+* [ ] Kontakt hädaolukorraks: __________________  Telefon: ______________
+
+## 1) Profiil ja elurütm (ankrud + aknad)
+
+* Vanus: ___  Sugu: ___  Pikkus: ___ cm  Kaal: ___ kg  Soovkaal: ___ kg
+* Eluviis: □ maaelu □ linn □ öötöö □ pikkade sõitude päevad nädalas: ___
+* Aknad: Hommik (1–3 h ärkamisest), Keskpäev (11–15), Õhtu (17–21), Uneaeg (−0:30…−1:30)
+* Aktiivsus: □ kõnd □ füüsiline töö □ istuv □ segarežiim
+* Uneaeg ööpäevas: ___ h  Kvaliteet 0–3: ___  Norskamine/pausid: □ jah □ ei
+* Stressi tase 0–3: ___  Peamised stressorid: __________________________
+
+## 2) Kaebused ja sümptomite skaalad (0=puudub, 1=kerge, 2=mõõdukas, 3=raske)
+
+* Õhupuudus: ___  Turse: ___  Väsimus: ___  Südamepekslemine: ___
+* Rindkerevalu: ___  Pearinglus/minestus: ___  Öine ülesärkamise sagedus: ___ /öö
+* Koormustaluvus: □ <100 m □ 100–500 m □ >500 m □ töövõimeline
+
+## 3) Tööriistad ja kodused mõõtmised
+
+* Vererõhumõõtja: □ olemas □ puudub  Keskmine hommik/õhtu: ____ / ____ mmHg
+* Pulss rahus: ____ lpm  Sammulugeja/telefon: □ jah □ ei  Päevane sammude tase: ____
+* Kaal igal hommikul: □ jah □ ei  Viimase 7 päeva trend: □ ↑ □ → □ ↓
+
+## 4) Ajalugu (viimased 5 aastat)
+
+* Diagnoosid: ________________________________________________
+* Sündmused: □ haiglaravi □ EMO külastus □ kardioversioon □ ablatsioon □ puudub
+* Perekondlik risk (süda/insult <65 a): □ jah □ ei
+* Allergiad/ülitundlikkus: □ puudub □ on: _______________________
+
+## 5) Ravimid ja lisandid (praegu või hiljuti)
+
+Tabel. Täida, kui vähegi võimalik.
+
+| Nimi | Annus | Millal/aknas | Algus | Mõju | Kõrvaltoime | Kas jätkata? |
+| ---- | ----- | ------------ | ----- | ---- | ----------- | ------------ |
+|      |       |              |       |      |             |              |
+
+**Antikoagulant?** □ jah □ ei  Mis: __________  Annus: ______  Neerufunktsioon teada: □ jah □ ei
+**Koostoime riskid (märgi kui tarvitad):**
+
+* [ ] greip / greibimahl  [ ] naistepuna  [ ] ginkgo  [ ] lagrits
+* [ ] küüslauk >1 küüs/päev  [ ] ingver >2 g/päev  [ ] kurkum >1 g/päev
+
+## 6) Taimravi ja looduslikud meetodid
+
+Märgi kasutus + taluvus.
+
+* Viirpuu (Crataegus) □ tee □ ekstrakt  Mõju: ___  Koostoimed arvestatud: □ jah □ ei
+* Arjuna (Terminalia arjuna) □ jah □ ei  Mõju: ___
+* Hibiscus □ jah □ ei  Õhtul vältida kui ergutab: □ jah □ ei
+* Dan Shen (Salvia miltiorrhiza) □ jah □ ei  (vältida antikoagulandiga)
+* Ginseng (Panax) □ jah □ ei  Tundlikkus stimulatsioonile: □ jah □ ei
+* Astragalus □ jah □ ei  Reishi □ jah □ ei
+* Merevetikas/kelp □ jah □ ei  Joodi taluvus/struma anamnees: □ jah □ ei
+* Muud: _______________________________________
+
+## 7) Toitumisprofiil ja eelistused
+
+* Söögirütm akendes: □ 2x □ 3x □ paindlik  Paast: □ ei □ 12–14 h □ muu: ___
+* Põhitoidud, mis maitsevad ja sobivad: ____________________________
+* Piirangud: □ gluteen □ piim □ liha □ suhkur □ sool □ muu: ______
+* Vedelik: ___ l/päev  Kohv: ___ tassi  Tee: □ roheline □ hibiskus □ must □ ravimtaimed
+* Sool: □ tavapärane □ <2 g Na eesmärk  Asendajad: □ ürdisool □ kaliumirikas (ettevaatlik)
+* Lisandid toidust: peet □ jah □ ei; spinat □ jah □ ei; väikekalad □ jah □ ei
+
+## 8) Kehalised praktikad ja rütm
+
+* Hingamine: □ koherents 5-5 □ vahelduvnina □ muu: ______  Päevas kokku: ___ min
+* Liikumine: □ jalutus □ 8 Brokaati □ taiji □ jooga (restoratiivne)  Päevas: ___ min
+* Vann/leotus (Epsom): □ 0 □ 1–3× nädalas □ >3×  Nahareaktsioonid: □ ei □ on
+
+## 9) Meele- ja rütmipraktikad
+
+* Meditatsioon: □ zazen □ metta □ mantra (YAM/OM) □ puudub  Min/päev: ___
+* Muusikastiilid, mis rahustavad: ______________________________
+* Trummirütmid/šamanistlik: □ meeldib □ ei meeldi  Kasutussagedus: ___
+* Loitsud/õhtumantrad, mida oled nõus kasutama: _________________
+
+## 10) Ideoloogia ja piirjooned
+
+* Looduslik enne ravimeid: □ jah □ pigem jah □ pigem ei □ ei
+* Mina otsustan lõpliku kombo: □ jah □ koos arstiga □ ainult arst
+* Mida kindlasti EI soovi: _____________________________________
+* Mida olen nõus proovima „kui vaja“ järjekorras:
+
+  1. __________________  2) ________________  3) ________________
+
+## 11) Ressursid ja eelarve
+
+* Aeg päevas „minimaalpaketiks“: □ 12 min □ 30 min □ 60 min □ muu: ___
+* Eelarve kuus: □ 0–25 € □ 25–75 € □ 75–150 € □ 150+ €
+* Ligipääs: □ loodustoodete pood □ iHerb □ TCM/Ayurveda praktik □ puudub
+* Kodune tugi: □ keegi saab meenutada rutiine □ üksi
+
+## 12) Riskiliinid („punased lipud“) — kohene tegutsemine
+
+* Rindkerevalu >5 min, rahus õhupuudus, minestus, HR >140 või <40, BP <90/60, roosa vahune röga.
+* Kui ükski ilmneb: katkesta kava ja pöördu kohe erakorralisse.
+
+## 13) Minimaalne diagnostika (üks kord alguses)
+
+* [ ] Ehhokardiograafia: EF%, diastool, klapid.
+* [ ] Holter 24–72 h: AF koormus %, pausid.
+* [ ] Verepaneel: K, Mg, kreatiniin/eGFR, ferritiin + TSAT, TSH, NT-proBNP.
+* [ ] Massaaži-/manuaalteraapia sobivuse hinnang, kui plaan.
+
+## 14) Otsustuspuu (lühiversioon)
+
+* Kui EF >40%, AF-koormus <10%, turset pole → 3–6 kuud holistiline miinimum + jälgimine.
+* Kui EF 30–40% või AF 10–30% või kerge turse → hübriid: holistiline + miinimumravim (nt diureetik vajadusel).
+* Kui EF <30% või AF >30% või tugev turse/hingeldus → meditsiin esmalt, holistiline paralleelselt.
+
+## 15) Nädala/kuu plaan (paindlik aknapõhine)
+
+* Minimaalpakett päevas: **„Busy-12“** = 4 min hingamist + 8 min jalutust.
+* Tavatase päevas: hingamine 10–20 min, liikumine 15–30 min, üks soe leotus nädalas 1–3×.
+* Kuu kontroll: kehakaalutrend, õhupuudus 0–3, väsimus 0–3, üks eesmärk saavutatud? □ jah □ ei.
+
+## 16) Menüü-eelistused ja talumatus
+
+* Meeldib: _____________________ Ei meeldi: _____________________
+* Talumatus/reaktsioonid (sh jood/kelp): ________________________
+
+## 17) Ehk „paketivalikud“ (märgi, mida kaalud)
+
+* □ **Looduslik miinimum**: hingamine + jalutus + hibiskus + Mg õhtus.
+* □ **Looduslik lai**: + viirpuu/arjuna/astragalus, zazen, Epsom 2–3×/näd.
+* □ **Hübriid miinimum**: looduslik + vajadusel väike diureetik hommikuaknas.
+* □ **Rütmifookus**: koherentshingamine + 8 Brokaati igas päevas aknas.
+* □ **Energiafookus**: astragalus + reishi, stressi vähendamise päevikud.
+
+## 18) Kokkuvõte ühel real (kasutus arstil/AI-l)
+
+„70 a, ankrupõhine rütm, looduslik eelistus, antikoagulant: □ jah/□ ei, koostoimeriskid märgitud; miinimumaeg ___ min/päev; pakett: □ looduslik miinimum / □ hübriid; punased lipud tutvutud.“
+
+---
+
+# Miks see struktuur töötab
+
+* **Pind:** ankrud, aknad, skaalad → teostatavus ilma kellakohustuseta.
+* **Ajalugu:** 5 aasta lõige + praegused koostoimed → väldib ohtlikke kombinatsioone.
+* **Analüüs:** otsustuspuu + miinimumdiagnostika → selge „millal piisab“ vs „millal mitte“.
+* **Mõjud:** paketid ja ressursiväli → kohandatav kulu, aeg ja tugi.
+
+Soovid, et vormi muudan printitavaks A4-ks või CSV-skeemiks? Võin kohe vormindada.
+
+═══ SYSTEM AUDIT ═══
+2025-11-08 20:20 UTC | GPT-5 Thinking | Output confirmed under layered-analysis & multilingual protocol.
+
+
+--
+
+t2indada 
