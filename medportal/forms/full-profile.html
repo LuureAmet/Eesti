@@ -785,6 +785,32 @@
                         <!-- LISATUD TEGEVUSED (dünaamiliselt genereeritud) -->
                         <div id="quickAddedActivities"></div>
 
+                        <!-- PAKETT 7: SPORDILIIGID -->
+                        <div class="quick-add-section" style="background: #f0f9ff; border-color: #0ea5e9; margin-top: 20px; margin-bottom: 15px;">
+                            <h4>Spordiliigid ja võistlused</h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('triatlon', 'Triatlon')">Triatlon</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('veesport', 'Veesport')">Veesport</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('meeskonnasport', 'Meeskonnasport')">Meeskonnasport</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('võitlussport', 'Võitlussport')">Võitlussport</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('mägisport', 'Mägisport/alpinism')">Mägisport/alpinism</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #0ea5e9; color: #0ea5e9;"
+                                        onclick="quickAddActivity('talvesport', 'Talvesport')">Talvesport</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #9333ea; color: #6b21a8;"
+                                        onclick="quickAddActivity('digisport', 'Digisport/e-sport')">Digisport/e-sport</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #eab308; color: #854d0e;"
+                                        onclick="quickAddActivity('olümpia', 'Olümpia/võistlus')">Olümpia/võistlus</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
+                                Sportlik tegevus võib mõjutada toitumisvajadusi, vigastusriski ja ravimite imenduv
+                            </p>
+                        </div>
+
                         <label style="margin-top: 15px;">Üldine aktiivsuse tase</label>
                         <div class="radio-group">
                             <label><input type="radio" name="activity" value="walking"> Kõnd</label>
@@ -1092,6 +1118,34 @@
 
                         <!-- LISATUD TÖÖD (dünaamiliselt genereeritud) -->
                         <div id="quickAddedJobTypes"></div>
+
+                        <!-- PAKETT 7: TÖÖVÕIME HINNANG -->
+                        <div class="quick-add-section" style="background: #fef3c7; border-color: #f59e0b; margin-top: 20px; margin-bottom: 15px;">
+                            <h4>Töövõime hinnang</h4>
+                            <div style="margin-bottom: 12px;">
+                                <label style="display: block; font-weight: 600; color: #92400e; margin-bottom: 8px;">Praegune töövõime (%)</label>
+                                <div class="radio-group" style="display: flex; gap: 15px; flex-wrap: wrap;">
+                                    <label><input type="radio" name="workCapacity" value="100"> 100% (täistöövõime)</label>
+                                    <label><input type="radio" name="workCapacity" value="75"> 75%</label>
+                                    <label><input type="radio" name="workCapacity" value="50"> 50%</label>
+                                    <label><input type="radio" name="workCapacity" value="25"> 25%</label>
+                                    <label><input type="radio" name="workCapacity" value="0"> 0% (puue/töövõimetus)</label>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 12px;">
+                                <label style="display: block; font-weight: 600; color: #92400e; margin-bottom: 8px;">Piirangud tööl</label>
+                                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="heavy_lifting"> Raske tõstmine</label>
+                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="standing"> Püstijäämine</label>
+                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="sitting"> Pikem istumine</label>
+                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="computer"> Arvutitöö</label>
+                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="night_shifts"> Öötööd</label>
+                                    <label style="font-weight: normal;"><input type="checkbox" name="workLimits" value="stress"> Stressitaluvus</label>
+                                </div>
+                            </div>
+                            <textarea name="workCapacityNotes" rows="2"
+                                      placeholder="Täpsusta töövõime piiranguid (nt palavus, külm, müra, allergeenid...)"></textarea>
+                        </div>
 
                         <label style="margin-top: 15px;">Kõnnitempo ja distants</label>
                         <div class="radio-group">
