@@ -56,56 +56,23 @@
                                     <div class="info-popup">Lapseootel/imetamine/lapse soov määrab kindlad ohutusreeglid taimedele ja ravimitele!</div>
                                 </span>
                             </label>
-                            <div class="radio-group" style="display: flex; gap: 20px; margin-top: 10px; flex-wrap: wrap;">
-                                <label style="font-size: 1.05rem;">
-                                    <input type="radio" name="pregnancyStatus" value="pregnant" onchange="updateProfileFilter()">
-                                    Lapseootel
-                                </label>
-                                <label style="font-size: 1.05rem;">
-                                    <input type="radio" name="pregnancyStatus" value="breastfeeding" onchange="updateProfileFilter()">
-                                    Imetan
-                                </label>
-                                <label style="font-size: 1.05rem;">
-                                    <input type="radio" name="pregnancyStatus" value="planning" onchange="updateProfileFilter()">
-                                    Soovin last
-                                </label>
-                                <label style="font-size: 1.05rem;">
-                                    <input type="radio" name="pregnancyStatus" value="no" onchange="updateProfileFilter()" checked>
-                                    Ei
-                                </label>
-                            </div>
 
-                            <!-- Nädalad kui lapseootel -->
-                            <div id="pregnancyWeeks" style="display: none; margin-top: 15px; padding: 10px; background: white; border-radius: 6px;">
-                                <label>Kui kaua lapseootel (nädalat)?</label>
-                                <input type="number" name="pregnancyWeeksCount" min="1" max="42" placeholder="Nt: 12" style="width: 100px; padding: 6px;">
-                            </div>
-
-                            <!-- Ajahorisont kui soovib last -->
-                            <div id="planningHorizon" style="display: none; margin-top: 15px; padding: 10px; background: white; border-radius: 6px;">
-                                <label style="font-weight: 600; margin-bottom: 8px; display: block;">Kui pika aja pärast plaanid rasestuda?</label>
-                                <div class="radio-group" style="display: flex; gap: 15px; flex-wrap: wrap;">
-                                    <label>
-                                        <input type="radio" name="planningHorizon" value="<3months">
-                                        ≤3 kuud
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="planningHorizon" value="3-6months">
-                                        3-6 kuud
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="planningHorizon" value="6-12months">
-                                        6-12 kuud
-                                    </label>
-                                    <label>
-                                        <input type="radio" name="planningHorizon" value=">12months">
-                                        >12 kuud
-                                    </label>
+                            <!-- KIIRVALIKU PLUS-NUPUD -->
+                            <div class="quick-add-section" style="background: #fef3c7; border-color: #f59e0b; margin-top: 10px;">
+                                <div class="quick-add-buttons">
+                                    <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #d97706;"
+                                            onclick="quickAddPregnancy('pregnant', 'Lapseootel')">+Lapseootel</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #d97706;"
+                                            onclick="quickAddPregnancy('breastfeeding', 'Imetan')">+Imetan</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #d97706;"
+                                            onclick="quickAddPregnancy('planning', 'Soovin last')">+Soovin last</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #9ca3af; color: #64748b;"
+                                            onclick="quickAddPregnancy('no', 'Ei')">+Ei</button>
                                 </div>
-                                <p style="font-size: 0.85rem; color: #92400e; margin-top: 10px; background: #fef3c7; padding: 8px; border-radius: 4px;">
-                                    💡 Soovitus: vaata üle profiili osad (ravimid, taimravimid, toitumine). Mõned ained tuleb lõpetada x kuud enne rasestumist.
-                                </p>
                             </div>
+
+                            <!-- LISATUD VALIK (dünaamiliselt genereeritud) -->
+                            <div id="quickAddedPregnancy"></div>
                         </div>
 
                         <!-- 2. VANUS - TEINE KÜSIMUS -->
@@ -117,27 +84,42 @@
                                 </span>
                             </label>
 
-                            <!-- Kiirvalik kategooriad -->
-                            <div style="margin: 15px 0;">
-                                <h4 style="color: #64748b; font-size: 0.9rem; margin-bottom: 8px;">Kiirvalik (meditsiinilised kategooriad):</h4>
-                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px;">
-                                    <button type="button" class="age-category-btn" data-age-range="0-0.08" onclick="selectAgeCategory(this, '0-0.08', 'Vastsündinu (0-28 päeva)')">Vastsündinu (0-28 p)</button>
-                                    <button type="button" class="age-category-btn" data-age-range="0.08-1" onclick="selectAgeCategory(this, '0.08-1', 'Imik (1-12 kuud)')">Imik (1-12 kuud)</button>
-                                    <button type="button" class="age-category-btn" data-age-range="1-3" onclick="selectAgeCategory(this, '1-3', 'Väikelaps (1-3 a)')">Väikelaps (1-3 a)</button>
-                                    <button type="button" class="age-category-btn" data-age-range="3-5" onclick="selectAgeCategory(this, '3-5', 'Eelkooliealine (3-5 a)')">Eelkooliealine (3-5)</button>
-                                    <button type="button" class="age-category-btn" data-age-range="6-11" onclick="selectAgeCategory(this, '6-11', 'Kooliealine (6-11 a)')">Kooliealine (6-11)</button>
-                                    <button type="button" class="age-category-btn" data-age-range="12-17" onclick="selectAgeCategory(this, '12-17', 'Nooruk (12-17 a)')">Nooruk (12-17)</button>
-                                    <button type="button" class="age-category-btn" data-age-range="18-39" onclick="selectAgeCategory(this, '18-39', 'Noor täiskasvanu (18-39 a)')">Noor täisk. (18-39)</button>
-                                    <button type="button" class="age-category-btn" data-age-range="40-64" onclick="selectAgeCategory(this, '40-64', 'Keskealine (40-64 a)')">Keskealine (40-64)</button>
-                                    <button type="button" class="age-category-btn" data-age-range="65-74" onclick="selectAgeCategory(this, '65-74', 'Young-old (65-74 a)')">Young-old (65-74)</button>
-                                    <button type="button" class="age-category-btn" data-age-range="75-84" onclick="selectAgeCategory(this, '75-84', 'Middle-old (75-84 a)')">Middle-old (75-84)</button>
-                                    <button type="button" class="age-category-btn" data-age-range="85-99" onclick="selectAgeCategory(this, '85-99', 'Oldest-old (85-99 a)')">Oldest-old (85-99)</button>
-                                    <button type="button" class="age-category-btn" data-age-range="100-120" onclick="selectAgeCategory(this, '100-120', 'Centaur (100-120 a)')" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); border-color: #d97706; color: white; font-weight: 700;">Centaur (100-120)</button>
+                            <!-- KIIRVALIKU PLUS-NUPUD -->
+                            <div class="quick-add-section" style="background: #e0f2fe; border-color: #0284c7; margin-top: 10px;">
+                                <h4 style="color: #64748b; font-size: 0.9rem; margin-bottom: 8px;">Meditsiinilised vanusekategooriad:</h4>
+                                <div class="quick-add-buttons" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;">
+                                    <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                            onclick="quickAddAgeCategory('0-0.08', 'Vastsündinu (0-28 päeva)')">+Vastsündinu</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                            onclick="quickAddAgeCategory('0.08-1', 'Imik (1-12 kuud)')">+Imik</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                            onclick="quickAddAgeCategory('1-3', 'Väikelaps (1-3 a)')">+Väikelaps</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                            onclick="quickAddAgeCategory('3-5', 'Eelkooliealine (3-5 a)')">+Eelkooliealine</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                            onclick="quickAddAgeCategory('6-11', 'Kooliealine (6-11 a)')">+Kooliealine</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                            onclick="quickAddAgeCategory('12-17', 'Nooruk (12-17 a)')">+Nooruk</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                            onclick="quickAddAgeCategory('18-39', 'Noor täiskasvanu (18-39 a)')">+Noor täisk.</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                            onclick="quickAddAgeCategory('40-64', 'Keskealine (40-64 a)')">+Keskealine</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                            onclick="quickAddAgeCategory('65-74', 'Young-old (65-74 a)')">+Young-old</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                            onclick="quickAddAgeCategory('75-84', 'Middle-old (75-84 a)')">+Middle-old</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #0284c7; color: #075985;"
+                                            onclick="quickAddAgeCategory('85-99', 'Oldest-old (85-99 a)')">+Oldest-old</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #f59e0b; color: #d97706; background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); font-weight: 700;"
+                                            onclick="quickAddAgeCategory('100-120', 'Centaur (100-120 a)')">+Centaur (100-120)</button>
                                 </div>
                             </div>
 
-                            <!-- Täpne vanus -->
-                            <div style="margin-top: 15px;">
+                            <!-- LISATUD VALIK (dünaamiliselt genereeritud) -->
+                            <div id="quickAddedAge"></div>
+
+                            <!-- Täpne vanus (alternatiiv) -->
+                            <div style="margin-top: 15px; padding: 10px; background: white; border-radius: 6px; border: 2px dashed #cbd5e1;">
                                 <label style="color: #64748b; font-size: 0.9rem;">Või sisesta täpne vanus:</label>
                                 <input type="number" id="exactAge" name="exactAge" min="0" max="120" placeholder="Nt: 42"
                                        onchange="updateProfileFilter()"
@@ -157,85 +139,78 @@
                                     <div class="info-popup">Vali sugu. Vabatahtlikult võid lisada ka bioloogilisi markereid (hormoonid, kromosoomid).</div>
                                 </span>
                             </label>
-                            <div class="radio-group" style="display: flex; gap: 20px; margin-top: 10px; flex-wrap: wrap;">
-                                <label style="font-size: 1.05rem;">
-                                    <input type="radio" id="genderMale" name="gender" value="male" onchange="updateProfileFilter()">
-                                    Mees
-                                </label>
-                                <label style="font-size: 1.05rem;">
-                                    <input type="radio" id="genderFemale" name="gender" value="female" onchange="updateProfileFilter()">
-                                    Naine
-                                </label>
-                                <label style="font-size: 1.05rem;">
-                                    <input type="radio" id="genderOther" name="gender" value="other" onchange="updateProfileFilter(); toggleGenderDetails(true)">
-                                    Sootuks/Sootu/Muu
-                                </label>
+
+                            <!-- KIIRVALIKU PLUS-NUPUD -->
+                            <div class="quick-add-section" style="background: #fce7f3; border-color: #ec4899; margin-top: 10px;">
+                                <div class="quick-add-buttons">
+                                    <button type="button" class="quick-add-btn" style="border-color: #ec4899; color: #9f1239;"
+                                            onclick="quickAddGender('female', 'Naine')">+Naine</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #ec4899; color: #9f1239;"
+                                            onclick="quickAddGender('male', 'Mees')">+Mees</button>
+                                    <button type="button" class="quick-add-btn" style="border-color: #ec4899; color: #9f1239;"
+                                            onclick="quickAddGender('other', 'Sootuks sootu')">+Sootuks sootu</button>
+                                </div>
                             </div>
 
-                            <!-- Laiendatud soo valikud -->
-                            <div id="genderDetails" style="display: none; margin-top: 15px; padding: 15px; background: white; border-radius: 8px; border: 2px dashed #ec4899;">
-                                <h4 style="color: #9f1239; margin-bottom: 10px;">Täpsusta (vabatahtlik):</h4>
+                            <!-- LISATUD VALIK (dünaamiliselt genereeritud) -->
+                            <div id="quickAddedGender"></div>
 
-                                <!-- Enesemääratlus -->
-                                <div class="form-group" style="margin-bottom: 15px;">
-                                    <label for="selfIdent" style="font-weight: 600;">Enesemääratlus (vaba tekst):</label>
-                                    <input type="text" id="selfIdent" name="selfIdent" placeholder="Nt: mittebinaar ne, genderfluid, trans..." style="width: 100%; padding: 8px; border: 1px solid #e5e7eb; border-radius: 6px;">
-                                </div>
+                            <!-- Laiendatud soo valikud (vabatahtlik) -->
+                            <details style="margin-top: 15px; background: white; padding: 12px; border-radius: 8px; border: 2px dashed #ec4899;">
+                                <summary style="font-weight: 600; color: #9f1239; cursor: pointer;">Täpsusta (vabatahtlik): Bioloogilised markerid / Trans / Mütoloogia</summary>
 
                                 <!-- Transseksuaalne alamvalikud -->
-                                <details style="background: #fef3c7; padding: 12px; border-radius: 6px; margin-bottom: 15px;">
-                                    <summary style="font-weight: 600; color: #92400e; cursor: pointer;">Transseksuaalne? (oluline ravimite jaoks)</summary>
-                                    <div style="margin-top: 10px;">
-                                        <div class="form-group" style="margin-bottom: 10px;">
-                                            <label>Mis oli sünnis:</label>
-                                            <div class="radio-group" style="display: flex; gap: 15px; margin-top: 5px;">
-                                                <label><input type="radio" name="bioSexAtBirth" value="male"> Mees</label>
-                                                <label><input type="radio" name="bioSexAtBirth" value="female"> Naine</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Hormoonid või muutused:</label>
-                                            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px;">
-                                                <label><input type="checkbox" name="transHormones" value="testosterone"> Testosteroon</label>
-                                                <label><input type="checkbox" name="transHormones" value="estrogen"> Östrogeen</label>
-                                                <label><input type="checkbox" name="transHormones" value="blockers"> Blokaatorid</label>
-                                                <label><input type="checkbox" name="transSurgery" value="yes"> Kirurgiline muutus</label>
-                                            </div>
+                                <div style="margin-top: 15px; background: #fef3c7; padding: 12px; border-radius: 6px;">
+                                    <h4 style="font-weight: 600; color: #92400e; margin-bottom: 10px;">Transseksuaalne? (oluline ravimite jaoks)</h4>
+                                    <div class="form-group" style="margin-bottom: 10px;">
+                                        <label style="font-size: 0.9rem;">Mis oli sünnis:</label>
+                                        <div class="radio-group" style="display: flex; gap: 15px; margin-top: 5px;">
+                                            <label><input type="radio" name="bioSexAtBirth" value="male"> Mees</label>
+                                            <label><input type="radio" name="bioSexAtBirth" value="female"> Naine</label>
                                         </div>
                                     </div>
-                                </details>
+                                    <div class="form-group">
+                                        <label style="font-size: 0.9rem;">Hormoonid või muutused:</label>
+                                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 5px;">
+                                            <label><input type="checkbox" name="transHormones" value="testosterone"> Testosteroon</label>
+                                            <label><input type="checkbox" name="transHormones" value="estrogen"> Östrogeen</label>
+                                            <label><input type="checkbox" name="transHormones" value="blockers"> Blokaatorid</label>
+                                            <label><input type="checkbox" name="transSurgery" value="yes"> Kirurgiline muutus</label>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- Bio-markerid (vabatahtlikud) -->
-                                <details style="background: #e0f2fe; padding: 12px; border-radius: 6px;">
-                                    <summary style="font-weight: 600; color: #075985; cursor: pointer;">Bioloogilised markerid (vabatahtlik, nähtav arstile)</summary>
-                                    <p style="font-size: 0.85rem; color: #64748b; margin-top: 5px;">Need andmed aitavad täpsustada ravimite koostoimeid ja annuseid.</p>
-                                    <div style="margin-top: 10px; display: grid; gap: 10px;">
+                                <div style="margin-top: 15px; background: #e0f2fe; padding: 12px; border-radius: 6px;">
+                                    <h4 style="font-weight: 600; color: #075985; margin-bottom: 6px;">Bioloogilised markerid (vabatahtlik)</h4>
+                                    <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 10px;">Need andmed aitavad täpsustada ravimite koostoimeid ja annuseid.</p>
+                                    <div style="display: grid; gap: 10px;">
                                         <div class="form-group">
-                                            <label for="bioChromosomes">Kromosoomid (nt XX, XY, XXY):</label>
+                                            <label for="bioChromosomes" style="font-size: 0.9rem;">Kromosoomid (nt XX, XY, XXY):</label>
                                             <input type="text" id="bioChromosomes" name="bioChromosomes" placeholder="Nt: XX" style="width: 150px; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
                                         </div>
                                         <div class="form-group">
-                                            <label for="bioGonads">Gonadid:</label>
+                                            <label for="bioGonads" style="font-size: 0.9rem;">Gonadid:</label>
                                             <input type="text" id="bioGonads" name="bioGonads" placeholder="Nt: munasarjad, munandid" style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
                                         </div>
                                         <div class="form-group">
-                                            <label for="bioHormones">Hormoonid (viimased väärtused):</label>
+                                            <label for="bioHormones" style="font-size: 0.9rem;">Hormoonid (viimased väärtused):</label>
                                             <textarea id="bioHormones" name="bioHormones" rows="2" placeholder="Nt: Testosteroon 450 ng/dL, Östrogeen 50 pg/mL..." style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;"></textarea>
                                         </div>
                                     </div>
-                                </details>
+                                </div>
 
                                 <!-- Mütoloogia/identiteet (belief-märgis) -->
-                                <details style="background: #f3f4f6; padding: 12px; border-radius: 6px; margin-top: 15px;">
-                                    <summary style="font-weight: 600; color: #4b5563; cursor: pointer;">Mütoloogia/identiteet (vabatahtlik, hariv)</summary>
-                                    <p style="font-size: 0.85rem; color: #6b7280; margin-top: 5px;">Kultuurilised või spirituaalsed identiteedid (näiteks kaksikhing, two-spirit jne). Need on harivad ja ei mõjuta meditsiinilist profiili.</p>
-                                    <div id="mythologyTypes" style="margin-top: 10px;">
+                                <div style="margin-top: 15px; background: #f3f4f6; padding: 12px; border-radius: 6px;">
+                                    <h4 style="font-weight: 600; color: #4b5563; margin-bottom: 6px;">Mütoloogia/identiteet (vabatahtlik, hariv)</h4>
+                                    <p style="font-size: 0.85rem; color: #6b7280; margin-bottom: 10px;">Kultuurilised või spirituaalsed identiteedid (näiteks kaksikhing, two-spirit jne). Need on harivad ja ei mõjuta meditsiinilist profiili.</p>
+                                    <div id="mythologyTypes">
                                         <!-- Plussid genereeritakse JS-s -->
                                         <button type="button" class="quick-add-btn" style="border-color: #9ca3af; color: #4b5563; font-size: 0.9rem;" onclick="addMythologyType()">+ Lisa mütoloogia tüüp</button>
                                     </div>
-                                </details>
+                                </div>
 
-                            </div>
+                            </details>
                         </div>
 
                         <!-- 4. MEDITSIINILISED RISKIFAKTORID (Valikuline, kuid oluline) -->

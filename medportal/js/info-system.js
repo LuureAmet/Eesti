@@ -3362,7 +3362,194 @@ function quickAddInteraction(key, name) {
             </div>
         </div>
     `;
-    
+
     container.appendChild(itemDiv);
     showToast(`${name} lisatud!`);
+}
+
+// ================================================================
+// QUICK ADD: PROFIILIFILTRI (Rasedus, Vanus, Sugu)
+// Erilised funktsioonid - lubavad ainult ÜHE valiku korraga
+// ================================================================
+
+function quickAddPregnancy(status, label) {
+    // Container
+    const containerId = 'quickAddedPregnancy';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`Container ${containerId} not found`);
+        return;
+    }
+
+    // Eemalda varasem valik (ainult üks valiku lubatud)
+    container.innerHTML = '';
+
+    const itemId = 'pregnancy_selected';
+    const fieldName = 'pregnancyStatus';
+
+    // Värv vastavalt staatusele
+    const bgColor = '#fef3c7';
+    const borderColor = '#f59e0b';
+    const textColor = '#92400e';
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = `background: ${bgColor}; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid ${borderColor};`;
+    itemDiv.id = itemId;
+
+    // Nädalate väli ainult lapseootel korral
+    const weeksField = status === 'pregnant' ? `
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <label style="font-size: 0.9rem; color: #64748b;">Kui kaua lapseootel (nädalat)?</label>
+            <input type="number" name="pregnancyWeeksCount" min="1" max="42" placeholder="Nt: 12"
+                   style="width: 100px; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+        </div>
+    ` : '';
+
+    // Planeerimise horisont ainult "soovin last" korral
+    const planningField = status === 'planning' ? `
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 6px;">Kui pika aja pärast plaanid rasestuda?</label>
+            <select name="planningHorizon" style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+                <option value="">Vali...</option>
+                <option value="<3months">≤3 kuud</option>
+                <option value="3-6months">3-6 kuud</option>
+                <option value="6-12months">6-12 kuud</option>
+                <option value=">12months">>12 kuud</option>
+            </select>
+            <p style="font-size: 0.85rem; color: #92400e; margin-top: 6px; background: #fef3c7; padding: 6px; border-radius: 4px;">
+                💡 Mõned ained tuleb lõpetada x kuud enne rasestumist.
+            </p>
+        </div>
+    ` : '';
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <label style="margin: 0; font-weight: 600; color: ${textColor}; display: flex; align-items: center; gap: 8px;">
+                <input type="radio" name="${fieldName}" value="${status}" checked onchange="updateProfileFilter()">
+                ${label}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove(); updateProfileFilter()" class="btn-danger-sm"
+                    style="background: ${borderColor}; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        ${weeksField}
+        ${planningField}
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${label} lisatud!`);
+
+    // Auto-select "naine" kui lapseootel/imetamine
+    if (status === 'pregnant' || status === 'breastfeeding' || status === 'planning') {
+        // Oota 100ms et DOM uueneks, siis vali "naine"
+        setTimeout(() => {
+            quickAddGender('female', 'Naine');
+        }, 100);
+    }
+
+    // Uuenda profiilifiltrit
+    updateProfileFilter();
+}
+
+function quickAddAgeCategory(range, label) {
+    // Container
+    const containerId = 'quickAddedAge';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`Container ${containerId} not found`);
+        return;
+    }
+
+    // Eemalda varasem valik (ainult üks valiku lubatud)
+    container.innerHTML = '';
+
+    const itemId = 'age_selected';
+
+    const bgColor = '#e0f2fe';
+    const borderColor = '#0284c7';
+    const textColor = '#075985';
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = `background: ${bgColor}; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid ${borderColor};`;
+    itemDiv.id = itemId;
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <label style="margin: 0; font-weight: 600; color: ${textColor};">
+                ${label}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove(); updateProfileFilter()" class="btn-danger-sm"
+                    style="background: ${borderColor}; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        <input type="hidden" id="ageCategory" name="ageCategory" value="${range}">
+        <input type="hidden" id="ageCategoryLabel" name="ageCategoryLabel" value="${label}">
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${label} lisatud!`);
+
+    // Uuenda profiilifiltrit
+    updateProfileFilter();
+}
+
+function quickAddGender(gender, label) {
+    // Container
+    const containerId = 'quickAddedGender';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`Container ${containerId} not found`);
+        return;
+    }
+
+    // Eemalda varasem valik (ainult üks valiku lubatud)
+    container.innerHTML = '';
+
+    const itemId = 'gender_selected';
+    const fieldName = 'gender';
+
+    const bgColor = '#fce7f3';
+    const borderColor = '#ec4899';
+    const textColor = '#9f1239';
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = `background: ${bgColor}; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid ${borderColor};`;
+    itemDiv.id = itemId;
+
+    // Laiendatud väljad "sootuks" korral
+    const expandedFields = gender === 'other' ? `
+        <div style="margin-left: 24px; margin-top: 10px; padding: 10px; background: white; border-radius: 6px;">
+            <label style="font-size: 0.9rem; color: #64748b; display: block; margin-bottom: 6px;">Enesemääratlus (vabatahtlik):</label>
+            <input type="text" name="selfIdent" placeholder="Nt: mittebinaar, genderfluid, trans..."
+                   style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px;">
+        </div>
+    ` : '';
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <label style="margin: 0; font-weight: 600; color: ${textColor}; display: flex; align-items: center; gap: 8px;">
+                <input type="radio" name="${fieldName}" value="${gender}" checked onchange="updateProfileFilter()">
+                ${label}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove(); updateProfileFilter()" class="btn-danger-sm"
+                    style="background: ${borderColor}; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        ${expandedFields}
+    `;
+
+    container.appendChild(itemDiv);
+    showToast(`${label} lisatud!`);
+
+    // Uuenda profiilifiltrit
+    updateProfileFilter();
 }
