@@ -1370,18 +1370,37 @@
                         <div id="quickAddedAnticoagulants"></div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Koostoime riskid (märgi kui tarvitad)</label>
-                        <div class="checkbox-group">
-                            <label><input type="checkbox" name="interactionGrapefruit" value="yes"> Greip/greibimahl</label>
-                            <label><input type="checkbox" name="interactionJohnsWort" value="yes"> Naistepuna</label>
-                            <label><input type="checkbox" name="interactionGinkgo" value="yes"> Ginkgo</label>
-                            <label><input type="checkbox" name="interactionLicorice" value="yes"> Lagrits</label>
-                            <label><input type="checkbox" name="interactionGarlic" value="yes"> Küüslauk &gt;1 küüs/päev</label>
-                            <label><input type="checkbox" name="interactionGinger" value="yes"> Ingver &gt;2 g/päev</label>
-                            <label><input type="checkbox" name="interactionTurmeric" value="yes"> Kurkum &gt;1 g/päev</label>
+                    <!-- TAIMEDE KOOSTOIMERISKID (PLUS-SÜSTEEM) -->
+                    <div class="form-group" style="margin-top: 25px;">
+                        <div class="quick-add-section" style="background: #fef2f2; border-color: #ef4444;">
+                            <h4 style="display: flex; align-items: center; gap: 8px;">
+                                Taimede koostoimeriskid
+                                <span class="info-icon" style="cursor: help;" title="Need taimed võivad koostoimet avaldada paljude ravimitega. Märgi siia kui tarvitad regulaarselt.">i</span>
+                            </h4>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddHerbInteraction('greip', 'Greip/greibimahl')">Greip</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddHerbInteraction('naistepuna', 'Naistepuna')">Naistepuna</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddHerbInteraction('ginkgo', 'Ginkgo')">Ginkgo</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddHerbInteraction('lagrits', 'Lagrits')">Lagrits</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddHerbInteraction('kyyslauk', 'Küüslauk')">Küüslauk</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddHerbInteraction('ingver', 'Ingver')">Ingver</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddHerbInteraction('kurkum', 'Kurkum')">Kurkum</button>
+                            </div>
+                            <p style="font-size: 0.85rem; color: #7f1d1d; margin-top: 8px; margin-bottom: 0;">
+                                ⚠️ HOIATUS: Need taimed võivad suurendada või vähendada ravimite toimet! Konsulteeri arstiga.
+                            </p>
                         </div>
                     </div>
+
+                    <!-- LISATUD TAIMEDE KOOSTOIMERISKID (dünaamiliselt genereeritud) -->
+                    <div id="quickAddedHerbInteractions"></div>
 
                     <!-- ELUSTIILI AINETE KOOSTOIMERISKID (PLUS-SÜSTEEM) -->
                     <div class="form-group" style="margin-top: 25px;">

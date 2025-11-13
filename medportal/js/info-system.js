@@ -3553,3 +3553,84 @@ function quickAddGender(gender, label) {
     // Uuenda profiilifiltrit
     updateProfileFilter();
 }
+
+// ================================================================
+// QUICK ADD: HERB INTERACTION RISKS
+// 7 taimi mis võivad koostoimet avaldada ravimitega
+// ================================================================
+
+function quickAddHerbInteraction(key, name) {
+    if (!quickAddCounters.herbInteraction) quickAddCounters.herbInteraction = 0;
+    quickAddCounters.herbInteraction++;
+
+    const containerId = 'quickAddedHerbInteractions';
+    let container = document.getElementById(containerId);
+
+    if (!container) {
+        console.error(`Container ${containerId} not found`);
+        return;
+    }
+
+    const itemId = `herbInteraction_quick_${quickAddCounters.herbInteraction}`;
+    const fieldName = `herbInteraction_${key}_${quickAddCounters.herbInteraction}`;
+
+    const bgColor = '#fef2f2';
+    const borderColor = '#ef4444';
+    const textColor = '#991b1b';
+
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = `background: ${bgColor}; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid ${borderColor};`;
+    itemDiv.id = itemId;
+
+    // Spetsiifilised väljad vastavalt ainele
+    let specificInfo = '';
+    if (key === 'kyyslauk') {
+        specificInfo = '<p style="margin-left: 24px; margin-top: 6px; font-size: 0.85rem; color: #7f1d1d;">⚠️ Koostoime: antikoagulandid, antiplaatikud. Tarvitusannused: >1 küüs/päev</p>';
+    } else if (key === 'ingver') {
+        specificInfo = '<p style="margin-left: 24px; margin-top: 6px; font-size: 0.85rem; color: #7f1d1d;">⚠️ Koostoime: antikoagulandid, antiplaatikud. Tarvitusannused: >2 g/päev</p>';
+    } else if (key === 'kurkum') {
+        specificInfo = '<p style="margin-left: 24px; margin-top: 6px; font-size: 0.85rem; color: #7f1d1d;">⚠️ Koostoime: antikoagulandid, antiplaatikud. Tarvitusannused: >1 g/päev</p>';
+    } else if (key === 'greip') {
+        specificInfo = '<p style="margin-left: 24px; margin-top: 6px; font-size: 0.85rem; color: #7f1d1d;">⚠️ SUUR koostoime: paljud ravimid (statinid, kaltsiumkanali blokaatorid, bensodiasepiinid jne). Suurendab ravimi taset veres!</p>';
+    } else if (key === 'naistepuna') {
+        specificInfo = '<p style="margin-left: 24px; margin-top: 6px; font-size: 0.85rem; color: #7f1d1d;">⚠️ SUUR koostoime: SSRI-d, kontratseptiivid, antikoagulandid. Vähendab ravimi efektiivsust!</p>';
+    } else if (key === 'ginkgo') {
+        specificInfo = '<p style="margin-left: 24px; margin-top: 6px; font-size: 0.85rem; color: #7f1d1d;">⚠️ Koostoime: antikoagulandid. Suurendab verejooksu riski.</p>';
+    } else if (key === 'lagrits') {
+        specificInfo = '<p style="margin-left: 24px; margin-top: 6px; font-size: 0.85rem; color: #7f1d1d;">⚠️ Koostoime: diureetikumid, kortikosteroidid. Vähendab kaaliumi taset.</p>';
+    }
+
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <label style="margin: 0; font-weight: 600; color: ${textColor}; display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: ${borderColor}; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        ${specificInfo}
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <label style="font-size: 0.9rem; color: #64748b;">Tarvitamise sagedus</label>
+            <select name="${fieldName}_frequency" style="width: 100%; padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; margin-top: 4px;">
+                <option value="">Vali...</option>
+                <option value="daily">Igapäevaselt</option>
+                <option value="weekly">Mitu korda nädalas</option>
+                <option value="occasionally">Aeg-ajalt</option>
+            </select>
+        </div>
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_notes')">+ Lisa täiendav info</span>
+            <div id="${itemId}_notes" class="inline-info-field">
+                <label>Täiendav info (vabatahtlik)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: kogus, vorm (tooraine/ekstrakt/kapsel)..."></textarea>
+            </div>
+        </div>
+    `;
+
+    container.insertBefore(itemDiv, container.firstChild);
+    showToast(`${name} lisatud koostoimeriskide alla!`);
+}
