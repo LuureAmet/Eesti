@@ -1,0 +1,63 @@
+═══════════════════════════════════════════════════════════════
+ UUE SESSIOONI ALUSTAMINE - FAILIDE NIMEKIRI
+═══════════════════════════════════════════════════════════════
+
+📋 KOPEERI UUE SESSIOONI PROMPT:
+
+Jätka Medical Portali v1.7.6 implementatsiooni.
+
+OLULINE: Loe ESMALT see fail läbi täielikult:
+/home/user/Eesti/medportal/docs/CONTINUATION-v1.7.6-PROMPT.md
+
+Selles failis on:
+1. 10 KRITILIST PROBLEEMI (korduvalt mainitud, 4-5 korda!)
+2. Sessiooni ajalugu
+3. Failide asukohad
+4. Faaside plaan (5 faasi)
+
+PRIORITEEDID:
+1. Profiilifilter plus-nuppudega (+Lapseootel, +Vanus, +Naine, +Mees, +Sootuks sootu)
+2. Plus-süsteemi käitumine (uued valikud ESIMESENA, teine vajutus = deselect)
+3. UI puhastus (lühemad väljad, "kg" suffix)
+4. Puuduvad plus-süsteemid (vana koostoime riskid, alternatiivne tööriistad, ressursid)
+5. Automaatne kokkuvõte (tabidega)
+
+BRANCH: claude/medical-portal-v1.7-implementation-011CV2rzuWMTMXiRnuywRdE2
+VERSIOON: v1.7.6
+
+Küsi kasutajalt, millisest faasist alustada.
+
+═══════════════════════════════════════════════════════════════
+
+📂 DOKUMENDID (URLid):
+
+1. PEAMINE JUHEND (LOE ESIMESENA!):
+   /home/user/Eesti/medportal/docs/CONTINUATION-v1.7.6-PROMPT.md
+   
+2. KIIRE JUHEND:
+   /home/user/Eesti/medportal/docs/START-NEW-SESSION.md
+
+3. Praegune seis:
+   /home/user/Eesti/medportal/docs/CURRENT-STATUS.md
+
+4. Strateegia plaan:
+   /home/user/Eesti/medportal/docs/STRATEGY-v1.7-PLAN.md
+
+═══════════════════════════════════════════════════════════════
+
+🚨 10 KRITILIST PROBLEEMI (lühidalt):
+
+ 1. Profiilifilter plus-nuppudega
+ 2. Plus-nupud lähevad lõppu
+ 3. Teine vajutus ei deselecti
+ 4. Kehaandmed liiga pikad
+ 5. Uneaeg jne liiga pikad
+ 6. "Naiste kaebused" näitab meestele
+ 7. Vana koostoime riskid
+ 8. Alternatiivne tööriistad kadunud
+ 9. Ressursid ei ole plusside all
+10. Kokkuvõte ei teki automaatselt
+
+DETAILID: CONTINUATION-v1.7.6-PROMPT.md
+
+═══════════════════════════════════════════════════════════════
