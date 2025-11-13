@@ -125,17 +125,87 @@ function selectPregnancyOption(status) {
 }
 
 // Vali vanuse valik
-function selectAgeOption(range, label) {
+function selectAgeOption(range, label, displayRange) {
     profileFilter.ageCategory = range;
     profileFilter.ageCategoryLabel = label;
+    profileFilter.ageDisplayRange = displayRange;
     document.getElementById('ageCategory').value = range;
     document.getElementById('ageCategoryLabel').value = label;
 
-    // Tühjenda täpne vanus
+    // Tühjenda täpne vanus ja sünnipäev
     document.getElementById('exactAge').value = '';
+    if (document.getElementById('birthdate')) {
+        document.getElementById('birthdate').value = '';
+    }
 
     // Sulge menüü
     document.getElementById('detailsAge').style.display = 'none';
+
+    updateButtonStates();
+    updateProfileFilter();
+}
+
+// Arvuta täpne vanus sünnipäevast
+function calculateExactAge() {
+    const birthdateInput = document.getElementById('birthdate');
+    const birthdateInfo = document.getElementById('birthdateInfo');
+
+    if (!birthdateInput.value) return;
+
+    const birthDate = new Date(birthdateInput.value);
+    const today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+
+    // Arvuta päevi sünnipäevani
+    const nextBirthday = new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+    if (nextBirthday < today) {
+        nextBirthday.setFullYear(today.getFullYear() + 1);
+    }
+    const daysUntilBirthday = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
+
+    // Määra profiilifiltri vanus
+    profileFilter.exactAge = age;
+    profileFilter.birthdate = birthdateInput.value;
+    document.getElementById('exactAge').value = age;
+
+    // Tühjenda kategooriad (täpne vanus on prioriteet)
+    profileFilter.ageCategory = null;
+    profileFilter.ageCategoryLabel = null;
+
+    // Näita infot
+    birthdateInfo.innerHTML = `<strong>Vanus: ${age} aastat</strong><br>`;
+    if (daysUntilBirthday === 0) {
+        birthdateInfo.innerHTML += `🎉 <strong>Palju õnne sünnipäevaks!</strong>`;
+    } else if (daysUntilBirthday <= 30) {
+        birthdateInfo.innerHTML += `🎂 Sünnipäev ${daysUntilBirthday} päeva pärast!`;
+    }
+
+    updateButtonStates();
+    updateProfileFilter();
+}
+
+// Käsitse numbrilist vanuse sisestust
+function handleExactAgeChange() {
+    const exactAgeInput = document.getElementById('exactAge');
+    const age = parseInt(exactAgeInput.value);
+
+    if (!age || age < 0 || age > 120) return;
+
+    profileFilter.exactAge = age;
+
+    // Tühjenda kategooriad ja sünnipäev
+    profileFilter.ageCategory = null;
+    profileFilter.ageCategoryLabel = null;
+    if (document.getElementById('birthdate')) {
+        document.getElementById('birthdate').value = '';
+        document.getElementById('birthdateInfo').innerHTML = '';
+    }
 
     updateButtonStates();
     updateProfileFilter();
@@ -158,9 +228,13 @@ function updateButtonStates() {
         btnLapseootel.style.background = 'white';
     }
 
-    // Vanus
-    if (profileFilter.ageCategory) {
-        btnVanus.innerHTML = '✓ Vanus';
+    // Vanus - näita numbrit/kategooriat
+    if (profileFilter.exactAge) {
+        btnVanus.innerHTML = `✓ Vanus ${profileFilter.exactAge}`;
+        btnVanus.style.background = '#e0f2fe';
+    } else if (profileFilter.ageCategory) {
+        const displayText = profileFilter.ageDisplayRange || profileFilter.ageCategoryLabel;
+        btnVanus.innerHTML = `✓ Vanus (${displayText})`;
         btnVanus.style.background = '#e0f2fe';
     } else {
         btnVanus.innerHTML = 'Vanus';
@@ -1142,4 +1216,49 @@ function exportWithPrivacyFilters(format) {
     showToast(`Eksportimine algas (${format.toUpperCase()})...`, 'success');
     // TODO: Actual export logic would filter out data based on active filters
     return true;
+}
+
+// ═══════════════════════════════════════════════════════════
+// SOO IDENTITEETIDE LISAMINE (SOOTUKS SOOTU)
+// ═══════════════════════════════════════════════════════════
+
+// Lisa soo identiteet
+function addGenderIdentity(identity) {
+    const container = document.getElementById('addedGenderIdentities');
+
+    // Kontrolli kas juba lisatud
+    const existingItems = container.querySelectorAll('.added-identity-item');
+    for (let item of existingItems) {
+        if (item.dataset.identity === identity) {
+            return; // Juba lisatud
+        }
+    }
+
+    // Loo uus element
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'added-identity-item';
+    itemDiv.dataset.identity = identity;
+    itemDiv.style.cssText = 'display: inline-block; background: #fce7f3; border: 2px solid #ec4899; color: #9f1239; padding: 6px 12px; border-radius: 6px; margin: 4px; font-size: 0.85rem; position: relative;';
+
+    // Tekst + eemaldamise nupp
+    itemDiv.innerHTML = `
+        <span>${identity}</span>
+        <button type="button" onclick="removeGenderIdentity('${identity}')"
+                style="background: none; border: none; color: #9f1239; font-weight: bold; margin-left: 8px; cursor: pointer; font-size: 1rem;">×</button>
+    `;
+
+    // Lisa container'i algusesse
+    container.insertBefore(itemDiv, container.firstChild);
+}
+
+// Eemalda soo identiteet
+function removeGenderIdentity(identity) {
+    const container = document.getElementById('addedGenderIdentities');
+    const items = container.querySelectorAll('.added-identity-item');
+
+    items.forEach(item => {
+        if (item.dataset.identity === identity) {
+            item.remove();
+        }
+    });
 }
