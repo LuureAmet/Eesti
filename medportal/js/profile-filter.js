@@ -94,6 +94,16 @@ function updateProfileFilter() {
         profileFilter.gender = 'female';
     }
 
+    // Conditional display: Naiste kaebused (näita ainult kui 'naine' või 'other')
+    const womenSection = document.getElementById('womenComplaintsSection');
+    if (womenSection) {
+        if (profileFilter.gender === 'female' || profileFilter.gender === 'other') {
+            womenSection.style.display = 'block';
+        } else {
+            womenSection.style.display = 'none';
+        }
+    }
+
     // Uuenda kokkuvõtet ja hoiatusi
     updateProfileSummary();
     updateProfileWarnings();
