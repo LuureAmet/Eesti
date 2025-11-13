@@ -68,6 +68,28 @@
                     <!-- ALAMMENÜÜD (COLLAPSE'ITAVAD) -->
                     <div style="background: white; padding: 15px; border-radius: 12px; margin-top: 10px;">
 
+                        <!-- NAISTE LISAVALIKUD (nähtav kui Naine valitud) -->
+                        <div id="femaleOptions" style="margin-bottom: 15px; display: none;">
+                            <h4 style="color: #ec4899; font-size: 0.95rem; margin-bottom: 10px;">Naiste tervisevalikud:</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                <button type="button" class="quick-add-btn female-option-btn" onclick="toggleFemaleOption('menstruation')" style="border-color: #ec4899; color: #9f1239; font-size: 0.85rem;">+Tsüklid</button>
+                                <button type="button" class="quick-add-btn female-option-btn" onclick="toggleFemaleOption('pcos')" style="border-color: #ec4899; color: #9f1239; font-size: 0.85rem;">+PCOS</button>
+                                <button type="button" class="quick-add-btn female-option-btn" onclick="toggleFemaleOption('endometriosis')" style="border-color: #ec4899; color: #9f1239; font-size: 0.85rem;">+Endometrioos</button>
+                                <button type="button" class="quick-add-btn female-option-btn" onclick="toggleFemaleOption('menopause')" style="border-color: #ec4899; color: #9f1239; font-size: 0.85rem;">+Menopaus</button>
+                                <button type="button" class="quick-add-btn female-option-btn" onclick="toggleFemaleOption('hormones')" style="border-color: #ec4899; color: #9f1239; font-size: 0.85rem;">+Hormoonid</button>
+                            </div>
+                        </div>
+
+                        <!-- MEESTE LISAVALIKUD (nähtav kui Mees valitud) -->
+                        <div id="maleOptions" style="margin-bottom: 15px; display: none;">
+                            <h4 style="color: #3b82f6; font-size: 0.95rem; margin-bottom: 10px;">Meeste tervisevalikud:</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                <button type="button" class="quick-add-btn male-option-btn" onclick="toggleMaleOption('prostate')" style="border-color: #3b82f6; color: #1e40af; font-size: 0.85rem;">+Prostaat</button>
+                                <button type="button" class="quick-add-btn male-option-btn" onclick="toggleMaleOption('erectile')" style="border-color: #3b82f6; color: #1e40af; font-size: 0.85rem;">+Erektsioon</button>
+                                <button type="button" class="quick-add-btn male-option-btn" onclick="toggleMaleOption('testosterone')" style="border-color: #3b82f6; color: #1e40af; font-size: 0.85rem;">+Testosteroon</button>
+                            </div>
+                        </div>
+
                         <!-- LAPSEOOTEL ALAMMENÜÜ -->
                         <details id="detailsPregnancy" style="margin-bottom: 10px; display: none;">
                             <summary style="cursor: pointer; padding: 10px; background: #fef3c7; border-radius: 6px; font-weight: 600; color: #92400e;">
@@ -153,6 +175,8 @@
                                         <button type="button" class="quick-add-btn" onclick="addGenderIdentity('tulnuk')" style="border-color: #10b981; color: #047857; font-size: 0.85rem;">+Tulnuk</button>
                                         <button type="button" class="quick-add-btn" onclick="addGenderIdentity('hübriid')" style="border-color: #10b981; color: #047857; font-size: 0.85rem;">+Hübriid</button>
                                         <button type="button" class="quick-add-btn" onclick="addGenderIdentity('ajareisija')" style="border-color: #6366f1; color: #4338ca; font-size: 0.85rem;">+Ajareisija</button>
+                                        <button type="button" class="quick-add-btn" onclick="addGenderIdentity('AI-hing')" style="border-color: #f59e0b; color: #d97706; font-size: 0.85rem;">+AI hing</button>
+                                        <button type="button" class="quick-add-btn" onclick="addGenderIdentity('robot-hing')" style="border-color: #f59e0b; color: #d97706; font-size: 0.85rem;">+Robot hing</button>
                                         <button type="button" class="quick-add-btn" onclick="addGenderIdentity('muu')" style="border-color: #9ca3af; color: #4b5563; font-size: 0.85rem;">+Muu</button>
                                     </div>
                                     <div id="addedGenderIdentities" style="margin-top: 10px;"></div>

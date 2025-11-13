@@ -1,14 +1,25 @@
-// VERSION: 1.7.7 - 2025-11-13
+// VERSION: 1.7.7.3 - 2025-11-13
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.7.7",
+    version: "1.7.7.3",
     date: "13.11.2025",
-    buildTime: "2025-11-13 14:30",
+    buildTime: "2025-11-13 16:00",
 
     // Versioonimärkmed
     changelog: {
+        "1.7.7.3": {
+            date: "13.11.2025",
+            changes: [
+                "NAISTE TERVISEVALIKUD: Tsüklid, PCOS, Endometrioos, Menopaus, Hormoonid (ilmub kui Naine valitud)",
+                "MEESTE TERVISEVALIKUD: Prostaat, Erektsioon, Testosteroon (ilmub kui Mees valitud)",
+                "VALITUD NUPUD JÄÄVAD NÄHA: Tumedad nupud jäävad püsima kui valitud",
+                "AI/ROBOT HING: Lisatud sootuks sootu alla (+AI hing, +Robot hing)",
+                "PIKTOGRAMMID EEMALDATUD: Kõik piktogrammid algusest ära (puhas interface)",
+                "MENÜÜD JÄÄVAD AVATUKS: Peale valikut ei sulgu enam automaatselt"
+            ]
+        },
         "1.7.7": {
             date: "13.11.2025",
             changes: [

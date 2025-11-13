@@ -13,6 +13,8 @@ const profileFilter = {
     ageCategoryLabel: null, // 'Noor täiskasvanu (18-39 a)'
     exactAge: null,
     gender: null,           // 'male', 'female', 'other'
+    femaleOptions: [],      // ['menstruation', 'pcos', 'endometriosis', 'menopause', 'hormones']
+    maleOptions: [],        // ['prostate', 'erectile', 'testosterone']
     afAnticoagulant: false,
     egfr: null,
     childPugh: null
@@ -212,6 +214,76 @@ function handleExactAgeChange() {
     updateProfileFilter();
 }
 
+// ═══════════════════════════════════════════════════════════
+// NAISTE JA MEESTE LISAVALIKUD
+// ═══════════════════════════════════════════════════════════
+
+// Toggle naiste valik
+function toggleFemaleOption(option) {
+    const index = profileFilter.femaleOptions.indexOf(option);
+
+    if (index > -1) {
+        // Eemalda
+        profileFilter.femaleOptions.splice(index, 1);
+    } else {
+        // Lisa
+        profileFilter.femaleOptions.push(option);
+    }
+
+    updateFemaleButtonStates();
+    updateProfileFilter();
+}
+
+// Toggle meeste valik
+function toggleMaleOption(option) {
+    const index = profileFilter.maleOptions.indexOf(option);
+
+    if (index > -1) {
+        // Eemalda
+        profileFilter.maleOptions.splice(index, 1);
+    } else {
+        // Lisa
+        profileFilter.maleOptions.push(option);
+    }
+
+    updateMaleButtonStates();
+    updateProfileFilter();
+}
+
+// Uuenda naiste nuppude olekut
+function updateFemaleButtonStates() {
+    const buttons = document.querySelectorAll('.female-option-btn');
+
+    buttons.forEach(btn => {
+        const option = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+
+        if (profileFilter.femaleOptions.includes(option)) {
+            btn.style.background = '#fce7f3';
+            btn.style.fontWeight = '700';
+        } else {
+            btn.style.background = 'white';
+            btn.style.fontWeight = '600';
+        }
+    });
+}
+
+// Uuenda meeste nuppude olekut
+function updateMaleButtonStates() {
+    const buttons = document.querySelectorAll('.male-option-btn');
+
+    buttons.forEach(btn => {
+        const option = btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+
+        if (profileFilter.maleOptions.includes(option)) {
+            btn.style.background = '#dbeafe';
+            btn.style.fontWeight = '700';
+        } else {
+            btn.style.background = 'white';
+            btn.style.fontWeight = '600';
+        }
+    });
+}
+
 // Uuenda nuppude visuaalset olekut (checkmark)
 function updateButtonStates() {
     const btnLapseootel = document.getElementById('btnLapseootel');
@@ -242,7 +314,10 @@ function updateButtonStates() {
         btnVanus.style.background = 'white';
     }
 
-    // Sugu
+    // Sugu + näita/peida lisavalikud
+    const femaleOptionsDiv = document.getElementById('femaleOptions');
+    const maleOptionsDiv = document.getElementById('maleOptions');
+
     if (profileFilter.gender === 'male') {
         btnMees.innerHTML = '✓ Mees';
         btnMees.style.background = '#fce7f3';
@@ -250,6 +325,10 @@ function updateButtonStates() {
         btnNaine.style.background = 'white';
         btnSootuks.innerHTML = 'Sootuks sootu / muu';
         btnSootuks.style.background = 'white';
+
+        // Näita meeste valikud, peida naiste
+        if (maleOptionsDiv) maleOptionsDiv.style.display = 'block';
+        if (femaleOptionsDiv) femaleOptionsDiv.style.display = 'none';
     } else if (profileFilter.gender === 'female') {
         btnNaine.innerHTML = '✓ Naine';
         btnNaine.style.background = '#fce7f3';
@@ -257,6 +336,10 @@ function updateButtonStates() {
         btnMees.style.background = 'white';
         btnSootuks.innerHTML = 'Sootuks sootu / muu';
         btnSootuks.style.background = 'white';
+
+        // Näita naiste valikud, peida meeste
+        if (femaleOptionsDiv) femaleOptionsDiv.style.display = 'block';
+        if (maleOptionsDiv) maleOptionsDiv.style.display = 'none';
     } else if (profileFilter.gender === 'other') {
         btnSootuks.innerHTML = '✓ Sootuks sootu / muu';
         btnSootuks.style.background = '#fce7f3';
@@ -264,6 +347,10 @@ function updateButtonStates() {
         btnMees.style.background = 'white';
         btnNaine.innerHTML = 'Naine';
         btnNaine.style.background = 'white';
+
+        // Peida mõlemad
+        if (femaleOptionsDiv) femaleOptionsDiv.style.display = 'none';
+        if (maleOptionsDiv) maleOptionsDiv.style.display = 'none';
     } else {
         btnMees.innerHTML = 'Mees';
         btnMees.style.background = 'white';
@@ -271,6 +358,10 @@ function updateButtonStates() {
         btnNaine.style.background = 'white';
         btnSootuks.innerHTML = 'Sootuks sootu / muu';
         btnSootuks.style.background = 'white';
+
+        // Peida mõlemad
+        if (femaleOptionsDiv) femaleOptionsDiv.style.display = 'none';
+        if (maleOptionsDiv) maleOptionsDiv.style.display = 'none';
     }
 }
 
