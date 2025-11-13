@@ -1,14 +1,27 @@
-// VERSION: 1.7.6 - 2025-11-13
+// VERSION: 1.7.7 - 2025-11-13
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.7.6",
+    version: "1.7.7",
     date: "13.11.2025",
-    buildTime: "2025-11-13 12:00",
+    buildTime: "2025-11-13 14:30",
 
     // Versioonimärkmed
     changelog: {
+        "1.7.7": {
+            date: "13.11.2025",
+            changes: [
+                "PROFIILIFILTRI PARANDUS: Üherealine interface (Lapseootel, Vanus, Mees, Naine, Sootuks sootu)",
+                "COLLAPSIBLE SUBMENÜÜD: Nupuvajutus avab alammenüü all (mitte modal)",
+                "CHECKMARK INDICATORS: Valitud nupud näitavad ✓ märki ja taustavärvi",
+                "AUTO-AKTIVATSIOON: Lapseootel → automaatselt Naine; Mees + Lapseootel → Mees deselect, Naine + Lapseootel aktiveeruvad",
+                "DESELECT LOGIC: Teine klikk eemaldab valiku (välja arvatud soo switcherid)",
+                "SUGU SWITCHING: Mees/Naine vahetuvad (ei lisandu mõlemad korraga)",
+                "SOOTUKS SOOTU: Lubab mõlemat soovalikut, vabatekst mitmekesiste identiteetide jaoks",
+                "UI CLEANUP: Eemaldatud vana mitme-sektsiooniline profiilifilter interface"
+            ]
+        },
         "1.7.6": {
             date: "13.11.2025",
             changes: [

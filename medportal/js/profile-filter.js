@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════
-// PROFIILIFILTRI SÜSTEEM
+// PROFIILIFILTRI SÜSTEEM v1.7.7
 // Jälgib rasedust, vanust, sugu ja meditsiinilisi riske
-// Näitab reaalajas hoiatusi ja kokkuvõtet
+// Üherealine interface checkmark'idega
 // ═══════════════════════════════════════════════════════════
 
 // Profiili filtri olek
@@ -17,6 +17,187 @@ const profileFilter = {
     egfr: null,
     childPugh: null
 };
+
+// ═══════════════════════════════════════════════════════════
+// UUED FUNKTSIOONID - ÜHEREALINE FILTER
+// ═══════════════════════════════════════════════════════════
+
+// Toggle profiili nuppu (avab/sulgeb alammenüü)
+function toggleProfileOption(option) {
+    const detailsPregnancy = document.getElementById('detailsPregnancy');
+    const detailsAge = document.getElementById('detailsAge');
+    const detailsOther = document.getElementById('detailsOther');
+
+    // Sule kõik muud
+    if (option !== 'pregnancy') {
+        detailsPregnancy.style.display = 'none';
+        detailsPregnancy.open = false;
+    }
+    if (option !== 'age') {
+        detailsAge.style.display = 'none';
+        detailsAge.open = false;
+    }
+    if (option !== 'other') {
+        detailsOther.style.display = 'none';
+        detailsOther.open = false;
+    }
+
+    // Toggle õige
+    if (option === 'pregnancy') {
+        const isVisible = detailsPregnancy.style.display !== 'none';
+        if (isVisible) {
+            // Deselect - kui juba valitud
+            if (profileFilter.pregnancy && profileFilter.pregnancy !== 'no') {
+                profileFilter.pregnancy = 'no';
+                document.getElementById('pregnancyStatus').value = 'no';
+                updateButtonStates();
+                detailsPregnancy.style.display = 'none';
+            } else {
+                detailsPregnancy.style.display = 'none';
+            }
+        } else {
+            detailsPregnancy.style.display = 'block';
+            detailsPregnancy.open = true;
+        }
+    } else if (option === 'age') {
+        const isVisible = detailsAge.style.display !== 'none';
+        detailsAge.style.display = isVisible ? 'none' : 'block';
+        if (!isVisible) detailsAge.open = true;
+    } else if (option === 'male') {
+        // Mees - deselect või switch
+        if (profileFilter.gender === 'male') {
+            profileFilter.gender = null;
+            document.getElementById('gender').value = '';
+        } else {
+            profileFilter.gender = 'male';
+            document.getElementById('gender').value = 'male';
+        }
+        updateButtonStates();
+        updateProfileFilter();
+    } else if (option === 'female') {
+        // Naine - deselect või switch
+        if (profileFilter.gender === 'female') {
+            profileFilter.gender = null;
+            document.getElementById('gender').value = '';
+        } else {
+            profileFilter.gender = 'female';
+            document.getElementById('gender').value = 'female';
+        }
+        updateButtonStates();
+        updateProfileFilter();
+    } else if (option === 'other') {
+        // Sootuks sootu
+        if (profileFilter.gender === 'other') {
+            // Deselect
+            detailsOther.style.display = 'none';
+            profileFilter.gender = null;
+            document.getElementById('gender').value = '';
+            updateButtonStates();
+            updateProfileFilter();
+        } else {
+            // Select
+            profileFilter.gender = 'other';
+            document.getElementById('gender').value = 'other';
+            detailsOther.style.display = 'block';
+            detailsOther.open = true;
+            updateButtonStates();
+            updateProfileFilter();
+        }
+    }
+}
+
+// Vali raseduse valik
+function selectPregnancyOption(status) {
+    profileFilter.pregnancy = status;
+    document.getElementById('pregnancyStatus').value = status;
+
+    // Auto-aktiveeri naine kui lapseootel/imetamine/planeerimine
+    if (status === 'pregnant' || status === 'breastfeeding' || status === 'planning') {
+        profileFilter.gender = 'female';
+        document.getElementById('gender').value = 'female';
+    }
+
+    // Sulge menüü
+    document.getElementById('detailsPregnancy').style.display = 'none';
+
+    updateButtonStates();
+    updateProfileFilter();
+}
+
+// Vali vanuse valik
+function selectAgeOption(range, label) {
+    profileFilter.ageCategory = range;
+    profileFilter.ageCategoryLabel = label;
+    document.getElementById('ageCategory').value = range;
+    document.getElementById('ageCategoryLabel').value = label;
+
+    // Tühjenda täpne vanus
+    document.getElementById('exactAge').value = '';
+
+    // Sulge menüü
+    document.getElementById('detailsAge').style.display = 'none';
+
+    updateButtonStates();
+    updateProfileFilter();
+}
+
+// Uuenda nuppude visuaalset olekut (checkmark)
+function updateButtonStates() {
+    const btnLapseootel = document.getElementById('btnLapseootel');
+    const btnVanus = document.getElementById('btnVanus');
+    const btnMees = document.getElementById('btnMees');
+    const btnNaine = document.getElementById('btnNaine');
+    const btnSootuks = document.getElementById('btnSootuks');
+
+    // Lapseootel
+    if (profileFilter.pregnancy && profileFilter.pregnancy !== 'no') {
+        btnLapseootel.innerHTML = '✓ Lapseootel';
+        btnLapseootel.style.background = '#fef3c7';
+    } else {
+        btnLapseootel.innerHTML = 'Lapseootel';
+        btnLapseootel.style.background = 'white';
+    }
+
+    // Vanus
+    if (profileFilter.ageCategory) {
+        btnVanus.innerHTML = '✓ Vanus';
+        btnVanus.style.background = '#e0f2fe';
+    } else {
+        btnVanus.innerHTML = 'Vanus';
+        btnVanus.style.background = 'white';
+    }
+
+    // Sugu
+    if (profileFilter.gender === 'male') {
+        btnMees.innerHTML = '✓ Mees';
+        btnMees.style.background = '#fce7f3';
+        btnNaine.innerHTML = 'Naine';
+        btnNaine.style.background = 'white';
+        btnSootuks.innerHTML = 'Sootuks sootu';
+        btnSootuks.style.background = 'white';
+    } else if (profileFilter.gender === 'female') {
+        btnNaine.innerHTML = '✓ Naine';
+        btnNaine.style.background = '#fce7f3';
+        btnMees.innerHTML = 'Mees';
+        btnMees.style.background = 'white';
+        btnSootuks.innerHTML = 'Sootuks sootu';
+        btnSootuks.style.background = 'white';
+    } else if (profileFilter.gender === 'other') {
+        btnSootuks.innerHTML = '✓ Sootuks sootu';
+        btnSootuks.style.background = '#fce7f3';
+        btnMees.innerHTML = 'Mees';
+        btnMees.style.background = 'white';
+        btnNaine.innerHTML = 'Naine';
+        btnNaine.style.background = 'white';
+    } else {
+        btnMees.innerHTML = 'Mees';
+        btnMees.style.background = 'white';
+        btnNaine.innerHTML = 'Naine';
+        btnNaine.style.background = 'white';
+        btnSootuks.innerHTML = 'Sootuks sootu';
+        btnSootuks.style.background = 'white';
+    }
+}
 
 // Vanuse kategooria valimine
 function selectAgeCategory(button, ageRange, label) {
