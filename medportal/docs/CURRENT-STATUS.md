@@ -1,9 +1,9 @@
 # PRAEGUNE SEIS - Meigo Medical Medisiiniportaal
 
 **Kuupäev:** 12.11.2025
-**Versioon:** v1.7.5
+**Versioon:** v1.7.5.3
 **Branch:** `claude/medical-portal-v1.7-implementation-011CV2rzuWMTMXiRnuywRdE2`
-**Viimane commit:** c41dd38
+**Viimane commit:** b4d39dc
 
 ---
 
@@ -151,6 +151,62 @@
 - ~200 rida koodi eemaldatud (duplikaadid)
 - ~100 rida koodi lisatud/muudetud (parandused)
 - 1 uus funktsioon (quickAddHomeSupport)
+
+---
+
+### **v1.7.5.1 - VEREVEDELDAJAD + KODUSED MÕÕTMISED (12.11.2025)**
+
+**1. Verevedeldajad (Antikoagulant → plus-süsteem):**
+- 8 ravimit: Varfariin, Apiksabaan, Rivaroksabaan, Dabigatraan, Edoksabaan, Aspiriin, Klopidogreel, Muu
+- Väljad: annus, sagedus (1×/2× päevas, vajadusel, muu), täpsustus
+- Automaatne HOIATUS: vältida taimi (ginkgo, naistepuna, küüslauk, ingver, kurkum)
+- Soovitatavad: hibiskus, viirpuu, arjuna
+- Lisatud `quickAddAnticoagulant()` funktsioon
+
+**2. Kodused mõõtmised (plus-süsteem):**
+- 7 seadet: Vererõhumõõtja, Sammulugeja, Kaal, Veresuhkur, Termomeeter, Oksümeeter, Muu
+- Spetsiifilised väljad iga seadme jaoks:
+  * Vererõhk: BP hommikul/õhtul, pulss rahus
+  * Sammulugeja: päevane keskmine
+  * Kaal: 7-päeva trend (tõuseb/stabiilne/langeb)
+  * Veresuhkur: tühja kõhuga keskmine
+  * Oksümeeter: tavaline SpO2
+- Eemaldatud 3 vana radio-group'i
+- Lisatud `quickAddHomeMeasurement()` funktsioon
+
+---
+
+### **v1.7.5.2 - TOITUMISE RÜTM PLUS-SÜSTEEMIKS (12.11.2025)**
+
+**Söögiajaaknad ja paast (plus-süsteem):**
+- 9 mustrit:
+  * 2×/3× päevas (regulaarne)
+  * Paindlik (söön kui jõuan)
+  * Paast 16:8 (8h aken), 12:12, 18:6
+  * Hobo-stiil (söön kui juhtub)
+  * Linnakiirtoit
+  * Muu muster
+- Paastude jaoks: söögiajaakna sisestamine (nt 12:00-20:00)
+- Hobo ja linnakiirtoit: selgitavad tekstid
+- Eemaldatud 2 vana radio-group'i (mealFrequency, fasting)
+- Lisatud `quickAddMealPattern()` funktsioon
+
+---
+
+### **v1.7.5.3 - INFO NUPUD LISATUD (12.11.2025)**
+
+**Info nupud lisatud järgmistele sektsioonidele:**
+- 2A. Uni ja norskamine (une olulisus, 7-9h/öö soovitus)
+- 3. Tööriistad ja kodused mõõtmised (enesejuhtimise võimekus)
+- 6. Taimravi ja looduslikud meetodid (HOIATUS koostoimetest)
+- 8. Kehalised ja meele praktikad (regulaarsus oluline)
+- 10. Ideoloogia ja piirjooned (väärtused ja piirid)
+- 11. Ressursid ja eelarve (kättesaadavus mõjutab valikuid)
+
+**Info nupu struktuur:**
+- Lühike popup tekst (title attribute)
+- Viide: "Vajuta siia et näha rohkem infot" (tulevikus avab modaali)
+- Järjepidev stiil kõikides sektsioonides
 
 ---
 
