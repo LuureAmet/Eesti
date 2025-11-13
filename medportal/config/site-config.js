@@ -1,14 +1,26 @@
-// VERSION: 1.7.5.4 - 2025-11-13
+// VERSION: 1.7.6 - 2025-11-13
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.7.5.4",
+    version: "1.7.6",
     date: "13.11.2025",
-    buildTime: "2025-11-13 10:00",
+    buildTime: "2025-11-13 12:00",
 
     // Versioonimärkmed
     changelog: {
+        "1.7.6": {
+            date: "13.11.2025",
+            changes: [
+                "PROFIILIFILTRI PLUS-NUPUD: Rasedus/Vanus/Sugu nüüd plus-nuppude süsteemis",
+                "PLUS-SÜSTEEMI KÄITUMINE: Uued valikud ilmuvad ESIMESENA (mitte lõppu)",
+                "UI PUHASTUS: Lühemad väljad (pikkus/kaal 80px + ühiku suffix), une/stressi väljad 60px",
+                "CONDITIONAL DISPLAY: Naiste kaebused näidatakse ainult kui 'Naine' või 'Sootuks sootu'",
+                "TAIMEDE KOOSTOIMERISKID: Vana checkbox-list → plus-süsteem (7 taime: greip, naistepuna, ginkgo, lagrits, küüslauk, ingver, kurkum)",
+                "3 uut quickAdd funktsiooni: quickAddPregnancy(), quickAddAgeCategory(), quickAddGender()",
+                "1 uus funktsioon: quickAddHerbInteraction()"
+            ]
+        },
         "1.7.5.4": {
             date: "13.11.2025",
             changes: [
