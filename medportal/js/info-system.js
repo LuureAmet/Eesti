@@ -3192,3 +3192,177 @@ function quickAddMealPattern(key, name) {
     container.appendChild(itemDiv);
     showToast(`${name} lisatud!`);
 }
+
+
+// =============================================================================
+// ELUSTIILI AINETE KOOSTOIMERISKID (v1.7.5.4)
+// =============================================================================
+
+function quickAddInteraction(key, name) {
+    if (!quickAddCounters.interaction) quickAddCounters.interaction = 0;
+    quickAddCounters.interaction++;
+    
+    const containerId = 'quickAddedInteractions';
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    
+    const itemId = `interaction_quick_${quickAddCounters.interaction}`;
+    const fieldName = `interaction_${key}_${quickAddCounters.interaction}`;
+    
+    const itemDiv = document.createElement('div');
+    itemDiv.className = 'form-group';
+    itemDiv.style.cssText = 'background: #fef2f2; padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid #ef4444;';
+    itemDiv.id = itemId;
+    
+    // Spetsiifilised väljad iga aine kohta
+    let specificFields = '';
+    let warningText = '';
+    
+    if (key === 'kakao') {
+        specificFields = `
+            <div style="margin-left: 24px;">
+                <label>Tarbimise sagedus</label>
+                <select name="${fieldName}_frequency" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db;">
+                    <option value="">Vali...</option>
+                    <option value="daily">Igapäevaselt</option>
+                    <option value="weekly">Mitu korda nädalas</option>
+                    <option value="occasional">Aeg-ajalt</option>
+                </select>
+            </div>
+            <div style="margin-left: 24px; margin-top: 8px;">
+                <label>Kogus päevas (ligikaudu)</label>
+                <input type="text" name="${fieldName}_amount" placeholder="Nt: 50g tumedat šokolaadi, 2 tassi kakaod..." style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db;">
+            </div>
+        `;
+        warningText = 'Kakao sisaldab teobromiin + kofeiin. Koostoime: MAOI inhibiitorid, stimulandid, migreenivastased ravimid.';
+    } else if (key === 'alkohol') {
+        specificFields = `
+            <div style="margin-left: 24px;">
+                <label>Tarbimise sagedus</label>
+                <select name="${fieldName}_frequency" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db;">
+                    <option value="">Vali...</option>
+                    <option value="daily">Igapäevaselt</option>
+                    <option value="weekly">Mitu korda nädalas</option>
+                    <option value="weekend">Nädalavahetustel</option>
+                    <option value="occasional">Harva</option>
+                </select>
+            </div>
+            <div style="margin-left: 24px; margin-top: 8px;">
+                <label>Kogus (ühikut nädalas)</label>
+                <input type="text" name="${fieldName}_amount" placeholder="Nt: 7-14 ühikut/nädal (1 ühik = 10g puhast alkoholi)" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db;">
+            </div>
+        `;
+        warningText = 'KÕRGE RISK: koostoime maksaravimitega, verevedeldajatega, sedatiivsete ravimitega, valuvaigistite, diabeediravimitega. VÄLTIDA koos ravimkuuriga!';
+    } else if (key === 'kofeiin') {
+        specificFields = `
+            <div style="margin-left: 24px;">
+                <label>Allikas</label>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-top: 4px;">
+                    <label style="font-weight: normal;"><input type="checkbox" name="${fieldName}_coffee" value="yes"> Kohv</label>
+                    <label style="font-weight: normal;"><input type="checkbox" name="${fieldName}_tea" value="yes"> Tee</label>
+                    <label style="font-weight: normal;"><input type="checkbox" name="${fieldName}_energy" value="yes"> Energiajook</label>
+                    <label style="font-weight: normal;"><input type="checkbox" name="${fieldName}_cola" value="yes"> Cola</label>
+                </div>
+            </div>
+            <div style="margin-left: 24px; margin-top: 8px;">
+                <label>Kogus päevas (ligikaudu)</label>
+                <input type="text" name="${fieldName}_amount" placeholder="Nt: 3 tassi kohvi (~300mg kofeiin)" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db;">
+            </div>
+        `;
+        warningText = 'Koostoime: südameravimid (eriti beeta-blokaatorid), bronhilaiendurid, antidepressandid. Võib suurendada südame löögisagedust.';
+    } else if (key === 'kanep_cbd') {
+        specificFields = `
+            <div style="margin-left: 24px;">
+                <label>Vorm</label>
+                <select name="${fieldName}_form" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db;">
+                    <option value="">Vali...</option>
+                    <option value="cbd_oil">CBD õli (ilma THC-ta)</option>
+                    <option value="cbd_full">CBD full spectrum</option>
+                    <option value="thc_low">Kanep (madal THC)</option>
+                    <option value="thc_high">Kanep (kõrge THC)</option>
+                    <option value="medical">Meditsiiniline kanep</option>
+                </select>
+            </div>
+            <div style="margin-left: 24px; margin-top: 8px;">
+                <label>Sagedus</label>
+                <select name="${fieldName}_frequency" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db;">
+                    <option value="">Vali...</option>
+                    <option value="daily">Igapäevaselt</option>
+                    <option value="weekly">Mitu korda nädalas</option>
+                    <option value="occasional">Aeg-ajalt</option>
+                </select>
+            </div>
+        `;
+        warningText = 'OLULINE: koostoime verevedeldajatega (suurendab verejooksu riski), sedatiivsete ravimitega. CBD metaboliseerub maksas (CYP450) - koostoime paljude ravimitega!';
+    } else if (key === 'kava') {
+        specificFields = `
+            <div style="margin-left: 24px;">
+                <label>Tarbimise sagedus</label>
+                <select name="${fieldName}_frequency" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db;">
+                    <option value="">Vali...</option>
+                    <option value="daily">Igapäevaselt</option>
+                    <option value="weekly">Mitu korda nädalas</option>
+                    <option value="occasional">Aeg-ajalt</option>
+                </select>
+            </div>
+            <div style="margin-left: 24px; margin-top: 8px;">
+                <label>Vorm</label>
+                <select name="${fieldName}_form" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db;">
+                    <option value="">Vali...</option>
+                    <option value="traditional">Traditsiooniline jook</option>
+                    <option value="extract">Ekstrakt/kapslid</option>
+                    <option value="powder">Pulber</option>
+                </select>
+            </div>
+        `;
+        warningText = 'MAKSATOKSILINE RISK! Koostoime maksaravimitega, alkoholi, sedatiivsete ravimitega. VÄLTIDA pikaajalisel kasutamisel või maksahaiguse korral!';
+    } else if (key === 'kratom') {
+        specificFields = `
+            <div style="margin-left: 24px;">
+                <label>Tarbimise sagedus</label>
+                <select name="${fieldName}_frequency" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db;">
+                    <option value="">Vali...</option>
+                    <option value="daily">Igapäevaselt</option>
+                    <option value="weekly">Mitu korda nädalas</option>
+                    <option value="occasional">Aeg-ajalt</option>
+                </select>
+            </div>
+            <div style="margin-left: 24px; margin-top: 8px;">
+                <label>Kogus päevas (ligikaudu)</label>
+                <input type="text" name="${fieldName}_amount" placeholder="Nt: 2-5 grammi" style="width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #d1d5db;">
+            </div>
+        `;
+        warningText = 'KÕRGE RISK: koostoime opioidide, sedatiivsete ravimite, MAO inhibiitoritega. Sõltuvuse risk! Maksatoksilisus võimalik. Paljudes riikides keelatud.';
+    }
+    
+    itemDiv.innerHTML = `
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <label style="margin: 0; font-weight: 600; color: #991b1b;">
+                <input type="checkbox" name="${fieldName}" value="yes" checked>
+                ${name}
+            </label>
+            <button type="button" onclick="document.getElementById('${itemId}').remove()" class="btn-danger-sm"
+                    style="background: #ef4444; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">
+                Eemalda
+            </button>
+        </div>
+        ${specificFields}
+        ${warningText ? `
+        <div style="margin-left: 24px; margin-top: 10px; padding: 10px; background: #fef9c3; border-radius: 4px; border-left: 3px solid #f59e0b;">
+            <p style="margin: 0; font-size: 0.85rem; color: #92400e;">
+                <strong>⚠ HOIATUS:</strong> ${warningText}
+            </p>
+        </div>
+        ` : ''}
+        <div style="margin-left: 24px; margin-top: 8px;">
+            <span class="inline-info-toggle" onclick="toggleInlineInfo('${itemId}_notes')">+ Lisa täiendav info</span>
+            <div id="${itemId}_notes" class="inline-info-field">
+                <label>Täiendav info (vabatahtlik)</label>
+                <textarea name="${fieldName}_notes" rows="2" placeholder="Nt: kasutamise põhjus, kui kaua kasutatud, kõrvaltoimed..."></textarea>
+            </div>
+        </div>
+    `;
+    
+    container.appendChild(itemDiv);
+    showToast(`${name} lisatud!`);
+}

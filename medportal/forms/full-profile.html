@@ -1386,6 +1386,36 @@
                             <label><input type="checkbox" name="interactionTurmeric" value="yes"> Kurkum &gt;1 g/päev</label>
                         </div>
                     </div>
+
+                    <!-- ELUSTIILI AINETE KOOSTOIMERISKID (PLUS-SÜSTEEM) -->
+                    <div class="form-group" style="margin-top: 25px;">
+                        <div class="quick-add-section" style="background: #fef2f2; border-color: #ef4444;">
+                            <h4 style="display: flex; align-items: center; gap: 8px;">
+                                Elustiili ained ja koostoimeriskid
+                                <span class="info-icon" style="cursor: help;" title="Mõned levinud toiduained ja ained võivad koostoimet avaldada ravimitega. Märgi siia kui tarvitad regulaarselt. Vajuta siia et näha rohkem infot.">i</span>
+                            </h4>
+                            <p style="font-size: 0.9rem; color: #991b1b; margin-bottom: 10px;">
+                                Kui tarvitad neid aineid koos ravimitega (eriti verevedeldajad, maksaravimid, sedatiivid), võib tekkida koostoime risk.
+                            </p>
+                            <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddInteraction('kakao', 'Kakao/tumedat šokolaad')">Kakao/šokolaad</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddInteraction('alkohol', 'Alkohol')">Alkohol</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddInteraction('kofeiin', 'Kofeiin (kohv, tee, energiajoogid)')">Kofeiin</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddInteraction('kanep_cbd', 'Kanep/CBD')">Kanep/CBD</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddInteraction('kava', 'Kava')">Kava</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddInteraction('kratom', 'Kratom')">Kratom</button>
+                            </div>
+                        </div>
+
+                        <!-- LISATUD KOOSTOIMERISKID (dünaamiliselt genereeritud) -->
+                        <div id="quickAddedInteractions"></div>
+                    </div>
                 </section>
 
                 <!-- SEKTSIOON 6: TAIMRAVI -->
@@ -1723,6 +1753,8 @@
                         <div class="quick-add-section" style="background: #f0fdf4; border-color: #22c55e; margin-bottom: 15px;">
                             <h4>Saadaolevad ressursid</h4>
                             <div class="quick-add-buttons">
+                                <button type="button" class="quick-add-btn" style="border-color: #3b82f6; color: #1e40af;"
+                                        onclick="quickAddAccess('apteek', 'Apteek (Benu, Südameapteek, Euroapteek vms)')">Apteek</button>
                                 <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
                                         onclick="quickAddAccess('loodustoodete_pood', 'Loodustoodete pood')">Loodustoodete pood</button>
                                 <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
@@ -1733,9 +1765,11 @@
                                         onclick="quickAddAccess('retseptiravimid', 'Retseptiravimid')">Retseptiravimid</button>
                                 <button type="button" class="quick-add-btn" style="border-color: #22c55e; color: #22c55e;"
                                         onclick="quickAddAccess('internet_tellimus', 'Internetist tellimised')">Internet</button>
+                                <button type="button" class="quick-add-btn" style="border-color: #ef4444; color: #991b1b;"
+                                        onclick="quickAddAccess('puudub', 'Puudub (piiratud ligipääs)')">Puudub</button>
                             </div>
                             <p style="font-size: 0.85rem; color: #64748b; margin-top: 8px; margin-bottom: 0;">
-                                Vali ressursid, millele sul on juurdepääs
+                                Vali ressursid, millele sul on juurdepääs. Kui ligipääs puudub, märgi "Puudub".
                             </p>
                         </div>
 
