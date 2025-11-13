@@ -38,8 +38,8 @@
                 <!-- PROFIILIFILTRI SEKTSIOON - ESIMENE ASI! -->
                 <!-- ═══════════════════════════════════════════════════════════ -->
                 <!-- PROFIILIFILTRI ALGUS - ÜKS RIDA PLUS-NUPPUDEGA -->
-                <section class="form-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: 3px solid #5a67d8; position: sticky; top: 0; z-index: 100;">
-                    <h2 style="color: white; margin-bottom: 10px; text-align: center;">⚕️ Profiili Filter - Alusta siit!</h2>
+                <section class="form-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: 3px solid #5a67d8; position: sticky; top: 0; z-index: 100; max-width: 100%;">
+                    <h2 style="color: white; margin-bottom: 10px; text-align: center;">Profiili Filter - Alusta siit!</h2>
 
                     <!-- ÜHEREALINE FILTER -->
                     <div style="background: white; padding: 15px; border-radius: 12px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; align-items: center;">
@@ -61,7 +61,7 @@
                         </button>
                         <button type="button" id="btnSootuks" class="profile-filter-btn" onclick="toggleProfileOption('other')"
                                 style="padding: 10px 20px; border: 2px solid #ec4899; background: white; color: #9f1239; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s;">
-                            Sootuks sootu
+                            Sootuks sootu / muu
                         </button>
                     </div>
 
@@ -105,39 +105,40 @@
                                     <button type="button" class="quick-add-btn" onclick="selectAgeOption('65-74', 'Young-old', '65-74a')" style="border-color: #0284c7; color: #075985; padding: 8px; font-size: 0.85rem;">Young-old<br><span style="font-size: 0.75rem; color: #64748b;">65-74a</span></button>
                                     <button type="button" class="quick-add-btn" onclick="selectAgeOption('75-84', 'Middle-old', '75-84a')" style="border-color: #0284c7; color: #075985; padding: 8px; font-size: 0.85rem;">Middle-old<br><span style="font-size: 0.75rem; color: #64748b;">75-84a</span></button>
                                     <button type="button" class="quick-add-btn" onclick="selectAgeOption('85-99', 'Oldest-old', '85-99a')" style="border-color: #0284c7; color: #075985; padding: 8px; font-size: 0.85rem;">Oldest-old<br><span style="font-size: 0.75rem; color: #64748b;">85-99a</span></button>
-                                    <button type="button" class="quick-add-btn" onclick="selectAgeOption('100-120', 'Centenarian', '100+a')" style="border-color: #f59e0b; color: #d97706; padding: 8px; font-size: 0.85rem; font-weight: 700;">Centaur🎉<br><span style="font-size: 0.75rem; color: #d97706;">100+a</span></button>
+                                    <button type="button" class="quick-add-btn" onclick="selectAgeOption('100-120', 'Centenarian', '100+a')" style="border-color: #f59e0b; color: #d97706; padding: 8px; font-size: 0.85rem; font-weight: 700;">Centaur<br><span style="font-size: 0.75rem; color: #d97706;">100+a</span></button>
                                 </div>
 
-                                <!-- TÄPNE VANUS SÜNNIPÄEVAGA (peidetud astroloogia vihjega) -->
+                                <!-- TÄPNE VANUS SÜNNIPÄEVAGA -->
                                 <details style="margin-top: 15px; background: white; padding: 12px; border-radius: 8px; border: 2px dashed #0284c7;">
                                     <summary style="font-weight: 600; color: #075985; cursor: pointer; font-size: 0.9rem;">
-                                        📅 Täpsusta täpse sünnipäevaga (vabatahtlik, alternatiiv meditsiinile)
+                                        Täpsusta täpse sünnipäevaga (vabatahtlik, alternatiiv meditsiinile)
                                     </summary>
                                     <div style="margin-top: 10px;">
                                         <label style="color: #64748b; font-size: 0.9rem;">Sünnipäev:</label>
                                         <input type="date" id="birthdate" name="birthdate" onchange="calculateExactAge()"
                                                style="width: 160px; padding: 6px; margin-left: 10px; border: 2px solid #0284c7; border-radius: 6px;">
                                         <div id="birthdateInfo" style="margin-top: 8px; font-size: 0.85rem; color: #64748b;"></div>
-                                        <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 6px;">
-                                            💡 Täpne sünnipäev võimaldab hiljem lisada täpsemaid alternatiivse meditsiini aspekte (kui soovid).
+
+                                        <!-- VANUS NUMBRINA (alternatiivse meditsiini all) -->
+                                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #cbd5e1;">
+                                            <label style="color: #64748b; font-size: 0.9rem;">Või sisesta vaid vanus numbrina:</label>
+                                            <input type="number" id="exactAge" name="exactAge" min="0" max="120" placeholder="Nt: 42"
+                                                   onchange="handleExactAgeChange()" style="width: 80px; padding: 6px; margin-left: 10px; border: 2px solid #cbd5e1; border-radius: 6px;">
+                                            <span style="color: #64748b; margin-left: 6px;">aastat</span>
+                                        </div>
+
+                                        <p style="font-size: 0.8rem; color: #9ca3af; margin-top: 10px;">
+                                            Täpne sünnipäev võimaldab hiljem lisada täpsemaid alternatiivse meditsiini aspekte (kui soovid).
                                         </p>
                                     </div>
                                 </details>
-
-                                <!-- VÕI TÄPNE VANUS NUMBRINA -->
-                                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #cbd5e1;">
-                                    <label style="color: #64748b; font-size: 0.9rem;">Või sisesta vaid vanus numbrina:</label>
-                                    <input type="number" id="exactAge" name="exactAge" min="0" max="120" placeholder="Nt: 42"
-                                           onchange="handleExactAgeChange()" style="width: 80px; padding: 6px; margin-left: 10px; border: 2px solid #cbd5e1; border-radius: 6px;">
-                                    <span style="color: #64748b; margin-left: 6px;">aastat</span>
-                                </div>
                             </div>
                         </details>
 
-                        <!-- SOOTUKS SOOTU ALAMMENÜÜ -->
+                        <!-- SOOTUKS SOOTU / MUU ALAMMENÜÜ -->
                         <details id="detailsOther" style="margin-bottom: 10px; display: none;">
                             <summary style="cursor: pointer; padding: 10px; background: #fce7f3; border-radius: 6px; font-weight: 600; color: #9f1239;">
-                                Sootuks sootu - Täpsustus
+                                Sootuks sootu / muu - Täpsustus
                             </summary>
                             <div style="padding: 15px; background: #fdf2f8; border-radius: 6px; margin-top: 10px;">
 
@@ -163,14 +164,14 @@
                                     <input type="text" id="selfIdentFree" name="selfIdentFree" placeholder="Nt: kaksikhing, dimensioonideülene, jne..."
                                            style="width: 100%; padding: 8px; border: 1px solid #ec4899; border-radius: 6px; margin-top: 6px;">
                                     <p style="font-size: 0.85rem; color: #9f1239; margin-top: 6px;">
-                                        💜 Kõik identiteedid on väärtuslikud ja austatud.
+                                        Kõik identiteedid on väärtuslikud ja austatud.
                                     </p>
                                 </div>
 
                                 <!-- TRANSSEKSUAALNE ALAMVALIKUD -->
                                 <details style="background: #fef3c7; padding: 12px; border-radius: 8px; margin-bottom: 10px;">
                                     <summary style="font-weight: 600; color: #92400e; cursor: pointer; font-size: 0.9rem;">
-                                        ⚧️ Transseksuaalne? (oluline ravimite jaoks)
+                                        Transseksuaalne? (oluline ravimite jaoks)
                                     </summary>
                                     <div style="margin-top: 10px;">
                                         <div class="form-group" style="margin-bottom: 10px;">
@@ -196,7 +197,7 @@
                                 <!-- BIO-MARKERID (VABATAHTLIKUD) -->
                                 <details style="background: #e0f2fe; padding: 12px; border-radius: 8px; margin-bottom: 10px;">
                                     <summary style="font-weight: 600; color: #075985; cursor: pointer; font-size: 0.9rem;">
-                                        🧬 Bioloogilised markerid (vabatahtlik)
+                                        Bioloogilised markerid (vabatahtlik)
                                     </summary>
                                     <div style="margin-top: 10px;">
                                         <p style="font-size: 0.85rem; color: #64748b; margin-bottom: 10px;">Need andmed aitavad täpsustada ravimite koostoimeid ja annuseid.</p>
@@ -220,7 +221,7 @@
                                 <!-- MÜTOLOOGIA/IDENTITEET (HARIDUSLIK) -->
                                 <details style="background: #f3f4f6; padding: 12px; border-radius: 8px;">
                                     <summary style="font-weight: 600; color: #4b5563; cursor: pointer; font-size: 0.9rem;">
-                                        🌟 Mütoloogia/spirituaalsus (vabatahtlik, hariduslik)
+                                        Mütoloogia/spirituaalsus (vabatahtlik, hariduslik)
                                     </summary>
                                     <div style="margin-top: 10px;">
                                         <p style="font-size: 0.85rem; color: #6b7280; margin-bottom: 10px;">Kultuurilised või spirituaalsed identiteedid. Need on harivad ja ei mõjuta meditsiinilist profiili.</p>
@@ -2181,7 +2182,7 @@
                 </p>
                 <details style="max-width: 800px; margin: 15px auto; text-align: left;">
                     <summary style="cursor: pointer; font-weight: 600; color: #3b82f6; padding: 8px;">
-                        📋 Versioonimärkmed
+                        Versioonimärkmed
                     </summary>
                     <div id="changelogContent" style="padding: 15px; background: #f9fafb; border-radius: 8px; margin-top: 10px;">
                         <p style="color: #6b7280;">Laen...</p>

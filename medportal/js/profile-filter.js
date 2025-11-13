@@ -117,8 +117,8 @@ function selectPregnancyOption(status) {
         document.getElementById('gender').value = 'female';
     }
 
-    // Sulge menüü
-    document.getElementById('detailsPregnancy').style.display = 'none';
+    // Menüü jääb avatuks - ei sulge!
+    // document.getElementById('detailsPregnancy').style.display = 'none';
 
     updateButtonStates();
     updateProfileFilter();
@@ -136,10 +136,11 @@ function selectAgeOption(range, label, displayRange) {
     document.getElementById('exactAge').value = '';
     if (document.getElementById('birthdate')) {
         document.getElementById('birthdate').value = '';
+        document.getElementById('birthdateInfo').innerHTML = '';
     }
 
-    // Sulge menüü
-    document.getElementById('detailsAge').style.display = 'none';
+    // Menüü jääb avatuks - ei sulge!
+    // document.getElementById('detailsAge').style.display = 'none';
 
     updateButtonStates();
     updateProfileFilter();
@@ -181,9 +182,9 @@ function calculateExactAge() {
     // Näita infot
     birthdateInfo.innerHTML = `<strong>Vanus: ${age} aastat</strong><br>`;
     if (daysUntilBirthday === 0) {
-        birthdateInfo.innerHTML += `🎉 <strong>Palju õnne sünnipäevaks!</strong>`;
+        birthdateInfo.innerHTML += `<strong>Palju õnne sünnipäevaks!</strong>`;
     } else if (daysUntilBirthday <= 30) {
-        birthdateInfo.innerHTML += `🎂 Sünnipäev ${daysUntilBirthday} päeva pärast!`;
+        birthdateInfo.innerHTML += `Sünnipäev ${daysUntilBirthday} päeva pärast!`;
     }
 
     updateButtonStates();
@@ -247,17 +248,17 @@ function updateButtonStates() {
         btnMees.style.background = '#fce7f3';
         btnNaine.innerHTML = 'Naine';
         btnNaine.style.background = 'white';
-        btnSootuks.innerHTML = 'Sootuks sootu';
+        btnSootuks.innerHTML = 'Sootuks sootu / muu';
         btnSootuks.style.background = 'white';
     } else if (profileFilter.gender === 'female') {
         btnNaine.innerHTML = '✓ Naine';
         btnNaine.style.background = '#fce7f3';
         btnMees.innerHTML = 'Mees';
         btnMees.style.background = 'white';
-        btnSootuks.innerHTML = 'Sootuks sootu';
+        btnSootuks.innerHTML = 'Sootuks sootu / muu';
         btnSootuks.style.background = 'white';
     } else if (profileFilter.gender === 'other') {
-        btnSootuks.innerHTML = '✓ Sootuks sootu';
+        btnSootuks.innerHTML = '✓ Sootuks sootu / muu';
         btnSootuks.style.background = '#fce7f3';
         btnMees.innerHTML = 'Mees';
         btnMees.style.background = 'white';
@@ -268,7 +269,7 @@ function updateButtonStates() {
         btnMees.style.background = 'white';
         btnNaine.innerHTML = 'Naine';
         btnNaine.style.background = 'white';
-        btnSootuks.innerHTML = 'Sootuks sootu';
+        btnSootuks.innerHTML = 'Sootuks sootu / muu';
         btnSootuks.style.background = 'white';
     }
 }
