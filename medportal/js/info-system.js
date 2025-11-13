@@ -1702,7 +1702,7 @@ function quickAddHerb(herbKey, herbName) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${herbName} lisatud!`);
 }
 
@@ -1754,7 +1754,7 @@ function quickAddEvent(eventKey, eventName) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${eventName} lisatud!`);
 }
 
@@ -1806,7 +1806,7 @@ function quickAddAllergy(allergyKey, allergyName) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${allergyName} lisatud!`);
 }
 
@@ -1858,7 +1858,7 @@ function quickAddPractice(practiceKey, practiceName) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${practiceName} lisatud!`);
 }
 
@@ -1908,7 +1908,7 @@ function quickAddNoConsent(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} keeld lisatud!`);
 }
 
@@ -1959,7 +1959,7 @@ function quickAddJobType(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud koormustaluvuse juurde!`);
 }
 
@@ -2043,7 +2043,7 @@ function quickAddActivity(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud!`);
 }
 
@@ -2094,7 +2094,7 @@ function quickAddLifestyle(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud eluviisile!`);
 }
 
@@ -2163,7 +2163,7 @@ function quickAddTeaType(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud!`);
 }
 
@@ -2226,7 +2226,7 @@ function quickAddRestriction(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud piirangutesse!`);
 }
 
@@ -2277,7 +2277,7 @@ function quickAddAccess(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud ligipääsule!`);
 }
 
@@ -2345,7 +2345,7 @@ function quickAddFamilyRisk(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud perekondliku riskina!`);
 }
 
@@ -2452,7 +2452,7 @@ function quickAddResidence(key, name) {
         ${apartmentDetailsHTML}
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud elupaika!`);
 }
 
@@ -2516,7 +2516,7 @@ function quickAddMobility(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud liikumisviisi!`);
 }
 
@@ -2573,7 +2573,7 @@ function quickAddComplaint(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud kaebustesse!`);
 }
 
@@ -2630,7 +2630,7 @@ function quickAddBath(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud!`);
 }
 
@@ -2703,7 +2703,7 @@ function quickAddMusic(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud muusikasse!`);
 }
 
@@ -2775,7 +2775,7 @@ function quickAddSleep(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud!`);
 }
 
@@ -2854,7 +2854,7 @@ function quickAddPrivacy(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud (${categoryLabel})!`);
 }
 
@@ -2917,7 +2917,7 @@ function quickAddHomeSupport(key, name) {
         ` : ''}
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud!`);
 }
 
@@ -2991,7 +2991,7 @@ function quickAddAnticoagulant(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud!`);
 }
 
@@ -3106,7 +3106,7 @@ function quickAddHomeMeasurement(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud!`);
 }
 
@@ -3189,7 +3189,7 @@ function quickAddMealPattern(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud!`);
 }
 
@@ -3363,7 +3363,7 @@ function quickAddInteraction(key, name) {
         </div>
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${name} lisatud!`);
 }
 
@@ -3439,7 +3439,7 @@ function quickAddPregnancy(status, label) {
         ${planningField}
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${label} lisatud!`);
 
     // Auto-select "naine" kui lapseootel/imetamine
@@ -3492,7 +3492,7 @@ function quickAddAgeCategory(range, label) {
         <input type="hidden" id="ageCategoryLabel" name="ageCategoryLabel" value="${label}">
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${label} lisatud!`);
 
     // Uuenda profiilifiltrit
@@ -3547,7 +3547,7 @@ function quickAddGender(gender, label) {
         ${expandedFields}
     `;
 
-    container.appendChild(itemDiv);
+    container.insertBefore(itemDiv, container.firstChild);
     showToast(`${label} lisatud!`);
 
     // Uuenda profiilifiltrit
