@@ -1,9 +1,9 @@
 # PRAEGUNE SEIS - Meigo Medical Medisiiniportaal
 
-**Kuupäev:** 12.11.2025
-**Versioon:** v1.7.5.3
+**Kuupäev:** 13.11.2025
+**Versioon:** v1.7.5.4
 **Branch:** `claude/medical-portal-v1.7-implementation-011CV2rzuWMTMXiRnuywRdE2`
-**Viimane commit:** b4d39dc
+**Viimane commit:** ea55fc2
 
 ---
 
@@ -207,6 +207,37 @@
 - Lühike popup tekst (title attribute)
 - Viide: "Vajuta siia et näha rohkem infot" (tulevikus avab modaali)
 - Järjepidev stiil kõikides sektsioonides
+
+---
+
+### **v1.7.5.4 - KOOSTOIME RISKID JA RESSURSID (13.11.2025)**
+
+**1. ELUSTIILI AINETE KOOSTOIMERISKID (uus plus-süsteem):**
+- 6 nuppu: Kakao/šokolaad, Alkohol, Kofeiin, Kanep/CBD, Kava, Kratom
+- Igaühel spetsiifilised väljad:
+  - Kakao: sagedus, kogus päevas
+  - Alkohol: sagedus, ühikut nädalas (KÕRGE RISK hoiatus)
+  - Kofeiin: allikas (kohv/tee/energiajook/cola), kogus
+  - Kanep/CBD: vorm (CBD õli/full spectrum/THC), sagedus
+  - Kava: sagedus, vorm (MAKSATOKSILINE hoiatus)
+  - Kratom: sagedus, kogus (KÕRGE RISK hoiatus)
+- Hoiatused:
+  - Alkohol: koostoime maksaravimid, verevedeldajad, sedatiivid
+  - Kofeiin: koostoime südameravimid, beeta-blokaatorid
+  - Kanep/CBD: CYP450 metaboliseerub (paljude ravimitega)
+  - Kava: maksatoksilisus
+  - Kratom: sõltuvuse risk, opioidid
+- Uus funktsioon: `quickAddInteraction()`
+
+**2. RESSURSID LIGIPÄÄS (täiendatud):**
+- Lisatud "Apteek" nupp (Benu, Südameapteek, Euroapteek vms)
+- Lisatud "Puudub" nupp (piiratud ligipääs)
+- Kogu ligipääsu sektsioon nüüd 7 valikuga
+
+**Failid:**
+- `medportal/forms/full-profile.html` (rida 1390-1418: elustiili ained)
+- `medportal/forms/full-profile.html` (rida 1756-1769: ressursid)
+- `medportal/js/info-system.js` (quickAddInteraction funktsioon)
 
 ---
 

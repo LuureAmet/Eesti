@@ -1,33 +1,49 @@
-// VERSION: 1.7.5 - 2025-11-12
+// VERSION: 1.7.5.4 - 2025-11-13
 // PORTAALI GLOBAALNE KONFIGURATSIOON
 // ===========================================
 
 const SITE_CONFIG = {
-    version: "1.7.5",
-    date: "12.11.2025",
-    buildTime: "2025-11-12 15:30",
+    version: "1.7.5.4",
+    date: "13.11.2025",
+    buildTime: "2025-11-13 10:00",
 
     // Versioonimärkmed
     changelog: {
+        "1.7.5.4": {
+            date: "13.11.2025",
+            changes: [
+                "KOOSTOIME RISKID: 6 elustiili ainet plus-süsteemiks (kakao, alkohol, kofeiin, kanep/CBD, kava, kratom)",
+                "RESSURSID: Lisatud 'Apteek' ja 'Puudub' valikud ligipääsu sektsiooni",
+                "Spetsiifilised väljad ja hoiatused igale ainele"
+            ]
+        },
+        "1.7.5.3": {
+            date: "12.11.2025",
+            changes: [
+                "INFO NUPUD: Lisatud 6 sektsiooni (Uni, Tööriistad, Taimravi, Praktikad, Ideoloogia, Ressursid)"
+            ]
+        },
+        "1.7.5.2": {
+            date: "12.11.2025",
+            changes: [
+                "TOITUMISE RÜTM: Söögiajaaknad ja paast plus-süsteemiks (9 mustrit)"
+            ]
+        },
+        "1.7.5.1": {
+            date: "12.11.2025",
+            changes: [
+                "VEREVEDELDAJAD: 8 ravimit plus-süsteemiks (Varfariin, Apiksabaan, jne)",
+                "KODUSED MÕÕTMISED: 7 seadet plus-süsteemiks"
+            ]
+        },
         "1.7.5": {
             date: "12.11.2025",
             changes: [
-                "MASSIIVNE v1.7.5 UUENDUS - 13 PAKETTI!",
-                "PAKETT 1: Profiilifilter - 'Lapseootel' (ei 'Rasedus'), Centaur vanus (100-120, kuldne), Sugu laiendus (Sootuks/bio-markerid/mütoloogia), 'Soovin last' ajahorisondi",
-                "PAKETT 2: Jumalale jagamine - kaheastmeline süsteem (Jumal/Vanajumal + Täpsustus nupp avab 30+ jumala), Abraami/Matriarhaatia/Polüteism/Animism/Royalistlik kategooriad",
-                "PAKETT 3: Bio-markerid - vabatahtlikud kromosoomid/gonaddid/hormoonid väljad (ainult arstile nähtav)",
-                "PAKETT 4: Aknad + BMI + Puuded - auto-BMI kalkulaator, optimaalsed ajaaknad tegevusteks, sünnikuupäev/asukoht, 8 puude tüüpi",
-                "PAKETT 5: Kortermaja laiendus - lift (jah/ei), korrus ('5' või '5/9'), ülemine korrus checkbox, eelistan treppu",
-                "PAKETT 6: UNI MASSIIVNE - +18 uut plus-nuppu (6 magamise probleemid, 4 unenägude tüübid, 8 ööhäired) = 30 UNI nuppu kokku!",
-                "PAKETT 7: Töövõime + Sport - 8 spordiliiki (triatlon→olümpia, digisport), töövõime % hinnang, 6 töö piirangut",
-                "PAKETT 8: Tööriistad ekstra - 8 alternatiivset tööriista (bioenergia→tšakra mõõtur), belief-märgitud, sagedus/tulemused väljad",
-                "PAKETT 9: Meditsiiniportaalid - 13 portaali (3 Eesti, 5 EU, 5 maailm), värviline regionaalne eristus, konto/viimati kasutatud jälgimine",
-                "PAKETT 10: Antikoagulant→Verevedeldajad - eestikeelne terminoloogia (tagasiühilduv)",
-                "PAKETT 11: Vann/saun laiendus - 6 saunatüüpi (suitsusaun→puidusaun), reorganiseeritud vesi/sauna sektsioonid",
-                "PAKETT 12: Try-if-needed (PRN) - uus Sektsioon 15A, 8 vajadusel kasutatavat abinoũ, ↑/↓ järjestamise süsteem, prioriteedi badges",
-                "PAKETT 13: Privaatsus filter - 14 filtri kategooriat, 3 presetti (arst/AI/uurija), live preview + kinnitusdialoог",
-                "KOKKU: ~1800 rida koodi, 75+ uut plus-nuppu, 15+ JS funktsiooni",
-                "Belief-scope süsteem läbivalt (hall #f3f4f6, ainult metadata, mitte avalikult nähtav)"
+                "PARANDUSED: Eemaldatud kõik 'Või märgi lihtsalt...' duplikaadid (9 kohta)",
+                "PARANDUSED: Eemaldatud vanad radio/checkbox listid (põhiline elupaik, aktiivsus, norskamine, kõnnitempo, vann/epsom)",
+                "UI: '(belief)' sildid peidetud, sünnikuupäev liigutatud BMI alla",
+                "KOMPAKT: Töövõime sektsioon ~40% lühem (dropdown + 2-veeruline grid)",
+                "KODUNE TUGI: Plus-süsteem (6 kategooriat)"
             ]
         },
         "1.7.0": {
