@@ -221,8 +221,67 @@ function generateFullTxt() {
 
     // SEKTSIOON 1
     txt += `[SEKTSIOON 1: PROFIIL JA ELURÜTM]\n`;
-    txt += `Vanus: ${d.age || 'N/A'} a\n`;
-    txt += `Sugu: ${d.gender || 'N/A'}\n`;
+
+    // PROFIILIFILTRI INFO
+    if (typeof profileFilter !== 'undefined') {
+        // Vanus
+        if (profileFilter.exactAge) {
+            txt += `Vanus: ${profileFilter.exactAge} a`;
+            if (profileFilter.birthdate) txt += ` (sünnipäev: ${profileFilter.birthdate})`;
+            txt += `\n`;
+        } else if (profileFilter.ageCategory) {
+            txt += `Vanus: ${profileFilter.ageCategoryLabel || profileFilter.ageCategory}\n`;
+        } else {
+            txt += `Vanus: ${d.age || 'N/A'} a\n`;
+        }
+
+        // Sugu
+        if (profileFilter.gender === 'male') {
+            txt += `Sugu: Mees\n`;
+            // Meeste valikud
+            if (profileFilter.maleOptions && profileFilter.maleOptions.length > 0) {
+                const maleLabels = {
+                    'prostate': 'Prostaat',
+                    'erectile': 'Erektsioon',
+                    'testosterone': 'Testosteroon'
+                };
+                const options = profileFilter.maleOptions.map(o => maleLabels[o] || o).join(', ');
+                txt += `  └─ Meeste terviseküsimused: ${options}\n`;
+            }
+        } else if (profileFilter.gender === 'female') {
+            txt += `Sugu: Naine\n`;
+            // Naiste valikud
+            if (profileFilter.femaleOptions && profileFilter.femaleOptions.length > 0) {
+                const femaleLabels = {
+                    'menstruation': 'Tsüklid',
+                    'pcos': 'PCOS',
+                    'endometriosis': 'Endometrioos',
+                    'menopause': 'Menopaus',
+                    'hormones': 'Hormoonid'
+                };
+                const options = profileFilter.femaleOptions.map(o => femaleLabels[o] || o).join(', ');
+                txt += `  └─ Naiste terviseküsimused: ${options}\n`;
+            }
+        } else if (profileFilter.gender === 'other') {
+            txt += `Sugu: Sootuks sootu / muu\n`;
+        } else {
+            txt += `Sugu: ${d.gender || 'N/A'}\n`;
+        }
+
+        // Rasedus/imetamine
+        if (profileFilter.pregnancy && profileFilter.pregnancy !== 'no') {
+            const pregnancyLabels = {
+                'pregnant': 'Lapseootel',
+                'breastfeeding': 'Imetan',
+                'planning': 'Soovin last'
+            };
+            txt += `Rasedus/Imetamine: ${pregnancyLabels[profileFilter.pregnancy] || profileFilter.pregnancy}\n`;
+        }
+    } else {
+        txt += `Vanus: ${d.age || 'N/A'} a\n`;
+        txt += `Sugu: ${d.gender || 'N/A'}\n`;
+    }
+
     txt += `Pikkus: ${d.height || 'N/A'} cm\n`;
     txt += `Kaal: ${d.weight || 'N/A'} kg\n`;
     if (d.targetWeight) {
@@ -804,8 +863,51 @@ function generateAiPromptCustom(selectedSections = [], includeSummary = false) {
     // PROFILE
     if (has('profile')) {
         prompt += `PATSIENT:\n`;
-        prompt += `${d.age || 'X'}a ${d.gender || 'N/A'}, `;
-        prompt += `${d.height || 'X'}cm, ${d.weight || 'X'}kg`;
+
+        // PROFIILIFILTRI INFO
+        if (typeof profileFilter !== 'undefined') {
+            // Vanus
+            if (profileFilter.exactAge) {
+                prompt += `${profileFilter.exactAge}a`;
+            } else if (profileFilter.ageCategory) {
+                prompt += `${profileFilter.ageCategoryLabel || profileFilter.ageCategory}`;
+            } else {
+                prompt += `${d.age || 'X'}a`;
+            }
+
+            // Sugu
+            if (profileFilter.gender === 'male') {
+                prompt += ` Mees`;
+                // Meeste valikud
+                if (profileFilter.maleOptions && profileFilter.maleOptions.length > 0) {
+                    const labels = { 'prostate': 'Prostaat', 'erectile': 'Erektsioon', 'testosterone': 'Testosteroon' };
+                    const opts = profileFilter.maleOptions.map(o => labels[o] || o).join(', ');
+                    prompt += ` [${opts}]`;
+                }
+            } else if (profileFilter.gender === 'female') {
+                prompt += ` Naine`;
+                // Naiste valikud
+                if (profileFilter.femaleOptions && profileFilter.femaleOptions.length > 0) {
+                    const labels = { 'menstruation': 'Tsüklid', 'pcos': 'PCOS', 'endometriosis': 'Endometrioos', 'menopause': 'Menopaus', 'hormones': 'Hormoonid' };
+                    const opts = profileFilter.femaleOptions.map(o => labels[o] || o).join(', ');
+                    prompt += ` [${opts}]`;
+                }
+            } else if (profileFilter.gender === 'other') {
+                prompt += ` Sootuks sootu/muu`;
+            } else {
+                prompt += ` ${d.gender || 'N/A'}`;
+            }
+
+            // Rasedus
+            if (profileFilter.pregnancy && profileFilter.pregnancy !== 'no') {
+                const labels = { 'pregnant': 'Lapseootel', 'breastfeeding': 'Imetan', 'planning': 'Soovin last' };
+                prompt += ` [${labels[profileFilter.pregnancy] || profileFilter.pregnancy}]`;
+            }
+        } else {
+            prompt += `${d.age || 'X'}a ${d.gender || 'N/A'}`;
+        }
+
+        prompt += `, ${d.height || 'X'}cm, ${d.weight || 'X'}kg`;
         if (d.bmi) prompt += ` (BMI ${d.bmi})`;
         if (d.targetWeight) prompt += ` → Siht: ${d.targetWeight}kg`;
         prompt += `\n`;

@@ -517,6 +517,62 @@ function updateProfileSummary() {
     } else {
         statusDiv.style.display = 'none';
     }
+
+    // UUENDA SEKTSIOON 17: KOKKUVÕTE ÜHEL REAL
+    updateOneLinerSummary();
+}
+
+// Uuenda sektsioon 17: Kokkuvõte ühel real
+function updateOneLinerSummary() {
+    const summaryEl = document.getElementById('oneLinerSummary');
+    if (!summaryEl) return;
+
+    let parts = [];
+
+    // Vanus
+    if (profileFilter.exactAge) {
+        parts.push(`${profileFilter.exactAge}a`);
+    } else if (profileFilter.ageCategoryLabel) {
+        parts.push(profileFilter.ageCategoryLabel);
+    }
+
+    // Sugu
+    if (profileFilter.gender === 'male') {
+        let genderText = 'Mees';
+        if (profileFilter.maleOptions && profileFilter.maleOptions.length > 0) {
+            const labels = { 'prostate': 'Prostaat', 'erectile': 'Erektsioon', 'testosterone': 'Testosteroon' };
+            const opts = profileFilter.maleOptions.map(o => labels[o] || o).join(', ');
+            genderText += ` [${opts}]`;
+        }
+        parts.push(genderText);
+    } else if (profileFilter.gender === 'female') {
+        let genderText = 'Naine';
+        if (profileFilter.femaleOptions && profileFilter.femaleOptions.length > 0) {
+            const labels = { 'menstruation': 'Tsüklid', 'pcos': 'PCOS', 'endometriosis': 'Endometrioos', 'menopause': 'Menopaus', 'hormones': 'Hormoonid' };
+            const opts = profileFilter.femaleOptions.map(o => labels[o] || o).join(', ');
+            genderText += ` [${opts}]`;
+        }
+        parts.push(genderText);
+    } else if (profileFilter.gender === 'other') {
+        parts.push('Sootuks sootu/muu');
+    }
+
+    // Rasedus
+    if (profileFilter.pregnancy && profileFilter.pregnancy !== 'no') {
+        const labels = { 'pregnant': 'Lapseootel', 'breastfeeding': 'Imetan', 'planning': 'Soovin last' };
+        parts.push(labels[profileFilter.pregnancy] || profileFilter.pregnancy);
+    }
+
+    // Näita
+    if (parts.length > 0) {
+        summaryEl.textContent = parts.join(' | ');
+        summaryEl.style.color = '#1f2937';
+        summaryEl.style.fontWeight = '600';
+    } else {
+        summaryEl.textContent = 'Täitke profiilifilter ja see genereeritakse automaatselt.';
+        summaryEl.style.color = '#6b7280';
+        summaryEl.style.fontWeight = 'normal';
+    }
 }
 
 // Näita hoiatusi ja nõuandeid
