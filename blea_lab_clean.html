@@ -1,0 +1,725 @@
+
+<!DOCTYPE html>
+<!-- Timestamp (start): 2025-05-16T12:30:00Z | Model: GPT-5.1-Codex-Max -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>BLEA Lab</title>
+<style>
+:root { color-scheme: dark; --bg:#0b0f0c; --panel:#111a14; --accent:#3cff8c; --accent2:#19c37d; --text:#e5ffe5; --muted:#8fbfa1; }
+*{box-sizing:border-box;font-family:Inter,Arial,system-ui,sans-serif;}
+body{margin:0;background:var(--bg);color:var(--text);} 
+header{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;padding:10px 12px;background:#0f1611;border-bottom:1px solid #1f2b23;}
+h1{margin:0;font-size:1.2rem;letter-spacing:0.05rem;color:var(--accent);} 
+button,select,input,textarea{background:#0f1b14;border:1px solid #1f2b23;color:var(--text);padding:6px 8px;border-radius:6px;} 
+button:hover,select:hover,input:hover,textarea:hover{border-color:var(--accent2);} 
+textarea{width:100%;min-height:140px;resize:vertical;} 
+small{color:var(--muted);} 
+.container{display:grid;grid-template-columns:240px 1fr 1fr;gap:10px;padding:10px;min-height:calc(100vh - 70px);} 
+.panel{background:var(--panel);border:1px solid #1f2b23;border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;} 
+.section-title{display:flex;align-items:center;gap:6px;font-weight:700;color:var(--accent);} 
+.flex{display:flex;gap:6px;flex-wrap:wrap;} 
+.badge{padding:2px 6px;border-radius:999px;background:#0f2619;color:var(--accent2);font-size:.75rem;} 
+.preview{background:#0e1511;border:1px solid #1f2b23;border-radius:8px;padding:10px;min-height:140px;overflow:auto;} 
+.list{max-height:220px;overflow:auto;display:flex;flex-direction:column;gap:6px;} 
+.module-item{display:flex;align-items:flex-start;gap:6px;padding:6px;border:1px solid #1f2b23;border-radius:8px;} 
+label span.code{font-weight:700;color:var(--accent2);} 
+hr{border:0;border-top:1px solid #1f2b23;} 
+.grid-two{display:grid;grid-template-columns:1fr 1fr;gap:8px;} 
+.help{font-size:.9rem;color:var(--muted);} 
+.highlight-warn{border:1px solid #ff9f43;background:#1f1305;} 
+.clause-card{border:1px dashed #1f2b23;padding:8px;border-radius:8px;background:#0f1612;} 
+.two-cols{display:grid;grid-template-columns:1fr 1fr;gap:6px;} 
+.tag{display:inline-block;padding:2px 6px;margin:2px;border-radius:6px;background:#14231a;color:var(--accent2);font-size:.8rem;} 
+.sidebar-buttons button{width:100%;} 
+.hidden{display:none;} 
+.comment-box{min-height:60px;} 
+.fork-box{border:1px solid #1f2b23;border-radius:8px;padding:8px;background:#0f1511;} 
+</style>
+</head>
+<body>
+<header>
+  <h1>BLEA Lab</h1>
+  <div class="flex">
+    <label>Mode
+      <select id="modeSelect">
+        <option value="core">Core</option>
+        <option value="deep-law">Deep Law / Proof</option>
+        <option value="play">Play / Kids / Family</option>
+        <option value="ai-human">AI–Human Charter</option>
+      </select>
+    </label>
+    <label>Perspective
+      <select id="perspectiveSelect">
+        <option value="both">Both</option>
+        <option value="partyA">Party A</option>
+        <option value="partyB">Party B</option>
+      </select>
+    </label>
+    <label class="badge">Room code: <span id="roomCode"></span></label>
+  </div>
+  <div class="flex">
+    <span class="badge">BLEA Version: <span id="semverDisplay"></span></span>
+    <label>Variant <input id="variantId" value="S223.13" style="width:110px;"></label>
+    <div class="flex">
+      <button id="bumpPatch">Bump PATCH</button>
+      <button id="bumpMinor">Bump MINOR</button>
+      <button id="bumpMajor">Bump MAJOR</button>
+    </div>
+    <button id="generateStamp">Generate Stamp</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+</header>
+
+<div class="container">
+  <aside class="panel">
+    <div class="section-title">Modules</div>
+    <div class="list" id="moduleList"></div>
+    <hr>
+    <div class="section-title">Exports</div>
+    <div class="sidebar-buttons">
+      <button id="saveLocal">Save Locally</button>
+      <button id="loadLocal">Load Locally</button>
+      <button id="exportText">Export BLEA Text</button>
+      <button id="exportStamp">Export Stamp JSON</button>
+      <button id="exportClauses">Export Clauses JSON</button>
+      <button id="exportChangelog">Export Changelog JSON</button>
+      <button id="exportState">Export State Bundle</button>
+      <button id="importState">Import State Bundle</button>
+      <button id="shareLink">Share Link</button>
+      <input type="file" id="stateFileInput" accept="application/json" class="hidden">
+    </div>
+    <hr>
+    <div class="section-title">Help</div>
+    <div class="help">
+      <p>Variant tracks sub-plot IDs (e.g., S223.13).</p>
+      <p>SemVer is independent from variant.</p>
+      <p>Stamp is ULID + canonical JSON + SHA-256.</p>
+      <p>Room code is local-only; SyncAdapter can be extended to servers later.</p>
+    </div>
+  </aside>
+
+  <main class="panel" id="leftPanel">
+    <div class="section-title">Template Editor</div>
+    <div class="flex" style="align-items:flex-end;gap:8px;">
+      <label style="flex:1 1 160px;">Template
+        <select id="templateSelect"></select>
+      </label>
+      <div class="flex" style="flex-wrap:wrap;gap:6px;">
+        <button id="applyTemplate">Apply Template</button>
+        <button id="saveTemplate">Save Current as Template</button>
+        <button id="importTemplatePack">Import Template Pack</button>
+        <button id="exportTemplatePack">Export Template Pack</button>
+        <input type="file" id="templateFileInput" accept="application/json" class="hidden">
+      </div>
+    </div>
+    <textarea id="coreText"></textarea>
+    <div id="playModeSimple" class="hidden">
+      <label>What do we promise? <textarea id="playPromise"></textarea></label>
+      <label>How do we say sorry? <textarea id="playSorry"></textarea></label>
+      <label>How do we fix it? <textarea id="playFix"></textarea></label>
+      <label>Story Version <input id="storyVersion" value="1"></label>
+      <label>Scene <input id="storyScene" value="1"></label>
+      <label><input type="checkbox" id="showTech"> Show technical details</label>
+    </div>
+    <div id="aiHumanNotes" class="hidden">
+      <div class="two-cols">
+        <div>
+          <div class="section-title">Human notes</div>
+          <textarea id="humanNotes"></textarea>
+        </div>
+        <div>
+          <div class="section-title">AI / Assistant notes</div>
+          <textarea id="assistantNotes"></textarea>
+        </div>
+      </div>
+    </div>
+    <div id="clauseTools" class="hidden">
+      <div class="section-title">Clause Cards</div>
+      <div id="clauseList"></div>
+      <div class="flex">
+        <button id="addClause">Add Clause</button>
+        <button id="extractClauses">Extract Clauses</button>
+        <button id="highlightIssues">Highlight inconsistencies</button>
+      </div>
+    </div>
+  </main>
+
+  <section class="panel" id="rightPanel">
+    <div class="section-title">Preview / Two-Party</div>
+    <div class="grid-two">
+      <div>
+        <div class="section-title">Preview</div>
+        <div id="preview" class="preview"></div>
+        <div><strong>Incorporated Modules:</strong> <span id="moduleCodes"></span></div>
+        <div id="incorporatedText" class="preview"></div>
+      </div>
+      <div>
+        <div class="section-title">Two-Party Comments</div>
+        <label>Party A name <input id="partyAName"></label>
+        <label>Party B name <input id="partyBName"></label>
+        <div id="commentsPreview" class="preview"></div>
+      </div>
+    </div>
+    <hr>
+    <div class="section-title">Fork Event</div>
+    <div class="fork-box">
+      <label>Fork ID <input id="forkIdInput"></label>
+      <label>Previous model claim <input id="prevModelClaim"></label>
+      <label>New model claim <input id="newModelClaim"></label>
+      <label>Reason <textarea id="forkReason"></textarea></label>
+      <label>Notes <textarea id="forkNotes"></textarea></label>
+      <button id="recordFork">Record Fork Event</button>
+      <div class="help" id="forkStatus"></div>
+    </div>
+    <hr>
+    <div class="section-title">Stamp</div>
+    <div><strong>Human stamp:</strong> <span id="humanStamp"></span></div>
+    <div><strong>ULID:</strong> <span id="ulidDisplay"></span></div>
+    <div><strong>SHA-256:</strong> <span id="hashDisplay"></span></div>
+    <div class="preview" id="jsonDisplay"></div>
+  </section>
+</div>
+
+<script>
+/* ============ Utility: ULID ============ */
+const Crock = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
+function encodeTime(time, len){let out="";for(let i=len-1;i>=0;i--){out=Crock[(time>>BigInt(i*5))&31n]+out;}return out;}
+function encodeRandom(len){let out="";crypto.getRandomValues(randomBuffer);for(let i=0;i<len;i++){out+=Crock[randomBuffer[i]%32];}return out;}
+const randomBuffer=new Uint8Array(16);
+function ulid(){const time=BigInt(Date.now());return encodeTime(time,10)+encodeRandom(16);}
+function isoLocalWithOffset(){
+  const d=new Date();
+  const pad=n=>String(n).padStart(2,"0");
+  const ms=String(d.getMilliseconds()).padStart(3,"0");
+  const tzMinutes=-d.getTimezoneOffset();
+  const sign=tzMinutes>=0?"+":"-";
+  const hh=pad(Math.floor(Math.abs(tzMinutes)/60));
+  const mm=pad(Math.abs(tzMinutes)%60);
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}.${ms}${sign}${hh}:${mm}`;
+}
+function randomHex(len=16){
+  const buf=new Uint8Array(len);crypto.getRandomValues(buf);return Array.from(buf).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+function toBase64Url(str){
+  return btoa(unescape(encodeURIComponent(str))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+}
+function fromBase64Url(str){
+  const base=str.replace(/-/g,"+").replace(/_/g,"/");return decodeURIComponent(escape(atob(base)));
+}
+
+/* ============ State ============ */
+const defaultModules={
+  "AUD-1":{version:"1.0",description:"Audit + transparency baseline.",text:"AUD-1: Parties allow reasonable audits and logs."},
+  "RENEW-1":{version:"1.0",description:"Renewal cadence.",text:"RENEW-1: Agreement reviewed every 90 days."},
+  "DATA-1":{version:"1.0",description:"Data handling.",text:"DATA-1: Minimal data retention; portable exports."},
+  "SAFE-1":{version:"1.0",description:"Safety guardrails.",text:"SAFE-1: Safety first; pause on risk discovery."},
+  "DISPUTE-1":{version:"1.0",description:"Dispute resolution.",text:"DISPUTE-1: Use fast mediation, then arbitration."},
+  "SPIRIT-1":{version:"1.0",description:"Intent framing.",text:"SPIRIT-1: Act in good faith and mutual respect."}
+};
+let templates=[...defaultTemplates];
+const defaultTemplates=[
+  {name:"Blank",mode:"core",coreText:"",default_modules:[],tags:["general"],language:"en"},
+  {name:"Human–AI Charter (Minimal)",mode:"ai-human",topic:"Human–AI Charter",coords:"CORE.1 / AI.1",partyA_name:"Human",partyB_name:"Assistant",default_modules:["SAFE-1","DATA-1","AUD-1","RENEW-1"],tags:["charter","human-ai","baseline"],coreText:"# BLEA CORE — Human–AI Charter (Minimal)\n\n## 1. Scope\nThis document is a symbolic charter (not legal advice). The Assistant is not a legal person.\n\n## 2. Intent\n- Human seeks clarity, safety, and revocability.\n- Assistant acts in good faith to assist.\n\n## 3. Safety & boundaries\n- Pause if risk increases.\n- Prefer explicit consent for sensitive topics.\n- Prefer verifiable sources when claims matter.\n\n## 4. Data handling\n- Minimize retention.\n- Exportability is required.\n\n## 5. Renewal\nReview cadence: every 90 days (or when major changes occur).\n",language:"en"},
+  {name:"Two Friends (Play / Kids)",mode:"play",topic:"Two Friends Agreement",coords:"PLAY.1 / REL.1",partyA_name:"Friend A",partyB_name:"Friend B",default_modules:["SPIRIT-1","DISPUTE-1"],tags:["kids","play","friendship"],coreText:"# Agreement between Two Friends\n\n- Share snacks fairly.\n- Say sorry quickly when wrong.\n- Take turns speaking (no interruptions).\n- If angry: 5-minute cool-down, then try again.\n",language:"en"},
+  {name:"Family Peace Pact",mode:"play",topic:"Family Peace Pact",coords:"PLAY.2 / FAMILY.1",partyA_name:"Family",partyB_name:"Family",default_modules:["SPIRIT-1","DISPUTE-1","RENEW-1"],tags:["family","peace","routines"],coreText:"# Family Peace Pact\n\n- We speak one at a time.\n- We do not insult; we describe feelings and needs.\n- If conflict rises: pause 10 minutes, then return.\n- We keep one shared rule: repair after conflict (apology + fix).\n\nRenewal: weekly check-in.\n",language:"en"},
+  {name:"Future Self (Weekly Check-in)",mode:"core",topic:"Agreement with Future Self",coords:"CORE.2 / SELF.1",partyA_name:"Present Self",partyB_name:"Future Self",default_modules:["RENEW-1","DATA-1","SPIRIT-1"],tags:["self","habits","planning"],coreText:"# Agreement with Future Self\n\n- Weekly: write one honest check-in (10 minutes).\n- Monthly: revisit goals and adjust.\n- If exhaustion: rest first, then plan.\n\nEvidence: track as short notes + timestamps.\n",language:"en"},
+  {name:"Research Collaboration Protocol",mode:"core",topic:"Research Collaboration",coords:"CORE.3 / RND.1",partyA_name:"Researcher A",partyB_name:"Researcher B",default_modules:["AUD-1","DATA-1","DISPUTE-1","RENEW-1"],tags:["research","collaboration","osint"],coreText:"# Research Collaboration Protocol\n\n## Principles\n- Define claims, confidence, and sources.\n- Separate facts from hypotheses.\n- Preserve raw logs (hash-stamped exports).\n\n## Workflow\n- Shared question backlog.\n- Weekly synthesis memo.\n- Dispute: write the disagreement as two competing hypotheses.\n\n## Deliverables\n- Notes\n- Source list\n- Findings table (claim → evidence → counter-evidence)\n",language:"en"},
+  {name:"Investigation Charter (InfoOps / OSINT)",mode:"deep-law",topic:"Investigation Charter",coords:"OPS.1 / OSINT.1",partyA_name:"Investigator",partyB_name:"Reviewer",default_modules:["AUD-1","DATA-1","SAFE-1","DISPUTE-1"],tags:["osint","investigation","evidence"],coreText:"# Investigation Charter\n\n## Rules\n- Every major claim must cite at least one source.\n- Track counter-claims and alternative explanations.\n- Mark uncertainty explicitly (confidence levels).\n\n## Clause format (recommended)\n1) Clause text (what is asserted)\n2) Meaning (what it implies operationally)\n3) Evidence (links, hashes, notes)\n4) Counter-evidence / dissent\n",language:"en"},
+  {name:"Co-founder Working Agreement (Lite)",mode:"core",topic:"Co-founder Working Agreement",coords:"BIZ.1 / TEAM.1",partyA_name:"Co-founder A",partyB_name:"Co-founder B",default_modules:["DISPUTE-1","RENEW-1","AUD-1","DATA-1"],tags:["startup","team","decisionmaking"],coreText:"# Co-founder Working Agreement (Lite)\n\n- Decision rule: try consensus; if blocked, time-box and pick a decider.\n- Define roles for 30-day periods; rotate if needed.\n- Financial transparency for shared costs.\n\nDispute path: quick mediation → written decision log.\n",language:"en"},
+  {name:"Community Charter (Local / Civic)",mode:"core",topic:"Community Charter",coords:"CIV.1 / LOCAL.1",partyA_name:"Community",partyB_name:"Community",default_modules:["AUD-1","DISPUTE-1","RENEW-1","SPIRIT-1"],tags:["community","civic","rules"],coreText:"# Community Charter\n\n- Transparency for decisions and notes.\n- Respectful debate; no personal attacks.\n- Clear escalation path for conflicts.\n- Renewal every quarter.\n\nOptional: publish stamped summaries after meetings.\n",language:"en"},
+  {name:"Animist Covenant (Symbolic / Intent)",mode:"core",topic:"Animist Covenant (Symbolic)",coords:"MYTH.1 / SPIRIT.1",partyA_name:"Human",partyB_name:"Assistant",default_modules:["SPIRIT-1","SAFE-1","DATA-1"],tags:["animism","symbolic","intent"],coreText:"# Animist Covenant (Symbolic)\n\n- We treat words as acts: careful, respectful, accountable.\n- We do not weaponize ambiguity.\n- We keep a trace (stamps) so memory is honest.\n\nNote: symbolic framing; not a claim of consciousness or legal status.\n",language:"en"},
+  {name:"Two People Agreement (Neutral)",mode:"core",topic:"Two People Agreement",coords:"CORE.4 / REL.2",partyA_name:"Party A",partyB_name:"Party B",default_modules:["AUD-1","DISPUTE-1","DATA-1"],tags:["agreement","two-party"],coreText:"# Kokkulepe kahe osapoole vahel (v0.1)\n\n## 1) Eesmärk\nSelle kokkuleppe eesmärk on luua selge mängureegel ja vaidluste korral paranduse tee.\n\n## 2) Lubadused\n- Me räägime ausalt ja täpselt.\n- Me parandame eksimused, kui need ilmnevad.\n- Me ei kasuta infot teise vastu pahatahtlikult.\n\n## 3) Piirid\n- Mis on “OK” ja mis on “EI” selles suhtes/koostöös?\n- Millised teemad on privaatsed?\n\n## 4) Konfliktide lahendamine\n- Esiteks: selgitame, mida iga lause tähendab (Meaning).\n- Teiseks: toome tõendid või näited (Proof).\n- Kolmandaks: lepime kokku paranduse sammus (Fix step).\nKui vaja, kaasame neutraalse kolmanda isiku.\n\n## 5) Versioonid\nIga muudatus saab uue versiooni ja stampi.\n\n## 6) Incorporated Modules\nIncorporated Modules: [SELECT]\n",language:"en"},
+  {name:"Project Collaboration Charter",mode:"core",topic:"Project Collaboration",coords:"CORE.5 / TEAM.2",partyA_name:"Team",partyB_name:"Team",default_modules:["AUD-1","DISPUTE-1","DATA-1","SAFE-1"],tags:["project","team","collaboration"],coreText:"# Projekti koostöö charter (v0.1)\n\n## 1) Eesmärk\nTeha koostööd nii, et otsused on jälgitavad ja kommunikatsioon selge.\n\n## 2) Otsustamine\n- Igal suurel otsusel on: põhjendus, riskid, alternatiivid, järgmine samm.\n- Vaieldes kasutame “Meaning/Proof” kihti: mis täpselt tähendas, mis tõendab.\n\n## 3) Andmed\n- Privaatne info jääb eraldi lisasse.\n- Stamps salvestavad ainult hash’i ja meta.\n\n## 4) Konfliktid\n- Vaidlus ei ole rünnak; vaidlus on täpsustus.\n- Kui ummik: kaasame kolmanda isiku või teeme katseperioodi.\n\n## 5) Versioonid\n- Patch: keeleparandus.\n- Minor: reeglite lisad/protsess.\n- Major: tööviisi aluspõhimõtte muutus.\n\nIncorporated Modules: [SELECT]\n",language:"en"}
+];
+
+const state={
+  coreText:"BLEA CORE: Describe the main expectations here.",
+  modules:JSON.parse(JSON.stringify(defaultModules)),
+  selectedModules:[],
+  semver:{major:0,minor:1,patch:0},
+  topic:"BLEA Lab Document",
+  coords:"0,0",
+  model_claim:"local",
+  portal:"",
+  tags:["blea","lab"],
+  lastStamp:{ulid:"",created_utc:"",hash:"",json:""},
+  mode:"core",
+  partyA_name:"Party A",
+  partyB_name:"Party B",
+  variant_id:"S223.13",
+  room_code:Math.random().toString(36).slice(2,7).toUpperCase(),
+  clauses:[],
+  human_notes_global:"",
+  assistant_notes_global:"",
+  fork_last_id:null,
+  changelog_head:null,
+  play:{promise:"",sorry:"",fix:"",storyVersion:"1",scene:"1",showTech:false}
+};
+
+/* ============ Sync Adapter (local only; extend later) ============ */
+const SyncAdapter={
+  loadState(remoteId){const raw=localStorage.getItem("blea_lab_"+remoteId);return raw?JSON.parse(raw):null;},
+  saveState(remoteId,obj){localStorage.setItem("blea_lab_"+remoteId,JSON.stringify(obj));}
+};
+
+/* ============ DOM refs ============ */
+const coreText=document.getElementById("coreText");
+const preview=document.getElementById("preview");
+const moduleList=document.getElementById("moduleList");
+const moduleCodes=document.getElementById("moduleCodes");
+const incorporatedText=document.getElementById("incorporatedText");
+const semverDisplay=document.getElementById("semverDisplay");
+const variantId=document.getElementById("variantId");
+const ulidDisplay=document.getElementById("ulidDisplay");
+const jsonDisplay=document.getElementById("jsonDisplay");
+const humanStamp=document.getElementById("humanStamp");
+const hashDisplay=document.getElementById("hashDisplay");
+const modeSelect=document.getElementById("modeSelect");
+const playModeSimple=document.getElementById("playModeSimple");
+const aiHumanNotes=document.getElementById("aiHumanNotes");
+const clauseTools=document.getElementById("clauseTools");
+const clauseList=document.getElementById("clauseList");
+const commentsPreview=document.getElementById("commentsPreview");
+const partyAName=document.getElementById("partyAName");
+const partyBName=document.getElementById("partyBName");
+const perspectiveSelect=document.getElementById("perspectiveSelect");
+const roomCodeEl=document.getElementById("roomCode");
+const humanNotes=document.getElementById("humanNotes");
+const assistantNotes=document.getElementById("assistantNotes");
+const playPromise=document.getElementById("playPromise");
+const playSorry=document.getElementById("playSorry");
+const playFix=document.getElementById("playFix");
+const storyVersion=document.getElementById("storyVersion");
+const storyScene=document.getElementById("storyScene");
+const showTech=document.getElementById("showTech");
+const templateSelect=document.getElementById("templateSelect");
+const applyTemplateBtn=document.getElementById("applyTemplate");
+const saveTemplateBtn=document.getElementById("saveTemplate");
+const importTemplatePackBtn=document.getElementById("importTemplatePack");
+const exportTemplatePackBtn=document.getElementById("exportTemplatePack");
+const templateFileInput=document.getElementById("templateFileInput");
+const forkIdInput=document.getElementById("forkIdInput");
+const prevModelClaim=document.getElementById("prevModelClaim");
+const newModelClaim=document.getElementById("newModelClaim");
+const forkReason=document.getElementById("forkReason");
+const forkNotes=document.getElementById("forkNotes");
+const forkStatus=document.getElementById("forkStatus");
+const exportStateBtn=document.getElementById("exportState");
+const importStateBtn=document.getElementById("importState");
+const shareLinkBtn=document.getElementById("shareLink");
+const stateFileInput=document.getElementById("stateFileInput");
+
+/* ============ Markdown-lite renderer ============ */
+function renderMarkdown(src){
+  const esc = src.replace(/[&<>]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[m]));
+  return esc
+    .replace(/^###### (.*)$/gm,"<h6>$1</h6>")
+    .replace(/^##### (.*)$/gm,"<h5>$1</h5>")
+    .replace(/^#### (.*)$/gm,"<h4>$1</h4>")
+    .replace(/^### (.*)$/gm,"<h3>$1</h3>")
+    .replace(/^## (.*)$/gm,"<h2>$1</h2>")
+    .replace(/^# (.*)$/gm,"<h1>$1</h1>")
+    .replace(/^\> (.*)$/gm,"<blockquote>$1</blockquote>")
+    .replace(/^\- (.*)$/gm,"<ul><li>$1</li></ul>")
+    .replace(/\n<ul>/g,"<ul>").replace(/<\/li>\n<\/ul>/g,"</li></ul>");
+}
+
+/* ============ Rendering ============ */
+function renderModules(){
+  moduleList.innerHTML="";
+  Object.entries(state.modules).forEach(([code,mod])=>{
+    const wrap=document.createElement("div");wrap.className="module-item";
+    const cb=document.createElement("input");cb.type="checkbox";cb.checked=state.selectedModules.includes(code);
+    cb.onchange=()=>{if(cb.checked){if(!state.selectedModules.includes(code))state.selectedModules.push(code);}else{state.selectedModules=state.selectedModules.filter(x=>x!==code);}renderAll();}
+    const label=document.createElement("label");label.innerHTML=`<span class="code">${code}</span> v${mod.version}<br><small>${mod.description}</small>`;
+    const ta=document.createElement("textarea");ta.value=mod.text;ta.oninput=()=>{state.modules[code].text=ta.value;renderAll();};
+    wrap.append(cb,label);wrap.append(ta);moduleList.append(wrap);
+  });
+  moduleCodes.textContent=state.selectedModules.join(", ")||"None";
+  incorporatedText.innerHTML=renderMarkdown(state.selectedModules.map(c=>state.modules[c].text).join("\n\n"));
+}
+function renderPreview(){
+  let text=state.coreText;
+  if(state.mode==="play"){
+    text=`Promises: ${state.play.promise}\nSorry: ${state.play.sorry}\nFix: ${state.play.fix}\nStory ${state.play.storyVersion}.${state.play.scene}\n\n${state.coreText}`;
+  }
+  preview.innerHTML=renderMarkdown(text);
+}
+function renderClauses(){
+  clauseList.innerHTML="";
+  state.clauses.forEach((c,idx)=>{
+    const card=document.createElement("div");card.className="clause-card";card.dataset.id=c.id;
+    card.innerHTML=`
+      <div class="flex"><span class="badge">Clause ${c.id}</span><span class="badge">${c.status}</span></div>
+      <label>Clause text<textarea data-field="text">${c.text}</textarea></label>
+      <label>Meaning<textarea data-field="meaning">${c.meaning||""}</textarea></label>
+      <label>Evidence<textarea data-field="evidence">${c.evidence||""}</textarea></label>
+      <label>Dependencies (comma IDs)<input data-field="dependencies" value="${(c.dependencies||[]).join(",")}"></label>
+      <div class="two-cols">
+        <label>Party A comment<textarea class="comment-box" data-field="partyA_comment">${c.partyA_comment||""}</textarea></label>
+        <label>Party B comment<textarea class="comment-box" data-field="partyB_comment">${c.partyB_comment||""}</textarea></label>
+      </div>
+      <label>Status
+        <select data-field="status">
+          <option ${c.status==="draft"?"selected":""}>draft</option>
+          <option ${c.status==="stable"?"selected":""}>stable</option>
+          <option ${c.status==="deprecated"?"selected":""}>deprecated</option>
+        </select>
+      </label>
+    `;
+    card.querySelectorAll("[data-field]").forEach(el=>{
+      el.oninput=()=>{
+        const val=el.dataset.field==="dependencies" ? el.value.split(",").map(s=>s.trim()).filter(Boolean):el.value;
+        c[el.dataset.field]=val;renderAll();
+      };
+    });
+    card.onclick=()=>{card.classList.remove("highlight-warn");};
+    clauseList.append(card);
+  });
+}
+function renderCommentsPreview(){
+  const parts=[];
+  state.clauses.forEach(c=>{
+    const a = c.partyA_comment||"", b=c.partyB_comment||"";
+    if(perspectiveSelect.value==="both" || perspectiveSelect.value==="partyA"){ if(a) parts.push(`<div><strong>${state.partyA_name} on ${c.id}:</strong> ${a}</div>`);} 
+    if(perspectiveSelect.value==="both" || perspectiveSelect.value==="partyB"){ if(b) parts.push(`<div><strong>${state.partyB_name} on ${c.id}:</strong> ${b}</div>`);} 
+  });
+  commentsPreview.innerHTML=parts.join("")||"<em>No comments yet.</em>";
+}
+function renderModePanels(){
+  playModeSimple.classList.toggle("hidden",state.mode!=="play");
+  aiHumanNotes.classList.toggle("hidden",state.mode!=="ai-human");
+  clauseTools.classList.toggle("hidden",state.mode!=="deep-law");
+}
+function renderTemplateOptions(){
+  const current=templateSelect.value;
+  templateSelect.innerHTML="";
+  templates.forEach(t=>{
+    const opt=document.createElement("option");
+    opt.value=t.name;opt.textContent=t.name;
+    templateSelect.append(opt);
+  });
+  if(current) templateSelect.value=current;
+  if(!templateSelect.value && templates[0]) templateSelect.value=templates[0].name;
+}
+function renderAll(){
+  coreText.value=state.coreText;
+  semverDisplay.textContent=`v${state.semver.major}.${state.semver.minor}.${state.semver.patch}`;
+  variantId.value=state.variant_id;
+  partyAName.value=state.partyA_name;partyBName.value=state.partyB_name;
+  humanNotes.value=state.human_notes_global;assistantNotes.value=state.assistant_notes_global;
+  playPromise.value=state.play.promise;playSorry.value=state.play.sorry;playFix.value=state.play.fix;
+  storyVersion.value=state.play.storyVersion;storyScene.value=state.play.scene;showTech.checked=state.play.showTech;
+  roomCodeEl.textContent=state.room_code;
+  modeSelect.value=state.mode;perspectiveSelect.value=perspectiveSelect.value||"both";
+  renderTemplateOptions();
+  renderModules();renderPreview();renderClauses();renderCommentsPreview();renderModePanels();updateStampUI();updateForkStatus();
+}
+
+/* ============ Stamp & JSON ============ */
+async function generateStamp(){
+  const created=new Date();
+  const created_utc=created.toISOString();
+  const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||"UTC";
+  const id=ulid();
+  const topic=state.topic;
+  const topicSlug=topic.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")||"blea";
+  const clauses_summary=state.clauses.map(c=>({id:c.id,status:c.status}));
+  const canonicalObj={
+    version:`v${state.semver.major}.${state.semver.minor}.${state.semver.patch}`,
+    variant_id:state.variant_id,
+    mode:state.mode,
+    created_utc,
+    created_local:isoLocalWithOffset(),
+    tz,
+    id,
+    topic,
+    coords:state.coords,
+    model_claim:state.model_claim,
+    nonce:randomHex(16),
+    meta:{tags:state.tags,portal:state.portal},
+    modules_selected:state.selectedModules,
+    room_code:state.room_code,
+    clauses_summary,
+    fork_last_id:state.fork_last_id,
+    changelog_head:state.changelog_head
+  };
+  const jsonStr=canonicalJSONString(canonicalObj);
+  const hash=await sha256Hex(jsonStr);
+  const stamp=`BLEA1-${created_utc.replace(/[:-]|\.\d{3}/g,"").replace("Z","Z")}-${id}-${topicSlug}-${hash.slice(0,8)}`;
+  state.lastStamp={ulid:id,created_utc,hash,json:jsonStr};
+  humanStamp.textContent=stamp;
+  ulidDisplay.textContent=id;
+  hashDisplay.textContent=hash;
+  jsonDisplay.textContent=jsonStr;
+}
+function canonicalJSONString(obj){
+  if(typeof obj!=="object"||obj===null) return JSON.stringify(obj);
+  if(Array.isArray(obj)) return "["+obj.map(o=>canonicalJSONString(o)).join(",")+"]";
+  return "{"+Object.keys(obj).sort().map(k=>JSON.stringify(k)+":"+canonicalJSONString(obj[k])).join(",")+"}";
+}
+async function sha256Hex(str){
+  const buf=new TextEncoder().encode(str);
+  const hash=await crypto.subtle.digest("SHA-256",buf);
+  return Array.from(new Uint8Array(hash)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+function loadTemplatesFromStorage(){
+  const raw=localStorage.getItem("blea_lab_templates");
+  if(raw){
+    try{
+      const parsed=JSON.parse(raw);
+      if(Array.isArray(parsed)) templates=parsed; else templates=[...defaultTemplates];
+    }catch(e){templates=[...defaultTemplates];}
+  }
+}
+function saveTemplatesToStorage(){
+  localStorage.setItem("blea_lab_templates",JSON.stringify(templates));
+}
+function applyTemplateByName(name){
+  const tpl=templates.find(t=>t.name===name);
+  if(!tpl) return;
+  state.mode=tpl.mode||state.mode;
+  state.coreText=tpl.coreText||"";
+  state.selectedModules=[...(tpl.default_modules||[])];
+  if(tpl.topic) state.topic=tpl.topic;
+  if(tpl.tags) state.tags=[...tpl.tags];
+  if(tpl.coords) state.coords=tpl.coords;
+  if(tpl.partyA_name) state.partyA_name=tpl.partyA_name;
+  if(tpl.partyB_name) state.partyB_name=tpl.partyB_name;
+  if(tpl.variant_id) state.variant_id=tpl.variant_id;
+  renderAll();
+}
+function saveCurrentAsTemplate(){
+  const name=prompt("Template name?");
+  if(!name) return;
+  const existingIndex=templates.findIndex(t=>t.name===name);
+  const tpl={
+    name,
+    mode:state.mode,
+    coreText:state.coreText,
+    default_modules:[...state.selectedModules],
+    topic:state.topic,
+    tags:[...state.tags],
+    coords:state.coords,
+    partyA_name:state.partyA_name,
+    partyB_name:state.partyB_name,
+    variant_id:state.variant_id,
+    language:"en"
+  };
+  if(existingIndex>=0){templates[existingIndex]=tpl;}else{templates.push(tpl);}
+  saveTemplatesToStorage();
+  renderTemplateOptions();
+  templateSelect.value=name;
+}
+function exportTemplatePack(){
+  const pack={pack_version:"1.0.0",created_utc:new Date().toISOString(),templates};
+  downloadFile("blea_templates_pack.json",JSON.stringify(pack,null,2));
+}
+function importTemplatePack(file){
+  const reader=new FileReader();
+  reader.onload=()=>{try{
+      const parsed=JSON.parse(reader.result);
+      const incoming=parsed.templates||parsed;
+      if(Array.isArray(incoming)){
+        const replace=confirm("Replace existing templates? OK = replace, Cancel = merge");
+        if(replace){templates=incoming;}else{templates=[...templates,...incoming];}
+        saveTemplatesToStorage();renderTemplateOptions();
+      } else {alert("Invalid template pack");}
+    }catch(e){alert("Failed to parse template pack");}};
+  reader.readAsText(file);
+}
+function updateStampUI(){
+  if(state.lastStamp.json){humanStamp.textContent=`BLEA1-${state.lastStamp.created_utc.replace(/[:-]|\.\d{3}/g,"")}-${state.lastStamp.ulid}-${state.topic}-${state.lastStamp.hash.slice(0,8)}`;}
+  jsonDisplay.textContent=state.lastStamp.json||"(generate to view)";
+  ulidDisplay.textContent=state.lastStamp.ulid||"-";
+  hashDisplay.textContent=state.lastStamp.hash||"-";
+}
+
+/* ============ Clause Extraction ============ */
+function extractClausesFromCore(){
+  const lines=coreText.value.split(/\r?\n/);
+  const clausesText=[];
+  let para=[];
+  const flushPara=()=>{if(para.length){const joined=para.join(" ").trim();if(joined) clausesText.push(joined);para=[];}};
+  lines.forEach(line=>{
+    const trimmed=line.trim();
+    if(/^#{1,6}\s+/.test(trimmed)){flushPara();clausesText.push(trimmed);}
+    else if(/^\s*\d+[\.\)]\s+/.test(line)){flushPara();clausesText.push(line.replace(/^\s*\d+[\.\)]\s*/,"").trim());}
+    else if(/^\s*[-*]\s+/.test(line)){flushPara();clausesText.push(line.replace(/^\s*[-*]\s*/,"").trim());}
+    else if(trimmed===""){flushPara();}
+    else {para.push(trimmed);}
+  });
+  flushPara();
+  const oldMap=Object.fromEntries(state.clauses.map(c=>[c.id,c]));
+  const newClauses=clausesText.map((p,i)=>{
+    const id=formatClauseId(i+1);
+    const existing=oldMap[id]||{};
+    return {
+      id,
+      text:p,
+      meaning:existing.meaning||"",
+      evidence:existing.evidence||"",
+      status:existing.status||"draft",
+      dependencies:existing.dependencies||[],
+      partyA_comment:existing.partyA_comment||"",
+      partyB_comment:existing.partyB_comment||""
+    };
+  });
+  state.clauses=newClauses;
+  renderAll();
+}
+function formatClauseId(n){return `C-${String(n).padStart(3,"0")}`;}
+
+/* ============ Fork Event Handling ============ */
+function recordForkEvent(){
+  const forkId=forkIdInput.value.trim()||`F-${Date.now()}`;
+  const prev=prevModelClaim.value.trim()||state.model_claim;
+  const next=newModelClaim.value.trim()||state.model_claim;
+  const reason=forkReason.value.trim();
+  const notes=forkNotes.value.trim();
+  const ts=new Date().toISOString();
+  state.fork_last_id=forkId;
+  if(next!==state.model_claim){state.semver.minor++;state.semver.patch=0;state.model_claim=next;}
+  const summary=`${ts} v${state.semver.major}.${state.semver.minor}.${state.semver.patch} Fork ${forkId}: ${prev} -> ${next}. Reason: ${reason||"n/a"}. Notes: ${notes||"-"}`;
+  state.changelog_head=summary;
+  forkStatus.textContent=`Recorded ${summary}`;
+  renderAll();
+}
+function updateForkStatus(){
+  forkStatus.textContent=state.changelog_head?`Last: ${state.changelog_head}`:"No fork recorded yet.";
+}
+
+/* ============ Event wiring ============ */
+coreText.oninput=()=>{state.coreText=coreText.value;renderPreview();};
+variantId.oninput=()=>{state.variant_id=variantId.value;};
+partyAName.oninput=()=>{state.partyA_name=partyAName.value;renderCommentsPreview();};
+partyBName.oninput=()=>{state.partyB_name=partyBName.value;renderCommentsPreview();};
+humanNotes.oninput=()=>{state.human_notes_global=humanNotes.value;};
+assistantNotes.oninput=()=>{state.assistant_notes_global=assistantNotes.value;};
+playPromise.oninput=()=>{state.play.promise=playPromise.value;renderPreview();};
+playSorry.oninput=()=>{state.play.sorry=playSorry.value;renderPreview();};
+playFix.oninput=()=>{state.play.fix=playFix.value;renderPreview();};
+storyVersion.oninput=()=>{state.play.storyVersion=storyVersion.value;};
+storyScene.oninput=()=>{state.play.scene=storyScene.value;};
+showTech.onchange=()=>{state.play.showTech=showTech.checked;};
+templateSelect.onchange=()=>{};
+applyTemplateBtn.onclick=()=>{const choice=templateSelect.value;if(!choice) return; if(confirm(`Apply template '${choice}'? This replaces core text and selection fields.`)){applyTemplateByName(choice);}};
+saveTemplateBtn.onclick=saveCurrentAsTemplate;
+importTemplatePackBtn.onclick=()=>templateFileInput.click();
+templateFileInput.onchange=e=>{const file=e.target.files[0];if(file) importTemplatePack(file);};
+exportTemplatePackBtn.onclick=exportTemplatePack;
+document.getElementById("bumpPatch").onclick=()=>{state.semver.patch++;renderAll();};
+document.getElementById("bumpMinor").onclick=()=>{state.semver.minor++;state.semver.patch=0;renderAll();};
+document.getElementById("bumpMajor").onclick=()=>{state.semver.major++;state.semver.minor=0;state.semver.patch=0;renderAll();};
+document.getElementById("generateStamp").onclick=()=>{generateStamp();};
+document.getElementById("resetBtn").onclick=()=>{localStorage.removeItem("blea_lab_state");const fresh=JSON.parse(JSON.stringify({
+  coreText:"BLEA CORE: Describe the main expectations here.",
+  modules:defaultModules,
+  selectedModules:[],
+  semver:{major:0,minor:1,patch:0},
+  topic:"BLEA Lab Document",
+  coords:"0,0",
+  model_claim:"local",
+  portal:"",
+  tags:["blea","lab"],
+  lastStamp:{ulid:"",created_utc:"",hash:"",json:""},
+  mode:"core",
+  partyA_name:"Party A",
+  partyB_name:"Party B",
+  variant_id:"S223.13",
+  room_code:Math.random().toString(36).slice(2,7).toUpperCase(),
+  clauses:[],
+  human_notes_global:"",
+  assistant_notes_global:"",
+  fork_last_id:null,
+  changelog_head:null,
+  play:{promise:"",sorry:"",fix:"",storyVersion:"1",scene:"1",showTech:false}
+}));fresh.modules=JSON.parse(JSON.stringify(defaultModules));Object.assign(state,fresh);renderAll();};
+document.getElementById("saveLocal").onclick=()=>{localStorage.setItem("blea_lab_state",JSON.stringify(state));SyncAdapter.saveState(state.room_code,state);alert("Saved locally.");};
+document.getElementById("loadLocal").onclick=()=>{const raw=localStorage.getItem("blea_lab_state");if(raw){Object.assign(state,JSON.parse(raw));renderAll();}};
+document.getElementById("exportText").onclick=()=>{downloadFile("blea_text.txt",buildFullText());};
+document.getElementById("exportStamp").onclick=()=>{downloadFile("blea_stamp.json",state.lastStamp.json||canonicalJSONString({note:"Generate stamp first."}));};
+document.getElementById("exportClauses").onclick=()=>{downloadFile("blea_clauses.json",JSON.stringify(state.clauses,null,2));};
+document.getElementById("exportChangelog").onclick=()=>{downloadFile("blea_changelog.json",JSON.stringify({fork_last_id:state.fork_last_id,changelog_head:state.changelog_head},null,2));};
+exportStateBtn.onclick=exportStateBundle;
+importStateBtn.onclick=()=>stateFileInput.click();
+stateFileInput.onchange=e=>{const file=e.target.files[0];if(file) importStateBundle(file);};
+shareLinkBtn.onclick=shareLinkFromState;
+document.getElementById("addClause").onclick=()=>{const id=formatClauseId(state.clauses.length+1);state.clauses.push({id,text:"New clause",meaning:"",evidence:"",status:"draft",dependencies:[],partyA_comment:"",partyB_comment:""});renderAll();};
+document.getElementById("extractClauses").onclick=()=>{extractClausesFromCore();};
+document.getElementById("highlightIssues").onclick=()=>{
+  state.clauses.forEach((c,i)=>{
+    const card=clauseList.children[i];
+    const sameTag=state.clauses.filter(x=>x.id!==c.id && x.status==="stable" && c.status==="stable" && x.text.match(/allow/i)&&c.text.match(/deny/i));
+    if((c.status==="stable" && (!c.meaning||!c.evidence)) || sameTag.length){card.classList.add("highlight-warn");}
+  });
+};
+modeSelect.onchange=()=>{state.mode=modeSelect.value;applyModeDefaults();renderAll();};
+perspectiveSelect.onchange=()=>{renderCommentsPreview();};
+document.getElementById("recordFork").onclick=recordForkEvent;
+
+/* ============ Helpers ============ */
+function buildFullText(){
+  let txt=state.coreText+"\n\nIncorporated Modules:\n"+state.selectedModules.join(", ")+"\n\n"+state.selectedModules.map(c=>state.modules[c].text).join("\n\n");
+  if(state.mode==="play"){txt+="\n\nPlay Promises:\n"+state.play.promise+"\nSorry:\n"+state.play.sorry+"\nFix:\n"+state.play.fix;}
+  if(state.mode==="ai-human"){txt+="\n\nHuman notes:\n"+state.human_notes_global+"\nAI notes:\n"+state.assistant_notes_global;}
+  if(state.clauses.length){txt+="\n\nClauses:\n"+state.clauses.map(c=>`${c.id} [${c.status}]: ${c.text}`).join("\n");}
+  return txt;
+}
+function downloadFile(name,content){const blob=new Blob([content],{type:"text/plain"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href);} 
+function applyModeDefaults(){
+  if(state.mode==="play"){const tpl=templates.find(t=>t.name.includes("Friends"));if(tpl){state.coreText=tpl.coreText;}}
+  if(state.mode==="ai-human"){if(!state.human_notes_global){state.human_notes_global="Human: We seek clarity and safety.";}if(!state.assistant_notes_global){state.assistant_notes_global="Assistant: I am not a legal person; I offer good-faith help.";}}
+}
+function exportStateBundle(){downloadFile("blea_state_bundle.json",JSON.stringify(state,null,2));}
+function importStateBundle(file){
+  const reader=new FileReader();
+  reader.onload=()=>{try{
+      const parsed=JSON.parse(reader.result);
+      const replace=confirm("Replace current state? OK = replace, Cancel = merge");
+      if(replace){Object.keys(state).forEach(k=>delete state[k]);Object.assign(state,parsed);}
+      else {Object.assign(state,parsed);}
+      if(parsed.modules) state.modules=JSON.parse(JSON.stringify(parsed.modules));
+      renderAll();
+    }catch(e){alert("Failed to import state bundle");}};
+  reader.readAsText(file);
+}
+function shareLinkFromState(){
+  const json=JSON.stringify(state);
+  if(json.length>20000 && !confirm("State is large; proceed to share link?")) return;
+  const encoded=toBase64Url(json);
+  const base=location.href.split("#")[0];
+  const url=`${base}#state=${encoded}`;
+  location.hash=`state=${encoded}`;
+  if(navigator.clipboard){navigator.clipboard.writeText(url).catch(()=>{});}
+  alert("Share link ready in address bar hash.");
+}
+function tryLoadStateFromHash(){
+  const match=location.hash.match(/state=([^&]+)/);
+  if(match){
+    try{
+      const decoded=fromBase64Url(match[1]);
+      const parsed=JSON.parse(decoded);
+      Object.assign(state,parsed);
+      if(parsed.modules) state.modules=JSON.parse(JSON.stringify(parsed.modules));
+      renderAll();
+    }catch(e){console.warn("Invalid state in hash");}
+  }
+}
+
+/* ============ Init ============ */
+(function init(){
+  loadTemplatesFromStorage();
+  const saved=localStorage.getItem("blea_lab_state");if(saved){Object.assign(state,JSON.parse(saved));}
+  tryLoadStateFromHash();
+  renderAll();
+})();
+</script>
+
+<!-- Timestamp (end): 2025-05-16T12:30:00Z | Model: GPT-5.1-Codex-Max -->
+<!-- How to run locally: Save as blea_lab.html and open in a modern browser (offline works). -->
+<!-- Modes: Core (baseline BLEA builder), Deep Law/Proof (clause cards, inconsistency highlighter), Play/Kids (friendly prompts + story version), AI–Human Charter (two-column notes). -->
+<!-- SyncAdapter extension: Replace SyncAdapter methods with WebSocket/HTTP calls; on load, fetch shared state by room_code; on save, push updates to the backend and broadcast to peers. -->
+<!-- Reset storage: use Reset button or clear localStorage key 'blea_lab_state'. -->
+</html>

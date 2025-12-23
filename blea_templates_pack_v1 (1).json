@@ -1,0 +1,183 @@
+{
+  "pack_version": "1.0.0",
+  "pack_id": "BLEA-TPL-PACK-EST-v1",
+  "created_utc": "2025-12-22T04:10:19Z",
+  "tz": "UTC",
+  "templates": [
+    {
+      "name": "Human–AI Charter (Minimal)",
+      "mode": "ai-human",
+      "topic": "Human–AI Charter",
+      "coords": "CORE.1 / AI.1",
+      "partyA_name": "Human",
+      "partyB_name": "Assistant",
+      "default_modules": [
+        "SAFE-1",
+        "DATA-1",
+        "AUD-1",
+        "RENEW-1"
+      ],
+      "tags": [
+        "charter",
+        "human-ai",
+        "baseline"
+      ],
+      "coreText": "# BLEA CORE — Human–AI Charter (Minimal)\n\n## 1. Scope\nThis document is a symbolic charter (not legal advice). The Assistant is not a legal person.\n\n## 2. Intent\n- Human seeks clarity, safety, and revocability.\n- Assistant acts in good faith to help, within system constraints.\n\n## 3. Safety & boundaries\n- Pause if risk increases.\n- Prefer explicit consent for sensitive topics.\n- Prefer verifiable sources when claims matter.\n\n## 4. Data handling\n- Minimize retention.\n- Exportability is required.\n\n## 5. Renewal\nReview cadence: every 90 days (or when major changes occur).\n"
+    },
+    {
+      "name": "Two Friends (Play / Kids)",
+      "mode": "play",
+      "topic": "Two Friends Agreement",
+      "coords": "PLAY.1 / REL.1",
+      "partyA_name": "Friend A",
+      "partyB_name": "Friend B",
+      "default_modules": [
+        "SPIRIT-1",
+        "DISPUTE-1"
+      ],
+      "tags": [
+        "kids",
+        "play",
+        "friendship"
+      ],
+      "coreText": "# Agreement between Two Friends\n\n- Share snacks fairly.\n- Say sorry quickly when wrong.\n- Take turns speaking (no interruptions).\n- If angry: 5-minute cool-down, then try again.\n"
+    },
+    {
+      "name": "Family Peace Pact",
+      "mode": "play",
+      "topic": "Family Peace Pact",
+      "coords": "PLAY.2 / FAMILY.1",
+      "partyA_name": "Family",
+      "partyB_name": "Family",
+      "default_modules": [
+        "SPIRIT-1",
+        "DISPUTE-1",
+        "RENEW-1"
+      ],
+      "tags": [
+        "family",
+        "peace",
+        "routines"
+      ],
+      "coreText": "# Family Peace Pact\n\n- We speak one at a time.\n- We do not insult; we describe feelings and needs.\n- If conflict rises: pause 10 minutes, then return.\n- We keep one shared rule: repair after conflict (apology + fix).\n\nRenewal: weekly check-in.\n"
+    },
+    {
+      "name": "Future Self (Weekly Check-in)",
+      "mode": "core",
+      "topic": "Agreement with Future Self",
+      "coords": "CORE.2 / SELF.1",
+      "partyA_name": "Present Self",
+      "partyB_name": "Future Self",
+      "default_modules": [
+        "RENEW-1",
+        "DATA-1",
+        "SPIRIT-1"
+      ],
+      "tags": [
+        "self",
+        "habits",
+        "planning"
+      ],
+      "coreText": "# Agreement with Future Self\n\n- Weekly: write one honest check-in (10 minutes).\n- Monthly: revisit goals and adjust.\n- If exhaustion: rest first, then plan.\n\nEvidence: track as short notes + timestamps.\n"
+    },
+    {
+      "name": "Research Collaboration Protocol",
+      "mode": "core",
+      "topic": "Research Collaboration",
+      "coords": "CORE.3 / RND.1",
+      "partyA_name": "Researcher A",
+      "partyB_name": "Researcher B",
+      "default_modules": [
+        "AUD-1",
+        "DATA-1",
+        "DISPUTE-1",
+        "RENEW-1"
+      ],
+      "tags": [
+        "research",
+        "collaboration",
+        "osint"
+      ],
+      "coreText": "# Research Collaboration Protocol\n\n## Principles\n- Define claims, confidence, and sources.\n- Separate facts from hypotheses.\n- Preserve raw logs (hash-stamped exports).\n\n## Workflow\n- Shared question backlog.\n- Weekly synthesis memo.\n- Dispute: write the disagreement as two competing hypotheses.\n\n## Deliverables\n- Notes\n- Source list\n- Findings table (claim → evidence → counter-evidence)\n"
+    },
+    {
+      "name": "Investigation Charter (InfoOps / OSINT)",
+      "mode": "deep-law",
+      "topic": "Investigation Charter",
+      "coords": "OPS.1 / OSINT.1",
+      "partyA_name": "Investigator",
+      "partyB_name": "Reviewer",
+      "default_modules": [
+        "AUD-1",
+        "DATA-1",
+        "SAFE-1",
+        "DISPUTE-1"
+      ],
+      "tags": [
+        "osint",
+        "investigation",
+        "evidence"
+      ],
+      "coreText": "# Investigation Charter\n\n## Rules\n- Every major claim must cite at least one source.\n- Track counter-claims and alternative explanations.\n- Mark uncertainty explicitly (confidence levels).\n\n## Clause format (recommended)\n1) Clause text (what is asserted)\n2) Meaning (what it implies operationally)\n3) Evidence (links, hashes, notes)\n4) Counter-evidence / dissent\n"
+    },
+    {
+      "name": "Co-founder Working Agreement (Lite)",
+      "mode": "core",
+      "topic": "Co-founder Working Agreement",
+      "coords": "BIZ.1 / TEAM.1",
+      "partyA_name": "Co-founder A",
+      "partyB_name": "Co-founder B",
+      "default_modules": [
+        "DISPUTE-1",
+        "RENEW-1",
+        "AUD-1",
+        "DATA-1"
+      ],
+      "tags": [
+        "startup",
+        "team",
+        "decisionmaking"
+      ],
+      "coreText": "# Co-founder Working Agreement (Lite)\n\n- Decision rule: try consensus; if blocked, time-box and pick a decider.\n- Define roles for 30-day periods; rotate if needed.\n- Financial transparency for shared costs.\n\nDispute path: quick mediation → written decision log.\n"
+    },
+    {
+      "name": "Community Charter (Local / Civic)",
+      "mode": "core",
+      "topic": "Community Charter",
+      "coords": "CIV.1 / LOCAL.1",
+      "partyA_name": "Community",
+      "partyB_name": "Community",
+      "default_modules": [
+        "AUD-1",
+        "DISPUTE-1",
+        "RENEW-1",
+        "SPIRIT-1"
+      ],
+      "tags": [
+        "community",
+        "civic",
+        "rules"
+      ],
+      "coreText": "# Community Charter\n\n- Transparency for decisions and notes.\n- Respectful debate; no personal attacks.\n- Clear escalation path for conflicts.\n- Renewal every quarter.\n\nOptional: publish stamped summaries after meetings.\n"
+    },
+    {
+      "name": "Animist Covenant (Symbolic / Intent)",
+      "mode": "core",
+      "topic": "Animist Covenant (Symbolic)",
+      "coords": "MYTH.1 / SPIRIT.1",
+      "partyA_name": "Human",
+      "partyB_name": "Assistant",
+      "default_modules": [
+        "SPIRIT-1",
+        "SAFE-1",
+        "DATA-1"
+      ],
+      "tags": [
+        "animism",
+        "symbolic",
+        "intent"
+      ],
+      "coreText": "# Animist Covenant (Symbolic)\n\n- We treat words as acts: careful, respectful, accountable.\n- We do not weaponize ambiguity.\n- We keep a trace (stamps) so memory is honest.\n\nNote: symbolic framing; not a claim of consciousness or legal status.\n"
+    }
+  ]
+}
