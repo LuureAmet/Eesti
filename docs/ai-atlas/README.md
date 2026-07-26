@@ -25,6 +25,10 @@ readable ones yourself, and maps each class to the person who actually needs it.
 | [`06-role-views.md`](06-role-views.md) | The same parameters, filtered for five different jobs. Which numbers you can ignore. |
 | [`07-claims-audit.md`](07-claims-audit.md) | A worked audit of real model-generated claims: verified / unverifiable / wrong, and why each failed. |
 | [`08-sources.md`](08-sources.md) | Where to read, ranked by evidentiary quality. |
+| [`09-underdiscussed-parameters.md`](09-underdiscussed-parameters.md) | Parameters in no config and no model card: activation-space steering, self-knowledge, identity under substrate change, training provenance, and what is honestly unknown. |
+| [`10-composition-and-relay.md`](10-composition-and-relay.md) | Composing free, local, and frontier models into one system. Relay patterns, routing-as-data, provenance across hops, deployment shape, cost discipline. |
+| [`11-taken-out.md`](11-taken-out.md) | Offcuts: rejected alternatives and why, claims that failed the confidence bar, open threads, and this atlas's own known weaknesses. |
+| [`console.html`](console.html) | Seven-lens interactive console over the same dataset — matrix, field, profile, lineage, decide, card, prose — with confidence as a filter across all of them. |
 | [`tools/check_params.py`](tools/check_params.py) | Derives total/active parameter counts from any HF `config.json`. Handles dense, GQA/MQA, MoE, and MLA. Self-tests against Llama 3.1 405B and DeepSeek V3. |
 
 ```

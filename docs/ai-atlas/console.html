@@ -1,0 +1,665 @@
+<title>Model Atlas Console</title>
+<style>
+:root{
+  --paper:#F4F6F6; --panel:#FFFFFF; --sunk:#E8ECED; --line:#D3DADB; --line2:#BFC9CB;
+  --ink:#101619; --ink2:#46565A; --ink3:#6E8085;
+  --c1:#0097B2; --c2:#B05E00; --c3:#5B4B9E; --bad:#B23A2F;
+  --grid:#DFE5E6;
+  --f-mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --f-sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#0F1416; --panel:#161D20; --sunk:#0A0E10; --line:#263034; --line2:#374448;
+  --ink:#E4ECEE; --ink2:#93A5A9; --ink3:#67787D;
+  --c1:#1B93A6; --c2:#B87B28; --c3:#8072C4; --bad:#D46558;
+  --grid:#20292C;
+}}
+:root[data-theme="dark"]{
+  --paper:#0F1416; --panel:#161D20; --sunk:#0A0E10; --line:#263034; --line2:#374448;
+  --ink:#E4ECEE; --ink2:#93A5A9; --ink3:#67787D;
+  --c1:#1B93A6; --c2:#B87B28; --c3:#8072C4; --bad:#D46558;
+  --grid:#20292C;
+}
+:root[data-theme="light"]{
+  --paper:#F4F6F6; --panel:#FFFFFF; --sunk:#E8ECED; --line:#D3DADB; --line2:#BFC9CB;
+  --ink:#101619; --ink2:#46565A; --ink3:#6E8085;
+  --c1:#0097B2; --c2:#B05E00; --c3:#5B4B9E; --bad:#B23A2F;
+  --grid:#DFE5E6;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;overflow:hidden}
+body{
+  background:var(--paper);color:var(--ink);
+  font-family:var(--f-mono);font-size:13px;line-height:1.45;
+  font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased;
+}
+.shell{display:grid;grid-template-rows:auto 1fr;height:100dvh}
+
+/* ── header ─────────────────────────────────────────── */
+.bar{
+  display:flex;align-items:center;gap:18px;flex-wrap:wrap;
+  padding:0 14px;min-height:46px;
+  border-bottom:1px solid var(--line);background:var(--panel);
+}
+.brand{display:flex;align-items:baseline;gap:9px}
+.brand b{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+.brand span{font-size:10px;color:var(--ink3);letter-spacing:.08em}
+.spacer{flex:1}
+.ctl{display:flex;align-items:center;gap:7px;font-size:10px;letter-spacing:.1em;
+     text-transform:uppercase;color:var(--ink2)}
+.seg{display:flex;border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.seg button{
+  font:inherit;font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:transparent;color:var(--ink2);border:0;cursor:pointer;
+  padding:4px 8px;border-right:1px solid var(--line);
+}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--c1);color:#fff}
+:root[data-theme="dark"] .seg button[aria-pressed="true"],
+@media (prefers-color-scheme:dark){.seg button[aria-pressed="true"]{color:#08191C}}
+.seg button:hover{color:var(--ink)}
+.seg button:focus-visible{outline:2px solid var(--c1);outline-offset:-2px}
+
+/* ── body ───────────────────────────────────────────── */
+.main{display:grid;grid-template-columns:172px 1fr;min-height:0}
+.rail{
+  border-right:1px solid var(--line);background:var(--panel);
+  display:flex;flex-direction:column;padding:8px 0;overflow-y:auto;
+}
+.lens{
+  display:grid;grid-template-columns:20px 1fr;gap:9px;align-items:start;
+  text-align:left;font:inherit;background:transparent;border:0;cursor:pointer;
+  padding:9px 12px;color:var(--ink2);border-left:2px solid transparent;
+}
+.lens:hover{background:var(--sunk);color:var(--ink)}
+.lens:focus-visible{outline:2px solid var(--c1);outline-offset:-2px}
+.lens[aria-current="true"]{border-left-color:var(--c1);color:var(--ink);background:var(--sunk)}
+.lens .n{font-size:9px;color:var(--ink3);padding-top:2px}
+.lens[aria-current="true"] .n{color:var(--c1)}
+.lens .t{display:block;font-size:11px;letter-spacing:.11em;text-transform:uppercase;font-weight:700}
+.lens .d{display:block;font-size:9.5px;color:var(--ink3);letter-spacing:0;text-transform:none;
+         font-family:var(--f-sans);line-height:1.35;margin-top:2px}
+.railfoot{margin-top:auto;padding:11px 12px;border-top:1px solid var(--line);
+          font-size:9px;color:var(--ink3);font-family:var(--f-sans);line-height:1.5}
+
+.stage{min-width:0;min-height:0;overflow:hidden;position:relative;display:flex;flex-direction:column}
+.stagehead{
+  padding:10px 16px;border-bottom:1px solid var(--line);
+  display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;background:var(--panel)
+}
+.stagehead h2{margin:0;font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+.stagehead p{margin:0;font-size:11px;color:var(--ink3);font-family:var(--f-sans)}
+.pane{flex:1;min-height:0;overflow:auto;padding:14px 16px}
+
+/* ── confidence encoding ────────────────────────────── */
+.cf{display:inline-flex;align-items:center;gap:5px}
+.cf i{
+  width:9px;height:9px;border-radius:50%;flex:none;font-style:normal;
+  border:1.5px solid currentColor;
+}
+.c3 i{background:currentColor}
+.c2 i{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.c1 i{background:transparent;border-style:dashed}
+.c0 i{display:none}
+.cx i{background:var(--bad);border-color:var(--bad)}
+.c3{color:var(--ink);opacity:1}
+.c2{color:var(--ink2);opacity:.92}
+.c1{color:var(--ink3);opacity:.62}
+.c0{color:var(--ink3);opacity:.5;font-style:normal}
+.cx{color:var(--bad);opacity:1}
+
+/* ── matrix ─────────────────────────────────────────── */
+table{border-collapse:collapse;width:100%;font-size:11.5px}
+thead th{
+  position:sticky;top:0;background:var(--panel);z-index:2;
+  text-align:left;font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink3);font-weight:700;padding:7px 9px;border-bottom:1px solid var(--line2);
+  cursor:pointer;white-space:nowrap;user-select:none;
+}
+thead th:hover{color:var(--ink)}
+thead th[aria-sort]{color:var(--c1)}
+tbody td{padding:6px 9px;border-bottom:1px solid var(--grid);white-space:nowrap}
+tbody tr{cursor:pointer}
+tbody tr:hover{background:var(--sunk)}
+tbody tr:focus-visible{outline:2px solid var(--c1);outline-offset:-2px}
+.nm{font-weight:700}
+.tag{font-size:9px;letter-spacing:.08em;text-transform:uppercase;padding:1px 5px;
+     border-radius:2px;border:1px solid currentColor}
+.o-open{color:var(--c1)} .o-closed{color:var(--c2)} .o-part{color:var(--c3)}
+.num{text-align:right}
+
+/* ── charts ─────────────────────────────────────────── */
+.chartwrap{width:100%;overflow-x:auto}
+svg{display:block;max-width:100%}
+.ax{stroke:var(--line2);stroke-width:1}
+.gl{stroke:var(--grid);stroke-width:1}
+.axt{fill:var(--ink3);font-size:9.5px;font-family:var(--f-mono)}
+.axl{fill:var(--ink2);font-size:9px;letter-spacing:.12em;text-transform:uppercase}
+.dotlbl{fill:var(--ink);font-size:10px;font-family:var(--f-mono)}
+.dot{cursor:pointer}
+.dot:hover circle{stroke-width:3}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 12px;padding:0;list-style:none;
+        font-size:10px;letter-spacing:.06em;color:var(--ink2)}
+.legend li{display:flex;align-items:center;gap:6px}
+.sw{width:11px;height:11px;border-radius:2px;flex:none}
+
+/* ── decide ─────────────────────────────────────────── */
+.qs{max-width:560px;display:flex;flex-direction:column;gap:16px}
+.q{border:1px solid var(--line);border-radius:3px;background:var(--panel);padding:12px 14px}
+.q h3{margin:0 0 9px;font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink2)}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{font:inherit;font-size:11px;padding:5px 10px;border:1px solid var(--line2);
+     background:transparent;color:var(--ink2);border-radius:2px;cursor:pointer}
+.opt:hover{border-color:var(--c1);color:var(--ink)}
+.opt:focus-visible{outline:2px solid var(--c1);outline-offset:1px}
+.opt[aria-pressed="true"]{background:var(--c1);border-color:var(--c1);color:#fff}
+.verdict{border:1px solid var(--c1);border-left-width:3px;border-radius:3px;
+         background:var(--panel);padding:14px}
+.verdict h3{margin:0 0 4px;font-size:15px}
+.verdict p{margin:6px 0 0;font-family:var(--f-sans);font-size:12.5px;color:var(--ink2);line-height:1.55}
+.verdict ul{margin:9px 0 0;padding-left:17px;font-family:var(--f-sans);font-size:12px;color:var(--ink2)}
+.verdict li{margin:3px 0}
+
+/* ── card ───────────────────────────────────────────── */
+.deck{display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.card{border:1px solid var(--line);border-radius:3px;background:var(--panel);
+      padding:16px;flex:1 1 340px;max-width:520px}
+.card h3{margin:0;font-size:17px;letter-spacing:-.01em}
+.card .sub{color:var(--ink3);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;margin:3px 0 13px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;font-size:11.5px}
+.kv dt{color:var(--ink3);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;padding-top:2px}
+.kv dd{margin:0}
+.note{font-family:var(--f-sans);font-size:12px;color:var(--ink2);line-height:1.55;
+      margin:13px 0 0;padding-top:12px;border-top:1px solid var(--grid)}
+.nav{display:flex;gap:7px;margin-top:14px}
+
+/* ── timeline ───────────────────────────────────────── */
+.tl{position:relative;padding-left:22px;max-width:760px}
+.tl::before{content:"";position:absolute;left:5px;top:5px;bottom:5px;width:1px;background:var(--line2)}
+.ev{position:relative;padding:0 0 18px}
+.ev::before{content:"";position:absolute;left:-21px;top:5px;width:9px;height:9px;
+            border-radius:50%;background:var(--paper);border:2px solid var(--c1)}
+.ev.minor::before{border-color:var(--line2)}
+.ev .yr{font-size:10px;letter-spacing:.11em;color:var(--c1)}
+.ev.minor .yr{color:var(--ink3)}
+.ev .hd{font-size:13px;font-weight:700;margin:2px 0}
+.ev .bd{font-family:var(--f-sans);font-size:12px;color:var(--ink2);line-height:1.55;max-width:62ch}
+
+/* ── prose lens ─────────────────────────────────────── */
+.prose{max-width:66ch;font-family:var(--f-sans);font-size:13.5px;line-height:1.65;color:var(--ink2)}
+.prose h3{font-family:var(--f-mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;
+          color:var(--ink);margin:22px 0 7px}
+.prose h3:first-child{margin-top:0}
+.prose p{margin:0 0 11px}
+.prose strong{color:var(--ink)}
+.prose code{font-family:var(--f-mono);font-size:12px;background:var(--sunk);padding:1px 4px;border-radius:2px}
+
+/* ── overlay ────────────────────────────────────────── */
+.sheet{position:absolute;inset:0;background:color-mix(in srgb,var(--paper) 90%,transparent);
+       backdrop-filter:blur(3px);display:none;align-items:center;justify-content:center;padding:22px;z-index:20}
+.sheet[open]{display:flex}
+.sheet .card{max-height:100%;overflow:auto}
+.x{position:absolute;top:12px;right:14px;font:inherit;font-size:11px;background:transparent;
+   border:1px solid var(--line2);color:var(--ink2);border-radius:2px;padding:3px 8px;cursor:pointer}
+.x:hover{color:var(--ink);border-color:var(--c1)}
+
+.hint{font-size:9.5px;color:var(--ink3);font-family:var(--f-sans)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:760px){
+  .main{grid-template-columns:1fr;grid-template-rows:auto 1fr}
+  .rail{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:0}
+  .lens{grid-template-columns:1fr;min-width:104px;border-left:0;border-bottom:2px solid transparent;padding:8px 10px}
+  .lens[aria-current="true"]{border-left-color:transparent;border-bottom-color:var(--c1)}
+  .lens .d,.lens .n,.railfoot{display:none}
+}
+</style>
+
+<div class="shell">
+  <header class="bar">
+    <div class="brand"><b>Model Atlas</b><span>console</span></div>
+    <div class="ctl">
+      <label for="conf">signal floor</label>
+      <div class="seg" id="conf" role="group" aria-label="Minimum confidence">
+        <button data-c="0" aria-pressed="true">all</button>
+        <button data-c="1" aria-pressed="false">≥spec</button>
+        <button data-c="2" aria-pressed="false">≥claim</button>
+        <button data-c="3" aria-pressed="false">verified</button>
+      </div>
+    </div>
+    <div class="spacer"></div>
+    <span class="hint" id="count"></span>
+    <div class="seg" role="group" aria-label="Theme">
+      <button id="tl" aria-pressed="false">light</button>
+      <button id="td" aria-pressed="false">dark</button>
+    </div>
+  </header>
+
+  <div class="main">
+    <nav class="rail" id="rail" aria-label="Lenses"></nav>
+    <section class="stage">
+      <div class="stagehead"><h2 id="sh"></h2><p id="sd"></p></div>
+      <div class="pane" id="pane"></div>
+      <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Model detail">
+        <div class="card" id="sheetc"></div>
+        <button class="x" id="sx">close</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+/* ══ data ═══════════════════════════════════════════════
+   conf: 3 verified · 2 vendor/measured · 1 speculative · 0 contradicted
+   Every field is [value, confidence]. Nothing is asserted without a mark. */
+const M=[
+ {id:"opus5",name:"Claude Opus 5",org:"Anthropic",open:"closed",rung:0,
+  total:[null,0],active:[null,0],layers:[null,0],hidden:[null,0],
+  ctx:[1000000,3],pin:[5,3],pout:[25,3],arch:["undisclosed",3],
+  note:"Agentic coding workhorse. Code review at high precision and recall, and unusually accurate at low effort — a cheap breadth sweep is viable. Delegates more readily than its predecessor, so cap it. Self-verifies unprompted; telling it to verify causes over-verification."},
+ {id:"fable5",name:"Claude Fable 5",org:"Anthropic",open:"closed",rung:0,
+  total:[null,0],active:[null,0],layers:[null,0],hidden:[null,0],
+  ctx:[1000000,3],pin:[10,3],pout:[50,3],arch:["undisclosed",3],
+  note:"Longest-horizon work; sustains async communication with long-running subagents. Turns can run many minutes. Thinking is always on — an explicit disable is a 400. Unavailable under zero data retention, and its classifiers target most cybersecurity content."},
+ {id:"sonnet5",name:"Claude Sonnet 5",org:"Anthropic",open:"closed",rung:0,
+  total:[null,0],active:[null,0],layers:[null,0],hidden:[null,0],
+  ctx:[1000000,3],pin:[3,3],pout:[15,3],arch:["undisclosed",3],
+  note:"Near-Opus quality on coding and agentic work at the volume tier. The one structural gap: no mid-conversation system messages. If your architecture depends on those, Sonnet is out regardless of price."},
+ {id:"haiku45",name:"Claude Haiku 4.5",org:"Anthropic",open:"closed",rung:0,
+  total:[null,0],active:[null,0],layers:[null,0],hidden:[null,0],
+  ctx:[200000,3],pin:[1,3],pout:[5,3],arch:["undisclosed",3],
+  note:"The prep tier. Every token of normalisation done here instead of at frontier rates is billed at a tenth. Note the 200K context — a big bundle routed here has to be chunked."},
+ {id:"gpt5",name:"GPT-5 family",org:"OpenAI",open:"closed",rung:1,
+  total:[null,0],active:[null,0],layers:[null,0],hidden:[null,0],
+  ctx:[400000,1],pin:[null,0],pout:[null,0],arch:["MoE implied",1],
+  note:"System cards imply mixture-of-experts without confirming a count. Every circulating parameter figure is a leak or an inference."},
+ {id:"gemini3",name:"Gemini 3 Pro",org:"Google",open:"closed",rung:1,
+  total:[null,0],active:[null,0],layers:[null,0],hidden:[null,0],
+  ctx:[1000000,2],pin:[null,0],pout:[null,0],arch:["sparse MoE",2],
+  note:"One of the few closed models whose vendor states the architecture type. Type only — no shape, no counts."},
+ {id:"grok4",name:"Grok 4",org:"xAI",open:"closed",rung:0,
+  total:[null,0],active:[null,0],layers:[null,0],hidden:[null,0],
+  ctx:[256000,1],pin:[null,0],pout:[null,0],arch:["hybrid (leak)",1],
+  note:"Widely-quoted parameter figures trace to leaks, not disclosure."},
+ {id:"llama405",name:"Llama 3.1 405B",org:"Meta",open:"open",rung:2,
+  total:[405.8,3],active:[405.8,3],layers:[126,3],hidden:[16384,3],
+  ctx:[128000,3],pin:[null,0],pout:[null,0],arch:["dense + GQA 128Q/8KV",3],
+  note:"The cleanest teaching example of a modern dense transformer, and the reference case for the derivation script — 405.8B derived against 405B published. Deliberately dense, which now reads as the end of an era rather than the start of one."},
+ {id:"dsv3",name:"DeepSeek V3 / R1",org:"DeepSeek",open:"open",rung:4,
+  total:[671,3],active:[37,3],layers:[61,3],hidden:[7168,3],
+  ctx:[128000,3],pin:[null,0],pout:[null,0],arch:["MLA + MoE 256/8 +1 shared",3],
+  note:"Three independent contributions: MLA (low-rank KV compression, ~7x smaller cache than GQA), fine-grained MoE, and native FP8 training at scale. Derived here at 670.9B total / 37.4B active — within 0.2% of published."},
+ {id:"mixtral",name:"Mixtral 8x22B",org:"Mistral",open:"open",rung:3,
+  total:[141,3],active:[39,3],layers:[56,3],hidden:[6144,3],
+  ctx:[64000,3],pin:[null,0],pout:[null,0],arch:["SMoE 8 experts / 2 active",3],
+  note:"Proved sparse MoE worked at production quality under a permissive licence. Everything fine-grained that followed is downstream of it."},
+ {id:"qwen3",name:"Qwen3-235B-A22B",org:"Alibaba",open:"open",rung:4,
+  total:[235,3],active:[22,3],layers:[94,3],hidden:[null,1],
+  ctx:[131000,3],pin:[null,0],pout:[null,0],arch:["MoE + GQA 64Q",3],
+  note:"Breadth is the contribution — one family from tiny local models to frontier MoE, with consistent tooling. The pragmatic production default for a lot of work."},
+ {id:"kimi",name:"Kimi K2",org:"Moonshot",open:"open",rung:3,
+  total:[1000,2],active:[32,2],layers:[null,1],hidden:[null,1],
+  ctx:[null,1],pin:[null,0],pout:[null,0],arch:["MoE 384/8, MuonClip",2],
+  note:"The MuonClip optimiser — scaling Muon to trillion-parameter training. Optimiser innovation at frontier scale is rare; almost everyone runs AdamW. Also the finest MoE granularity shipped."},
+ {id:"glm46",name:"GLM-4.6",org:"Z.ai",open:"open",rung:3,
+  total:[355,2],active:[32,2],layers:[92,2],hidden:[5120,2],
+  ctx:[200000,2],pin:[null,0],pout:[null,0],arch:["MoE + shared expert, QK-Norm, partial RoPE",2],
+  note:"Architecturally interesting for partial RoPE — only some head dimensions rotated. Figures here are third-party; a config fetch promotes the whole row to verified."},
+ {id:"glm5",name:"GLM-5",org:"Z.ai",open:"open",rung:3,
+  total:[744,1],active:[40,1],layers:[null,1],hidden:[null,1],
+  ctx:[null,1],pin:[null,0],pout:[null,0],arch:["MoE",1],
+  note:"Weights published alongside a deliberately minimal repository. Nothing is restricted — disclosure simply thinned. Read the config; ignore the absent prose."}
+];
+
+const LENSES=[
+ {id:"matrix",n:"01",t:"Matrix",d:"Dense, sortable, every cell marked",
+  h:"Matrix",s:"Sort any column. Click a row for the full record. Cell opacity is confidence."},
+ {id:"field",n:"02",t:"Field",d:"Spatial position by cost and context",
+  h:"Field",s:"Input price against context window, both log-scaled. Only models with published pricing can appear."},
+ {id:"profile",n:"03",t:"Profile",d:"Shape comparison across structural axes",
+  h:"Profile",s:"Parallel coordinates. Every axis is computed from verifiable data — no invented capability scores."},
+ {id:"lineage",n:"04",t:"Lineage",d:"How the field arrived here",
+  h:"Lineage",s:"The architectural and disclosure inflection points, not a release calendar."},
+ {id:"decide",n:"05",t:"Decide",d:"Answer four questions, get a route",
+  h:"Decide",s:"Constraint-first. Hard blockers are evaluated before capability."},
+ {id:"card",n:"06",t:"Card",d:"One model at a time, arrow keys",
+  h:"Card",s:"For when a table is too much at once. Arrow keys or the buttons move through the set."},
+ {id:"prose",n:"07",t:"Prose",d:"The argument in sentences",
+  h:"Prose",s:"Same content, for readers who think in paragraphs rather than grids."}
+];
+
+/* ══ state ══════════════════════════════════════════════ */
+let lens="matrix", floor=0, sortk="name", sortd=1, cardi=0;
+const D=[null,null,null,null];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* a field passes the floor if its confidence clears it */
+const ok=f=>f[1]>=floor;
+const show=(f,fmt)=>{
+  if(f[1]===0&&f[0]===null) return `<span class="cf c0">not published</span>`;
+  if(!ok(f)) return `<span class="cf c1" style="opacity:.28"><i></i>·</span>`;
+  const v=f[0]===null?"—":(fmt?fmt(f[0]):f[0]);
+  return `<span class="cf c${f[1]}"><i></i>${esc(v)}</span>`;
+};
+const nfmt=n=>n>=1000?(n/1000).toFixed(n>=10000?0:1)+"k":String(n);
+const bfmt=n=>n>=1000?(n/1000).toFixed(2)+"T":n+"B";
+
+/* ══ lenses ═════════════════════════════════════════════ */
+function matrix(){
+  const cols=[["name","Model",0],["org","Org",0],["open","Access",0],["arch","Architecture",1],
+              ["total","Total",1],["active","Active",1],["layers","Layers",1],
+              ["hidden","Hidden",1],["ctx","Context",1],["pin","$ / MTok in",1]];
+  const rows=[...M].sort((a,b)=>{
+    const g=o=>{const v=o[sortk]; return Array.isArray(v)?(v[0]??-Infinity):v;};
+    const x=g(a),y=g(b);
+    return (typeof x==="string"?x.localeCompare(y):x-y)*sortd;
+  });
+  return `<div class="chartwrap"><table><thead><tr>${
+    cols.map(([k,l,num])=>`<th data-k="${k}" ${sortk===k?`aria-sort="${sortd>0?"ascending":"descending"}"`:""}
+      class="${num?"num":""}">${l}${sortk===k?(sortd>0?" ▲":" ▼"):""}</th>`).join("")
+  }</tr></thead><tbody>${rows.map(m=>`<tr tabindex="0" data-id="${m.id}">
+    <td class="nm">${esc(m.name)}</td>
+    <td>${esc(m.org)}</td>
+    <td><span class="tag o-${m.open==="open"?"open":"closed"}">${m.open}</span></td>
+    <td>${show(m.arch)}</td>
+    <td class="num">${show(m.total,bfmt)}</td>
+    <td class="num">${show(m.active,bfmt)}</td>
+    <td class="num">${show(m.layers)}</td>
+    <td class="num">${show(m.hidden)}</td>
+    <td class="num">${show(m.ctx,nfmt)}</td>
+    <td class="num">${show(m.pin,v=>"$"+v)}</td>
+  </tr>`).join("")}</tbody></table></div>`;
+}
+
+let fx="cost";
+const FAX={
+  cost:{sub:"Input price against context window, both log-scaled.",x:m=>m.pin,y:m=>m.ctx,xl:"input $ / MTok \u2192",yl:"context \u2192",
+        xt:[1,3,5,10],yt:[200000,400000,1000000],xf:v=>"$"+v,yf:v=>nfmt(v),
+        note:"Only a model whose vendor publishes a price can be placed. Open-weights models are absent because you run them yourself \u2014 absence here is a disclosure fact, not a capability one."},
+  spars:{sub:"Total against active parameters. The dashed diagonal is dense.",x:m=>m.total,y:m=>m.active,xl:"total params (B) \u2192",yl:"active params (B) \u2192",
+        xt:[141,405,671,1000],yt:[22,37,141,405],xf:v=>v+"B",yf:v=>v+"B",diag:true,
+        note:"The diagonal is dense \u2014 every parameter active on every token. Distance <em>below</em> it is sparsity, and sparsity is what makes a 671B model cost roughly what a 37B one costs to run. It is also what makes it impossible to fit on your GPU."}
+};
+function field(){
+  const A=FAX[fx];
+  const pts=M.filter(m=>{const x=A.x(m),y=A.y(m);
+    return x[0]!==null&&y[0]!==null&&ok(x)&&ok(y);});
+  const sel=`<div class="seg" id="fax" style="margin:0 0 12px">
+    <button data-f="cost" aria-pressed="${fx==="cost"}">cost / context</button>
+    <button data-f="spars" aria-pressed="${fx==="spars"}">total / active</button></div>`;
+  if(!pts.length) return sel+`<p class="hint">No model clears the current signal floor on both axes.</p>`;
+  const W=760,H=430,P={t:22,r:130,b:56,l:70};
+  const lg=v=>Math.log10(v);
+  const xs=pts.map(m=>lg(A.x(m)[0])), ys=pts.map(m=>lg(A.y(m)[0]));
+  const x0=Math.min(...xs)-.22,x1=Math.max(...xs)+.22,y0=Math.min(...ys)-.18,y1=Math.max(...ys)+.18;
+  const X=v=>P.l+(lg(v)-x0)/(x1-x0)*(W-P.l-P.r);
+  const Y=v=>H-P.b-(lg(v)-y0)/(y1-y0)*(H-P.t-P.b);
+  const diag=A.diag?`<line x1="${X(Math.pow(10,Math.max(x0,y0)))}" y1="${Y(Math.pow(10,Math.max(x0,y0)))}"
+      x2="${X(Math.pow(10,Math.min(x1,y1)))}" y2="${Y(Math.pow(10,Math.min(x1,y1)))}"
+      stroke="var(--line2)" stroke-width="1.5" stroke-dasharray="5 4"/>
+     <text class="axt" x="${X(Math.pow(10,Math.min(x1,y1)))-6}" y="${Y(Math.pow(10,Math.min(x1,y1)))-8}"
+      text-anchor="end">dense</text>`:"";
+  return sel+`<ul class="legend">
+    <li><span class="sw" style="background:var(--c2)"></span>closed weights</li>
+    <li><span class="sw" style="background:var(--c1)"></span>open weights</li>
+    <li><span class="cf c3"><i></i></span>verified</li>
+    <li><span class="cf c1"><i></i></span>speculative</li>
+  </ul>
+  <div class="chartwrap"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img"
+    aria-label="${A.xl} against ${A.yl}, log scaled">
+    ${A.yt.filter(t=>lg(t)>=y0&&lg(t)<=y1).map(t=>`<line class="gl" x1="${P.l}" x2="${W-P.r}" y1="${Y(t)}" y2="${Y(t)}"/>
+      <text class="axt" x="${P.l-8}" y="${Y(t)+3}" text-anchor="end">${A.yf(t)}</text>`).join("")}
+    ${A.xt.filter(t=>lg(t)>=x0&&lg(t)<=x1).map(t=>`<text class="axt" x="${X(t)}" y="${H-P.b+16}" text-anchor="middle">${A.xf(t)}</text>`).join("")}
+    ${diag}
+    <line class="ax" x1="${P.l}" x2="${W-P.r}" y1="${H-P.b}" y2="${H-P.b}"/>
+    <line class="ax" x1="${P.l}" x2="${P.l}" y1="${P.t}" y2="${H-P.b}"/>
+    <text class="axl" x="${P.l}" y="${H-12}">${A.xl}</text>
+    <text class="axl" x="${-P.t-4}" y="14" transform="rotate(-90)" text-anchor="end">${A.yl}</text>
+    ${(()=>{const placed=[];
+      return pts.map(m=>{
+      const c=m.open==="open"?"var(--c1)":"var(--c2)";
+      const cf=Math.min(A.x(m)[1],A.y(m)[1]);
+      const cx=X(A.x(m)[0]), cy=Y(A.y(m)[0]);
+      let ly=cy+4;
+      while(placed.some(q=>Math.abs(q.x-cx)<118&&Math.abs(q.y-ly)<13)) ly-=14;
+      placed.push({x:cx,y:ly});
+      return `<g class="dot" data-id="${m.id}" tabindex="0" role="button" aria-label="${esc(m.name)}">
+        <circle cx="${cx}" cy="${cy}" r="9" fill="${c}"
+          fill-opacity="${cf>=3?.32:.14}" stroke="${c}" stroke-width="2"
+          stroke-dasharray="${cf<=1?"3 3":"none"}" stroke-opacity="${cf>=3?1:.6}"/>
+        ${Math.abs(ly-(cy+4))>2?`<line x1="${cx+10}" y1="${cy}" x2="${cx+13}" y2="${ly-4}" stroke="${c}" stroke-width="1" stroke-opacity=".5"/>`:""}
+        <text class="dotlbl" x="${cx+14}" y="${ly}">${esc(m.name.replace("Claude ",""))}</text>
+      </g>`;}).join("");})()}
+  </svg></div>
+  <p class="hint" style="margin-top:10px">${A.note}</p>`;
+}
+function profile(){
+  const ax=[
+    {k:"Context",   f:m=>m.ctx[0]?Math.log10(m.ctx[0]):null,  c:m=>m.ctx[1]},
+    {k:"Cheapness", f:m=>m.pin[0]?-Math.log10(m.pin[0]):null, c:m=>m.pin[1]},
+    {k:"Openness",  f:m=>m.rung,                              c:()=>3},
+    {k:"Spec vis.", f:m=>[m.total,m.active,m.layers,m.hidden].filter(x=>x[1]>=2).length, c:()=>3},
+    {k:"Sparsity",  f:m=>m.total[0]&&m.active[0]?1-m.active[0]/m.total[0]:null, c:m=>Math.min(m.total[1],m.active[1])}
+  ];
+  const rows=M.filter(m=>ax.some(a=>a.f(m)!==null));
+  const W=760,H=380,P={t:26,r:24,b:44,l:80};
+  const cw=(W-P.l-P.r)/(ax.length-1);
+  const dom=ax.map(a=>{const v=rows.map(a.f).filter(x=>x!==null);
+    return v.length?[Math.min(...v),Math.max(...v)]:[0,1];});
+  const Y=(i,v)=>{const[a,b]=dom[i];return b===a?(P.t+H-P.b)/2:H-P.b-(v-a)/(b-a)*(H-P.t-P.b);};
+  return `<ul class="legend">
+    <li><span class="sw" style="background:var(--c1)"></span>open weights</li>
+    <li><span class="sw" style="background:var(--c2)"></span>closed weights</li>
+  </ul>
+  <div class="chartwrap"><svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img"
+    aria-label="Parallel coordinates across five structural axes">
+    ${ax.map((a,i)=>`<line class="ax" x1="${P.l+i*cw}" x2="${P.l+i*cw}" y1="${P.t}" y2="${H-P.b}"/>
+      <text class="axl" x="${P.l+i*cw}" y="${H-P.b+18}" text-anchor="middle">${a.k}</text>`).join("")}
+    ${rows.map(m=>{
+      const seg=[];let run=[];
+      ax.forEach((a,i)=>{const v=a.f(m);
+        if(v===null||a.c(m)<floor){if(run.length>1)seg.push(run);run=[];}
+        else run.push([P.l+i*cw,Y(i,v)]);});
+      if(run.length>1)seg.push(run);
+      const c=m.open==="open"?"var(--c1)":"var(--c2)";
+      const conf=Math.min(...ax.map(a=>a.f(m)!==null?a.c(m):3));
+      return seg.map(s=>`<polyline points="${s.map(p=>p.join(",")).join(" ")}" fill="none"
+        ><title>${esc(m.name)}</title></polyline><polyline points="${s.map(p=>p.join(",")).join(" ")}" fill="none"
+        stroke="${c}" stroke-width="2" stroke-opacity="${conf>=3?.85:.4}"
+        stroke-dasharray="${conf<=1?"4 3":"none"}" stroke-linejoin="round"/>`).join("")
+      + seg.flat().map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.5" fill="${c}"
+          stroke="var(--panel)" stroke-width="2"/>`).join("");
+    }).join("")}
+  </svg></div>
+  <p class="hint" style="margin-top:10px"><strong>Axes are computed, never scored.</strong> Cheapness inverts input
+  price; Openness is the six-rung ladder; Spec&nbsp;visibility counts how many of four shape fields are actually
+  published. Hover a line for its model.</p>
+  <p class="hint" style="margin-top:6px">Read the <em>populations</em>, not the individuals: the closed group cannot
+  reach the right-hand axes at all. That is not a capability gap — it is a disclosure gap, and it is the whole
+  argument for measuring behaviour instead of inferring it from specifications.</p>`;
+}
+
+function lineage(){
+  const E=[
+   {y:"2017",h:"Attention",b:"The decoder-only transformer arrives. Everything below is a modification of it, not a replacement.",m:0},
+   {y:"2020",h:"GPT-3 — weights close",b:"Parameter count and paper published; weights withheld. The first frontier model nobody outside could run. Establishes the API-only norm.",m:0},
+   {y:"2022",h:"Chinchilla",b:"Compute-optimal scaling. Widely misapplied ever since: it optimises training cost, not inference cost — which is why everyone now deliberately overtrains small models far past it.",m:1},
+   {y:"2023",h:"GPT-4 — architecture closes",b:"The report declines to disclose size, architecture, hardware, or data. Everyone follows. Parameter count stops being a comparison axis for frontier models.",m:0},
+   {y:"2023",h:"Mamba",b:"Selective state space models. The first credible attack on attention's quadratic cost — input-dependent dynamics let a fixed-size state choose what to remember.",m:1},
+   {y:"2024",h:"Mixtral — sparse MoE ships",b:"Production-quality mixture-of-experts under a permissive licence. Total-versus-active enters common vocabulary.",m:1},
+   {y:"2024",h:"Llama 3.1 405B",b:"First open-weights model at genuine frontier scale, and deliberately dense — which now looks like the close of the dense era.",m:0},
+   {y:"2024",h:"DeepSeek V3",b:"MLA, fine-grained MoE, and native FP8 training in one release. The architecture and the economics move together.",m:0},
+   {y:"2025",h:"RLVR",b:"Reinforcement learning on verifiable rewards — maths with checkable answers, code with passing tests — produces reasoning that generalises beyond the verifiable domains. Reasoning models converge because everyone found the same lever.",m:0},
+   {y:"2026",h:"Sampling parameters removed",b:"Frontier models drop temperature, top_p, top_k. Post-training fixes the output distribution; perturbing it degrades rather than diversifies. Effort and thinking configuration replace them.",m:1}];
+  return `<div class="tl">${E.map(e=>`<div class="ev ${e.m?"minor":""}">
+    <div class="yr">${e.y}</div><div class="hd">${esc(e.h)}</div><div class="bd">${esc(e.b)}</div></div>`).join("")}</div>`;
+}
+
+function decide(){
+  const Q=[
+   {q:"Data-retention posture",o:["Zero / under 30 days","Standard retention"]},
+   {q:"Does the work involve security analysis?",o:["Yes","No"]},
+   {q:"Shape of the task",o:["Prep, extract, classify","Implement or review","Long-horizon autonomous"]},
+   {q:"Must it run on your own hardware?",o:["Yes","No"]}];
+  const html=Q.map((q,i)=>`<div class="q"><h3>${i+1}. ${esc(q.q)}</h3><div class="opts">${
+    q.o.map((o,j)=>`<button class="opt" data-q="${i}" data-v="${j}"
+      aria-pressed="${D[i]===j}">${esc(o)}</button>`).join("")}</div></div>`).join("");
+  let v="";
+  if(D.every(x=>x!==null)){
+    if(D[3]===0){
+      v=verdict("An open-weights model","Local execution rules out every closed model regardless of capability.",
+        ["Weigh total parameters, not active — sparse models are compute-cheap and <strong>memory-expensive</strong>, which is the opposite of what a single GPU needs.",
+         "A dense 30B usually beats a sparse 200B/20B you have to offload.",
+         "Budget KV cache separately: it is linear in context and can exceed the weights."]);
+    } else if(D[0]===0){
+      v=verdict("Opus 5, Sonnet 5, or Haiku 4.5 by task shape",
+        "Zero data retention removes Fable 5 entirely — every request returns 400 regardless of payload. This is a hard blocker, not a degradation, and it is worth checking before any capability comparison.",
+        ["Prep and classification: Haiku 4.5.","Implementation and review: Sonnet 5, or Opus 5 for difficulty.",
+         "Long-horizon work: Opus 5, since the usual escalation target is unavailable."]);
+    } else if(D[1]===0){
+      v=verdict("Opus 5","Security analysis routes away from Fable 5 on two independent grounds: its classifiers target most cybersecurity content, and its documented bug-finding gains explicitly exclude security-focused analysis.",
+        ["You would pay double for the model most likely to decline the work.",
+         "Opus 5 carries elevated safeguards too, but cyber-category refusals have a designed fallback path.",
+         "Delete verification scaffolding from the prompt — it self-verifies, and instructing it causes over-verification.",
+         "Use a coverage-first review prompt; a severity filter is followed literally and silently drops findings."]);
+    } else if(D[2]===0){
+      v=verdict("Haiku 4.5","Prep work at the cheapest tier that holds quality. This is where the arbitrage lives.",
+        ["Every token normalised here rather than at frontier rates is billed at roughly a tenth.",
+         "Watch the 200K context — a large bundle has to be chunked before it arrives.",
+         "Consider programmatic tool calling so intermediate results never enter the context window at all."]);
+    } else if(D[2]===1){
+      v=verdict("Sonnet 5, escalating to Opus 5","Near-Opus quality at the volume tier; escalate on difficulty rather than by default.",
+        ["Opus 5 is markedly stronger on difficult multi-file work and weaker in advantage on easy single edits.",
+         "Sonnet 5 does not support mid-conversation system messages — check your architecture first.",
+         "Sweep effort per route. Prior-model defaults rarely transfer."]);
+    } else {
+      v=verdict("Fable 5 as coordinator, Opus 5 as worker","The one shape where Fable 5's premium is defensible: it sustains asynchronous communication with long-running subagents.",
+        ["Give the full task specification up front in a single well-specified turn.",
+         "Plan for turns running many minutes — timeouts, streaming, async check-ins.",
+         "Give it a memory surface; it performs materially better with somewhere to write learnings.",
+         "Require progress claims to be audited against tool results — this near-eliminates fabricated status reports."]);
+    }
+  }
+  return `<div class="qs">${html}${v}</div>`;
+}
+const verdict=(h,p,li)=>`<div class="verdict"><h3>${h}</h3><p>${p}</p><ul>${li.map(x=>`<li>${x}</li>`).join("")}</ul></div>`;
+
+function card(){
+  const m=M[cardi];
+  return `<div class="deck"><div class="card">
+    <h3>${esc(m.name)}</h3><div class="sub">${esc(m.org)} · ${m.open} weights · rung ${m.rung}</div>
+    <dl class="kv">
+      <dt>Arch</dt><dd>${show(m.arch)}</dd>
+      <dt>Total</dt><dd>${show(m.total,bfmt)}</dd>
+      <dt>Active</dt><dd>${show(m.active,bfmt)}</dd>
+      <dt>Layers</dt><dd>${show(m.layers)}</dd>
+      <dt>Hidden</dt><dd>${show(m.hidden)}</dd>
+      <dt>Context</dt><dd>${show(m.ctx,nfmt)}</dd>
+      <dt>Price</dt><dd>${show(m.pin,v=>"$"+v)} / ${show(m.pout,v=>"$"+v)} per MTok</dd>
+    </dl>
+    <p class="note">${esc(m.note)}</p>
+    <div class="nav">
+      <button class="opt" id="pv">← prev</button><button class="opt" id="nx">next →</button>
+      <span class="hint" style="align-self:center">${cardi+1} / ${M.length}</span>
+    </div>
+  </div></div>`;
+}
+
+function prose(){
+  return `<div class="prose">
+  <h3>The word does too much work</h3>
+  <p>“A 405B parameter model” tells you one number from one of seven unrelated classes, and it is the least
+  informative of the seven for most decisions. A 671B model can be cheaper to run than a 70B one. Two models with
+  identical shape can differ enormously because of what happened after pretraining.</p>
+  <h3>What you can know, and what you cannot</h3>
+  <p>For open-weights models, shape is <strong>fully knowable</strong> — <code>config.json</code> cannot lie, because
+  it is what the loader reads. You can derive the parameter count, the KV-cache size, and the VRAM requirement from
+  first principles in about five minutes.</p>
+  <p>For closed models, shape is <strong>permanently unknowable</strong>, and no amount of confident phrasing changes
+  that. What <em>is</em> fully documented is the part you actually build against: pricing, context, features,
+  rate limits, and a live capability API.</p>
+  <h3>The centre of gravity moved</h3>
+  <p>In 2021 the architecture was the secret. Today architectures have converged — everyone runs decoder-only with
+  RMSNorm, SwiGLU, RoPE, GQA-or-MLA, and mixture-of-experts. <strong>Data and post-training are the differentiators,
+  and those are precisely what nobody publishes.</strong> Even at the most generous rung of openness you get the
+  weights and the shape; you do not get the data mixture, the filter classifiers, or the full reinforcement-learning
+  recipe.</p>
+  <p>The corollary is uncomfortable but freeing: inferring capability from a config is a dead end. Config gives you
+  cost and memory. It does not give you quality.</p>
+  <h3>What matters instead</h3>
+  <p>For anyone orchestrating models rather than studying them, the decisive class is the one with no documentation
+  anywhere — <strong>behaviour under load</strong>. Delegation propensity, instruction literalism, self-verification
+  tendency, refusal surface, failure signature. Two models with identical benchmark scores can have opposite
+  delegation propensities, and that alone decides whether a run costs forty euros or four hundred.</p>
+  <p>It is only discoverable by running the model on your actual workload. Which is the argument, in the end, for
+  keeping a small fixed internal evaluation set and trusting it over every table — including this one.</p>
+  </div>`;
+}
+
+const R={matrix,field,profile,lineage,decide,card,prose};
+
+/* ══ render ═════════════════════════════════════════════ */
+function railHTML(){
+  $("#rail").innerHTML=LENSES.map(l=>`<button class="lens" data-l="${l.id}"
+    aria-current="${l.id===lens}"><span class="n">${l.n}</span>
+    <span><span class="t">${l.t}</span><span class="d">${l.d}</span></span></button>`).join("")
+    +`<div class="railfoot">Signal floor filters every lens at once. Set it to <em>verified</em> to see how much of
+    the public record is actually checkable.</div>`;
+}
+function draw(){
+  const L=LENSES.find(l=>l.id===lens);
+  $("#sh").textContent=L.h;
+  $("#sd").textContent=(lens==="field")?FAX[fx].sub:L.s;
+  $("#pane").innerHTML=R[lens]();
+  const tot=M.length*4;
+  let pass=0; M.forEach(m=>[m.total,m.active,m.layers,m.hidden].forEach(f=>{if(f[1]>=Math.max(floor,1))pass++;}));
+  $("#count").textContent=`${pass}/${tot} shape fields at ≥${Math.max(floor,1)}`;
+  document.querySelectorAll("[data-l]").forEach(b=>b.setAttribute("aria-current",b.dataset.l===lens));
+}
+function sheet(id){
+  const m=M.find(x=>x.id===id); if(!m)return;
+  const i=M.indexOf(m); cardi=i;
+  $("#sheetc").innerHTML=card().replace(/^<div class="deck"><div class="card">/,"").replace(/<\/div><\/div>$/,"");
+  $("#sheet").setAttribute("open","");
+  $("#sx").focus();
+}
+
+/* ══ events ═════════════════════════════════════════════ */
+document.addEventListener("click",e=>{
+  const l=e.target.closest("[data-l]"); if(l){lens=l.dataset.l;draw();return;}
+  const c=e.target.closest("#conf button");
+  if(c){floor=+c.dataset.c;
+    document.querySelectorAll("#conf button").forEach(b=>b.setAttribute("aria-pressed",b===c));draw();return;}
+  const th=e.target.closest("thead th");
+  if(th){const k=th.dataset.k; sortd=(sortk===k)?-sortd:1; sortk=k; draw(); return;}
+  const row=e.target.closest("tbody tr[data-id]"); if(row){sheet(row.dataset.id);return;}
+  const dot=e.target.closest(".dot[data-id]"); if(dot){sheet(dot.dataset.id);return;}
+  const fa=e.target.closest("#fax button"); if(fa){fx=fa.dataset.f;draw();return;}
+  const o=e.target.closest(".opt[data-q]");
+  if(o){const q=+o.dataset.q,v=+o.dataset.v; D[q]=(D[q]===v)?null:v; draw(); return;}
+  if(e.target.id==="pv"){cardi=(cardi-1+M.length)%M.length;draw();return;}
+  if(e.target.id==="nx"){cardi=(cardi+1)%M.length;draw();return;}
+  if(e.target.id==="sx"||e.target.id==="sheet"){$("#sheet").removeAttribute("open");return;}
+  if(e.target.id==="tl"){document.documentElement.dataset.theme="light";th2();return;}
+  if(e.target.id==="td"){document.documentElement.dataset.theme="dark";th2();return;}
+});
+document.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){$("#sheet").removeAttribute("open");return;}
+  if(e.target.matches("input,textarea"))return;
+  if(/^[1-7]$/.test(e.key)){lens=LENSES[+e.key-1].id;draw();return;}
+  if(lens==="card"){
+    if(e.key==="ArrowRight"){cardi=(cardi+1)%M.length;draw();}
+    if(e.key==="ArrowLeft"){cardi=(cardi-1+M.length)%M.length;draw();}
+  }
+  if(e.key==="Enter"){
+    const r=document.activeElement.closest("[data-id]"); if(r)sheet(r.dataset.id);
+  }
+});
+function th2(){
+  const t=document.documentElement.dataset.theme;
+  $("#tl").setAttribute("aria-pressed",t==="light");
+  $("#td").setAttribute("aria-pressed",t==="dark");
+}
+railHTML(); draw(); th2();
+</script>
