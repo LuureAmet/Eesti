@@ -228,7 +228,8 @@ function donut(data){
   let off=0;
   const rings = top.map((d,i)=>{
     const frac = d.bytes/total;
-    const c = el('circle',{});
+    // SVG elements need createElementNS -- el() builds HTML-namespace nodes,
+    // which render as nothing inside an <svg>.
     const seg = document.createElementNS('http://www.w3.org/2000/svg','circle');
     seg.setAttribute('cx',80); seg.setAttribute('cy',80); seg.setAttribute('r',R);
     seg.setAttribute('fill','none'); seg.setAttribute('stroke',PALETTE[i%PALETTE.length]);
