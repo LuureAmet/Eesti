@@ -168,6 +168,7 @@ See [`docs/04-AJALUGU.md`](docs/04-AJALUGU.md).
 
 | Doc | Contents |
 |---|---|
+| [`docs/05-INSTALL.md`](docs/05-INSTALL.md) | Installing on a real machine, and the gotchas hit doing it |
 | [`docs/00-AUDIT.md`](docs/00-AUDIT.md) | What was wrong with v2, with reproductions |
 | [`docs/01-ROADMAP.md`](docs/01-ROADMAP.md) | Staged plan, and what to *not* build yet |
 | [`docs/02-DATA-CONTRACT.md`](docs/02-DATA-CONTRACT.md) | Schema and views the frontend may rely on |
