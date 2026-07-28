@@ -75,7 +75,16 @@ def main():
     importlib.reload(api_main)
     api_main.DB_PATH = db
 
-    from fastapi.testclient import TestClient
+    try:
+        from fastapi.testclient import TestClient
+    except (ImportError, RuntimeError) as exc:
+        # starlette's TestClient needs an HTTP client library that fastapi does
+        # not pull in itself. That is a test-only dependency, so a clean install
+        # should say so plainly rather than emit a traceback.
+        shutil.rmtree(workdir, ignore_errors=True)
+        print(f"\nSKIPPED: the API test client is unavailable.\n  {exc}\n"
+              "  Install the test extras:  pip install -r requirements-dev.txt")
+        raise SystemExit(77)
     client = TestClient(api_main.app)
 
     print("\n[endpoints]")

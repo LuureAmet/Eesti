@@ -7,3 +7,5 @@ uvicorn>=0.27
 #   python-magic  in-process MIME detection, avoids forking file(1)
 blake3>=0.4
 python-magic>=0.4.27
+
+# Test-only extras live in requirements-dev.txt (pip install -r requirements-dev.txt)

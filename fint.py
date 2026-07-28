@@ -242,18 +242,27 @@ def cmd_migrate(args, rest):
 
 
 def cmd_test(args, rest):
-    failed = []
+    failed, skipped = [], []
     for name in ("test_pipeline.py", "test_lens.py", "test_api.py"):
         target = TESTS / name
         if not target.exists():
-            print(f"{YELLOW}skip{RESET}  {name} not found")
+            skipped.append(f"{name} (not found)")
             continue
         print(f"\n{BOLD}=== {name} ==={RESET}")
-        if subprocess.run([sys.executable, str(target)]).returncode != 0:
+        code = subprocess.run([sys.executable, str(target)]).returncode
+        if code == 77:
+            # 77 is the conventional "skipped, not failed" exit status: a
+            # missing test-only dependency should not read as a broken install.
+            skipped.append(f"{name} (missing test dependency)")
+        elif code != 0:
             failed.append(name)
+
+    print()
+    for item in skipped:
+        print(f"{YELLOW}skipped{RESET}  {item}")
     if failed:
         die(f"failing suites: {', '.join(failed)}")
-    print(f"\n{GREEN}all suites passed{RESET}")
+    print(f"{GREEN}all runnable suites passed{RESET}")
 
 
 def cmd_serve(args, rest):
