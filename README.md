@@ -18,34 +18,44 @@ scripts/scan.py  ──▶  files.db  ◀──  api/main.py  ──▶  web/ind
 
 ## Quick start
 
+Everything runs through `fint` — one entry point, so there is nothing to
+remember about which script lives where or what order things go in.
+
 ```bash
-# 0. dependencies (blake3 is optional but ~10x faster than forking b3sum)
-pip install fastapi uvicorn blake3
+pip install fastapi uvicorn blake3 python-magic
 
-# 1. inventory a tree
-python3 scripts/scan.py ~ --profile light --secrets
-
-# 2. work out what is actually duplicated
-python3 scripts/process_duplicates.py
-
-# 3. read it in the terminal
-python3 scripts/report.py
-
-# 4. or in a browser
-cd api && uvicorn main:app --port 8420
-#   open http://127.0.0.1:8420/
+./fint.py doctor          # is anything missing, and what does it cost me
+./fint.py all ~           # scan + duplicates + report, in one go
+./fint.py serve           # dashboard on http://127.0.0.1:8420/
 ```
+
+| Command | Does |
+|---|---|
+| `fint status` | What the database currently knows |
+| `fint doctor` | Dependency and layout check, with the impact of each gap |
+| `fint scan PATH` | Inventory a tree (`--profile light\|fast`, `--secrets`) |
+| `fint dupes` | Group identical files, compute reclaimable space |
+| `fint report` | Print the latest scan (`--json` for cron) |
+| `fint ajalugu` | Find and rescue content surviving only in backups |
+| `fint all PATH` | scan → dupes → report |
+| `fint serve` | Dashboard (`-b` to background it, `fint stop` to stop) |
+| `fint migrate` | Apply schema migrations, rebuild views |
+| `fint test` | Run all three regression suites |
+
+Unknown flags pass straight through, so `fint scan ~ --batch 2000 --dry-run`
+behaves exactly as calling `scan.py` would.
 
 The database lives at `~/file-intelligence/database/files.db` by default.
 Override with `FI_DB=/path/to/files.db`.
 
-Run the tests any time — they build a synthetic filesystem, scan it for real,
-and assert the numbers:
+The tests build a synthetic filesystem, scan it for real, and assert the
+numbers:
 
 ```bash
-python3 tests/test_pipeline.py   # scanner + duplicate maths           (37 checks)
-python3 tests/test_lens.py       # query compiler, incl. hostile input (24 checks)
-python3 tests/test_api.py        # every endpoint the UI calls         (38 checks)
+./fint.py test
+# test_pipeline.py  38 checks   scanner + duplicate maths
+# test_lens.py      24 checks   query compiler, incl. hostile input
+# test_api.py       38 checks   every endpoint the UI calls
 ```
 
 ---
@@ -57,6 +67,7 @@ python3 tests/test_api.py        # every endpoint the UI calls         (38 check
 | `scripts/scan.py` | Walks a tree, hashes with BLAKE3, classifies, upserts, writes an audit event per change |
 | `scripts/process_duplicates.py` | Groups by hash, picks a canonical master with an explained score, computes reclaimable bytes |
 | `scripts/rescue_ajalugu.py` | Finds content surviving only inside backups and stages it into a history folder |
+| `fint.py` | Unified CLI. Everything below is reachable through it |
 | `scripts/report.py` | Terminal report; `--json` for cron |
 | `scripts/fi_common.py` | Connection, versioned migrations, shared helpers |
 | `scripts/fi_classify.py` | Extension/category/language maps, scope rules, secret patterns |

@@ -120,6 +120,13 @@ def main():
     check("symlink itself is recorded",
           con.execute("SELECT COUNT(*) FROM files WHERE is_symlink=1").fetchone()[0] >= 1)
 
+    # The database lives under the scanned tree on a real install. Indexing it
+    # would make it show up as 'changed' on every run for ever, because its WAL
+    # churns during the very scan that is recording it.
+    check("the intelligence database excludes itself from its own inventory",
+          con.execute("SELECT COUNT(*) FROM files WHERE path LIKE ?",
+                      (str(db) + "%",)).fetchone()[0] == 0)
+
     check("audit events were written (v2 never wrote any)",
           con.execute("SELECT COUNT(*) FROM file_events WHERE event='created'").fetchone()[0] == total)
 

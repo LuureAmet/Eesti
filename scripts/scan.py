@@ -372,8 +372,12 @@ def main():
     hasher = Hasher(enabled=args.profile != "fast")
     mimer = MimeDetector()
 
-    # Never hash the database we are writing to, or its WAL.
-    self_paths = {str(db_path), f"{db_path}-wal", f"{db_path}-shm"}
+    # Never index the database we are writing to, or its sidecars. Hashing them
+    # would be wasted work, but recording them is worse: the WAL churns during
+    # the scan itself, so the DB would show up as 'changed' on every single run
+    # for ever. The intelligence database is infrastructure, not inventory.
+    self_paths = {str(db_path), f"{db_path}-wal", f"{db_path}-shm",
+                  str(error_log)}
 
     print(f"scan root : {scan_root}")
     print(f"profile   : {args.profile}   hash backend: {hasher.backend or 'disabled'}   "
@@ -457,6 +461,8 @@ def main():
         for full in symlinked_dirs + [root_path / n for n in filenames]:
             name = full.name
             path_str = str(full)
+            if path_str in self_paths:
+                continue
             try:
                 is_symlink = full.is_symlink()
                 stat = None if is_symlink else full.stat()
