@@ -94,6 +94,11 @@ def score_candidate(row):
 
 
 def main():
+    try:
+        sys.stdout.reconfigure(line_buffering=True)  # see the note in scan.py
+    except (AttributeError, OSError):
+        pass
+
     parser = argparse.ArgumentParser(description="Duplicate analysis v2")
     parser.add_argument("--db", default=None)
     parser.add_argument("--min-size", type=int, default=1,

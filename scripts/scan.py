@@ -341,6 +341,15 @@ def _gid_name(gid):
 
 
 def main():
+    # A scan of a large tree runs for many minutes, and is usually redirected to
+    # a log. Python block-buffers stdout when it is not a tty, so without this
+    # the log stays completely empty until the process exits -- which is
+    # indistinguishable from a hang exactly when you most want reassurance.
+    try:
+        sys.stdout.reconfigure(line_buffering=True)
+    except (AttributeError, OSError):
+        pass
+
     parser = argparse.ArgumentParser(description="File Intelligence scanner v3")
     parser.add_argument("path")
     parser.add_argument("--profile", choices=["full", "light", "fast"], default="full")
