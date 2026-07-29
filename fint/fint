@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# fint -- File INTelligence launcher.
+#
+# Picks the right interpreter so `fint` behaves identically no matter what
+# shell, venv or agent invokes it. Order of preference:
+#
+#   1. $FINT_PYTHON, if you set it explicitly
+#   2. ./.venv/bin/python3 next to this script  -- the project's own venv
+#   3. whatever python3 is on PATH
+#
+# The venv matters more than it looks: on a machine where an agent runs inside
+# one venv and your login shell uses the system python, installing the
+# dependencies once will appear to work for one of you and be missing for the
+# other. Pinning the interpreter here removes that whole class of confusion.
+
+set -euo pipefail
+HERE="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+if [ -n "${FINT_PYTHON:-}" ]; then
+    PY="$FINT_PYTHON"
+elif [ -x "$HERE/.venv/bin/python3" ]; then
+    PY="$HERE/.venv/bin/python3"
+else
+    PY="$(command -v python3 || true)"
+fi
+
+if [ -z "$PY" ] || [ ! -x "$PY" ]; then
+    echo "fint: no usable python3 found (tried FINT_PYTHON, $HERE/.venv, PATH)" >&2
+    exit 1
+fi
+
+exec "$PY" "$HERE/fint.py" "$@"

@@ -1,0 +1,8 @@
+# Test-only dependencies. The runtime does not need these.
+#
+# starlette's TestClient needs an HTTP client library that fastapi does not
+# pull in itself. Newer starlette wants httpx2; older wants httpx. Installing
+# httpx2 first and falling back keeps both working.
+-r requirements.txt
+httpx2; python_version >= "3.9"
+httpx

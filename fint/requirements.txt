@@ -1,0 +1,11 @@
+# Core API + dashboard
+fastapi>=0.110
+uvicorn>=0.27
+
+# Optional but strongly recommended:
+#   blake3      in-process hashing, ~10x faster than forking b3sum per file
+#   python-magic  in-process MIME detection, avoids forking file(1)
+blake3>=0.4
+python-magic>=0.4.27
+
+# Test-only extras live in requirements-dev.txt (pip install -r requirements-dev.txt)
