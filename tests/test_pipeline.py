@@ -291,6 +291,46 @@ def main():
     check("no phantom 'missing' event was logged for skipped files", fake == 0, f"{fake} events")
     con5.close()
 
+    print("\n[7] backup must actually restore")
+    # A backup nobody has restored is a rumour. Both paths are checked because
+    # they fail differently: the snapshot is useless if the SQLite file format
+    # is the problem, the dump is useless if it was written mid-transaction.
+    backup_out = workdir / "bk"
+    run([sys.executable, str(ROOT / "fint.py"), "backup", "--dest", str(backup_out)], env)
+    archives = list(backup_out.glob("fileintel-backup-*.tar.*"))
+    check("backup produced a single archive", len(archives) == 1, str(archives))
+
+    bundle = next(p for p in backup_out.iterdir() if p.is_dir())
+    for name in ("files.db", "files.sql", "schema.sql", "MANIFEST.txt", "RESTORE.md"):
+        check(f"backup contains {name}", (bundle / name).exists())
+
+    live = sqlite3.connect(db)
+    expected = {t: live.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0]
+                for t in ("files", "file_events", "scan_statistics")}
+    live.close()
+
+    snap = sqlite3.connect(bundle / "files.db")
+    got = {t: snap.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0] for t in expected}
+    snap_ok = snap.execute("PRAGMA quick_check").fetchone()[0]
+    snap.close()
+    check("snapshot restores with identical row counts", got == expected, f"{got} vs {expected}")
+    check("snapshot passes integrity check", snap_ok == "ok", snap_ok)
+
+    rebuilt_path = workdir / "rebuilt.db"
+    rebuilt = sqlite3.connect(rebuilt_path)
+    rebuilt.executescript((bundle / "files.sql").read_text())
+    got2 = {t: rebuilt.execute(f"SELECT COUNT(*) FROM {t}").fetchone()[0] for t in expected}
+    view_count = rebuilt.execute(
+        "SELECT COUNT(*) FROM sqlite_master WHERE type='view'").fetchone()[0]
+    rebuilt.close()
+    check("SQL dump rebuilds an equivalent database", got2 == expected, f"{got2} vs {expected}")
+    check("SQL dump restores the views too, not just tables", view_count >= 9, str(view_count))
+
+    manifest = (bundle / "MANIFEST.txt").read_text()
+    check("manifest records per-table row counts",
+          f"files" in manifest and str(expected["files"]) in manifest)
+    check("manifest records checksums", manifest.count("SHA256") == 1 and "  files.db" in manifest)
+
     con.close()
     shutil.rmtree(workdir, ignore_errors=True)
     summarise()

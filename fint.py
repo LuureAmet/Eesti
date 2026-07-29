@@ -241,6 +241,214 @@ def cmd_migrate(args, rest):
     print(f"{GREEN}ok{RESET}  schema at version {version}, views rebuilt")
 
 
+def cmd_backup(args, rest):
+    """Produce one self-contained archive that can rebuild the database anywhere.
+
+    Three artefacts, because they fail in different ways:
+      * files.db    -- a VACUUM INTO snapshot. Byte-identical semantics, opens
+                       instantly, but useless if the SQLite file format ever
+                       becomes a problem.
+      * files.sql   -- a full text dump. Survives anything, restorable into a
+                       different SQLite build or adapted to Postgres.
+      * schema.sql  -- schema alone, readable, for when you just need to know
+                       what the shape was.
+    """
+    import hashlib
+    import shutil as sh
+    from datetime import datetime, UTC
+    from fi_common import connect, human_bytes
+
+    db = _db()
+    if not db.exists():
+        die(f"no database at {db}")
+
+    dest_root = Path(args.dest).expanduser() if args.dest else (HERE / "backups")
+    stamp = datetime.now(UTC).strftime("%Y%m%d-%H%M")
+    out = dest_root / f"fileintel-backup-{stamp}"
+
+    db_size = db.stat().st_size
+    free = sh.disk_usage(dest_root if dest_root.exists() else dest_root.parent).free
+    needed = db_size * 3  # snapshot + dump + archive, roughly
+    print(f"database  {human_bytes(db_size)}")
+    print(f"free      {human_bytes(free)}  (need about {human_bytes(needed)})")
+    if free < needed and not args.force:
+        die(f"not enough free space. Free some, or pass --force to try anyway.")
+
+    out.mkdir(parents=True, exist_ok=True)
+    print(f"writing   {out}")
+
+    # --- 1. consistent snapshot -------------------------------------------
+    # SQLite's Online Backup API, not cp and not VACUUM INTO:
+    #   * cp can catch a torn state when the WAL is mid-write,
+    #   * VACUUM INTO needs write access to the source,
+    #   * .backup() works from a read-only handle and is consistent even while
+    #     another process is writing.
+    # The live database is therefore never opened writable by this command.
+    import sqlite3
+    snapshot = out / "files.db"
+    print("  [1/5] snapshot (online backup API)...")
+    con = connect(read_only=True)
+    dst = sqlite3.connect(snapshot)
+    try:
+        con.backup(dst)
+        dst.execute("VACUUM")          # compact the copy, never the original
+        dst.commit()
+    finally:
+        dst.close()
+        con.close()
+    print(f"        {human_bytes(snapshot.stat().st_size)}")
+
+    # --- 2. full SQL dump --------------------------------------------------
+    print("  [2/5] SQL dump...")
+    src = sqlite3.connect(f"file:{snapshot}?mode=ro", uri=True)
+    dump_path = out / "files.sql"
+    with open(dump_path, "w", encoding="utf-8") as handle:
+        handle.write("-- File Intelligence full dump\n")
+        handle.write(f"-- generated: {datetime.now(UTC).isoformat()}\n")
+        handle.write("-- restore:   sqlite3 restored.db < files.sql\n\n")
+        handle.write("PRAGMA foreign_keys=OFF;\nBEGIN TRANSACTION;\n")
+        for line in src.iterdump():
+            if line.startswith(("BEGIN TRANSACTION", "COMMIT")):
+                continue
+            handle.write(line + "\n")
+        handle.write("COMMIT;\n")
+    print(f"        {human_bytes(dump_path.stat().st_size)}")
+
+    # --- 3. schema only ----------------------------------------------------
+    print("  [3/5] schema...")
+    schema_path = out / "schema.sql"
+    with open(schema_path, "w", encoding="utf-8") as handle:
+        version = src.execute("PRAGMA user_version").fetchone()[0]
+        handle.write(f"-- schema user_version={version}\n\n")
+        for (sql,) in src.execute(
+            "SELECT sql FROM sqlite_master WHERE sql IS NOT NULL ORDER BY type DESC, name"
+        ):
+            handle.write(sql.rstrip().rstrip(";") + ";\n\n")
+
+    # --- 4. manifest -------------------------------------------------------
+    print("  [4/5] manifest...")
+    counts = {}
+    for (name,) in src.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"
+        " ORDER BY name"
+    ):
+        try:
+            counts[name] = src.execute(f'SELECT COUNT(*) FROM "{name}"').fetchone()[0]
+        except sqlite3.Error:
+            counts[name] = -1
+    version = src.execute("PRAGMA user_version").fetchone()[0]
+    integrity = src.execute("PRAGMA quick_check").fetchone()[0]
+    src.close()
+
+    def digest(path):
+        h = hashlib.sha256()
+        with open(path, "rb") as handle:
+            for block in iter(lambda: handle.read(1 << 20), b""):
+                h.update(block)
+        return h.hexdigest()
+
+    lines = [
+        "FILE INTELLIGENCE BACKUP MANIFEST",
+        f"generated      : {datetime.now(UTC).isoformat()}",
+        f"source         : {db}",
+        f"schema version : user_version={version}",
+        f"integrity      : {integrity}",
+        "",
+        "ROW COUNTS",
+    ]
+    for name, count in sorted(counts.items()):
+        lines.append(f"  {name:<24} {count:>12,}")
+    lines += ["", "SHA256"]
+    for path in (snapshot, dump_path, schema_path):
+        lines.append(f"  {digest(path)}  {path.name}")
+    (out / "MANIFEST.txt").write_text("\n".join(lines) + "\n")
+
+    (out / "RESTORE.md").write_text(RESTORE_DOC.format(version=version, stamp=stamp))
+
+    # --- 5. one archive ----------------------------------------------------
+    # Google Drive (and most sync tools) are far slower with many small files
+    # than with one large one, so the deliverable is a single archive.
+    if args.no_compress:
+        print("  [5/5] skipped (--no-compress)")
+        print(f"\n{GREEN}done{RESET}  {out}")
+        return
+
+    print("  [5/5] archiving...")
+    archive = dest_root / f"fileintel-backup-{stamp}.tar.zst"
+    if shutil.which("zstd"):
+        code = subprocess.run(
+            ["tar", "-I", "zstd -3 -T0", "-cf", str(archive), "-C", str(dest_root), out.name]
+        ).returncode
+    else:
+        archive = archive.with_suffix("").with_suffix(".tar.gz")
+        code = subprocess.run(
+            ["tar", "-czf", str(archive), "-C", str(dest_root), out.name]
+        ).returncode
+    if code != 0:
+        die("archiving failed; the uncompressed directory is still at " + str(out))
+
+    size = archive.stat().st_size
+    raw = sum(p.stat().st_size for p in out.iterdir())
+    print(f"\n{GREEN}done{RESET}")
+    print(f"  archive  {archive}")
+    print(f"  size     {human_bytes(size)}  (from {human_bytes(raw)})")
+    print(f"  loose    {out}   <- delete once the archive is safely copied")
+    print(f"\nverify before trusting it:")
+    print(f"  tar -tf {archive.name} >/dev/null && echo 'archive readable'")
+
+
+RESTORE_DOC = """# Restoring this backup
+
+Taken {stamp}, schema `user_version={version}`.
+
+## Fastest path -- use the snapshot
+
+```bash
+tar -xf fileintel-backup-{stamp}.tar.zst
+cp fileintel-backup-{stamp}/files.db ~/file-intelligence/database/files.db
+cd ~/file-intelligence && ./fint status
+```
+
+`files.db` was taken with SQLite's online backup API, so it is consistent even
+though the database was live at the time, and it has been compacted.
+
+## If the snapshot will not open -- use the SQL dump
+
+```bash
+sqlite3 restored.db < fileintel-backup-{stamp}/files.sql
+sqlite3 restored.db "PRAGMA integrity_check;"
+```
+
+This is plain text and survives a SQLite version change. It is also the
+starting point for moving to Postgres: the schema is standard SQL apart from
+SQLite's type affinity, so the table definitions port with light editing.
+
+## Just want to see the shape
+
+`schema.sql` is every table, index and view, readable, no data.
+
+## Check nothing rotted
+
+`MANIFEST.txt` carries row counts per table and a SHA256 for each artefact:
+
+```bash
+sha256sum -c <(awk '/^  [0-9a-f]{{64}}/ {{print $1"  "$2}}' MANIFEST.txt)
+```
+
+If a row count in the manifest is far below what you expect, the backup was
+taken mid-failure -- check the count of `duplicate_members` in particular,
+since a disk-full during duplicate analysis leaves it empty while
+`duplicate_groups` is populated.
+
+## Rebuilding instead of restoring
+
+Nothing here is irreplaceable except the *history*. Paths, sizes and hashes can
+all be regenerated by re-scanning. What cannot be regenerated is `file_events`
+-- the append-only record of what changed and when -- and `first_seen`. Those
+are the reason to keep backups at all.
+"""
+
+
 def cmd_test(args, rest):
     failed, skipped = [], []
     for name in ("test_pipeline.py", "test_lens.py", "test_api.py"):
@@ -344,6 +552,11 @@ def main():
 
     add("stop", "stop a backgrounded dashboard", cmd_stop)
     add("test", "run the regression suites", cmd_test)
+
+    p = add("backup", "snapshot + SQL dump + schema, in one archive", cmd_backup)
+    p.add_argument("--dest", default=None, help="where to write (default ./backups)")
+    p.add_argument("--no-compress", action="store_true", help="leave a loose directory")
+    p.add_argument("--force", action="store_true", help="proceed despite low disk space")
 
     args, rest = parser.parse_known_args()
     if not args.command:

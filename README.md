@@ -39,6 +39,7 @@ pip install fastapi uvicorn blake3 python-magic
 | `fint ajalugu` | Find and rescue content surviving only in backups |
 | `fint all PATH` | scan → dupes → report |
 | `fint serve` | Dashboard (`-b` to background it, `fint stop` to stop) |
+| `fint backup` | Snapshot + SQL dump + schema + manifest, in one archive |
 | `fint migrate` | Apply schema migrations, rebuild views |
 | `fint test` | Run all three regression suites |
 
@@ -53,7 +54,7 @@ numbers:
 
 ```bash
 ./fint.py test
-# test_pipeline.py  38 checks   scanner + duplicate maths
+# test_pipeline.py  50 checks   scanner, duplicate maths, backup/restore
 # test_lens.py      24 checks   query compiler, incl. hostile input
 # test_api.py       38 checks   every endpoint the UI calls
 ```
