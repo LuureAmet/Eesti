@@ -175,3 +175,4 @@ See [`docs/04-AJALUGU.md`](docs/04-AJALUGU.md).
 | [`docs/02-DATA-CONTRACT.md`](docs/02-DATA-CONTRACT.md) | Schema and views the frontend may rely on |
 | [`docs/03-LENS-ENGINE.md`](docs/03-LENS-ENGINE.md) | Query AST reference |
 | [`docs/04-AJALUGU.md`](docs/04-AJALUGU.md) | History rescue design |
+| [`docs/06-INCIDENT-BRIEFS.md`](docs/06-INCIDENT-BRIEFS.md) | Task briefs for other models, and what the evidence cannot prove |
