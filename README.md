@@ -169,6 +169,8 @@ See [`docs/04-AJALUGU.md`](docs/04-AJALUGU.md).
 
 | Doc | Contents |
 |---|---|
+| [`CLAUDE.md`](CLAUDE.md) | How to operate this repo — read first if you are an agent |
+| [`docs/07-PROJECT-MEMORY.md`](docs/07-PROJECT-MEMORY.md) | Why it exists, settled decisions, machine state, open questions |
 | [`docs/05-INSTALL.md`](docs/05-INSTALL.md) | Installing on a real machine, and the gotchas hit doing it |
 | [`docs/00-AUDIT.md`](docs/00-AUDIT.md) | What was wrong with v2, with reproductions |
 | [`docs/01-ROADMAP.md`](docs/01-ROADMAP.md) | Staged plan, and what to *not* build yet |
