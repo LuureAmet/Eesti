@@ -1,4 +1,8 @@
-# Working in this repository
+# Working in fint/
+
+This is one project inside the **Eesti** monorepo. It is self-contained: its
+docs, tests and dependencies all live under `fint/`. Do not reach into sibling
+project folders.
 
 Claude Code reads this file automatically. Keep it operational — the *why*
 lives in [`docs/07-PROJECT-MEMORY.md`](docs/07-PROJECT-MEMORY.md); read that

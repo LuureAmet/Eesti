@@ -34,15 +34,10 @@ directory. Both are useful for testing against a copy.
 cd ~
 git clone --branch <branch> https://github.com/LuureAmet/Eesti.git eesti-v3
 
+# the project lives in the repo's fint/ subfolder (Eesti is a monorepo)
 FI=~/file-intelligence
-mkdir -p $FI/{scripts,sql,api,web,docs,tests,reports}
-cp ~/eesti-v3/scripts/*.py $FI/scripts/
-cp ~/eesti-v3/sql/*.sql    $FI/sql/
-cp ~/eesti-v3/api/*.py     $FI/api/
-cp ~/eesti-v3/web/*.html   $FI/web/
-cp ~/eesti-v3/tests/*.py   $FI/tests/
-cp ~/eesti-v3/docs/*.md    $FI/docs/
-cp ~/eesti-v3/fint ~/eesti-v3/fint.py ~/eesti-v3/requirements*.txt $FI/
+mkdir -p $FI/reports
+cp -r ~/eesti-v3/fint/. $FI/
 chmod +x $FI/fint $FI/fint.py
 
 cd $FI
